@@ -96,23 +96,23 @@ function Sidebar() {
   );
 }
 
-function Indicator() {
-  const { step, updateStep } = useFormStepStore((state) => state);
+// function Indicator() {
+//   const { step, updateStep } = useFormStepStore((state) => state);
 
-  const IndicatorLine = ({ index }: { index: number }) => {
-    return (
-      <div
-        className={`h-1 w-24 cursor-pointer rounded-full ${step === index ? "bg-primary" : "bg-gray-200"}`}
-        onClick={() => updateStep(index)}
-      />
-    );
-  };
+//   const IndicatorLine = ({ index }: { index: number }) => {
+//     return (
+//       <div
+//         className={`h-1 w-24 cursor-pointer rounded-full ${step === index ? "bg-primary" : "bg-gray-200"}`}
+//         onClick={() => updateStep(index)}
+//       />
+//     );
+//   };
 
-  const renderedLines = Array(4)
-    .fill("")
-    .map((_, i) => <IndicatorLine key={i} index={i} />);
+//   const renderedLines = Array(4)
+//     .fill("")
+//     .map((_, i) => <IndicatorLine key={i} index={i} />);
 
-  return (
-    <div className="absolute top-2 z-50 flex gap-x-4">{renderedLines}</div>
-  );
-}
+//   return (
+//     <div className="absolute top-2 z-50 flex gap-x-4">{renderedLines}</div>
+//   );
+// }

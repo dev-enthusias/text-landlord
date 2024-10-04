@@ -23,7 +23,7 @@ export default function SelectInput({
 
   return (
     <div className="relative w-full">
-      <p className="block text-sm font-semibold text-gray-600 mb-1">{label}</p>
+      <p className="mb-1 block font-semibold text-gray-600">{label}</p>
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -49,7 +49,7 @@ export default function SelectInput({
               className={` ${
                 option.value === value
                   ? "bg-primary text-black"
-                  : "text-gray-900 hover:bg-primary/20"
+                  : "hover:bg-primary/20 text-gray-900"
               } group flex w-full items-center px-3 py-2 text-left`}
               onClick={() => {
                 onChange(option.value);
