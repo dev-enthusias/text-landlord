@@ -23,7 +23,9 @@ export default function SelectInput({
 
   return (
     <div className="relative w-full">
-      <p className="mb-1 block font-semibold text-gray-600">{label}</p>
+      <p className="mb-1 block font-semibold text-gray-600">
+        {label} {required && <span className="font-bold text-red-500">*</span>}
+      </p>
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}

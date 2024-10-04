@@ -1,14 +1,8 @@
 "use client";
 
-import CustomCheckbox from "@/components/auth/custome-checkbox";
 import TextInput from "@/components/auth/text-input";
-import { routes } from "@/constants/routes";
-import Link from "next/link";
-import { useState } from "react";
 
 export default function ForgotPasswordForm() {
-  const [checked, setChecked] = useState(true);
-
   return (
     <form className="w-full max-w-[480px]">
       <section>
