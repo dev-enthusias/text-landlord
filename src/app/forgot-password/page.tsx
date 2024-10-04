@@ -1,9 +1,10 @@
 import { routes } from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
-import LoginForm from "./login-form";
+import ForgotPasswordForm from "./forgot-password-form";
+import { Arrow } from "@/components/svg";
 
-export default function Login() {
+export default function ForgotPassword() {
   return (
     <main className="flex h-screen max-h-screen overflow-hidden p-4">
       <section className="shrink-0 rounded-lg">
@@ -23,24 +24,15 @@ export default function Login() {
           </div>
         </Link>
 
-        <LoginForm />
+        <ForgotPasswordForm />
 
-        <p className="py-10 text-sm">
-          New User?{" "}
-          <Link
-            href={routes.REGISTERASLANDLORD}
-            className="mr-2 text-base font-semibold underline opacity-80 hover:opacity-100"
-          >
-            Become Landlord
-          </Link>
-          <span className="mr-2">or</span>
-          <Link
-            href={routes.REGISTERASTENANT}
-            className="text-base font-semibold underline opacity-80 hover:opacity-100"
-          >
-            Become Tenant
-          </Link>
-        </p>
+        <Link
+          href={routes.LOGIN}
+          className="group mt-10 flex items-center gap-x-1.5 font-semibold text-gray-600 hover:text-gray-800"
+        >
+          <Arrow className="h-4 w-4 transition-all duration-300 group-hover:-translate-x-1" />
+          Back to Login
+        </Link>
       </section>
     </main>
   );

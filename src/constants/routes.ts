@@ -6,4 +6,8 @@ export const routes = {
   REGISTER: "/register",
   REGISTERASLANDLORD: "/register?type=landlord",
   REGISTERASTENANT: "/register?type=tenant",
+  FORGOTPASSWORD: "/forgot-password",
+
+  //Dashboard pages
+  DASHBOARD: "/dashboard",
 };

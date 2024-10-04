@@ -7,10 +7,7 @@ export default function TextInput({
 }) {
   return (
     <div className="space-y-1">
-      <label
-        htmlFor={label}
-        className="block text-sm font-semibold text-gray-600"
-      >
+      <label htmlFor={label} className="block font-semibold text-gray-600">
         {label} {required && <span className="font-bold text-red-500">*</span>}
       </label>
       <input
