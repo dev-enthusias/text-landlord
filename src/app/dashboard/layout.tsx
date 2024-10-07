@@ -16,9 +16,9 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
+    <section className="bg-yellow-50/10">
       <Topbar />
-      <main className="px-5 pb-20 pt-5">{children}</main>
+      <main className="px-3 pb-24 pt-5">{children}</main>
       <Menu />
     </section>
   );
@@ -26,7 +26,7 @@ export default function DashboardLayout({
 
 const Topbar = () => {
   return (
-    <header className="flex h-16 justify-between overflow-hidden border px-5">
+    <header className="sticky top-0 z-50 flex h-16 justify-between overflow-hidden border bg-white px-5">
       <Image
         src="/logos/logo-transparent.png"
         alt="Oga landlord logo"
@@ -54,7 +54,7 @@ const Topbar = () => {
 const Menu = () => {
   return (
     <footer>
-      <ul className="fixed bottom-0 flex w-full justify-between rounded-t-3xl bg-foreground px-5 py-4 text-background">
+      <ul className="fixed bottom-0 flex w-full justify-between rounded-t-3xl bg-black px-5 py-4 text-background">
         <li>
           <NavLink
             href="/dashboard"
