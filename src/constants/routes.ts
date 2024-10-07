@@ -12,6 +12,7 @@ export const routes = {
   DASHBOARD: "/dashboard",
   DASHBOARDPROPERTIES: "/dashboard/properties",
   DASHBOARDPROPERTIESDETAILS: "/dashboard/properties/:propertyId",
+  DASHBOARDPROFILE: "/dashboard/settings",
   DASHBOARDHISTORY: "/dashboard/history",
   DASHBOARDSETTINGS: "/dashboard/settings",
 };
