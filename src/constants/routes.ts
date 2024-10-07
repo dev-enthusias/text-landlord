@@ -10,4 +10,8 @@ export const routes = {
 
   //Dashboard pages
   DASHBOARD: "/dashboard",
+  DASHBOARDPROPERTIES: "/dashboard/properties",
+  DASHBOARDPROPERTIESDETAILS: "/dashboard/properties/:propertyId",
+  DASHBOARDHISTORY: "/dashboard/history",
+  DASHBOARDSETTINGS: "/dashboard/settings",
 };

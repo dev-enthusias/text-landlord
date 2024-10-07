@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MapPin, MoveDownIcon, MoveUpIcon } from "lucide-react";
 import { WalletOverview } from "./client-component";
 import PropertyCard from "@/components/general/property-card";
+import { routes } from "@/constants/routes";
 
 export default function DashboardHomePage() {
   return (
@@ -18,7 +19,10 @@ export default function DashboardHomePage() {
         <section className="-mx-3">
           <div className="mb-2 flex items-center justify-between px-3 font-semibold">
             <h2 className="text-lg">New Properties</h2>
-            <Link href="" className="text-sm text-accent underline">
+            <Link
+              href={routes.DASHBOARDPROPERTIES}
+              className="text-sm text-accent underline"
+            >
               View more
             </Link>
           </div>
@@ -39,7 +43,10 @@ export default function DashboardHomePage() {
         <section>
           <div className="mb-2 flex items-center justify-between font-semibold">
             <h2 className="text-lg">Recent transactions</h2>
-            <Link href="" className="text-sm text-accent underline">
+            <Link
+              href={routes.DASHBOARDHISTORY}
+              className="text-sm text-accent underline"
+            >
               View all
             </Link>
           </div>
@@ -116,8 +123,11 @@ function TransactionCard({ status }: { status: "credit" | "debit" }) {
           </p>
         </div>
       </div>
-      <div className="shrink-0 font-bold">
+      <div className="shrink-0 text-right font-bold">
         <p>{status === "debit" && "-"}₦650,000</p>
+        <p className="text-xxs font-normal text-gray-500">
+          18th August, 12:17 PM
+        </p>
       </div>
     </article>
   );

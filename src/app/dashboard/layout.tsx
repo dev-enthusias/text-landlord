@@ -16,7 +16,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="bg-yellow-50/10">
+    <section className="bg-yellow-50/20">
       <Topbar />
       <main className="px-3 pb-24 pt-5">{children}</main>
       <Menu />
@@ -70,7 +70,7 @@ const Menu = () => {
           <NavLink
             href="/dashboard/properties"
             className="flex flex-col items-center justify-center gap-y-1 text-sm"
-            activeClassName="text-primary font-semibold"
+            activeClassName="text-primary font-bold"
           >
             <LucideHousePlus className="h-5 w-5" />
             Properties
@@ -80,7 +80,7 @@ const Menu = () => {
           <NavLink
             href="/dashboard/history"
             className="flex flex-col items-center justify-center gap-y-1 text-sm"
-            activeClassName="text-primary font-semibold"
+            activeClassName="text-primary font-bold"
           >
             <LucideHistory className="h-5 w-5" />
             History
@@ -90,7 +90,7 @@ const Menu = () => {
           <NavLink
             href="/dashboard/settings"
             className="flex flex-col items-center justify-center gap-y-1 text-sm"
-            activeClassName="text-primary font-semibold"
+            activeClassName="text-primary font-bold"
           >
             <LucideSettings className="h-5 w-5" />
             Settings
