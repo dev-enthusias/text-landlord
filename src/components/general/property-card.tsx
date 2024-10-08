@@ -17,7 +17,7 @@ export default function PropertyCard() {
           />
         </div>
         <div className="border-b border-b-gray-300 py-4">
-          <p className="text-primary-dark flex items-center gap-x-1 text-lg font-bold">
+          <p className="flex items-center gap-x-1 text-lg font-bold text-primary-dark">
             ₦5,000,000{" "}
             <span className="text-base font-medium text-foreground opacity-50">
               /Year
@@ -30,6 +30,58 @@ export default function PropertyCard() {
               <MapPin size={10} /> Palaxisto Emeriando Plaza Road
             </p>
           </div>
+
+          <ul className="flex items-center justify-between">
+            <li className="flex w-1/3 items-center justify-start gap-x-1 text-sm font-semibold">
+              <BedIcon className="text-primary-dark" size={18} />
+              <span className="opacity-50">6 bd</span>
+            </li>
+            <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300 text-sm font-semibold">
+              <BathIcon className="text-primary-dark" size={18} />
+              <span className="opacity-50">6 bt</span>
+            </li>
+            <li className="flex w-1/3 items-center justify-end gap-x-1 text-sm font-semibold">
+              <RulerIcon className="text-primary-dark" size={18} />
+              <span className="opacity-50">2.62ft</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </Link>
+  );
+}
+
+export function PropertyCardLandscape() {
+  return (
+    <Link
+      href={routes.DASHBOARDPROPERTIESDETAILS}
+      className="custom-shadow-sm z-50 block rounded-lg"
+    >
+      <article className="flex gap-x-3 rounded-lg p-2">
+        <div className="relative w-32 overflow-hidden rounded-lg">
+          <Image
+            src="/images/duplex.webp"
+            alt="property display photo"
+            fill
+            sizes="384px"
+            className="object-cover"
+          />
+        </div>
+
+        <div>
+          <div>
+            <h3 className="text-lg font-semibold">Emperica in Dazil, Villa</h3>
+            <p className="text-medium flex items-center gap-x-0.5 text-sm">
+              Palaxisto Emeriando Plaza Road
+            </p>
+          </div>
+
+          <p className="my-2 flex items-center gap-x-1 text-lg font-bold text-primary-dark">
+            ₦5,000,000
+            <span className="text-[14px] font-medium text-foreground opacity-50">
+              /Year
+            </span>
+          </p>
 
           <ul className="flex items-center justify-between">
             <li className="flex w-1/3 items-center justify-start gap-x-1 text-sm font-semibold">

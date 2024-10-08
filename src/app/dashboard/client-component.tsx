@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon, ShieldCheckIcon } from "lucide-react";
+import { routes } from "@/constants/routes";
+import Link from "next/link";
 
 export function WalletOverview() {
   const [isVisible, setVisibility] = useState(true);
@@ -22,9 +24,12 @@ export function WalletOverview() {
           {isVisible ? "₦10,000,000" : "****"}
         </p>
       </div>
-      <button className="rounded-full bg-black px-2 py-2 text-xs text-white">
+      <Link
+        href={routes.DASHBOARDADDMONEY}
+        className="rounded-full bg-black px-3 py-2 text-xs text-white"
+      >
         <span className="">+</span> Add Money
-      </button>
+      </Link>
     </section>
   );
 }

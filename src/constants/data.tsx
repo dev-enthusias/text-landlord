@@ -3,6 +3,7 @@ import {
   CircleAlertIcon,
   HeartIcon,
   HistoryIcon,
+  HomeIcon,
   ListOrderedIcon,
   LockKeyholeIcon,
   MapPinnedIcon,
@@ -81,4 +82,13 @@ export const profileInfo = [
   { title: "Passport/ID no", value: "489519345GH" },
   { title: "TIN", value: "398dbfa0e3489" },
   { title: "SIN", value: "edfan9e9r9dbfaifb" },
+];
+
+export const propertyCategories = [
+  { title: "Apartment", icon: <HomeIcon /> },
+  { title: "Building", icon: <HomeIcon /> },
+  { title: "Office", icon: <HomeIcon /> },
+  { title: "Room", icon: <HomeIcon /> },
+  { title: "Flat", icon: <HomeIcon /> },
+  { title: "Land", icon: <HomeIcon /> },
 ];

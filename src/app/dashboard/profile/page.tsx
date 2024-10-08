@@ -35,7 +35,10 @@ export default function Profile() {
 
         <section className="px-5">
           {profileInfo.map(({ value, title }, i) => (
-            <div className="flex justify-between border-b border-b-gray-200 py-4">
+            <div
+              key={i}
+              className="flex justify-between border-b border-b-gray-200 py-4"
+            >
               <h3 className="opacity-50">{title}</h3>
               <p className="font-semibold">{value}</p>
             </div>
