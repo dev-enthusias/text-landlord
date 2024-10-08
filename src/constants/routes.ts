@@ -15,4 +15,5 @@ export const routes = {
   DASHBOARDPROFILE: "/dashboard/settings",
   DASHBOARDHISTORY: "/dashboard/history",
   DASHBOARDSETTINGS: "/dashboard/settings",
+  DASHBOARDNOTIFICATIONS: "/dashboard/notifications",
 };

@@ -2,7 +2,7 @@ import Menu from "@/components/general/footer-menu";
 import PrevPageButton from "@/components/general/prev-page";
 import { settings } from "@/constants/data";
 import { routes } from "@/constants/routes";
-import { ChevronRight, ChevronRightIcon } from "lucide-react";
+import { ChevronRight, ChevronRightIcon, LogOutIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function Settings() {
@@ -78,6 +78,13 @@ export default function Settings() {
             ))}
           </div>
         </section>
+
+        <form>
+          <button className="flex gap-x-2 px-1 font-bold text-red-600">
+            <LogOutIcon className="-rotate-180" />
+            Logout
+          </button>
+        </form>
       </main>
       <Menu />
     </>

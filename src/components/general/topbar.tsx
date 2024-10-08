@@ -1,3 +1,4 @@
+import { routes } from "@/constants/routes";
 import { LucideBellRing, LucideShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,7 +16,7 @@ export default function Topbar() {
       />
 
       <div className="flex items-center gap-x-4">
-        <Link href="">
+        <Link href={routes.DASHBOARDNOTIFICATIONS}>
           <LucideBellRing />
         </Link>
         <Link href="">
