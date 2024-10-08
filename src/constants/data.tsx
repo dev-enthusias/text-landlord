@@ -70,3 +70,15 @@ export const settings = {
     },
   ],
 };
+
+export const profileInfo = [
+  { title: "Religion", value: "Santorian" },
+  { title: "Gender", value: "Male" },
+  { title: "DOB", value: "11th March, 1900" },
+  { title: "Marital Status", value: "Single" },
+  { title: "Occupation", value: "Software Engineer" },
+  { title: "Property Owner", value: "Organization" },
+  { title: "Passport/ID no", value: "489519345GH" },
+  { title: "TIN", value: "398dbfa0e3489" },
+  { title: "SIN", value: "edfan9e9r9dbfaifb" },
+];
