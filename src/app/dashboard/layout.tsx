@@ -3,5 +3,5 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section className="min-h-screen bg-yellow-50/[15%]">{children}</section>;
+  return <section className="min-h-dvh bg-yellow-50/[15%]">{children}</section>;
 }

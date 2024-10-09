@@ -107,7 +107,7 @@ function UpcomingRentNotification() {
         <p className="text-sm">Expires on 12th Dec, 2024</p>
       </div>
       <button className="shrink-0 rounded-full bg-black px-3 py-1 text-sm font-bold text-white">
-        Renew
+        Pay Rent
       </button>
     </article>
   );

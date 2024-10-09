@@ -51,10 +51,18 @@ export default function PropertyCard() {
   );
 }
 
-export function PropertyCardLandscape() {
+export function PropertyCardLandscape({
+  status,
+  queryParam = "",
+}: {
+  status?: string;
+  queryParam?: string;
+}) {
   return (
     <Link
-      href={routes.DASHBOARDPROPERTIESDETAILS}
+      href={
+        routes.DASHBOARDPROPERTIESDETAILS + `?property-status=${queryParam}`
+      }
       className="custom-shadow-sm z-50 block rounded-lg"
     >
       <article className="flex gap-x-3 rounded-lg p-2">
@@ -69,6 +77,18 @@ export function PropertyCardLandscape() {
         </div>
 
         <div>
+          {status === "upcoming" ? (
+            <p className="text-xxs font-semibold text-accent">
+              Upcoming - Due 21st December, 2024
+            </p>
+          ) : status === "overdue" ? (
+            <p className="text-xxs font-semibold text-red-600">
+              Overdue - Expired 15th September, 2024
+            </p>
+          ) : (
+            ""
+          )}
+
           <div>
             <h3 className="text-lg font-semibold">Emperica in Dazil, Villa</h3>
             <p className="text-medium flex items-center gap-x-0.5 text-sm">

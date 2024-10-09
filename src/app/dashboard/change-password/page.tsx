@@ -1,6 +1,5 @@
 import TextInput from "@/components/auth/text-input";
 import PrevPageButton from "@/components/general/prev-page";
-import { ChevronRightIcon, LandmarkIcon } from "lucide-react";
 
 export default function ChangePassword() {
   return (

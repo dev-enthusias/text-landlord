@@ -16,17 +16,17 @@ import { routes } from "./routes";
 export const settings = {
   general: [
     {
-      name: "Fund Wallet",
+      name: "Fund wallet",
       icon: <WalletIcon className="text-primary-dark" size={18} />,
       link: routes.DASHBOARDADDMONEY,
     },
     {
-      name: "Transaction History",
+      name: "Transaction history",
       icon: <HistoryIcon className="text-primary-dark" size={18} />,
       link: routes.DASHBOARDHISTORY,
     },
     {
-      name: "Change Password",
+      name: "Change password",
       icon: <LockKeyholeIcon className="text-primary-dark" size={18} />,
       link: routes.DASHBOARDCHANGEPASSWORD,
     },
@@ -35,25 +35,30 @@ export const settings = {
     {
       name: "Orders",
       icon: <ListOrderedIcon className="text-primary-dark" size={18} />,
-      link: "",
+      link: routes.DASHBOARDORDER,
+    },
+    {
+      name: "Rented properties",
+      icon: <HomeIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDRENTEDPROPERTIES,
     },
     {
       name: "Wishlist",
       icon: <HeartIcon className="text-primary-dark" size={18} />,
-      link: "",
+      link: routes.DASHBOARDWISHLIST,
     },
     {
       name: "Appointments",
       icon: <MapPinnedIcon className="text-primary-dark" size={18} />,
       link: "",
     },
+  ],
+  legal: [
     {
       name: "Support",
       icon: <BotMessageSquareIcon className="text-primary-dark" size={18} />,
       link: "",
     },
-  ],
-  legal: [
     {
       name: "Terms and condition",
       icon: <NotebookTextIcon className="text-primary-dark" size={18} />,
