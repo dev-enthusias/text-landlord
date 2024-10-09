@@ -18,7 +18,7 @@ export const settings = {
     {
       name: "Fund Wallet",
       icon: <WalletIcon className="text-primary-dark" size={18} />,
-      link: "",
+      link: routes.DASHBOARDADDMONEY,
     },
     {
       name: "Transaction History",
