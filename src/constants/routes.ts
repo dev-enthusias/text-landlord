@@ -18,4 +18,5 @@ export const routes = {
   DASHBOARDNOTIFICATIONS: "/dashboard/notifications",
   DASHBOARDCART: "/dashboard/cart",
   DASHBOARDADDMONEY: "/dashboard/add-money",
+  DASHBOARDCHANGEPASSWORD: "/dashboard/change-password",
 };

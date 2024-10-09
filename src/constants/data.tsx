@@ -28,7 +28,7 @@ export const settings = {
     {
       name: "Change Password",
       icon: <LockKeyholeIcon className="text-primary-dark" size={18} />,
-      link: "",
+      link: routes.DASHBOARDCHANGEPASSWORD,
     },
   ],
   general2: [
