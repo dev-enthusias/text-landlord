@@ -13,13 +13,15 @@ import Image from "next/image";
 export default function RegisterPage() {
   return (
     <FormStepStoreProvider>
-      <main className="flex h-screen max-h-screen overflow-hidden p-4">
-        <section className="shrink-0 rounded-lg">
+      <main className="flex h-screen max-h-dvh overflow-hidden p-4">
+        <section className="hidden shrink-0 rounded-lg lg:block">
           <Sidebar />
         </section>
 
         <section className="no-scrollbar relative flex grow flex-col items-center overflow-y-auto py-10">
-          {/* <Indicator /> */}
+          <div className="fixed left-0 top-0 z-50 w-full bg-white py-4 lg:hidden">
+            <Indicator />
+          </div>
 
           <Link href={routes.HOME} className="block">
             <div className="relative mx-auto h-20 w-28">
@@ -33,7 +35,9 @@ export default function RegisterPage() {
             </div>
           </Link>
 
-          <RegisterationForm />
+          <div className="px-1 lg:px-0">
+            <RegisterationForm />
+          </div>
         </section>
       </main>
     </FormStepStoreProvider>
@@ -73,7 +77,7 @@ function Sidebar() {
             onClick={() => updateStep(i)}
           >
             <div
-              className={`flex h-10 w-10 items-center justify-center rounded border-2 ${step === i ? "bg-primary border-black font-bold" : "border-gray-300 bg-white"} `}
+              className={`flex h-10 w-10 items-center justify-center rounded border-2 ${step === i ? "border-black bg-primary font-bold" : "border-gray-300 bg-white"} `}
             >
               {i + 1}
             </div>
@@ -96,23 +100,21 @@ function Sidebar() {
   );
 }
 
-// function Indicator() {
-//   const { step, updateStep } = useFormStepStore((state) => state);
+function Indicator() {
+  const { step, updateStep } = useFormStepStore((state) => state);
 
-//   const IndicatorLine = ({ index }: { index: number }) => {
-//     return (
-//       <div
-//         className={`h-1 w-24 cursor-pointer rounded-full ${step === index ? "bg-primary" : "bg-gray-200"}`}
-//         onClick={() => updateStep(index)}
-//       />
-//     );
-//   };
+  const IndicatorLine = ({ index }: { index: number }) => {
+    return (
+      <div
+        className={`h-1 cursor-pointer rounded-full ${step === index ? "bg-primary" : "bg-gray-200"}`}
+        onClick={() => updateStep(index)}
+      />
+    );
+  };
 
-//   const renderedLines = Array(4)
-//     .fill("")
-//     .map((_, i) => <IndicatorLine key={i} index={i} />);
+  const renderedLines = Array(4)
+    .fill("")
+    .map((_, i) => <IndicatorLine key={i} index={i} />);
 
-//   return (
-//     <div className="absolute top-2 z-50 flex gap-x-4">{renderedLines}</div>
-//   );
-// }
+  return <div className="grid grid-cols-4 gap-x-4 px-3">{renderedLines}</div>;
+}

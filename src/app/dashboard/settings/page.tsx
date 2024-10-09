@@ -80,12 +80,21 @@ export default function Settings() {
           </div>
         </section>
 
-        <form>
+        {/* You would change this when you start integrating endpoints */}
+
+        {/* <form>
           <button className="flex gap-x-2 px-1 font-bold text-red-600">
             <LogOutIcon className="-rotate-180" />
             Logout
           </button>
-        </form>
+        </form> */}
+        <Link
+          href={routes.LOGIN}
+          className="flex gap-x-2 px-1 font-bold text-red-600"
+        >
+          <LogOutIcon className="-rotate-180" />
+          Logout
+        </Link>
       </main>
       <Menu />
     </>

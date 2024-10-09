@@ -6,8 +6,8 @@ import { Arrow } from "@/components/svg";
 
 export default function ForgotPassword() {
   return (
-    <main className="flex h-screen max-h-screen overflow-hidden p-4">
-      <section className="shrink-0 rounded-lg">
+    <main className="flex h-screen max-h-dvh overflow-hidden p-4">
+      <section className="hidden shrink-0 rounded-lg lg:block">
         <Sidebar />
       </section>
 
@@ -24,7 +24,9 @@ export default function ForgotPassword() {
           </div>
         </Link>
 
-        <ForgotPasswordForm />
+        <div className="p-1 lg:p-0">
+          <ForgotPasswordForm />
+        </div>
 
         <Link
           href={routes.LOGIN}

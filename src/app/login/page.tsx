@@ -5,8 +5,8 @@ import LoginForm from "./login-form";
 
 export default function Login() {
   return (
-    <main className="flex h-screen max-h-screen overflow-hidden p-4">
-      <section className="shrink-0 rounded-lg">
+    <main className="flex h-screen max-h-dvh overflow-hidden p-4">
+      <section className="hidden shrink-0 rounded-lg lg:block">
         <Sidebar />
       </section>
 
@@ -23,10 +23,12 @@ export default function Login() {
           </div>
         </Link>
 
-        <LoginForm />
+        <div className="p-1 lg:p-0">
+          <LoginForm />
+        </div>
 
-        <p className="py-10 text-sm">
-          New User?{" "}
+        <p className="py-10 text-center text-[14px]">
+          <span className="block lg:mr-2 lg:inline-block">New User?</span>{" "}
           <Link
             href={routes.REGISTERASLANDLORD}
             className="mr-2 text-base font-semibold underline opacity-80 hover:opacity-100"

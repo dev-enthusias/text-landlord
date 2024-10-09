@@ -3,7 +3,9 @@
 import CustomCheckbox from "@/components/auth/custome-checkbox";
 import SelectInput from "@/components/auth/select-input";
 import TextInput from "@/components/auth/text-input";
+import { routes } from "@/constants/routes";
 import { useFormStepStore } from "@/providers/register-form-step-store-provider";
+import Link from "next/link";
 import { useState } from "react";
 
 const maritalOptions = [
@@ -58,7 +60,7 @@ export default function RegisterationForm() {
 
           <button
             type="button"
-            className="bg-primary hover:bg-primary/80 w-full rounded-lg py-3 font-semibold transition-colors duration-300 ease-out"
+            className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
             onClick={nextStep}
           >
             Continue
@@ -67,7 +69,7 @@ export default function RegisterationForm() {
       )}
 
       {step === 1 && (
-        <section>
+        <section className="">
           <div className="mb-6 text-center">
             <h2 className="text-gray- mb-1 text-3xl font-bold">
               Personal Details
@@ -93,11 +95,11 @@ export default function RegisterationForm() {
               onChange={setSelectedValueReligion}
               placeholder="Choose an option"
             />
-            <div className="flex gap-x-5">
-              <div className="w-1/2">
+            <div className="flex gap-5 lg:flex-row">
+              <div className="grow lg:w-1/2">
                 <TextInput label="Date of Birth" required />
               </div>
-              <div className="w-1/2">
+              <div className="grow lg:w-1/2">
                 <SelectInput
                   label="Gender"
                   options={genderOptions}
@@ -111,7 +113,7 @@ export default function RegisterationForm() {
 
           <button
             type="button"
-            className="bg-primary hover:bg-primary/80 w-full rounded-lg py-3 font-semibold transition-colors duration-300 ease-out"
+            className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
             onClick={nextStep}
           >
             Continue
@@ -138,11 +140,11 @@ export default function RegisterationForm() {
               placeholder="Choose an option"
             />
             <TextInput label="Passport/ID Card No" required />
-            <div className="flex gap-x-5">
-              <div className="w-1/2">
+            <div className="flex flex-col gap-5 lg:flex-row">
+              <div className="lg:w-1/2">
                 <TextInput label="Tin Number" required />
               </div>
-              <div className="w-1/2">
+              <div className="lg:w-1/2">
                 <TextInput label="SSNIT Number" required />
               </div>
             </div>
@@ -150,7 +152,7 @@ export default function RegisterationForm() {
 
           <button
             type="button"
-            className="bg-primary hover:bg-primary/80 w-full rounded-lg py-3 font-semibold transition-colors duration-300 ease-out"
+            className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
             onClick={nextStep}
           >
             Continue
@@ -180,12 +182,19 @@ export default function RegisterationForm() {
             </div>
           </div>
 
-          <button
+          {/* Change this later */}
+          {/* <button
             type="submit"
-            className="bg-primary hover:bg-primary/80 w-full rounded-lg py-3 font-semibold transition-colors duration-300 ease-out"
+            className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
           >
             Continue
-          </button>
+          </button> */}
+          <Link
+            href={routes.LOGIN}
+            className="block w-full rounded-lg bg-primary py-3 text-center font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
+          >
+            Register
+          </Link>
         </section>
       )}
     </form>

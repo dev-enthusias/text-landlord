@@ -15,7 +15,7 @@ export default function LoginForm() {
         <div className="mb-6 text-center">
           <h2 className="text-gray- mb-1 text-3xl font-bold">Welcome Back</h2>
           <p className="text-gray-500">
-            Enter your credentials to see for listing or rented properties.
+            Enter credentials to see your listing or rented properties.
           </p>
         </div>
 
@@ -23,7 +23,7 @@ export default function LoginForm() {
           <TextInput label="Email" required />
           <div>
             <TextInput label="Password" required />
-            <div className="mt-2 flex items-center justify-between text-sm font-semibold">
+            <div className="mt-2 flex items-center justify-between text-[14px] font-semibold">
               <div className="flex items-center gap-x-1">
                 <CustomCheckbox
                   id="disabled"
@@ -42,12 +42,18 @@ export default function LoginForm() {
           </div>
         </div>
 
-        <button
+        {/* <button
           type="submit"
-          className="bg-primary hover:bg-primary/80 w-full rounded-lg py-3 font-semibold transition-colors duration-300 ease-out"
+          className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
         >
           LOGIN
-        </button>
+        </button> */}
+        <Link
+          href={routes.DASHBOARD}
+          className="block w-full text-center rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
+        >
+          LOGIN
+        </Link>
       </section>
     </form>
   );
