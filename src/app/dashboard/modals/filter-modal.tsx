@@ -1,7 +1,7 @@
 "use client";
 
 import PriceRangeSlider from "@/components/general/pricerange-slider";
-import { FilterIcon, ShieldClose, XCircle } from "lucide-react";
+import { FilterIcon, XCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function FilterModal() {
@@ -42,7 +42,10 @@ export default function FilterModal() {
                   {Array(5)
                     .fill("")
                     .map((_, i) => (
-                      <li className="custom-shadow-sm w-full rounded py-1 text-center font-medium">
+                      <li
+                        key={i}
+                        className="custom-shadow-sm w-full rounded py-1 text-center font-medium"
+                      >
                         {i === 4 ? "5+" : i + 1}
                       </li>
                     ))}
@@ -55,7 +58,10 @@ export default function FilterModal() {
                   {Array(5)
                     .fill("")
                     .map((_, i) => (
-                      <li className="custom-shadow-sm w-full rounded py-1 text-center font-medium">
+                      <li
+                        key={i}
+                        className="custom-shadow-sm w-full rounded py-1 text-center font-medium"
+                      >
                         {i === 4 ? "5+" : i + 1}
                       </li>
                     ))}

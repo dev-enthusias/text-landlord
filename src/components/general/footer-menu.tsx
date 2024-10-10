@@ -1,8 +1,8 @@
 import {
-  LucideHistory,
   LucideHousePlus,
   LucideLayoutDashboard,
   LucideSettings,
+  MessageCircleMoreIcon,
 } from "lucide-react";
 import NavLink from "./navlink";
 
@@ -33,12 +33,12 @@ export default function Menu() {
         </li>
         <li>
           <NavLink
-            href="/dashboard/history"
+            href="/dashboard/chat"
             className="flex flex-col items-center justify-center gap-y-1 text-sm"
             activeClassName="text-primary font-bold"
           >
-            <LucideHistory className="h-5 w-5" />
-            History
+            <MessageCircleMoreIcon className="h-5 w-5" />
+            Chat
           </NavLink>
         </li>
         <li>
