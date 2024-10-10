@@ -2,7 +2,7 @@ import Menu from "@/components/general/footer-menu";
 import { PropertyCardLandscape } from "@/components/general/property-card";
 import Topbar from "@/components/general/topbar";
 import { propertyCategories } from "@/constants/data";
-import { FilterIcon } from "lucide-react";
+import FilterModal from "../modals/filter-modal";
 
 export default function Properties() {
   return (
@@ -15,12 +15,7 @@ export default function Properties() {
             Properties
           </h1>
 
-          <button className="mb-3 flex w-full items-center justify-between rounded-lg border bg-gray-50 px-4 py-3">
-            <span className="text-xs">
-              Filter by categories, beds, baths, area
-            </span>
-            <FilterIcon size={16} />
-          </button>
+          <FilterModal />
 
           <ul className="no-scrollbar -mx-3 my-5 flex w-[calc(97vw)] gap-x-6 overflow-scroll px-3">
             {propertyCategories.map(({ icon, title }, i) => (

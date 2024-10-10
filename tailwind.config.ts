@@ -13,7 +13,7 @@ const config: Config = {
         foreground: "var(--foreground)",
         primary: "#f2cc53",
         "primary-dark": "#FEBE00",
-        accent: " #087c7c",
+        accent: "#087c7c",
       },
     },
     fontSize: {
