@@ -11,7 +11,7 @@ export function WalletOverview() {
   const [isVisible, setVisibility] = useState(true);
 
   return (
-    <section className="flex items-start justify-between rounded-lg bg-primary px-4 py-3">
+    <section className="flex w-full items-start justify-between rounded-lg bg-primary px-4 py-3">
       <div>
         <div className="mb-4 flex items-center gap-x-4">
           <p className="flex items-center gap-x-1 text-sm">
@@ -22,7 +22,7 @@ export function WalletOverview() {
             {isVisible ? <EyeIcon size={14} /> : <EyeOffIcon size={14} />}
           </button>
         </div>
-        <p className="text-xl font-semibold">
+        <p className="text-xl lg:text-3xl font-semibold">
           {isVisible ? "₦10,000,000" : "****"}
         </p>
       </div>

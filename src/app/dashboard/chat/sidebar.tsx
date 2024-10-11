@@ -41,7 +41,7 @@ export default function Friends() {
   );
 }
 
-const FriendCard = () => {
+export const FriendCard = () => {
   return (
     <Link href="/dashboard/chat/id">
       <article className="flex items-center gap-x-3.5 rounded-lg px-3.5 py-2 text-[#09132C] hover:bg-primary">
