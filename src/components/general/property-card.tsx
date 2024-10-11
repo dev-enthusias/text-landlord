@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function PropertyCard() {
   return (
     <Link href={routes.DASHBOARDPROPERTIESDETAILS} className="z-40 block">
-      <article>
+      <article className="w-64">
         <div className="relative h-36 w-64 overflow-hidden rounded-lg">
           <Image
             src="/images/duplex.webp"

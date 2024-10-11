@@ -12,7 +12,7 @@ import {
 
 export default function Sidebar() {
   return (
-    <aside className="hidden w-[340px] shrink-0 bg-primary lg:block">
+    <aside className="hidden w-[310px] shrink-0 bg-primary lg:block">
       <div className="flex h-20 items-center justify-center bg-white">
         <Link href={routes.HOME} className="relative block h-32 w-32">
           <Image
