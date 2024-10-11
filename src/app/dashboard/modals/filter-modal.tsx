@@ -35,9 +35,9 @@ export default function FilterModal() {
               Filters
             </h2>
 
-            <section className="space-y-4 px-5 pb-6">
+            <section className="space-y-8 px-5 pb-6 lg:space-y-12">
               <div>
-                <h3 className="mb-2 font-semibold">Bed Rooms</h3>
+                <h3 className="mb-2 font-semibold lg:font-medium">Bed Rooms</h3>
                 <ul className="flex gap-x-4">
                   {Array(5)
                     .fill("")
@@ -53,7 +53,9 @@ export default function FilterModal() {
               </div>
 
               <div>
-                <h3 className="mb-2 font-semibold">Bath Rooms</h3>
+                <h3 className="mb-2 font-semibold lg:font-medium">
+                  Bath Rooms
+                </h3>
                 <ul className="flex gap-x-4">
                   {Array(5)
                     .fill("")
@@ -69,7 +71,7 @@ export default function FilterModal() {
               </div>
 
               <div>
-                <h3 className="mb- font-semibold">Price</h3>
+                <h3 className="mb- font-semibold lg:font-medium">Price</h3>
                 <PriceRangeSlider />
               </div>
 

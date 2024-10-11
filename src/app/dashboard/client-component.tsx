@@ -22,7 +22,7 @@ export function WalletOverview() {
             {isVisible ? <EyeIcon size={14} /> : <EyeOffIcon size={14} />}
           </button>
         </div>
-        <p className="text-xl lg:text-3xl font-semibold">
+        <p className="text-xl font-semibold lg:text-3xl">
           {isVisible ? "₦10,000,000" : "****"}
         </p>
       </div>
@@ -75,7 +75,7 @@ const ImageSlider = () => {
   return (
     <>
       <div
-        className="relative mx-auto flex h-[30vh] w-full items-center justify-center"
+        className="relative mx-auto flex h-[30vh] w-full items-center justify-center lg:h-[60vh]"
         {...handlers} // Attach swipe handlers
       >
         <button
