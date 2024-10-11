@@ -10,7 +10,7 @@ export default function DashboardLayout({
     <section className="flex max-h-dvh min-h-dvh overflow-hidden bg-yellow-50/[15%]">
       <Sidebar />
       <div className="grow overflow-y-auto">
-        <div className="hidden lg:block">
+        <div className="sticky top-0 z-[10000] hidden lg:block">
           <Topbar />
         </div>
         {children}

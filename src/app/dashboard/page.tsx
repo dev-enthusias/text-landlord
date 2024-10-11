@@ -69,7 +69,7 @@ export default function DashboardHomePage() {
               </div>
             </section>
 
-            <section className="col-span-3 lg:border lg:bg-white">
+            <section className="col-span-3 rounded-lg lg:overflow-hidden lg:border lg:bg-white">
               <div className="mb-2 flex items-center justify-between font-semibold lg:border-b lg:px-5 lg:py-5">
                 <h2 className="text-lg lg:text-xl">Recent transactions</h2>
                 <Link
@@ -97,7 +97,7 @@ export default function DashboardHomePage() {
 // Dynamically set on card to display data
 function RentNotification() {
   return (
-    <article className="flex w-full max-w-[540px] items-center justify-between gap-x-2 rounded-lg border border-red-600 bg-red-50 px-3 py-1">
+    <article className="flex w-full max-w-[540px] items-center justify-between gap-x-2 rounded-lg border border-red-600 bg-red-50 px-3 py-1 lg:py-2">
       <div>
         <p className="mb-1 text-xxs font-semibold text-red-600">Overdue</p>
         <h3 className="text-lg font-semibold">Havilla Somalisto</h3>
@@ -116,7 +116,7 @@ function RentNotification() {
 
 function UpcomingRentNotification() {
   return (
-    <article className="flex w-full max-w-[540px] items-center justify-between gap-x-2 rounded-lg border border-gray-400 bg-gray-50 px-3 py-1">
+    <article className="flex w-full max-w-[540px] items-center justify-between gap-x-2 rounded-lg border border-gray-400 bg-gray-50 px-3 py-1 lg:py-2">
       <div>
         <p className="mb-1 text-xxs font-semibold text-gray-500">
           Upcoming rent due

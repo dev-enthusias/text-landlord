@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function PropertyCard() {
   return (
-    <Link href={routes.DASHBOARDPROPERTIESDETAILS} className="block">
+    <Link href={routes.DASHBOARDPROPERTIESDETAILS} className="z-40 block">
       <article>
         <div className="relative h-36 w-64 overflow-hidden rounded-lg">
           <Image
@@ -63,7 +63,7 @@ export function PropertyCardLandscape({
       href={
         routes.DASHBOARDPROPERTIESDETAILS + `?property-status=${queryParam}`
       }
-      className="custom-shadow-sm z-50 block rounded-lg"
+      className="custom-shadow-sm z-40 block rounded-lg"
     >
       <article className="flex gap-x-3 rounded-lg p-2">
         <div className="relative w-32 overflow-hidden rounded-lg">

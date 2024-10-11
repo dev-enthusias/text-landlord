@@ -15,15 +15,15 @@ export default function FilterModal() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="mb-3 flex w-full items-center justify-between rounded-lg border bg-gray-50 px-4 py-3"
+        className="mb-3 ml-auto flex w-full items-center justify-between rounded-lg border bg-gray-50 px-4 py-3 lg:w-[420px]"
       >
         <span className="text-xs">Filter by categories, beds, baths, area</span>
         <FilterIcon size={16} />
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <article className="relative mx-auto w-[95%] rounded-t-2xl bg-white">
+        <div className="fixed inset-0 z-[1000000000] flex items-center justify-center bg-black bg-opacity-50">
+          <article className="relative mx-auto w-[95%] max-w-[440px] rounded-t-2xl bg-white lg:rounded-b-2xl">
             <button
               onClick={handleClose}
               className="absolute right-5 top-5 text-xl"
@@ -75,7 +75,7 @@ export default function FilterModal() {
 
               <button
                 type="submit"
-                className="w-full rounded-lg bg-accent py-3 font-semibold text-white transition-colors duration-300 ease-out hover:bg-primary/80"
+                className="w-full rounded-lg bg-accent py-3 font-semibold text-white transition-colors duration-300 ease-out hover:bg-accent/80"
               >
                 Apply Filter
               </button>
