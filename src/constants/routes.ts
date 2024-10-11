@@ -23,4 +23,5 @@ export const routes = {
   DASHBOARDADDMONEY: "/dashboard/add-money",
   DASHBOARDCHANGEPASSWORD: "/dashboard/change-password",
   DASHBOARDRENTEDPROPERTIES: "/dashboard/rented-properties",
+  DASHBOARDCHAT: "/dashboard/chat",
 };

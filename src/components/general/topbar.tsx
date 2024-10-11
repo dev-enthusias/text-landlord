@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function Topbar() {
   return (
-    <header className="sticky top-0 z-50 flex h-16 justify-between overflow-hidden border bg-white px-3">
-      <Link href={routes.HOME}>
+    <header className="sticky top-0 z-50 flex h-16 justify-between overflow-hidden border-b bg-white px-3 lg:h-20 lg:justify-end lg:border-l lg:px-10">
+      <Link href={routes.HOME} className="lg:hidden">
         <Image
           src="/logos/logo-transparent.png"
           alt="Oga landlord logo"
@@ -17,7 +17,7 @@ export default function Topbar() {
         />
       </Link>
 
-      <div className="flex items-center gap-x-4">
+      <div className="flex items-center gap-x-4 lg:gap-x-10">
         <Link href={routes.DASHBOARDNOTIFICATIONS}>
           <LucideBellRing />
         </Link>
@@ -25,12 +25,12 @@ export default function Topbar() {
           <LucideShoppingCart />
         </Link>
         <Link href={routes.DASHBOARDPROFILE}>
-          <div className="relative h-10 w-10 overflow-hidden rounded-full bg-gray-300">
+          <div className="relative h-10 w-10 overflow-hidden rounded-full bg-gray-300 lg:h-12 lg:w-12">
             <Image
               src="/images/profile-img.jpeg"
               alt="Tenant profile photo"
               fill
-              sizes="40px"
+              sizes="100vw"
               style={{ objectFit: "cover" }}
             />
           </div>

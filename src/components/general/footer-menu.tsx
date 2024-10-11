@@ -8,7 +8,7 @@ import NavLink from "./navlink";
 
 export default function Menu() {
   return (
-    <footer>
+    <footer className="lg:hidden">
       <ul className="fixed bottom-0 flex w-full justify-between rounded-t-3xl bg-black px-5 py-4 text-background">
         <li>
           <NavLink
