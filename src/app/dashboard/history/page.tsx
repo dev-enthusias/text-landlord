@@ -22,7 +22,7 @@ export default function History() {
             {buttons.map((btnText, i) => (
               <button
                 key={i}
-                className={`shrink-0 whitespace-nowrap rounded-full px-4 py-[3px] font-bold ${activeBtn === i ? "bg-primary text-black" : "text-primary-dark bg-primary/20"}`}
+                className={`shrink-0 whitespace-nowrap rounded-full px-4 py-[3px] font-bold ${activeBtn === i ? "bg-primary text-black" : "bg-primary/20 text-primary-dark"}`}
                 onClick={() => setActiveBtn(i)}
               >
                 {btnText}
@@ -32,7 +32,7 @@ export default function History() {
         </div>
       </section>
 
-      <section className="px-3 py-4">
+      <section className="px-3 py-4 lg:px-10">
         <section className="mb-4">
           <div className="mb-2 flex items-center gap-x-1">
             <h2 className="text-sm font-bold">NOVEMBER</h2>
@@ -40,9 +40,6 @@ export default function History() {
           </div>
           <div className="space-y-5">
             <TransactionCard status="credit" />
-            <TransactionCard status="debit" />
-            <TransactionCard status="credit" />
-            <TransactionCard status="debit" />
             <TransactionCard status="debit" />
             <TransactionCard status="credit" />
           </div>

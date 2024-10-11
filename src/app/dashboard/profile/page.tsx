@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Profile() {
   return (
     <>
-      <header className="relative mb-20 h-28 w-full border-b border-gray-200 bg-primary px-3 py-5">
+      <header className="relative mb-20 h-28 w-full border-b border-gray-200 bg-primary px-3 py-5 lg:border-none lg:bg-transparent">
         <div className="absolute -bottom-1/2 left-5 h-28 w-28 overflow-hidden rounded-full border-4 border-white">
           <Image
             src="/images/profile-img.jpeg"

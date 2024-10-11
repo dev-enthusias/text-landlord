@@ -7,7 +7,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex max-h-dvh min-h-dvh overflow-hidden bg-yellow-50/[15%]">
+    <section className="relative flex max-h-dvh min-h-dvh overflow-hidden bg-yellow-50/[15%]">
       <Sidebar />
       <div className="grow overflow-y-auto">
         <div className="sticky top-0 z-[10000] hidden lg:block">

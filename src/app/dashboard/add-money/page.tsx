@@ -12,7 +12,7 @@ export default function AddMoney() {
       </header>
 
       <main className="p-5">
-        <section className="custom-shadow rounded-lg bg-white p-3">
+        <section className="custom-shadow max-w-[540px] rounded-lg bg-white p-3">
           <article className="mb-2 flex items-center justify-between border-b border-dashed border-gray-200 pb-2">
             <div className="flex items-center space-x-2">
               <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-dark/10">
