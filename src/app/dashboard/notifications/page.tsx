@@ -34,7 +34,7 @@ export default function Notifications() {
   );
 }
 
-export function NotificationCard({
+function NotificationCard({
   status = "unread",
 }: {
   status?: "unread" | "read";

@@ -2,7 +2,7 @@ import { routes } from "@/constants/routes";
 import { LucideBellRing, LucideShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import NotificationBtn from "./notification-btn";
+// import NotificationBtn from "./notification-btn";
 
 export default function Topbar() {
   return (
@@ -22,7 +22,7 @@ export default function Topbar() {
         <Link href={routes.DASHBOARDNOTIFICATIONS} className="lg:hidden">
           <LucideBellRing />
         </Link>
-        <NotificationBtn />
+        {/* <NotificationBtn /> */}
         <Link href={routes.DASHBOARDCART}>
           <LucideShoppingCart />
         </Link>
