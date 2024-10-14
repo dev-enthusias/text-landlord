@@ -11,7 +11,7 @@ export default function History() {
 
   return (
     <>
-      <section className="sticky top-[72px] w-full border-b border-gray-200 bg-white px-3 py-5 lg:px-10">
+      <section className="sticky top-0 w-full border-b border-gray-200 bg-white px-3 py-5 lg:top-[72px] lg:px-10">
         <div className="mb-10 flex items-center gap-x-8 lg:hidden">
           <PrevPageButton />
           <h1 className="text-xl font-semibold">Transaction History</h1>

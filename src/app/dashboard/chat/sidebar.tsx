@@ -3,24 +3,29 @@
 import { SearchIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Friends() {
+  const router = useRouter();
   return (
-    <div className="w-screen">
-      <div className="px-3 py-5">
-        <h2 className="text-xl font-semibold">Chats</h2>
+    <div className="w-screen lg:w-[380px]">
+      <div className="p-3">
+        <button
+          className="transtion-all text-18 text-grey-700 group flex gap-x-2 font-semibold duration-150 hover:opacity-80"
+          onClick={() => router.back()}
+        >
+          <span className="transition-all duration-150 group-hover:-translate-x-0.5">
+            &larr;
+          </span>
+          <span>Back</span>
+        </button>
+      </div>
+
+      <div className="px-3 py-5 lg:pb-10 lg:pt-5">
+        <h2 className="text-2xl font-semibold">Chats</h2>
       </div>
 
       <section className="h-full max-w-[429px] px-2.5">
-        <div className="hidden px-6 lg:block">
-          <button className="transtion-all text-18 text-grey-700 group mb-8 flex gap-x-2 duration-150 hover:opacity-80">
-            <span className="transition-all duration-150 group-hover:-translate-x-0.5">
-              &larr;
-            </span>
-            <span>Back</span>
-          </button>
-        </div>
-
         <div className="custom-shadow relative mb-7 flex w-full justify-center rounded-lg">
           <input
             type="search"
@@ -34,6 +39,11 @@ export default function Friends() {
         </div>
 
         <section>
+          <FriendCard />
+          <FriendCard />
+          <FriendCard />
+          <FriendCard />
+          <FriendCard />
           <FriendCard />
         </section>
       </section>
