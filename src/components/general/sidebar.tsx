@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./navlink";
 import {
+  HistoryIcon,
   LayoutDashboardIcon,
   LogOutIcon,
   LucideHousePlus,
@@ -12,8 +13,8 @@ import {
 
 export default function Sidebar() {
   return (
-    <aside className="hidden w-[310px] shrink-0 bg-primary lg:block">
-      <div className="flex h-20 items-center justify-center bg-white">
+    <aside className="hidden w-[310px] shrink-0 border-r px-4 lg:block">
+      <div className="flex h-20 items-center justify-center border-b">
         <Link href={routes.HOME} className="relative block h-32 w-32">
           <Image
             src="/logos/logo-transparent.png"
@@ -29,8 +30,8 @@ export default function Sidebar() {
         <li>
           <NavLink
             exact
-            className="flex items-center gap-x-2 px-10 py-4 font-semibold hover:bg-white"
-            activeClassName="text-yellow-700 bg-white font-bold"
+            className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+            activeClassName=" bg-primary font-bold-dark/20 text-yellow-700 hover:bg-primary-dark/20"
             href={routes.DASHBOARD}
           >
             <LayoutDashboardIcon size={22} />
@@ -39,8 +40,8 @@ export default function Sidebar() {
         </li>
         <li>
           <NavLink
-            className="flex items-center gap-x-2 px-10 py-4 font-semibold hover:bg-white"
-            activeClassName="font-bold text-yellow-700 bg-white"
+            className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+            activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
             href={routes.DASHBOARDPROPERTIES}
           >
             <LucideHousePlus size={22} />
@@ -49,8 +50,18 @@ export default function Sidebar() {
         </li>
         <li>
           <NavLink
-            className="flex items-center gap-x-2 px-10 py-4 font-semibold hover:bg-white"
-            activeClassName="font-bold text-yellow-700 bg-white"
+            className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+            activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
+            href={routes.DASHBOARDHISTORY}
+          >
+            <HistoryIcon size={22} />
+            Transaction History
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+            activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
             href={routes.DASHBOARDCHAT}
           >
             <MessageCircleMoreIcon size={22} />
@@ -59,8 +70,8 @@ export default function Sidebar() {
         </li>
         <li>
           <NavLink
-            className="flex items-center gap-x-2 px-10 py-4 font-semibold hover:bg-white"
-            activeClassName="font-bold text-yellow-700 bg-white"
+            className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+            activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
             href={routes.DASHBOARDSETTINGS}
           >
             <LucideSettings size={22} />

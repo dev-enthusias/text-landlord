@@ -3,9 +3,24 @@ import { BathIcon, BedIcon, MapPin, RulerIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function PropertyCard() {
+export default function PropertyCard({
+  type,
+  status,
+  queryParam = "",
+}: {
+  type?: "order";
+  status?: string;
+  queryParam?: string;
+}) {
   return (
-    <Link href={routes.DASHBOARDPROPERTIESDETAILS} className="z-40 block">
+    <Link
+      href={
+        type !== "order"
+          ? routes.DASHBOARDPROPERTIESDETAILS + `?property-status=${queryParam}`
+          : routes.DASHBOARDSETTINGS + "?path=orderdetails"
+      }
+      className="z-40 block"
+    >
       <article className="w-64">
         <div className="relative h-36 w-64 overflow-hidden rounded-lg">
           <Image
@@ -16,35 +31,51 @@ export default function PropertyCard() {
             className="object-cover"
           />
         </div>
-        <div className="border-b border-b-gray-300 py-4">
+        <div className="border-b border-b-gray-300 py-2">
+          {status === "upcoming" ? (
+            <p className="text-xxs font-semibold text-accent">
+              Upcoming - Due 21st December, 2024
+            </p>
+          ) : status === "overdue" ? (
+            <p className="text-xxs font-semibold text-red-600">
+              Overdue - Expired 15th September, 2024
+            </p>
+          ) : (
+            ""
+          )}
+
           <p className="flex items-center gap-x-1 text-lg font-bold text-primary-dark">
             ₦5,000,000{" "}
-            <span className="text-base font-medium text-foreground opacity-50">
+            <span className="text-[14px] font-medium text-foreground opacity-50">
               /Year
             </span>
           </p>
 
-          <div className="mb-3 mt-1">
+          <div className="mt-1">
             <h3 className="text-lg font-semibold">Emperica in Dazil, Villa</h3>
             <p className="text-medium flex items-center gap-x-0.5 text-sm">
               <MapPin size={10} /> Palaxisto Emeriando Plaza Road
             </p>
           </div>
 
-          <ul className="flex items-center justify-between">
-            <li className="flex w-1/3 items-center justify-start gap-x-1 text-sm font-semibold">
-              <BedIcon className="text-primary-dark" size={18} />
-              <span className="opacity-50">6 bd</span>
-            </li>
-            <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300 text-sm font-semibold">
-              <BathIcon className="text-primary-dark" size={18} />
-              <span className="opacity-50">6 bt</span>
-            </li>
-            <li className="flex w-1/3 items-center justify-end gap-x-1 text-sm font-semibold">
-              <RulerIcon className="text-primary-dark" size={18} />
-              <span className="opacity-50">2.62ft</span>
-            </li>
-          </ul>
+          {type !== "order" ? (
+            <ul className="mt-3 flex items-center justify-between">
+              <li className="flex w-1/3 items-center justify-start gap-x-1 text-sm font-semibold">
+                <BedIcon className="text-primary-dark" size={18} />
+                <span className="opacity-50">6 bd</span>
+              </li>
+              <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300 text-sm font-semibold">
+                <BathIcon className="text-primary-dark" size={18} />
+                <span className="opacity-50">6 bt</span>
+              </li>
+              <li className="flex w-1/3 items-center justify-end gap-x-1 text-sm font-semibold">
+                <RulerIcon className="text-primary-dark" size={18} />
+                <span className="opacity-50">2.62ft</span>
+              </li>
+            </ul>
+          ) : (
+            <p className="mt-1 text-sm opacity-50">10/10/2024 - 01:30PM</p>
+          )}
         </div>
       </article>
     </Link>

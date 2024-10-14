@@ -11,18 +11,22 @@ export default function History() {
 
   return (
     <>
-      <section className="sticky top-0 w-full border-b border-gray-200 bg-white px-3 py-5">
-        <div className="mb-10 flex items-center gap-x-8">
+      <section className="sticky top-[72px] w-full border-b border-gray-200 bg-white px-3 py-5 lg:px-10">
+        <div className="mb-10 flex items-center gap-x-8 lg:hidden">
           <PrevPageButton />
           <h1 className="text-xl font-semibold">Transaction History</h1>
         </div>
+
+        <h1 className="mb-4 flex items-center text-xl font-semibold lg:text-2xl">
+          Transaction History
+        </h1>
 
         <div className="no-scrollbar overflow-x-auto">
           <div className="flex space-x-4">
             {buttons.map((btnText, i) => (
               <button
                 key={i}
-                className={`shrink-0 whitespace-nowrap rounded-full px-4 py-[3px] font-bold ${activeBtn === i ? "bg-primary text-black" : "bg-primary/20 text-primary-dark"}`}
+                className={`shrink-0 whitespace-nowrap rounded-full px-4 py-[3px] font-bold ${activeBtn === i ? "bg-primary text-black" : "bg-primary/20 text-black/60"}`}
                 onClick={() => setActiveBtn(i)}
               >
                 {btnText}

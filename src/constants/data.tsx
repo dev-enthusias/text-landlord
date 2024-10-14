@@ -31,6 +31,23 @@ export const settings = {
       link: routes.DASHBOARDCHANGEPASSWORD,
     },
   ],
+  general1d: [
+    {
+      name: "Profile",
+      icon: <WalletIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=profile",
+    },
+    {
+      name: "Fund wallet",
+      icon: <WalletIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=wallet",
+    },
+    {
+      name: "Change password",
+      icon: <LockKeyholeIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=password",
+    },
+  ],
   general2: [
     {
       name: "Orders",
@@ -46,6 +63,28 @@ export const settings = {
       name: "Wishlist",
       icon: <HeartIcon className="text-primary-dark" size={18} />,
       link: routes.DASHBOARDWISHLIST,
+    },
+    {
+      name: "Appointments",
+      icon: <MapPinnedIcon className="text-primary-dark" size={18} />,
+      link: "",
+    },
+  ],
+  general2d: [
+    {
+      name: "Orders",
+      icon: <ListOrderedIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=order",
+    },
+    {
+      name: "Rented properties",
+      icon: <HomeIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=properties",
+    },
+    {
+      name: "Wishlist",
+      icon: <HeartIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=wishlist",
     },
     {
       name: "Appointments",
@@ -74,6 +113,23 @@ export const settings = {
       icon: <CircleAlertIcon className="text-primary-dark" size={18} />,
       link: "",
     },
+  ],
+  legald: [
+    {
+      name: "Support",
+      icon: <BotMessageSquareIcon className="text-primary-dark" size={18} />,
+      link: "",
+    },
+    // {
+    //   name: "Terms and condition",
+    //   icon: <NotebookTextIcon className="text-primary-dark" size={18} />,
+    //   link: "",
+    // },
+    // {
+    //   name: "Privacy policy",
+    //   icon: <ShieldAlertIcon className="text-primary-dark" size={18} />,
+    //   link: "",
+    // },
   ],
 };
 

@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function Profile() {
   return (
     <>
-      <header className="relative mb-20 h-28 w-full border-b border-gray-200 bg-primary px-3 py-5 lg:border-none lg:bg-transparent">
-        <div className="absolute -bottom-1/2 left-5 h-28 w-28 overflow-hidden rounded-full border-4 border-white">
+      <header className="relative mb-20 h-28 w-full border-b border-gray-200 bg-primary px-3 py-5 lg:mb-5 lg:h-auto lg:border-none lg:bg-transparent lg:py-0">
+        <div className="absolute -bottom-1/2 left-5 h-28 w-28 overflow-hidden rounded-full border-4 border-white lg:relative lg:left-0">
           <Image
             src="/images/profile-img.jpeg"
             alt=""
@@ -17,7 +17,7 @@ export default function Profile() {
       </header>
 
       <main className="pb-10">
-        <section className="border-b px-5 pb-6">
+        <section className="border-b px-5 pb-6 lg:border-none">
           <div className="mb-2 space-y-1">
             <h1 className="flex items-center gap-x-2 text-[22px] font-semibold">
               Antonio Griexmansh{" "}

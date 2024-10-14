@@ -34,7 +34,9 @@ export default function NavLink({
     // Check if pathname starts with href and if the next character is a slash or doesn't exist
     return (
       pathname.startsWith(href) &&
-      (pathname.length === href.length || pathname[href.length] === "/")
+      (pathname.length === href.length ||
+        pathname[href.length] === "/" ||
+        pathname[href.length] === "?")
     );
   };
 

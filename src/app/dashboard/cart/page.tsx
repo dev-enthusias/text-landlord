@@ -98,7 +98,7 @@ function CartItem() {
   const [selectedItem, setSelectedItem] = useState(true);
 
   return (
-    <article className="relative flex items-start gap-x-4 rounded-lg border border-gray-300 p-3">
+    <article className="relative flex max-w-[440px] items-start gap-x-4 rounded-lg border border-gray-300 p-3">
       <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg">
         <Image
           src="/images/duplex.webp"
@@ -108,7 +108,7 @@ function CartItem() {
           sizes="80px"
         />
       </div>
-      <div>
+      <div className="grow">
         <h3 className="font-medium">Havilla Specitazio</h3>
         <p className="w-[calc(100vw-144px)] truncate text-[14px] opacity-50 lg:w-full">
           Menitalio Espressito Avalanche Street

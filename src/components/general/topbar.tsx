@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Topbar() {
   return (
-    <header className="sticky top-0 z-50 flex h-16 justify-between overflow-hidden border-b bg-white px-3 lg:h-20 lg:justify-end lg:border-l lg:px-10">
+    <header className="sticky top-0 z-50 flex h-16 justify-between overflow-hidden border-b bg-white px-3 lg:h-20 lg:justify-end lg:px-10">
       <Link href={routes.HOME} className="lg:hidden">
         <Image
           src="/logos/logo-transparent.png"
@@ -26,7 +26,21 @@ export default function Topbar() {
         <Link href={routes.DASHBOARDCART}>
           <LucideShoppingCart />
         </Link>
-        <Link href={routes.DASHBOARDPROFILE}>
+        <Link href={routes.DASHBOARDPROFILE} className="lg:hidden">
+          <div className="relative h-10 w-10 overflow-hidden rounded-full bg-gray-300 lg:h-12 lg:w-12">
+            <Image
+              src="/images/profile-img.jpeg"
+              alt="Tenant profile photo"
+              fill
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+        </Link>
+        <Link
+          href={routes.DASHBOARDSETTINGS + "?path=profile"}
+          className="hidden lg:block"
+        >
           <div className="relative h-10 w-10 overflow-hidden rounded-full bg-gray-300 lg:h-12 lg:w-12">
             <Image
               src="/images/profile-img.jpeg"
