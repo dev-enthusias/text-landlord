@@ -7,6 +7,8 @@ import TransactionCard from "@/components/general/transaction-card";
 import Topbar from "@/components/general/topbar";
 import Menu from "@/components/general/footer-menu";
 import { FriendCard } from "./chat/sidebar";
+import { USERROLE } from "@/util/role";
+import LandLordQuickActions from "./modals/add-property";
 
 export default function DashboardHomePage() {
   return (
@@ -18,19 +20,31 @@ export default function DashboardHomePage() {
       <main className="px-3 pb-24 pt-5 lg:px-10 lg:pt-8">
         <h1 className="mb-3 flex items-center text-xl lg:text-2xl">
           <span className="font-semibold">Welcome Back,</span>
-          <span className="font-semibold">Tenant</span>
+          <span className="ml-1 font-semibold">
+            {USERROLE === "landlord"
+              ? "Landloard"
+              : USERROLE === "agent"
+                ? "Agent"
+                : "Tenant"}
+          </span>
           <span className="">🎉</span>
         </h1>
 
-        <div className="space-y-6 lg:space-y-10">
-          <div className="flex gap-x-5">
-            <WalletOverview />
-            <Summary />
-          </div>
+        <div className="grid gap-y-6 lg:gap-y-10">
+          {USERROLE === "tenant" && (
+            <div className="flex gap-x-5">
+              <WalletOverview />
+              <Summary />
+            </div>
+          )}
+
+          {USERROLE === "landlord" && <LandLordQuickActions />}
 
           <section className="-mx-3">
             <div className="mb-2 flex items-center justify-between px-3 font-semibold">
-              <h2 className="text-lg lg:text-xl">New Properties</h2>
+              <h2 className="text-lg lg:text-xl">
+                {USERROLE === "tenant" && "New"} Properties
+              </h2>
               <Link
                 href={routes.DASHBOARDPROPERTIES}
                 className="text-sm text-accent underline lg:text-[14px]"
@@ -46,10 +60,12 @@ export default function DashboardHomePage() {
             </div>
           </section>
 
-          <div className="flex flex-col gap-y-2 lg:flex-row lg:gap-x-5">
-            <RentNotification />
-            <UpcomingRentNotification />
-          </div>
+          {USERROLE === "tenant" && (
+            <div className="flex flex-col gap-y-2 lg:flex-row lg:gap-x-5">
+              <RentNotification />
+              <UpcomingRentNotification />
+            </div>
+          )}
 
           <div className="grid-cols-5 gap-x-20 lg:grid">
             <section className="col-span-2 hidden rounded-lg lg:block lg:border lg:bg-white">

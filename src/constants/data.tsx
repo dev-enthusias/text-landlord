@@ -153,3 +153,12 @@ export const propertyCategories = [
   { title: "Flat", icon: <HomeIcon /> },
   { title: "Land", icon: <HomeIcon /> },
 ];
+
+export const landloardQuickActionData = [
+  { icons: <HomeIcon />, title: "Add Property", },
+  { icons: <HomeIcon />, title: "Tenants" },
+  { icons: <HomeIcon />, title: "Add Tenants" },
+  { icons: <HomeIcon />, title: "Reports" },
+  { icons: <HomeIcon />, title: "Assign Agents" },
+  { icons: <HomeIcon />, title: "Bill Management" },
+];

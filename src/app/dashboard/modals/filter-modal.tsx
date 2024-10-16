@@ -3,6 +3,7 @@
 import PriceRangeSlider from "@/components/general/pricerange-slider";
 import { FilterIcon, XCircle } from "lucide-react";
 import { useState } from "react";
+import ModalLayout from "./modal-layout";
 
 export default function FilterModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function FilterModal() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-[1000000000] flex items-center justify-center bg-black bg-opacity-50">
+        <ModalLayout>
           <article className="relative mx-auto w-[95%] max-w-[440px] rounded-t-2xl bg-white lg:rounded-b-2xl">
             <button
               onClick={handleClose}
@@ -83,7 +84,7 @@ export default function FilterModal() {
               </button>
             </section>
           </article>
-        </div>
+        </ModalLayout>
       )}
     </>
   );

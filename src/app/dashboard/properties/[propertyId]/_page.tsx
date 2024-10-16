@@ -13,6 +13,7 @@ import ImageSlider from "../../client-component";
 import { useSearchParams } from "next/navigation";
 import { routes } from "@/constants/routes";
 import Link from "next/link";
+import { USERROLE } from "@/util/role";
 
 export default function PropertyDetails() {
   const searchParam = useSearchParams();
@@ -90,7 +91,7 @@ export default function PropertyDetails() {
                 <MapPin size={13} /> Palaxisto Emeriando Plaza Road
               </p>
             </div>
-            <HeartIcon />
+            {USERROLE === "tenant" && <HeartIcon />}
           </section>
 
           <ul className="mb-6 mt-4 flex items-center justify-between rounded-lg border border-gray-200 bg-black/[1%] px-3 py-2">
@@ -108,30 +109,62 @@ export default function PropertyDetails() {
             </li>
           </ul>
 
+          {USERROLE === "landlord" && (
+            <div className="mb-6 grid grid-cols-2 gap-y-2">
+              <div>
+                <h3 className="mb-2 text-[14px] leading-none opacity-50">
+                  Down Payment
+                </h3>
+                <p>₦500,000</p>
+              </div>
+              <div>
+                <h3 className="mb-2 text-[14px] leading-none opacity-50">
+                  Payment Plan
+                </h3>
+                <p>₦500,000</p>
+              </div>
+              <div>
+                <h3 className="mb-2 text-[14px] leading-none opacity-50">
+                  Handover
+                </h3>
+                <p>St. Paulinus Avatar</p>
+              </div>
+            </div>
+          )}
+
           <div className="mb-6 flex items-center gap-x-5">
             <div>
               <p className="text-2xl font-semibold">₦10,000,000</p>
             </div>
-            <button className="w-full rounded-lg bg-primary py-3 text-lg font-semibold text-black">
-              {propertyStatus === "rent" ? "Pay Rent" : "Add to Cart"}
-            </button>
+
+            {USERROLE === "landlord" ? (
+              <button className="w-full rounded-lg bg-primary py-3 text-lg font-semibold text-black">
+                Edit
+              </button>
+            ) : (
+              <button className="w-full rounded-lg bg-primary py-3 text-lg font-semibold text-black">
+                {propertyStatus === "rent" ? "Pay Rent" : "Add to Cart"}
+              </button>
+            )}
           </div>
 
-          <div className="rounded-lg border border-accent p-5">
-            <h3 className="mb-4 font-semibold">Property Lister</h3>
+          {USERROLE === "tenant" && (
+            <div className="rounded-lg border border-accent p-5">
+              <h3 className="mb-4 font-semibold">Property Lister</h3>
 
-            <p className="text-[14px] font-medium">Melissa Monroe</p>
-            <p className="mb-4 text-[14px] opacity-70">
-              Somewhere in bgbadagri, Kondovo
-            </p>
+              <p className="text-[14px] font-medium">Melissa Monroe</p>
+              <p className="mb-4 text-[14px] opacity-70">
+                Somewhere in bgbadagri, Kondovo
+              </p>
 
-            <Link
-              href={routes.DASHBOARDCHAT}
-              className="flex w-fit items-center gap-x-2 rounded border-2 border-accent px-4 py-1 font-medium"
-            >
-              <MessageCircleIcon size={20} /> Message
-            </Link>
-          </div>
+              <Link
+                href={routes.DASHBOARDCHAT}
+                className="flex w-fit items-center gap-x-2 rounded border-2 border-accent px-4 py-1 font-medium"
+              >
+                <MessageCircleIcon size={20} /> Message
+              </Link>
+            </div>
+          )}
         </div>
       </main>
 

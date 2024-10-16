@@ -4,7 +4,7 @@ import { useState } from "react";
 import PrevPageButton from "@/components/general/prev-page";
 import TransactionCard from "@/components/general/transaction-card";
 
-const buttons = ["All", "Income", "Expense", "Bank Payment"];
+const buttons = ["All", "Credit", "Debit"];
 
 export default function History() {
   const [activeBtn, setActiveBtn] = useState(0);
@@ -26,7 +26,7 @@ export default function History() {
             {buttons.map((btnText, i) => (
               <button
                 key={i}
-                className={`shrink-0 whitespace-nowrap rounded-full px-4 py-[3px] font-bold ${activeBtn === i ? "bg-primary text-black" : "bg-primary/20 text-black/60"}`}
+                className={`shrink-0 whitespace-nowrap rounded-lg px-4 py-[3px] font-medium ${activeBtn === i ? "bg-primary text-black" : "bg-primary/20 text-black/60"}`}
                 onClick={() => setActiveBtn(i)}
               >
                 {btnText}

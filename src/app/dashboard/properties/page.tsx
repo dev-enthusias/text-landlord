@@ -5,6 +5,7 @@ import PropertyCard, {
 import Topbar from "@/components/general/topbar";
 import { propertyCategories } from "@/constants/data";
 import FilterModal from "../modals/filter-modal";
+import { USERROLE } from "@/util/role";
 
 export default function Properties() {
   return (
@@ -15,6 +16,25 @@ export default function Properties() {
 
       <main className="pb-24 pt-5">
         <section className="z-50 border-b px-3 lg:px-10">
+          {USERROLE === "landlord" && (
+            <div className="mb-10 grid grid-cols-3 gap-x-4">
+              <div className="flex flex-col items-center rounded-lg bg-black py-4 text-background">
+                <span className="text-xl font-bold">4</span>
+                <h3 className="mt-2 font-semibold opacity-80">
+                  Total Property
+                </h3>
+              </div>
+              <div className="flex flex-col items-center rounded-lg bg-primary-dark py-4 text-black">
+                <span className="text-xl font-bold">10</span>
+                <h3 className="mt-2 font-semibold opacity-80">Occupied</h3>
+              </div>
+              <div className="custom-shadow flex flex-col items-center rounded-lg bg-white py-4 text-foreground">
+                <span className="text-xl font-bold">2</span>
+                <h3 className="mt-2 font-semibold opacity-80">Vacant</h3>
+              </div>
+            </div>
+          )}
+
           <div className="flex flex-col gap-3 lg:flex-row">
             <h1 className="flex items-center text-xl font-semibold lg:text-3xl">
               Properties
@@ -27,7 +47,7 @@ export default function Properties() {
             {propertyCategories.map(({ icon, title }, i) => (
               <li
                 key={i}
-                className="flex flex-col items-center justify-center gap-x-2 space-y-1 lg:flex-row lg:border rounded-full lg:pr-8"
+                className="flex flex-col items-center justify-center gap-x-2 space-y-1 rounded-full lg:flex-row lg:border lg:pr-8"
               >
                 <div className="z-40 flex h-14 w-14 items-center justify-center rounded-full border">
                   {icon}

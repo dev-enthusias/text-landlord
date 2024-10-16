@@ -1,5 +1,6 @@
 import { routes } from "@/constants/routes";
-import { BathIcon, BedIcon, MapPin, RulerIcon } from "lucide-react";
+import { USERROLE } from "@/util/role";
+import { BathIcon, BedIcon, MapPin, RulerIcon, UsersRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -58,7 +59,7 @@ export default function PropertyCard({
             </p>
           </div>
 
-          {type !== "order" ? (
+          {USERROLE === "tenant" && type !== "order" ? (
             <ul className="mt-3 flex items-center justify-between">
               <li className="flex w-1/3 items-center justify-start gap-x-1 text-sm font-semibold">
                 <BedIcon className="text-primary-dark" size={18} />
@@ -74,7 +75,20 @@ export default function PropertyCard({
               </li>
             </ul>
           ) : (
-            <p className="mt-1 text-sm opacity-50">10/10/2024 - 01:30PM</p>
+            <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
+          )}
+
+          {USERROLE === "landlord" && (
+            <div className="mt-3 flex justify-between text-[14px] font-semibold">
+              <p className="flex items-center gap-x-1">
+                <UsersRound size={18} className="text-primary-dark" />{" "}
+                <span className="opacity-60"> 3 tenants</span>
+              </p>
+              <p className="flex items-center gap-x-1">
+                <UsersRound size={18} className="text-primary-dark" />
+                <span className="opacity-60">12 vacant</span>
+              </p>
+            </div>
           )}
         </div>
       </article>

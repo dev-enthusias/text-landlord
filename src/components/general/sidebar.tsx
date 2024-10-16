@@ -10,10 +10,11 @@ import {
   LucideSettings,
   MessageCircleMoreIcon,
 } from "lucide-react";
+import { USERROLE } from "@/util/role";
 
 export default function Sidebar() {
   return (
-    <aside className="hidden w-[310px] shrink-0 border-r px-4 lg:block">
+    <aside className="oveflow-y-auto no-scrollbar hidden h-[calc(100vh-80px)] w-[310px] shrink-0 border-r px-4 lg:block">
       <div className="flex h-20 items-center justify-center border-b">
         <Link href={routes.HOME} className="relative block h-32 w-32">
           <Image
@@ -48,16 +49,58 @@ export default function Sidebar() {
             Properties
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
-            activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
-            href={routes.DASHBOARDHISTORY}
-          >
-            <HistoryIcon size={22} />
-            Transaction History
-          </NavLink>
-        </li>
+        {USERROLE === "tenant" && (
+          <li>
+            <NavLink
+              className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+              activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
+              href={routes.DASHBOARDHISTORY}
+            >
+              <HistoryIcon size={22} />
+              Transaction History
+            </NavLink>
+          </li>
+        )}
+
+        {USERROLE === "landlord" && (
+          <li>
+            <NavLink
+              className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+              activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
+              href={routes.DASHBOARDTENANT}
+            >
+              <HistoryIcon size={22} />
+              Tenants
+            </NavLink>
+          </li>
+        )}
+
+        {USERROLE === "landlord" && (
+          <li>
+            <NavLink
+              className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+              activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
+              href={routes.DASHBOARDREPORTS}
+            >
+              <HistoryIcon size={22} />
+              Reports
+            </NavLink>
+          </li>
+        )}
+
+        {USERROLE === "landlord" && (
+          <li>
+            <NavLink
+              className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+              activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
+              href={routes.DASHBOARDBILLS}
+            >
+              <HistoryIcon size={22} />
+              Bills
+            </NavLink>
+          </li>
+        )}
+
         <li>
           <NavLink
             className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"

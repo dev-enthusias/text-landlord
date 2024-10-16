@@ -12,7 +12,7 @@ export default function TextInput({
       </label>
       <input
         type="text"
-        className="focus:border-primary focus:ring-primary relative w-full rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm focus:outline-none focus:ring-1"
+        className="relative w-full rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
       />
     </div>
   );
