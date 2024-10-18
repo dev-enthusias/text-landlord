@@ -5,7 +5,7 @@ import PropertyCard, {
 import Topbar from "@/components/general/topbar";
 import { propertyCategories } from "@/constants/data";
 import FilterModal from "../modals/filter-modal";
-import { USERROLE } from "@/util/role";
+import { USERROLE } from "@/utils/role";
 
 export default function Properties() {
   return (

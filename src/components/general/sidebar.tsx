@@ -10,11 +10,11 @@ import {
   LucideSettings,
   MessageCircleMoreIcon,
 } from "lucide-react";
-import { USERROLE } from "@/util/role";
+import { USERROLE } from "@/utils/role";
 
 export default function Sidebar() {
   return (
-    <aside className="oveflow-y-auto no-scrollbar hidden h-[calc(100vh-80px)] w-[310px] shrink-0 border-r px-4 lg:block">
+    <aside className="oveflow-y-auto no-scrollbar hidden w-[310px] shrink-0 border-r px-4 pb-10 lg:block">
       <div className="flex h-20 items-center justify-center border-b">
         <Link href={routes.HOME} className="relative block h-32 w-32">
           <Image
@@ -27,7 +27,7 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      <ul className="my-8 flex flex-col gap-y-6">
+      <ul className="no-scrollbar my-4 flex h-[calc(100vh-80px)] flex-col gap-y-6 overflow-y-auto pb-20">
         <li>
           <NavLink
             exact
@@ -49,18 +49,6 @@ export default function Sidebar() {
             Properties
           </NavLink>
         </li>
-        {USERROLE === "tenant" && (
-          <li>
-            <NavLink
-              className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
-              activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
-              href={routes.DASHBOARDHISTORY}
-            >
-              <HistoryIcon size={22} />
-              Transaction History
-            </NavLink>
-          </li>
-        )}
 
         {USERROLE === "landlord" && (
           <li>
@@ -96,10 +84,21 @@ export default function Sidebar() {
               href={routes.DASHBOARDBILLS}
             >
               <HistoryIcon size={22} />
-              Bills
+              Bills Management
             </NavLink>
           </li>
         )}
+
+        <li>
+          <NavLink
+            className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"
+            activeClassName="font-bold  bg-primary-dark/20 text-yellow-700 hover:bg-primary-dark/20"
+            href={routes.DASHBOARDHISTORY}
+          >
+            <HistoryIcon size={22} />
+            Transaction History
+          </NavLink>
+        </li>
 
         <li>
           <NavLink

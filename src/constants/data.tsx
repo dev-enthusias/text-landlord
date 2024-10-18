@@ -48,6 +48,43 @@ export const settings = {
       link: routes.DASHBOARDSETTINGS + "?path=password",
     },
   ],
+  generallandlord: [
+    {
+      name: "Profile",
+      icon: <WalletIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=profile",
+    },
+    {
+      name: "Account",
+      icon: <WalletIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=account",
+    },
+    {
+      name: "Change password",
+      icon: <LockKeyholeIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=password",
+    },
+    {
+      name: "Orders",
+      icon: <ListOrderedIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=order",
+    },
+    {
+      name: "Property Category",
+      icon: <HomeIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=category",
+    },
+    {
+      name: "Property Facility Type",
+      icon: <HeartIcon className="text-primary-dark" size={18} />,
+      link: routes.DASHBOARDSETTINGS + "?path=facility",
+    },
+    {
+      name: "Appointments",
+      icon: <MapPinnedIcon className="text-primary-dark" size={18} />,
+      link: "",
+    },
+  ],
   general2: [
     {
       name: "Orders",
@@ -155,7 +192,7 @@ export const propertyCategories = [
 ];
 
 export const landloardQuickActionData = [
-  { icons: <HomeIcon />, title: "Add Property", },
+  { icons: <HomeIcon />, title: "Add Property" },
   { icons: <HomeIcon />, title: "Tenants" },
   { icons: <HomeIcon />, title: "Add Tenants" },
   { icons: <HomeIcon />, title: "Reports" },

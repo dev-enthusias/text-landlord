@@ -1,4 +1,5 @@
 import { profileInfo } from "@/constants/data";
+import { USERROLE } from "@/utils/role";
 import Image from "next/image";
 
 export default function Profile() {
@@ -22,7 +23,11 @@ export default function Profile() {
             <h1 className="flex items-center gap-x-2 text-[22px] font-semibold">
               Antonio Griexmansh{" "}
               <span className="inline-block rounded bg-accent/10 px-2 py-0.5 text-xs font-medium text-accent">
-                Tenant
+                {USERROLE === "tenant"
+                  ? "Tenant"
+                  : USERROLE === "landlord"
+                    ? "Landlord"
+                    : "Agent"}
               </span>
             </h1>
             <p className="font-medium opacity-70">antoniogreix@gmail.com</p>

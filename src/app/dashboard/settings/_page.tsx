@@ -15,6 +15,10 @@ import { useSearchParams } from "next/navigation";
 import AddMoneyCard from "../add-money/add-money-card";
 import { ChangePasswordForm } from "../change-password/chage-password-form";
 import OrderPageContent from "../orders/order-page-content";
+import { USERROLE } from "@/utils/role";
+import Account from "../account/page";
+import PropertyCategories from "../property-category/page";
+import PropertyFacilities from "../property-facility-type/page";
 
 export default function SettingsPage() {
   return (
@@ -151,64 +155,86 @@ function DesktopSettingsPage() {
       {/* <h1 className="border-b px-10 py-5 text-2xl font-semibold">Settings</h1> */}
 
       <div className="hidden items-start gap-x-10 px-10 py-5 lg:flex">
-        <div className="custom-shadow space-y-4 rounded-xl bg-white px-2 py-5">
-          <section>
-            <div className="space-y-4">
-              {settings.general1d.map(({ name, icon, link }, i) => (
-                <Link
-                  key={i}
-                  href={link}
-                  className={`flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20 ${
-                    link.includes(activePath)
-                      ? "bg-primary-dark/20"
-                      : "bg-transparent"
-                  }`}
-                >
-                  <div className="flex items-center gap-x-4">
-                    {icon}
-                    {name}
-                  </div>
-                  <ChevronRight />
-                </Link>
-              ))}
-            </div>
-          </section>
+        <div className="custom-shadow shrink-0 space-y-4 rounded-xl bg-white px-2 py-5">
+          {USERROLE === "tenant" && (
+            <>
+              <section>
+                <div className="space-y-4">
+                  {settings.general1d.map(({ name, icon, link }, i) => (
+                    <Link
+                      key={i}
+                      href={link}
+                      className={`flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20 ${
+                        link.includes(activePath)
+                          ? "bg-primary-dark/20"
+                          : "bg-transparent"
+                      }`}
+                    >
+                      <div className="flex items-center gap-x-4">
+                        {icon}
+                        {name}
+                      </div>
+                      <ChevronRight />
+                    </Link>
+                  ))}
+                </div>
+              </section>
+              <section>
+                <div className="space-y-4">
+                  {settings.general2d.map(({ name, icon, link }, i) => (
+                    <Link
+                      key={i}
+                      href={link}
+                      className={`flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20 ${link.includes(activePath) ? "bg-primary-dark/20" : "bg-transparent"}`}
+                    >
+                      <div className="flex items-center gap-x-4">
+                        {icon}
+                        {name}
+                      </div>
+                      <ChevronRight />
+                    </Link>
+                  ))}
+                </div>
+              </section>
+              <section>
+                <div className="space-y-4">
+                  {settings.legald.map(({ name, icon, link }, i) => (
+                    <Link
+                      key={i}
+                      href={link}
+                      className="flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20"
+                    >
+                      <div className="flex items-center gap-x-4">
+                        {icon}
+                        {name}
+                      </div>
+                      <ChevronRight />
+                    </Link>
+                  ))}
+                </div>
+              </section>{" "}
+            </>
+          )}
 
-          <section>
-            <div className="space-y-4">
-              {settings.general2d.map(({ name, icon, link }, i) => (
-                <Link
-                  key={i}
-                  href={link}
-                  className={`flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20 ${link.includes(activePath) ? "bg-primary-dark/20" : "bg-transparent"}`}
-                >
-                  <div className="flex items-center gap-x-4">
-                    {icon}
-                    {name}
-                  </div>
-                  <ChevronRight />
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <div className="space-y-4">
-              {settings.legald.map(({ name, icon, link }, i) => (
-                <Link
-                  key={i}
-                  href={link}
-                  className="flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20"
-                >
-                  <div className="flex items-center gap-x-4">
-                    {icon}
-                    {name}
-                  </div>
-                  <ChevronRight />
-                </Link>
-              ))}
-            </div>
-          </section>
+          {USERROLE === "landlord" && (
+            <section>
+              <div className="space-y-4">
+                {settings.generallandlord.map(({ name, icon, link }, i) => (
+                  <Link
+                    key={i}
+                    href={link}
+                    className="flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20"
+                  >
+                    <div className="flex items-center gap-x-4">
+                      {icon}
+                      {name}
+                    </div>
+                    <ChevronRight />
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
         {/* Right Section */}
@@ -230,6 +256,12 @@ function DesktopSettingsPage() {
               <Wishlist />
             ) : activePath === "orderdetails" ? (
               <OrderDetails />
+            ) : activePath === "account" ? (
+              <Account />
+            ) : activePath === "category" ? (
+              <PropertyCategories />
+            ) : activePath === "facility" ? (
+              <PropertyFacilities />
             ) : (
               ""
             )}

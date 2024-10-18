@@ -1,5 +1,5 @@
 import { routes } from "@/constants/routes";
-import { USERROLE } from "@/util/role";
+import { USERROLE } from "@/utils/role";
 import { BathIcon, BedIcon, MapPin, RulerIcon, UsersRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

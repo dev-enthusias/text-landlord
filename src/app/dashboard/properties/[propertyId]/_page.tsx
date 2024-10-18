@@ -13,7 +13,7 @@ import ImageSlider from "../../client-component";
 import { useSearchParams } from "next/navigation";
 import { routes } from "@/constants/routes";
 import Link from "next/link";
-import { USERROLE } from "@/util/role";
+import { USERROLE } from "@/utils/role";
 
 export default function PropertyDetails() {
   const searchParam = useSearchParams();

@@ -1,6 +1,7 @@
 import PrevPageButton from "@/components/general/prev-page";
 import { DownloadIcon, File, MapPin } from "lucide-react";
 import ImageSlider from "../../client-component";
+import { USERROLE } from "@/utils/role";
 
 export default function OrderDetails() {
   return (
@@ -39,10 +40,21 @@ export default function OrderDetails() {
                   10th Sep, 2024 - 10:30am
                 </p>
               </li>
-              <li className="flex items-center justify-between">
-                <h3 className="opacity-50">Property Owner</h3>
-                <p className="font-medium opacity-90">Stephenie Hawkins</p>
-              </li>
+
+              {USERROLE === "tenant" && (
+                <li className="flex items-center justify-between">
+                  <h3 className="opacity-50">Property Owner</h3>
+                  <p className="font-medium opacity-90">Stephenie Hawkins</p>
+                </li>
+              )}
+
+              {USERROLE === "landlord" && (
+                <li className="flex items-center justify-between">
+                  <h3 className="opacity-50">Tenant</h3>
+                  <p className="font-medium opacity-90">James Clerk</p>
+                </li>
+              )}
+
               <li className="flex items-center justify-between">
                 <h3 className="opacity-50">Renewal Due</h3>
                 <p className="font-medium opacity-90">10th Sep, 2025</p>

@@ -7,7 +7,7 @@ import TransactionCard from "@/components/general/transaction-card";
 import Topbar from "@/components/general/topbar";
 import Menu from "@/components/general/footer-menu";
 import { FriendCard } from "./chat/sidebar";
-import { USERROLE } from "@/util/role";
+import { USERROLE } from "@/utils/role";
 import LandLordQuickActions from "./modals/add-property";
 
 export default function DashboardHomePage() {

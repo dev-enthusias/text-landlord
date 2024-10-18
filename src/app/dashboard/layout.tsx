@@ -9,6 +9,7 @@ export default function DashboardLayout({
   return (
     <section className="relative flex max-h-dvh min-h-dvh overflow-hidden bg-yellow-50/[15%]">
       <Sidebar />
+
       <div className="no-scrollbar grow overflow-y-auto">
         <div className="sticky top-0 z-[10000] hidden lg:block">
           <Topbar />
