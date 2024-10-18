@@ -1,3 +1,5 @@
+"use client";
+
 import { routes } from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,9 +12,11 @@ import {
   LucideSettings,
   MessageCircleMoreIcon,
 } from "lucide-react";
-import { USERROLE } from "@/utils/role";
+import { getRole } from "@/utils/role";
 
 export default function Sidebar() {
+  const USERROLE = getRole();
+
   return (
     <aside className="oveflow-y-auto no-scrollbar hidden w-[310px] shrink-0 border-r px-4 pb-10 lg:block">
       <div className="flex h-20 items-center justify-center border-b">
@@ -110,6 +114,7 @@ export default function Sidebar() {
             Chat
           </NavLink>
         </li>
+
         <li>
           <NavLink
             className="flex items-center gap-x-2 rounded-lg px-10 py-4 font-semibold hover:bg-primary/50"

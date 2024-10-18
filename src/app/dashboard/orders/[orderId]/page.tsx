@@ -1,9 +1,13 @@
+"use client";
+
 import PrevPageButton from "@/components/general/prev-page";
 import { DownloadIcon, File, MapPin } from "lucide-react";
 import ImageSlider from "../../client-component";
-import { USERROLE } from "@/utils/role";
+import { getRole } from "@/utils/role";
 
 export default function OrderDetails() {
+  const USERROLE = getRole();
+
   return (
     <>
       <section className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-gray-200 bg-white px-3 py-5 lg:border-none lg:px-0 lg:py-0">

@@ -1,3 +1,5 @@
+"use client";
+
 import Menu from "@/components/general/footer-menu";
 import PropertyCard, {
   PropertyCardLandscape,
@@ -5,9 +7,11 @@ import PropertyCard, {
 import Topbar from "@/components/general/topbar";
 import { propertyCategories } from "@/constants/data";
 import FilterModal from "../modals/filter-modal";
-import { USERROLE } from "@/utils/role";
+import { getRole } from "@/utils/role";
 
 export default function Properties() {
+  const USERROLE = getRole();
+
   return (
     <>
       <div className="lg:hidden">

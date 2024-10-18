@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { HomeIcon, MapPin } from "lucide-react";
 import { WalletOverview } from "./client-component";
@@ -7,10 +9,11 @@ import TransactionCard from "@/components/general/transaction-card";
 import Topbar from "@/components/general/topbar";
 import Menu from "@/components/general/footer-menu";
 import { FriendCard } from "./chat/sidebar";
-import { USERROLE } from "@/utils/role";
+import { getRole } from "@/utils/role";
 import LandLordQuickActions from "./modals/add-property";
 
 export default function DashboardHomePage() {
+  const USERROLE = getRole();
   return (
     <>
       <div className="lg:hidden">

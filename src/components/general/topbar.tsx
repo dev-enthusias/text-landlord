@@ -3,6 +3,7 @@ import { LucideBellRing, LucideShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import NotificationBtn from "./notification-btn";
+import { SwitchUserRole } from "@/utils/switch-user";
 
 export default function Topbar() {
   return (
@@ -19,6 +20,7 @@ export default function Topbar() {
       </Link>
 
       <div className="flex items-center gap-x-4 lg:gap-x-10">
+        <SwitchUserRole />
         <Link href={routes.DASHBOARDNOTIFICATIONS} className="lg:hidden">
           <LucideBellRing />
         </Link>

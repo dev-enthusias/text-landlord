@@ -15,7 +15,7 @@ import { useSearchParams } from "next/navigation";
 import AddMoneyCard from "../add-money/add-money-card";
 import { ChangePasswordForm } from "../change-password/chage-password-form";
 import OrderPageContent from "../orders/order-page-content";
-import { USERROLE } from "@/utils/role";
+import { getRole } from "@/utils/role";
 import Account from "../account/page";
 import PropertyCategories from "../property-category/page";
 import PropertyFacilities from "../property-facility-type/page";
@@ -147,6 +147,8 @@ function MobileSettingPage() {
 }
 
 function DesktopSettingsPage() {
+  const USERROLE = getRole();
+
   const searchParam = useSearchParams();
   const activePath = (searchParam.get("path") as string) || "profile";
 

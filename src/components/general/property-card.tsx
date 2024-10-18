@@ -1,5 +1,7 @@
+"use client";
+
 import { routes } from "@/constants/routes";
-import { USERROLE } from "@/utils/role";
+import { getRole } from "@/utils/role";
 import { BathIcon, BedIcon, MapPin, RulerIcon, UsersRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +15,8 @@ export default function PropertyCard({
   status?: string;
   queryParam?: string;
 }) {
+  const USERROLE = getRole();
+
   return (
     <Link
       href={

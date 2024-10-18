@@ -1,8 +1,12 @@
+"use client";
+
 import { profileInfo } from "@/constants/data";
-import { USERROLE } from "@/utils/role";
+import { getRole } from "@/utils/role";
 import Image from "next/image";
 
 export default function Profile() {
+  const USERROLE = getRole();
+
   return (
     <>
       <header className="relative mb-20 h-28 w-full border-b border-gray-200 bg-primary px-3 py-5 lg:mb-5 lg:h-auto lg:border-none lg:bg-transparent lg:py-0">

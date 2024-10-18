@@ -13,9 +13,10 @@ import ImageSlider from "../../client-component";
 import { useSearchParams } from "next/navigation";
 import { routes } from "@/constants/routes";
 import Link from "next/link";
-import { USERROLE } from "@/utils/role";
+import { getRole } from "@/utils/role";
 
 export default function PropertyDetails() {
+  const USERROLE = getRole();
   const searchParam = useSearchParams();
   const propertyStatus = searchParam.get("property-status");
 
