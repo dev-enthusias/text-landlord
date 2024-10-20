@@ -1,10 +1,10 @@
 "use client";
 
-import SelectInput from "@/components/auth/select-input";
+import SelectInput from "@/components/ui/select-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
-import TextInput from "@/components/auth/text-input";
+import TextInput from "@/components/ui/text-input";
 
 export default function AddAccountCategoryBtn() {
   const [propertyType, setPropertyType] = useState("");

@@ -1,6 +1,6 @@
 "use client";
 
-import TextInput from "@/components/auth/text-input";
+import TextInput from "@/components/ui/text-input";
 
 export default function ForgotPasswordForm() {
   return (
@@ -21,7 +21,7 @@ export default function ForgotPasswordForm() {
 
         <button
           type="submit"
-          className="bg-primary hover:bg-primary/80 w-full rounded-lg py-3 font-semibold transition-colors duration-300 ease-out"
+          className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
         >
           RESET
         </button>

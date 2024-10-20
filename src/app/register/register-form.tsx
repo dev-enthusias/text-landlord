@@ -1,8 +1,8 @@
 "use client";
 
-import CustomCheckbox from "@/components/auth/custome-checkbox";
-import SelectInput from "@/components/auth/select-input";
-import TextInput from "@/components/auth/text-input";
+import CustomCheckbox from "@/components/ui/custome-checkbox";
+import SelectInput from "@/components/ui/select-input";
+import TextInput from "@/components/ui/text-input";
 import { routes } from "@/constants/routes";
 import { useFormStepStore } from "@/providers/register-form-step-store-provider";
 import Link from "next/link";

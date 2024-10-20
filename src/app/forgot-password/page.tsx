@@ -42,6 +42,14 @@ export default function ForgotPassword() {
 
 function Sidebar() {
   return (
-    <aside className="relative h-full w-[630px] rounded-xl bg-gray-200 px-5 py-10"></aside>
+    <div className="relative h-full w-[630px] overflow-hidden rounded-xl bg-gray-200 px-5 py-10">
+      <Image
+        src="/images/forget-password-bg.jpg"
+        alt="Photo by USSAMA AZAM on Unsplash"
+        fill
+        sizes="100vw"
+        style={{objectFit: 'cover'}}
+      />
+    </div>
   );
 }

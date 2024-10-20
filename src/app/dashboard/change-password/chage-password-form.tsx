@@ -1,4 +1,4 @@
-import TextInput from "@/components/auth/text-input";
+import TextInput from "@/components/ui/text-input";
 
 export function ChangePasswordForm() {
   return (

@@ -1,33 +1,22 @@
-import { routes } from "@/constants/routes";
-import Image from "next/image";
 import Link from "next/link";
-import LoginForm from "./login-form";
+import LoginForm from "../../components/forms/login-form";
+import AuthLogo from "@/components/ui/auth-logo";
+import AuthLeftHandSide from "@/components/layout/auth-sidebar";
+import { routes } from "@/constants/routes";
 
 export default function Login() {
   return (
-    <main className="flex h-screen max-h-dvh overflow-hidden p-4">
-      <section className="hidden shrink-0 rounded-lg lg:block">
-        <Sidebar />
-      </section>
+    <main className="flex overflow-hidden p-4 lg:h-dvh lg:max-h-dvh">
+      <AuthLeftHandSide />
 
-      <section className="no-scrollbar relative flex grow flex-col items-center justify-center overflow-y-auto py-10">
-        <Link href={routes.HOME} className="block">
-          <div className="relative mx-auto h-20 w-28">
-            <Image
-              src="/logos/logo.svg"
-              alt="Oga landlord logo"
-              fill
-              sizes="160px"
-              className="object-cover"
-            />
-          </div>
-        </Link>
+      <section className="no-scrollbar relative flex h-full grow flex-col items-center justify-center overflow-y-auto py-10">
+        <AuthLogo />
 
         <div className="p-1 lg:p-0">
           <LoginForm />
         </div>
 
-        <p className="py-10 text-center text-[14px]">
+        <div className="py-10 text-center text-[14px]">
           <span className="block lg:mr-2 lg:inline-block">New User?</span>{" "}
           <Link
             href={routes.REGISTERASLANDLORD}
@@ -42,14 +31,15 @@ export default function Login() {
           >
             Become Tenant
           </Link>
-        </p>
+          <span className="mx-2">or</span>
+          <Link
+            href={routes.REGISTERASAGENT}
+            className="block text-base font-semibold underline opacity-80 hover:opacity-100"
+          >
+            Become Agent
+          </Link>
+        </div>
       </section>
     </main>
-  );
-}
-
-function Sidebar() {
-  return (
-    <aside className="relative h-full w-[630px] rounded-xl bg-gray-200 px-5 py-10"></aside>
   );
 }

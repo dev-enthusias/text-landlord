@@ -1,6 +1,6 @@
 "use client";
 
-import SelectInput from "@/components/auth/select-input";
+import SelectInput from "@/components/ui/select-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";

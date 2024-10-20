@@ -1,7 +1,7 @@
 "use client";
 
-import SelectInput from "@/components/auth/select-input";
-import TextInput from "@/components/auth/text-input";
+import SelectInput from "@/components/ui/select-input";
+import TextInput from "@/components/ui/text-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 

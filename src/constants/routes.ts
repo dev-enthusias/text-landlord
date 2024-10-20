@@ -6,6 +6,7 @@ export const routes = {
   REGISTER: "/register",
   REGISTERASLANDLORD: "/register?type=landlord",
   REGISTERASTENANT: "/register?type=tenant",
+  REGISTERASAGENT: "/register?type=agent",
   FORGOTPASSWORD: "/forgot-password",
 
   //Dashboard pages
