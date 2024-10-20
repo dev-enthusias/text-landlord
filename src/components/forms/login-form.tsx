@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormState } from "react-dom";
 import Link from "next/link";
+import { permanentRedirect, RedirectType } from "next/navigation";
 import { toast } from "sonner";
 import TextInput from "@/components/ui/text-input";
 import CustomCheckbox from "@/components/ui/custome-checkbox";
@@ -10,18 +11,21 @@ import SubmitButton from "@/components/forms/submit-button";
 import { authenticate } from "@/lib/actions";
 import { routes } from "@/constants/routes";
 
-const authenticateWithToast = async (prevState: any, formData: FormData) => {
+const authenticateWithToastAndRedirect = async (
+  prevState: any,
+  formData: FormData,
+) => {
   const result = await authenticate(prevState, formData);
   if (result && typeof result === "string") {
     toast.error("Error", { description: result });
   }
-  return result;
+  permanentRedirect(routes.DASHBOARD, RedirectType.replace);
 };
 
 export default function LoginForm() {
   const [checked, setChecked] = useState(true);
   const [errorMessage, dispatch] = useFormState(
-    authenticateWithToast,
+    authenticateWithToastAndRedirect,
     undefined,
   );
 

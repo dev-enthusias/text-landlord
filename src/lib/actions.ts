@@ -1,10 +1,9 @@
 "use server";
 
-import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import axiosInstance from "./axios-instance";
 import { loginSchema } from "./schema";
-import { cookies } from "next/headers";
-import { routes } from "@/constants/routes";
+import { encrypt } from "@/utils/encryption";
 
 export async function authenticate(_currentState: unknown, formData: FormData) {
   const validateFields = loginSchema.safeParse({
@@ -23,13 +22,13 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
     );
 
     if (res.status === 200) {
-      const encryptedSessionData = res.data.access_token;
+      const encryptedSessionToken = encrypt(res.data.access_token);
       const roleId = res.data.role_id;
 
       // role_id === 4 means 'Landlord'
       // role_id === 5 means 'Tenant'
 
-      cookies().set("session", encryptedSessionData, {
+      cookies().set("session", encryptedSessionToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60 * 24 * 7, // One week
@@ -49,6 +48,4 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
 
     return "An unexpected error occurred. Please check your internet connection and try again.";
   }
-
-  redirect(routes.DASHBOARD);
 }
