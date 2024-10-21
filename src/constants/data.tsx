@@ -199,3 +199,9 @@ export const landloardQuickActionData = [
   { icons: <HomeIcon />, title: "Assign Agents" },
   { icons: <HomeIcon />, title: "Bill Management" },
 ];
+
+// Match roleId to dashboardroute
+export const ROLE_ROUTES = {
+  4: "/dashboard/landlord",
+  5: "/dashboard/tenant",
+};

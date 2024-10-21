@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useFormState } from "react-dom";
 import Link from "next/link";
-import { permanentRedirect, RedirectType } from "next/navigation";
 import { toast } from "sonner";
 import TextInput from "@/components/ui/text-input";
 import CustomCheckbox from "@/components/ui/custome-checkbox";
@@ -19,7 +18,6 @@ const authenticateWithToastAndRedirect = async (
   if (result && typeof result === "string") {
     toast.error("Error", { description: result });
   }
-  permanentRedirect(routes.DASHBOARD, RedirectType.replace);
 };
 
 export default function LoginForm() {

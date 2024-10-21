@@ -3,7 +3,8 @@
 import { cookies } from "next/headers";
 import axiosInstance from "./axios-instance";
 import { loginSchema } from "./schema";
-import { encrypt } from "@/utils/encryption";
+import { redirect } from "next/navigation";
+import { ROLE_ROUTES } from "@/constants/data";
 
 export async function authenticate(_currentState: unknown, formData: FormData) {
   const validateFields = loginSchema.safeParse({
@@ -15,6 +16,8 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
     return validateFields.error.flatten().fieldErrors;
   }
 
+  let redirectionPathname: string;
+
   try {
     const res = await axiosInstance.post(
       "/public/v1/login",
@@ -22,24 +25,27 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
     );
 
     if (res.status === 200) {
-      const encryptedSessionToken = encrypt(res.data.access_token);
+      const authToken = res.data.access_token;
       const roleId = res.data.role_id;
 
       // role_id === 4 means 'Landlord'
       // role_id === 5 means 'Tenant'
 
-      cookies().set("session", encryptedSessionToken, {
+      cookies().set("session", authToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60 * 24 * 7, // One week
         path: "/",
       });
+
       cookies().set("role", roleId, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60 * 24 * 7,
         path: "/",
       });
+
+      redirectionPathname = ROLE_ROUTES[roleId as keyof typeof ROLE_ROUTES];
     }
   } catch (error: any) {
     if (error?.status === 401) {
@@ -48,4 +54,6 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
 
     return "An unexpected error occurred. Please check your internet connection and try again.";
   }
+
+  redirect(redirectionPathname!);
 }

@@ -17,7 +17,7 @@ export default function Login() {
         </div>
 
         <div className="py-10 text-center text-[14px]">
-          <span className="block lg:mr-2 lg:inline-block">New User?</span>{" "}
+          <span className="block lg:mr-2 lg:inline-block">New User?</span>
           <Link
             href={routes.REGISTERASLANDLORD}
             className="mr-2 text-base font-semibold underline opacity-80 hover:opacity-100"
