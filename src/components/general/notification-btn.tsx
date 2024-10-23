@@ -1,8 +1,8 @@
 "use client";
 
-import NotificationCard from "@/app/dashboard/notifications/notification-card";
 import { LucideBellRing } from "lucide-react";
 import { useState } from "react";
+import NotificationCard from "../pages/notifications/notification-card";
 
 export default function NotificationBtn() {
   const [isOpen, setIsOpen] = useState(false);

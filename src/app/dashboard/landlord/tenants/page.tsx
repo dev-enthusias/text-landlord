@@ -1,5 +1,5 @@
 import Topbar from "@/components/general/topbar";
-import Menu from "@/components/general/footer-menu";
+import Menu from "@/components/layout/footer-menu";
 import AddTenantBtn from "../modals/add-tenant-btn";
 import Image from "next/image";
 import {

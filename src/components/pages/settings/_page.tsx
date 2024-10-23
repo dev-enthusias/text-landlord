@@ -1,6 +1,6 @@
 "use client";
 
-import Menu from "@/components/general/footer-menu";
+import Menu from "@/components/layout/footer-menu";
 import PrevPageButton from "@/components/general/prev-page";
 import { settings } from "@/constants/data";
 import { routes } from "@/constants/routes";

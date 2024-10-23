@@ -1,4 +1,4 @@
-import PropertyCard from "@/components/general/property-card";
+import PropertyCard from "@/components/ui/property-card";
 import OrderCard from "./order-card";
 
 export default function OrderPageContent() {

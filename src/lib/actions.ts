@@ -5,6 +5,7 @@ import axiosInstance from "./axios-instance";
 import { loginSchema } from "./schema";
 import { redirect } from "next/navigation";
 import { ROLE_ROUTES } from "@/constants/data";
+import { routes } from "@/constants/routes";
 
 export async function authenticate(_currentState: unknown, formData: FormData) {
   const validateFields = loginSchema.safeParse({
@@ -56,4 +57,11 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
   }
 
   redirect(redirectionPathname!);
+}
+
+export async function logout() {
+  cookies().delete("session");
+  cookies().delete("role");
+
+  redirect(routes.LOGIN);
 }

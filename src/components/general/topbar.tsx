@@ -1,13 +1,12 @@
+import Link from "next/link";
+import Image from "next/image";
+import NotificationBtn from "./notification-btn";
 import { routes } from "@/constants/routes";
 import { LucideBellRing, LucideShoppingCart } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import NotificationBtn from "./notification-btn";
-import { SwitchUserRole } from "@/utils/switch-user";
 
 export default function Topbar() {
   return (
-    <header className="sticky top-0 z-50 flex h-16 justify-between overflow-hidden border-b bg-white px-3 lg:h-20 lg:justify-end lg:px-10">
+    <header className="sticky top-0 z-50 flex h-16 justify-between border-b bg-white px-5 lg:h-20 lg:justify-end lg:px-10">
       <Link href={routes.HOME} className="lg:hidden">
         <Image
           src="/logos/logo-transparent.png"
@@ -20,7 +19,6 @@ export default function Topbar() {
       </Link>
 
       <div className="flex items-center gap-x-4 lg:gap-x-10">
-        <SwitchUserRole />
         <Link href={routes.DASHBOARDNOTIFICATIONS} className="lg:hidden">
           <LucideBellRing />
         </Link>
@@ -34,7 +32,7 @@ export default function Topbar() {
               src="/images/profile-img.jpeg"
               alt="Tenant profile photo"
               fill
-              sizes="100vw"
+              sizes="40px, (min-width: 1024px) 48px"
               style={{ objectFit: "cover" }}
             />
           </div>
@@ -48,7 +46,7 @@ export default function Topbar() {
               src="/images/profile-img.jpeg"
               alt="Tenant profile photo"
               fill
-              sizes="100vw"
+              sizes="40px, (min-width: 1024px) 48px"
               style={{ objectFit: "cover" }}
             />
           </div>

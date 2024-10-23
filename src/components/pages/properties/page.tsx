@@ -1,9 +1,9 @@
 "use client";
 
-import Menu from "@/components/general/footer-menu";
+import Menu from "@/components/layout/footer-menu";
 import PropertyCard, {
   PropertyCardLandscape,
-} from "@/components/general/property-card";
+} from "@/components/ui/property-card";
 import Topbar from "@/components/general/topbar";
 import { propertyCategories } from "@/constants/data";
 import FilterModal from "../modals/filter-modal";

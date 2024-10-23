@@ -1,7 +1,7 @@
 "use client";
 
 import Topbar from "@/components/general/topbar";
-import Menu from "@/components/general/footer-menu";
+import Menu from "@/components/layout/footer-menu";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import AddAccountListBtn from "../modals/add-account-list";

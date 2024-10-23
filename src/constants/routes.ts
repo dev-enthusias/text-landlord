@@ -9,10 +9,28 @@ export const routes = {
   REGISTERASAGENT: "/register?type=agent",
   FORGOTPASSWORD: "/forgot-password",
 
-  //Dashboard pages
-  DASHBOARD: "/dashboard",
-  DASHBOARDPROPERTIES: "/dashboard/properties",
-  DASHBOARDPROPERTIESDETAILS: "/dashboard/properties/:propertyId",
+  // Tenant dashboard pages
+  TENANT_DASHBOARD: "/dashboard/tenant",
+  TENANT_DASHBOARD_PROPERTIES: "/dashboard/tenant/properties",
+  TENANT_DASHBOARD_PROPERTIES_DETAIL:
+    "/dashboard/tenant/properties/:propertyId",
+  TENANT_DASHBOARD_CHAT: "/dashboard/tenant/chat",
+  TENANT_DASHBOARD_PAYMENT_HISTORY: "/dashboard/tenant/payment-history",
+  TENANT_DASHBOARD_SETTINGS: "/dashboard/tenant/settings",
+
+  // Landlord dashboard pages
+  LANDLORD_DASHBOARD: "/dashboard/landlord",
+  LANDLORD_DASHBOARD_PROPERTIES: "/dashboard/landlord/properties",
+  LANDLORD_DASHBOARD_PROPERTIES_DETAIL:
+    "/dashboard/landlord/properties/:propertyId",
+  LANDLORD_DASHBOARD_CHAT: "/dashboard/landlord/chat",
+  LANDLORD_DASHBOARD_TRANSACTION_HISTORY:
+    "/dashboard/landlord/transaction-history",
+  LANDLORD_DASHBOARD_SETTINGS: "/dashboard/landlord/settings",
+  LANDLORD_DASHBOARD_BILLS: "/dashboard/landlord/bills",
+  LANDLORD_DASHBOARD_REPORTS: "/dashboard/landlord/reports",
+  LANDLORD_DASHBOARD_TENANTS: "/dashboard/landlord/tenants",
+
   DASHBOARDPROFILE: "/dashboard/profile",
   DASHBOARDHISTORY: "/dashboard/history",
   DASHBOARDSETTINGS: "/dashboard/settings",

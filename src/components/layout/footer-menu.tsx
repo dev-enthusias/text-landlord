@@ -4,7 +4,7 @@ import {
   LucideSettings,
   MessageCircleMoreIcon,
 } from "lucide-react";
-import NavLink from "./navlink";
+import NavLink from "../general/navlink";
 
 export default function Menu() {
   return (

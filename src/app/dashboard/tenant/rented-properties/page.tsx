@@ -1,7 +1,7 @@
 import PrevPageButton from "@/components/general/prev-page";
 import PropertyCard, {
   PropertyCardLandscape,
-} from "@/components/general/property-card";
+} from "@/components/ui/property-card";
 
 export default function RentedProperties() {
   return (
