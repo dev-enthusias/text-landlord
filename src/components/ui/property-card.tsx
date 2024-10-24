@@ -2,11 +2,19 @@
 
 import { routes } from "@/constants/routes";
 import { getRole } from "@/utils/role";
-import { BathIcon, BedIcon, MapPin, RulerIcon, UsersRound } from "lucide-react";
+import {
+  BathIcon,
+  BedIcon,
+  MapPin,
+  RulerIcon,
+  Trash2,
+  UsersRound,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { HeartSolid, HeartStroke } from "../svg";
 import { useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function PropertyCard({
   type,
@@ -61,8 +69,9 @@ export default function PropertyCard({
 
           <div className="mt-1">
             <h3 className="text-lg font-semibold">Emperica in Dazil, Villa</h3>
-            <p className="text-medium flex items-center gap-x-0.5 text-sm">
-              <MapPin size={10} /> Palaxisto Emeriando Plaza Road
+            <p className="text-medium flex items-start gap-x-0.5 text-sm">
+              <MapPin size={10} className="mt-1" /> Palaxisto Emeriando Plaza
+              Road
             </p>
           </div>
 
@@ -107,12 +116,15 @@ export default function PropertyCard({
 export function TenantPropertyCard({
   type,
   status,
-  queryParam = "",
+  wishlist = false,
+  queryParam,
 }: {
   type?: "order";
   status?: string;
+  wishlist?: boolean;
   queryParam?: string;
 }) {
+  const pathname = usePathname();
   const [favProperty, setFavProperty] = useState(false);
 
   const handleFavClick = (
@@ -127,15 +139,16 @@ export function TenantPropertyCard({
     <Link
       href={
         type !== "order"
-          ? routes.TENANT_DASHBOARD_PROPERTIES_DETAIL +
+          ? routes.TENANT_DASHBOARD_PROPERTIES +
+            "/0" +
             `?property-status=${queryParam}`
-          : routes.DASHBOARDSETTINGS + "?path=orderdetails"
+          : routes.TENANT_DASHBOARD_SETTINGS + "?path=orderdetails"
       }
       className="z-40 block"
     >
       <article>
         {/* Property photo */}
-        <div className="relative h-36 overflow-hidden rounded-lg">
+        <div className="relative h-36 min-w-[240px] overflow-hidden rounded-lg lg:min-w-fit">
           <Image
             src="/images/duplex.webp"
             alt="property display photo"
@@ -167,9 +180,23 @@ export function TenantPropertyCard({
                 /Year
               </span>
             </p>
-            <button onClick={(e) => handleFavClick(e)}>
-              {!favProperty ? <HeartStroke /> : <HeartSolid />}
-            </button>
+
+            {!pathname.includes("settings") && (
+              <button onClick={(e) => handleFavClick(e)}>
+                {!favProperty ? <HeartStroke /> : <HeartSolid />}
+              </button>
+            )}
+
+            {wishlist && (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+              >
+                <Trash2 className="h-4 w-4 transition-colors duration-300 hover:text-red-600" />
+              </button>
+            )}
           </div>
 
           {/* Property name and location */}

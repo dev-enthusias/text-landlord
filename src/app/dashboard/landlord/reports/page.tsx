@@ -1,6 +1,6 @@
 "use client";
 
-import Topbar from "@/components/general/topbar";
+import Topbar from "@/components/layout/topbar";
 import Menu from "@/components/layout/footer-menu";
 import { CalendarDays, Trash2, WalletMinimal } from "lucide-react";
 import { useState } from "react";

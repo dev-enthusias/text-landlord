@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
-import AddEditTenantForm from "../forms/add-edit-tenant-form";
+import EditProfileForm from "../forms/profile-form";
 
-export default function EditTenantBtn() {
+export default function EditProfileBtn() {
   const [isAddTenantModalOpen, setAddTenantModal] = useState(false);
 
   return (
     <>
       <button
-        className="rounded bg-primary-dark px-5 py-1 font-semibold"
+        className="shrink-0 rounded bg-primary-dark px-5 py-1 font-semibold"
         onClick={() => setAddTenantModal(true)}
       >
         EDIT PROFILE
@@ -18,10 +18,7 @@ export default function EditTenantBtn() {
 
       {isAddTenantModalOpen && (
         <ModalLayout>
-          <AddEditTenantForm
-            setAddTenantModal={setAddTenantModal}
-            title="Edit"
-          />
+          <EditProfileForm setAddTenantModal={setAddTenantModal} />
         </ModalLayout>
       )}
     </>

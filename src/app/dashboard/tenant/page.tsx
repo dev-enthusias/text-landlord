@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { HomeIcon, MapPin } from "lucide-react";
+import { HomeIcon } from "lucide-react";
 import { WalletOverview } from "@/components/data-visualization/wallet-overview";
 import { TenantPropertyCard } from "@/components/ui/property-card";
-import TransactionCard from "@/components/general/transaction-card";
-import Topbar from "@/components/general/topbar";
+import TransactionCard from "@/components/ui/transaction-card";
+import Topbar from "@/components/layout/topbar";
 import Menu from "@/components/layout/footer-menu";
-import { FriendCard } from "@/components/pages/chat/sidebar";
 import { routes } from "@/constants/routes";
+import { FriendCard } from "@/components/layout/chat-sidebar";
 
 export default function TenantDashboard() {
   return (
@@ -21,17 +21,17 @@ export default function TenantDashboard() {
           Welcome Back, Tenant 🎉
         </h1>
 
-        <div className="grid gap-y-6 lg:gap-y-16">
+        <div className="grid gap-y-10 lg:gap-y-14">
           {/* Summaries */}
           <div className="grid grid-cols-12 grid-rows-1 items-stretch gap-x-5">
-            <div className="col-span-6">
+            <div className="col-span-12 lg:col-span-6">
               <WalletOverview />
             </div>
 
-            <div className="col-span-3">
+            <div className="col-span-3 hidden lg:block">
               <TotalRentedProperty />
             </div>
-            <div className="col-span-3">
+            <div className="col-span-3 hidden lg:block">
               <TotalOverdueRent />
             </div>
           </div>
@@ -47,6 +47,7 @@ export default function TenantDashboard() {
                 View more
               </Link>
             </div>
+
             <div className="no-scrollbar flex w-screen min-w-64 grid-cols-3 gap-5 overflow-x-auto px-5 lg:grid lg:w-auto lg:justify-between xl:hidden">
               <TenantPropertyCard />
               <TenantPropertyCard />
@@ -81,7 +82,7 @@ export default function TenantDashboard() {
               <div className="mb-2 flex items-center justify-between font-semibold lg:border-b lg:px-5 lg:py-5">
                 <h2 className="text-lg xl:text-xl">Chats</h2>
                 <Link
-                  href={routes.DASHBOARDCHAT}
+                  href={routes.TENANT_DASHBOARD_CHAT}
                   className="text-sm text-accent underline lg:text-[14px]"
                 >
                   View all
@@ -97,9 +98,9 @@ export default function TenantDashboard() {
             {/* Recent Transactions */}
             <section className="rounded-lg lg:col-span-7 lg:overflow-hidden lg:border lg:bg-white xl:col-span-7">
               <div className="mb-2 flex items-center justify-between font-semibold lg:border-b lg:px-5 lg:py-5">
-                <h2 className="text-lg xl:text-xl">Recent transactions</h2>
+                <h2 className="text-lg xl:text-xl">Recent payments</h2>
                 <Link
-                  href={routes.DASHBOARDHISTORY}
+                  href={routes.TENANT_DASHBOARD_PAYMENT_HISTORY}
                   className="text-sm text-accent underline lg:text-[14px]"
                 >
                   View all
@@ -154,7 +155,6 @@ function RentNotification({ status }: { status: "upcoming" | "overdue" }) {
         </p>
         <h3 className="font-semibold">Clear Home</h3>
         <p className="mb-1 flex items-center gap-x-0.5 text-xs font-medium">
-          <MapPin size={10} />
           Erimus, d richest man house road
         </p>
         <p className="text-xxs">

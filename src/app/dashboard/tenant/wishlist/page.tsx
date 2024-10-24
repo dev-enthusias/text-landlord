@@ -1,6 +1,7 @@
-import PrevPageButton from "@/components/general/prev-page";
-import PropertyCard, {
+import PrevPageButton from "@/components/ui/prev-page";
+import {
   PropertyCardLandscape,
+  TenantPropertyCard,
 } from "@/components/ui/property-card";
 
 export default function Wishlist() {
@@ -26,11 +27,12 @@ export default function Wishlist() {
         <PropertyCardLandscape />
         <PropertyCardLandscape />
       </div>
-      <div className="hidden grid-cols-3 gap-5 lg:grid lg:p-3">
-        <PropertyCard />
-        <PropertyCard />
-        <PropertyCard />
-        <PropertyCard />
+
+      <div className="hidden gap-5 lg:grid lg:grid-cols-2 lg:px-3 xl:grid-cols-3">
+        <TenantPropertyCard wishlist={true} />
+        <TenantPropertyCard wishlist />
+        <TenantPropertyCard wishlist />
+        <TenantPropertyCard wishlist />
       </div>
     </>
   );

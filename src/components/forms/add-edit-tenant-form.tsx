@@ -24,11 +24,11 @@ export default function AddEditTenantForm({
       </header>
       <main className="px-5">
         <fieldset className="space-y-4">
-          <TextInput label="First Name" />
-          <TextInput label="Last Name" />
-          <TextInput label="Email" />
-          <TextInput label="Phone" />
-          <TextInput label="Occupation" />
+          <TextInput name="" label="First Name" />
+          <TextInput name="" label="Last Name" />
+          <TextInput name="" label="Email" />
+          <TextInput name="" label="Phone" />
+          <TextInput name="" label="Occupation" />
           <SelectInput
             label="Location"
             options={[{ value: "land", label: "Land" }]}
@@ -50,7 +50,7 @@ export default function AddEditTenantForm({
             onChange={setPropertyType}
             placeholder="City"
           />
-          <TextInput label="Address" />
+          <TextInput name="" label="Address" />
           <button
             type="submit"
             className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"

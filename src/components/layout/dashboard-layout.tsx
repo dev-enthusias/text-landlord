@@ -1,5 +1,5 @@
-import Sidebar from "@/components/general/sidebar";
-import Topbar from "@/components/general/topbar";
+import Sidebar from "@/components/layout/sidebar";
+import Topbar from "@/components/layout/topbar";
 import { SidebarNavLinks } from "@/definition";
 
 export default function DashboardLayout({
@@ -15,8 +15,10 @@ export default function DashboardLayout({
         <Sidebar navlinks={navlinks} />
       </div>
 
-      <div className="no-scrollbar grow overflow-y-auto">
-        <Topbar />
+      <div className="no-scrollbar relative grow overflow-y-auto">
+        <div className="sticky top-0 hidden lg:block z-50">
+          <Topbar />
+        </div>
         {children}
       </div>
     </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import PrevPageButton from "@/components/general/prev-page";
+import PrevPageButton from "@/components/ui/prev-page";
 import {
   BathIcon,
   BedIcon,

@@ -1,24 +1,20 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import Menu from "@/components/layout/footer-menu";
 import PrevPageButton from "@/components/ui/prev-page";
-import { settings } from "@/constants/data";
-import { routes } from "@/constants/routes";
-import { ChevronRight, ChevronRightIcon, LogOutIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import OrderDetails from "../order-details";
 import RentedProperties from "../rented-properties/page";
 import Wishlist from "../wishlist/page";
-import ProfilePage from "../profile";
-import { useSearchParams } from "next/navigation";
-import AddMoneyCard from "../add-money/add-money-card";
-import { ChangePasswordForm } from "../../forms/chage-password-form";
-import OrderPageContent from "../order-page-content";
-import { getRole } from "@/utils/role";
-import Account from "../account/page";
-import PropertyCategories from "../property-category/page";
-import PropertyFacilities from "../property-facility-type/page";
+import { routes } from "@/constants/routes";
+import { settings, tenantSettingLinksDesktop } from "@/constants/data";
+import ProfilePage from "@/components/pages/profile";
+import { ChangePasswordForm } from "@/components/forms/chage-password-form";
+import { ChevronRight, ChevronRightIcon, LogOutIcon } from "lucide-react";
+import FundWalletPage from "@/components/pages/fund-wallet";
+import OrderDetails from "@/components/pages/order-details";
+import Orders from "@/components/pages/order";
 
 export default function SettingsPage() {
   return (
@@ -147,96 +143,34 @@ function MobileSettingPage() {
 }
 
 function DesktopSettingsPage() {
-  const USERROLE = getRole();
-
   const searchParam = useSearchParams();
   const activePath = (searchParam.get("path") as string) || "profile";
 
   return (
     <div className="max-h-[calc(100vh-100px)] overflow-hidden">
-      {/* <h1 className="border-b px-10 py-5 text-2xl font-semibold">Settings</h1> */}
-
       <div className="hidden items-start gap-x-10 px-10 py-5 lg:flex">
         <div className="custom-shadow shrink-0 space-y-4 rounded-xl bg-white px-2 py-5">
-          {USERROLE === "tenant" && (
-            <>
-              <section>
-                <div className="space-y-4">
-                  {settings.general1d.map(({ name, icon, link }, i) => (
-                    <Link
-                      key={i}
-                      href={link}
-                      className={`flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20 ${
-                        link.includes(activePath)
-                          ? "bg-primary-dark/20"
-                          : "bg-transparent"
-                      }`}
-                    >
-                      <div className="flex items-center gap-x-4">
-                        {icon}
-                        {name}
-                      </div>
-                      <ChevronRight />
-                    </Link>
-                  ))}
-                </div>
-              </section>
-              <section>
-                <div className="space-y-4">
-                  {settings.general2d.map(({ name, icon, link }, i) => (
-                    <Link
-                      key={i}
-                      href={link}
-                      className={`flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20 ${link.includes(activePath) ? "bg-primary-dark/20" : "bg-transparent"}`}
-                    >
-                      <div className="flex items-center gap-x-4">
-                        {icon}
-                        {name}
-                      </div>
-                      <ChevronRight />
-                    </Link>
-                  ))}
-                </div>
-              </section>
-              <section>
-                <div className="space-y-4">
-                  {settings.legald.map(({ name, icon, link }, i) => (
-                    <Link
-                      key={i}
-                      href={link}
-                      className="flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20"
-                    >
-                      <div className="flex items-center gap-x-4">
-                        {icon}
-                        {name}
-                      </div>
-                      <ChevronRight />
-                    </Link>
-                  ))}
-                </div>
-              </section>{" "}
-            </>
-          )}
-
-          {USERROLE === "landlord" && (
-            <section>
-              <div className="space-y-4">
-                {settings.generallandlord.map(({ name, icon, link }, i) => (
-                  <Link
-                    key={i}
-                    href={link}
-                    className="flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20"
-                  >
-                    <div className="flex items-center gap-x-4">
-                      {icon}
-                      {name}
-                    </div>
-                    <ChevronRight />
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
+          <section>
+            <div className="space-y-4">
+              {tenantSettingLinksDesktop.map(({ name, icon, link }, i) => (
+                <Link
+                  key={i}
+                  href={link}
+                  className={`flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20 ${
+                    link.includes(activePath)
+                      ? "bg-primary-dark/20"
+                      : "bg-transparent"
+                  }`}
+                >
+                  <div className="flex items-center gap-x-4">
+                    {icon}
+                    {name}
+                  </div>
+                  <ChevronRight />
+                </Link>
+              ))}
+            </div>
+          </section>
         </div>
 
         {/* Right Section */}
@@ -245,25 +179,19 @@ function DesktopSettingsPage() {
             {activePath === "password" ? (
               <ChangePasswordForm />
             ) : activePath === "profile" ? (
-              <ProfilePage />
+              <ProfilePage role="tenant" />
             ) : activePath === "wallet" ? (
               <div className="p-2">
-                <AddMoneyCard />
+                <FundWalletPage />
               </div>
             ) : activePath === "order" ? (
-              <OrderPageContent />
+              <Orders />
             ) : activePath === "properties" ? (
               <RentedProperties />
             ) : activePath === "wishlist" ? (
               <Wishlist />
             ) : activePath === "orderdetails" ? (
               <OrderDetails />
-            ) : activePath === "account" ? (
-              <Account />
-            ) : activePath === "category" ? (
-              <PropertyCategories />
-            ) : activePath === "facility" ? (
-              <PropertyFacilities />
             ) : (
               ""
             )}

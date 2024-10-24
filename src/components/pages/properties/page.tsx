@@ -4,7 +4,7 @@ import Menu from "@/components/layout/footer-menu";
 import PropertyCard, {
   PropertyCardLandscape,
 } from "@/components/ui/property-card";
-import Topbar from "@/components/general/topbar";
+import Topbar from "@/components/layout/topbar";
 import { propertyCategories } from "@/constants/data";
 import FilterModal from "../modals/filter-modal";
 import { getRole } from "@/utils/role";

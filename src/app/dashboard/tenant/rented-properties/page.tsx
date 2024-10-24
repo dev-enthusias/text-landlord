@@ -1,6 +1,7 @@
-import PrevPageButton from "@/components/general/prev-page";
-import PropertyCard, {
+import PrevPageButton from "@/components/ui/prev-page";
+import {
   PropertyCardLandscape,
+  TenantPropertyCard,
 } from "@/components/ui/property-card";
 
 export default function RentedProperties() {
@@ -31,7 +32,7 @@ export default function RentedProperties() {
               <span className="text-xl font-bold">4</span>
               <h3 className="mt-2 font-semibold opacity-80">Upcoming</h3>
             </div>
-            <div className="flex flex-col items-center rounded-lg border border-red-500 bg-red-600 py-4 text-white">
+            <div className="custom-shadow flex flex-col items-center rounded-lg border bg-white py-4">
               <span className="text-xl font-bold">2</span>
               <h3 className="mt-2 font-semibold opacity-80">Overdue</h3>
             </div>
@@ -46,16 +47,16 @@ export default function RentedProperties() {
               <PropertyCardLandscape status="overdue" queryParam="rent" />
               <PropertyCardLandscape status="upcoming" queryParam="rent" />
             </div>
-            <div className="hidden grid-cols-3 items-stretch gap-5 lg:grid">
-              <PropertyCard queryParam="rent" />
-              <PropertyCard status="overdue" queryParam="rent" />
-              <PropertyCard status="upcoming" queryParam="rent" />
-              <PropertyCard queryParam="rent" />
-              <PropertyCard status="overdue" queryParam="rent" />
-              <PropertyCard status="upcoming" queryParam="rent" />
-              <PropertyCard queryParam="rent" />
-              <PropertyCard status="overdue" queryParam="rent" />
-              <PropertyCard status="upcoming" queryParam="rent" />
+            <div className="hidden items-stretch gap-5 lg:grid lg:grid-cols-2 xl:grid-cols-3">
+              <TenantPropertyCard queryParam="rent" />
+              <TenantPropertyCard status="overdue" queryParam="rent" />
+              <TenantPropertyCard status="upcoming" queryParam="rent" />
+              <TenantPropertyCard queryParam="rent" />
+              <TenantPropertyCard status="overdue" queryParam="rent" />
+              <TenantPropertyCard status="upcoming" queryParam="rent" />
+              <TenantPropertyCard queryParam="rent" />
+              <TenantPropertyCard status="overdue" queryParam="rent" />
+              <TenantPropertyCard status="upcoming" queryParam="rent" />
             </div>
           </section>
         </section>

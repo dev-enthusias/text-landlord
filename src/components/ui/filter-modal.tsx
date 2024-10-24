@@ -1,6 +1,6 @@
 "use client";
 
-import PriceRangeSlider from "@/components/general/pricerange-slider";
+import PriceRangeSlider from "@/components/ui/pricerange-slider";
 import { FilterIcon, XCircle } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
@@ -16,7 +16,7 @@ export default function FilterModal() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="mb-3 ml-auto flex w-full items-center justify-between rounded-lg border bg-gray-50 px-4 py-3 lg:w-[420px]"
+        className="mb-3 ml-auto flex w-full items-center justify-between rounded-lg border bg-gray-50 px-4 py-3 lg:w-[320px] xl:w-[420px]"
       >
         <span className="text-xs">Filter by categories, beds, baths, area</span>
         <FilterIcon size={16} />
@@ -25,16 +25,12 @@ export default function FilterModal() {
       {isOpen && (
         <ModalLayout>
           <article className="relative mx-auto w-[95%] max-w-[440px] rounded-t-2xl bg-white lg:rounded-b-2xl">
-            <button
-              onClick={handleClose}
-              className="absolute right-5 top-5 text-xl"
-            >
-              <XCircle />
-            </button>
-
-            <h2 className="mb-4 border-b p-5 pb-3 text-center text-lg font-bold">
-              Filters
-            </h2>
+            <div className="mb-4 flex justify-between border-b px-5 py-5">
+              <h2 className="text-center text-lg font-bold">Filters</h2>
+              <button onClick={handleClose} className="text-xl">
+                <XCircle />
+              </button>
+            </div>
 
             <section className="space-y-8 px-5 pb-6 lg:space-y-12">
               <div>
@@ -72,7 +68,7 @@ export default function FilterModal() {
               </div>
 
               <div>
-                <h3 className="mb- font-semibold lg:font-medium">Price</h3>
+                <h3 className="font-semibold lg:font-medium">Price</h3>
                 <PriceRangeSlider />
               </div>
 

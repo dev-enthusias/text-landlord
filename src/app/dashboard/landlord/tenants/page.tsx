@@ -1,4 +1,4 @@
-import Topbar from "@/components/general/topbar";
+import Topbar from "@/components/layout/topbar";
 import Menu from "@/components/layout/footer-menu";
 import AddTenantBtn from "../modals/add-tenant-btn";
 import Image from "next/image";
