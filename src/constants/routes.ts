@@ -17,6 +17,7 @@ export const routes = {
   TENANT_DASHBOARD_CHAT: "/dashboard/tenant/chat",
   TENANT_DASHBOARD_PAYMENT_HISTORY: "/dashboard/tenant/payment-history",
   TENANT_DASHBOARD_SETTINGS: "/dashboard/tenant/settings",
+  TENANT_DASHBOARD_CART: "/dashboard/tenant/cart",
 
   // Landlord dashboard pages
   LANDLORD_DASHBOARD: "/dashboard/landlord",

@@ -26,7 +26,7 @@ export default function Topbar() {
         <NotificationBtn />
 
         <Link
-          href={routes.DASHBOARDCART}
+          href={routes.TENANT_DASHBOARD_CART}
           className="hidden items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
         >
           <LucideShoppingCart className="h-5 w-5" />
