@@ -146,7 +146,7 @@ export function TenantPropertyCard({
       }
       className="z-40 block"
     >
-      <article>
+      <article className="group">
         {/* Property photo */}
         <div className="relative h-36 min-w-[240px] overflow-hidden rounded-lg lg:min-w-fit">
           <Image
@@ -154,7 +154,7 @@ export function TenantPropertyCard({
             alt="property display photo"
             fill
             sizes="384px"
-            className="object-cover transition-transform duration-300 ease-in hover:scale-110"
+            className="object-cover transition-transform duration-300 ease-in group-hover:scale-110"
           />
         </div>
 
