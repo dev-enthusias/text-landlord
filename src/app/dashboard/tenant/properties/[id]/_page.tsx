@@ -154,7 +154,7 @@ function PropertyListerContact() {
       </p>
 
       <Link
-        href={routes.DASHBOARDCHAT}
+        href={routes.TENANT_DASHBOARD_CHAT}
         className="flex w-fit items-center gap-x-2 rounded border-2 border-accent px-4 py-1 font-medium"
       >
         <MessageCircleIcon size={20} /> Message

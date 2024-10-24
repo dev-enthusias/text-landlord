@@ -154,7 +154,7 @@ export function TenantPropertyCard({
             alt="property display photo"
             fill
             sizes="384px"
-            className="object-cover"
+            className="object-cover transition-transform duration-300 ease-in hover:scale-110"
           />
         </div>
 

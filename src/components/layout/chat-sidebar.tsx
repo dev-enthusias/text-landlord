@@ -37,7 +37,7 @@ export default function ChatSidebar() {
 
 export const FriendCard = () => {
   return (
-    <Link href={routes.TENANT_DASHBOARD_CHAT + "/0"}>
+    <Link href={routes.TENANT_DASHBOARD_CHAT + "/0"} replace>
       <article className="flex items-center gap-x-3.5 rounded-lg px-3.5 py-2 text-[#09132C] hover:bg-primary/10">
         <div className="relative h-[50px] w-[50px] shrink-0 overflow-hidden rounded-full">
           <Image
