@@ -4,8 +4,8 @@ import Topbar from "@/components/layout/topbar";
 import Menu from "@/components/layout/footer-menu";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
-import AddAccountListBtn from "../modals/add-account-list";
-import AddAccountCategoryBtn from "../modals/add-account-category";
+import AddAccountListBtn from "@/components/ui/add-account-list";
+import AddAccountCategoryBtn from "@/components/ui/add-account-category";
 
 const buttons = ["Account list", "Account category"];
 

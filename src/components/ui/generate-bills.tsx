@@ -22,7 +22,7 @@ export default function GenerateBillBtn() {
         <ModalLayout>
           <article className="no-scrollbar max-h-[95vh] w-[95%] max-w-[640px] overflow-y-auto rounded-lg bg-white pb-5">
             <header className="sticky top-0 z-50 mb-4 flex justify-between border-b bg-white p-5">
-              <h3 className="text-lg font-semibold">Assign Agent</h3>
+              <h3 className="text-lg font-semibold">Generate Bill</h3>
               <button className="" onClick={() => setGenerateBillModal(false)}>
                 <X size={20} />
               </button>

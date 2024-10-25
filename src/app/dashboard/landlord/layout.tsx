@@ -13,41 +13,49 @@ const landlordSidebarLinks = [
     name: "Home",
     icon: <LayoutDashboardIcon size={22} />,
     href: routes.LANDLORD_DASHBOARD,
+    exact: true,
   },
   {
     name: "Properties",
     icon: <LucideHousePlus size={22} />,
     href: routes.LANDLORD_DASHBOARD_PROPERTIES,
+    exact: false,
   },
   {
     name: "Tenants",
     icon: <LucideHousePlus size={22} />,
     href: routes.LANDLORD_DASHBOARD_TENANTS,
-  },
-  {
-    name: "Transaction History",
-    icon: <HistoryIcon size={22} />,
-    href: routes.LANDLORD_DASHBOARD_TRANSACTION_HISTORY,
-  },
-  {
-    name: "Reports",
-    icon: <MessageCircleMoreIcon size={22} />,
-    href: routes.LANDLORD_DASHBOARD_REPORTS,
-  },
-  {
-    name: "Bills Management",
-    icon: <MessageCircleMoreIcon size={22} />,
-    href: routes.LANDLORD_DASHBOARD_BILLS,
+    exact: false,
   },
   {
     name: "Chat",
     icon: <MessageCircleMoreIcon size={22} />,
     href: routes.LANDLORD_DASHBOARD_CHAT,
+    exact: false,
   },
   {
-    name: "Properties",
+    name: "Reports",
+    icon: <MessageCircleMoreIcon size={22} />,
+    href: routes.LANDLORD_DASHBOARD_REPORTS,
+    exact: false,
+  },
+  {
+    name: "Bills Management",
+    icon: <MessageCircleMoreIcon size={22} />,
+    href: routes.LANDLORD_DASHBOARD_BILLS,
+    exact: false,
+  },
+  {
+    name: "Transaction History",
+    icon: <HistoryIcon size={22} />,
+    href: routes.LANDLORD_DASHBOARD_TRANSACTION_HISTORY,
+    exact: false,
+  },
+  {
+    name: "Settings",
     icon: <LucideSettings size={22} />,
     href: routes.LANDLORD_DASHBOARD_SETTINGS,
+    exact: false,
   },
 ];
 

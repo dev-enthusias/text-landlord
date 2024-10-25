@@ -1,7 +1,7 @@
 import Topbar from "@/components/layout/topbar";
 import Menu from "@/components/layout/footer-menu";
 import { Trash2 } from "lucide-react";
-import AddPropertyCategoryBtn from "../modals/add-property-category";
+import AddPropertyCategoryBtn from "@/components/ui/add-property-category";
 
 export default function PropertyCategories() {
   return (

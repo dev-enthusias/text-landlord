@@ -39,8 +39,8 @@ export default function AddAccountListBtn() {
                   onChange={setPropertyType}
                   placeholder="--Select--"
                 />
-                <TextInput label="Account number" />
-                <TextInput label="Account holder" />
+                <TextInput name="" label="Account number" />
+                <TextInput name="" label="Account holder" />
                 <CustomCheckbox
                   id="disabled"
                   checked={checked}

@@ -7,14 +7,17 @@ export default function TextInput({
   name,
   required,
   error,
+  type = "text",
 }: {
   label: string;
   name: string;
   required?: boolean;
+  type?: string;
   error?: any;
 }) {
   const [isFocused, setIsFocused] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
+  const [inputType, setInputType] = useState(type)
 
   // Reset hasChanged when new errors are received from validation
   useEffect(() => {
@@ -45,13 +48,14 @@ export default function TextInput({
         {label} {required && <span className="font-bold text-red-500">*</span>}
       </label>
       <input
-        type="text"
+        type={inputType}
         name={name}
         className="relative w-full rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
         onFocus={handleFocus}
         onBlur={(e) => handleBlur(e)}
         onChange={(e) => handleChange(e)}
       />
+      {inputType === 'password' && <button></button>}
 
       {!isFocused && !hasChanged && hasError && (
         <p className="mt-1 text-sm text-red-600">{error[name][0]}</p>

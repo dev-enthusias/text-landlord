@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { HomeIcon } from "lucide-react";
 import { WalletOverview } from "@/components/data-visualization/wallet-overview";
+import RecentChatsAndTransactions from "@/components/data-visualization/recent-chat-trx";
 import { TenantPropertyCard } from "@/components/ui/property-card";
-import TransactionCard from "@/components/ui/transaction-card";
 import Topbar from "@/components/layout/topbar";
 import Menu from "@/components/layout/footer-menu";
 import { routes } from "@/constants/routes";
-import { FriendCard } from "@/components/layout/chat-sidebar";
 
 export default function TenantDashboard() {
   return (
@@ -76,43 +75,7 @@ export default function TenantDashboard() {
             <RentNotification status="upcoming" />
           </div>
 
-          <div className="grid-cols-12 gap-x-5 lg:grid">
-            {/* Recent Chats */}
-            <section className="hidden rounded-lg lg:col-span-5 lg:block lg:border lg:bg-white xl:col-span-5">
-              <div className="mb-2 flex items-center justify-between font-semibold lg:border-b lg:px-5 lg:py-5">
-                <h2 className="text-lg xl:text-xl">Chats</h2>
-                <Link
-                  href={routes.TENANT_DASHBOARD_CHAT}
-                  className="text-sm text-accent underline lg:text-[14px]"
-                >
-                  View all
-                </Link>
-              </div>
-              <div className="no-scrollbar grid w-full gap-y-5 overflow-x-scroll px-1">
-                <FriendCard />
-                <FriendCard />
-                <FriendCard />
-              </div>
-            </section>
-
-            {/* Recent Transactions */}
-            <section className="rounded-lg lg:col-span-7 lg:overflow-hidden lg:border lg:bg-white xl:col-span-7">
-              <div className="mb-2 flex items-center justify-between font-semibold lg:border-b lg:px-5 lg:py-5">
-                <h2 className="text-lg xl:text-xl">Recent payments</h2>
-                <Link
-                  href={routes.TENANT_DASHBOARD_PAYMENT_HISTORY}
-                  className="text-sm text-accent underline lg:text-[14px]"
-                >
-                  View all
-                </Link>
-              </div>
-              <div className="no-scrollbar grid w-full gap-y-5 overflow-x-scroll lg:px-5">
-                <TransactionCard status="credit" />
-                <TransactionCard status="credit" />
-                <TransactionCard status="debit" />
-              </div>
-            </section>
-          </div>
+          <RecentChatsAndTransactions />
         </div>
       </main>
 

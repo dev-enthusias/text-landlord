@@ -1,15 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import RentedProperties from "../rented-properties/page";
-import Wishlist from "../wishlist/page";
-import { tenantSettingLinksDesktop } from "@/constants/data";
-import ProfilePage from "@/components/pages/profile";
-import { ChangePasswordForm } from "@/components/forms/chage-password-form";
+import { landlordSettingsLinksDesktop } from "@/constants/data";
 import { ChevronRight } from "lucide-react";
-import FundWalletPage from "@/components/pages/fund-wallet";
+import Image from "next/image";
+import Link from "next/link";
+import Account from "../account/page";
+import PropertyCategories from "../property-category/page";
+import PropertyFacilities from "../property-facility-type/page";
+import { useSearchParams } from "next/navigation";
+import { ChangePasswordForm } from "@/components/forms/chage-password-form";
+import ProfilePage from "@/components/pages/profile";
+import RentedProperties from "../../tenant/rented-properties/page";
+import Wishlist from "../../tenant/wishlist/page";
 import OrderDetails from "@/components/pages/order-details";
 import Orders from "@/components/pages/order";
 
@@ -53,7 +55,7 @@ function Profile() {
 
 //         <div className="mt-5 flex items-center justify-between">
 //           <Profile />
-//           <Link href={routes.TENANT_DASHBOARD_SETTINGS + "?path=profile"}>
+//           <Link href={routes.LANDLORD_DASHBOARD_SETTINGS}>
 //             <ChevronRightIcon />
 //           </Link>
 //         </div>
@@ -144,20 +146,18 @@ function DesktopSettingsPage() {
   const activePath = (searchParam.get("path") as string) || "profile";
 
   return (
-    <div className="max-h-[calc(100vh-100px)] overflow-hidden">
+    <div className="max-h-[calc(100vh-100px)] overflow-hidden mb-24">
+      {/* <h1 className="border-b px-10 py-5 text-2xl font-semibold">Settings</h1> */}
+
       <div className="hidden items-start gap-x-10 px-10 py-5 lg:flex">
         <div className="custom-shadow shrink-0 space-y-4 rounded-xl bg-white px-2 py-5">
           <section>
             <div className="space-y-4">
-              {tenantSettingLinksDesktop.map(({ name, icon, link }, i) => (
+              {landlordSettingsLinksDesktop.map(({ name, icon, link }, i) => (
                 <Link
                   key={i}
                   href={link}
-                  className={`flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20 ${
-                    link.includes(activePath)
-                      ? "bg-primary-dark/20"
-                      : "bg-transparent"
-                  }`}
+                  className="flex items-center justify-between gap-x-10 rounded-lg px-2 py-2 hover:bg-primary-dark/20"
                 >
                   <div className="flex items-center gap-x-4">
                     {icon}
@@ -176,11 +176,7 @@ function DesktopSettingsPage() {
             {activePath === "password" ? (
               <ChangePasswordForm />
             ) : activePath === "profile" ? (
-              <ProfilePage role="tenant" />
-            ) : activePath === "wallet" ? (
-              <div className="p-2">
-                <FundWalletPage />
-              </div>
+              <ProfilePage role="landlord" />
             ) : activePath === "order" ? (
               <Orders />
             ) : activePath === "properties" ? (
@@ -189,6 +185,12 @@ function DesktopSettingsPage() {
               <Wishlist />
             ) : activePath === "orderdetails" ? (
               <OrderDetails />
+            ) : activePath === "account" ? (
+              <Account />
+            ) : activePath === "category" ? (
+              <PropertyCategories />
+            ) : activePath === "facility" ? (
+              <PropertyFacilities />
             ) : (
               ""
             )}

@@ -1,4 +1,5 @@
 import { routes } from "@/constants/routes";
+import getRole from "@/utils/getRole";
 import { SearchIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,9 +36,20 @@ export default function ChatSidebar() {
   );
 }
 
-export const FriendCard = () => {
+export const FriendCard = async () => {
+  const roleid = await getRole();
+
+  const href =
+    roleid === 4
+      ? routes.LANDLORD_DASHBOARD_CHAT + "/0"
+      : roleid === 5
+        ? routes.TENANT_DASHBOARD_CHAT + "/0"
+        : roleid === 7
+          ? routes.AGENT_DASHBOARD_CHAT + "/0"
+          : "";
+
   return (
-    <Link href={routes.TENANT_DASHBOARD_CHAT + "/0"} replace>
+    <Link href={href} replace>
       <article className="flex items-center gap-x-3.5 rounded-lg px-3.5 py-2 text-[#09132C] hover:bg-primary/10">
         <div className="relative h-[50px] w-[50px] shrink-0 overflow-hidden rounded-full">
           <Image

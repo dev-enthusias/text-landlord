@@ -1,13 +1,14 @@
+import EditTenantBtn from "@/components/ui/edit-tenant";
+import { routes } from "@/constants/routes";
 import { HomeIcon, MapPin, MessageCircle, PhoneCall } from "lucide-react";
 import Image from "next/image";
-import EditTenantBtn from "../../modals/edit-tenant";
 import Link from "next/link";
 
 export default function TenantDetails() {
   return (
     <main className="px-3 py-5 lg:px-10">
       <Link
-        href="/dashboard/tenants"
+        href={routes.LANDLORD_DASHBOARD_TENANTS}
         className="mb-4 inline-block font-medium opacity-60"
       >
         {"<"} Tenants
@@ -18,7 +19,7 @@ export default function TenantDetails() {
           <EditTenantBtn />
         </div>
 
-        <div className="mb-10 flex items-center gap-x-8">
+        <div className="mb-5 flex items-center gap-x-8">
           <div className="relative h-40 w-40 overflow-hidden rounded-lg">
             <Image
               fill
@@ -56,18 +57,18 @@ export default function TenantDetails() {
               </div>
             </div>
           </section>
-
-          <section className="px-5">
-            <p className="flex items-center gap-x-1 text-lg font-semibold opacity-80">
-              <HomeIcon size={13} />
-              Marculey Avenue Lounge
-            </p>
-            <p className="flex items-center gap-x-1 truncate text-[14px] opacity-80">
-              <MapPin size={12} className="shrink-0" /> Emeritus express road,
-              Abuja
-            </p>
-          </section>
         </div>
+
+        <section className="mb-5">
+          <p className="flex items-center gap-x-1 text-lg font-semibold opacity-80">
+            <HomeIcon size={13} />
+            Marculey Avenue Lounge
+          </p>
+          <p className="flex items-center gap-x-1 truncate text-[14px] opacity-80">
+            <MapPin size={12} className="shrink-0" /> Emeritus express road,
+            Abuja
+          </p>
+        </section>
 
         <section className="border-y py-10 pr-10">
           <p className="mb-5 text-[14px] font-medium opacity-80">
@@ -86,12 +87,15 @@ export default function TenantDetails() {
               <h3 className="text-sm font-semibold opacity-70">PHONE NUMBER</h3>
             </div>
             <div className="flex items-center gap-x-5">
-              <button className="flex h-12 w-12 items-center justify-center rounded-full border bg-accent text-white">
+              <button className="flex h-12 w-12 items-center justify-center rounded-full border bg-accent text-white lg:hidden">
                 <PhoneCall size={24} className="opacity-80" />
               </button>
-              <button className="flex h-12 w-12 items-center justify-center rounded-full border bg-accent text-white">
+              <Link
+                href={routes.LANDLORD_DASHBOARD_CHAT + "/0"}
+                className="flex h-12 w-12 items-center justify-center rounded-full border bg-accent text-white"
+              >
                 <MessageCircle size={24} className="opacity-80" />
-              </button>
+              </Link>
             </div>
           </div>
         </section>

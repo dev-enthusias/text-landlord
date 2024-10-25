@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
-import AddEditTenantForm from "@/components/general/forms/add-edit-tenant-form";
+import AddEditTenant from "./add-edit-tenant";
 
 export default function AddTenantBtn() {
   const [isAddTenantModalOpen, setAddTenantModal] = useState(false);
@@ -18,7 +18,7 @@ export default function AddTenantBtn() {
 
       {isAddTenantModalOpen && (
         <ModalLayout>
-          <AddEditTenantForm setAddTenantModal={setAddTenantModal} />
+          <AddEditTenant setAddTenantModal={setAddTenantModal} />
         </ModalLayout>
       )}
     </>

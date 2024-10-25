@@ -1,7 +1,7 @@
 import Topbar from "@/components/layout/topbar";
 import Menu from "@/components/layout/footer-menu";
 import { Trash2 } from "lucide-react";
-import AddPropertyFacilityBtn from "../modals/add-facility";
+import AddPropertyFacilityBtn from "@/components/ui/add-facility";
 
 export default function PropertyFacilities() {
   return (

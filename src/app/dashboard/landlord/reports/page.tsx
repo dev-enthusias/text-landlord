@@ -1,6 +1,5 @@
 "use client";
 
-import Topbar from "@/components/layout/topbar";
 import Menu from "@/components/layout/footer-menu";
 import { CalendarDays, Trash2, WalletMinimal } from "lucide-react";
 import { useState } from "react";
@@ -12,9 +11,9 @@ export default function Reports() {
 
   return (
     <>
-      <div className="lg:hidden">
+      {/* <div className="lg:hidden">
         <Topbar />
-      </div>
+      </div> */}
 
       <main className="pb-24 pt-5">
         <section className="z-50 px-3 lg:px-10">
@@ -40,7 +39,7 @@ export default function Reports() {
         </section>
 
         {activeBtn === 0 && (
-          <section className="grid grid-cols-2 justify-between gap-6 px-3 md:grid-cols-3 lg:grid-cols-3 lg:p-10">
+          <section className="grid grid-cols-2 justify-between gap-6 px-3 md:grid-cols-3 lg:grid-cols-2 lg:p-10 xl:grid-cols-3">
             <PaymentReportCard />
             <PaymentReportCard />
             <PaymentReportCard />
@@ -49,7 +48,7 @@ export default function Reports() {
         )}
 
         {activeBtn === 1 && (
-          <section className="grid grid-cols-2 justify-between gap-6 px-3 md:grid-cols-3 lg:grid-cols-3 lg:p-10">
+          <section className="grid grid-cols-2 justify-between gap-6 px-3 md:grid-cols-3 lg:grid-cols-2 lg:p-10 2xl:grid-cols-3">
             <TenantReportCard />
             <TenantReportCard />
             <TenantReportCard />

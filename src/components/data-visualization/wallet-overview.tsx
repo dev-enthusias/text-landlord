@@ -26,7 +26,7 @@ export function WalletOverview() {
       </div>
 
       <Link
-        href={routes.DASHBOARDADDMONEY}
+        href={routes.TENANT_DASHBOARD_ADD_MONEY}
         className="rounded-full bg-black px-3 py-2 text-xxs text-white xl:text-xs"
       >
         <span className="">+</span> Fund Wallet

@@ -1,7 +1,7 @@
 import Topbar from "@/components/layout/topbar";
 import Menu from "@/components/layout/footer-menu";
 import { Trash2 } from "lucide-react";
-import GenerateBillBtn from "../modals/generate-bills";
+import GenerateBillBtn from "@/components/ui/generate-bills";
 
 export default function Bills() {
   return (
@@ -23,7 +23,7 @@ export default function Bills() {
           </div>
         </section>
 
-        <section className="grid grid-cols-2 justify-between gap-x-4 gap-y-8 px-3 md:grid-cols-3 lg:grid-cols-3 lg:p-10">
+        <section className="grid grid-cols-2 justify-between gap-x-4 gap-y-8 px-3 md:grid-cols-3 lg:grid-cols-2 lg:p-10 xl:grid-cols-3">
           <BillCard />
           <BillCard />
           <BillCard />

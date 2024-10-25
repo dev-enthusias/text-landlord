@@ -1,6 +1,7 @@
 import Sidebar from "@/components/layout/sidebar";
 import Topbar from "@/components/layout/topbar";
 import { SidebarNavLinks } from "@/definition";
+import AppFooter from "./footer";
 
 export default function DashboardLayout({
   children,
@@ -16,10 +17,11 @@ export default function DashboardLayout({
       </div>
 
       <div className="no-scrollbar relative grow overflow-y-auto">
-        <div className="sticky top-0 hidden lg:block z-50">
+        <div className="sticky top-0 z-50 hidden lg:block">
           <Topbar />
         </div>
         {children}
+        <AppFooter />
       </div>
     </section>
   );

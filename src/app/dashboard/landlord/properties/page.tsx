@@ -1,13 +1,27 @@
 import Menu from "@/components/layout/footer-menu";
-import FilterModal from "@/components/ui/filter-modal";
 import {
+  LandlordPropertyCard,
   PropertyCardLandscape,
-  TenantPropertyCard,
 } from "@/components/ui/property-card";
 import Topbar from "@/components/layout/topbar";
 import { propertyCategories } from "@/constants/data";
+import FilterModal from "@/components/ui/filter-modal";
 
-export default function TenantProperties() {
+export default function Properties() {
+  const propertiesOverview = [
+    {
+      title: "Total",
+      number: 20,
+    },
+    {
+      title: "Occupied",
+      number: 15,
+    },
+    {
+      title: "Vacant",
+      number: 5,
+    },
+  ];
   return (
     <>
       <div className="lg:hidden">
@@ -16,8 +30,19 @@ export default function TenantProperties() {
 
       <main className="pb-24 pt-5">
         <section className="z-50 mb-5 border-b px-3 lg:px-10">
+          <div className="mb-10 grid grid-cols-3 gap-x-4">
+            {propertiesOverview.map(({ title, number }, i) => (
+              <div
+                className={`flex flex-col items-center rounded-lg ${i === 0 ? "bg-black text-background" : i === 1 ? "bg-primary-dark" : "custom-shadow bg-white"} py-4`}
+              >
+                <span className="text-xl font-bold">{number}</span>
+                <h3 className="mt-2 font-semibold opacity-80">{title}</h3>
+              </div>
+            ))}
+          </div>
+
           <div className="flex flex-col gap-3 lg:flex-row">
-            <h1 className="flex items-center text-xl font-semibold lg:text-2xl xl:text-3xl">
+            <h1 className="flex items-center text-xl font-semibold lg:text-2xl">
               Properties
             </h1>
 
@@ -49,23 +74,23 @@ export default function TenantProperties() {
         </section>
 
         <div className="no-scrollbar flex w-screen min-w-64 grid-cols-3 gap-5 overflow-x-auto px-5 lg:grid lg:w-auto lg:justify-between lg:px-10 xl:hidden">
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
         </div>
 
         <div className="no-scrollbar hidden w-screen min-w-64 grid-cols-3 gap-5 overflow-x-auto px-5 lg:w-auto lg:justify-between lg:px-10 xl:grid xl:grid-cols-4">
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
-          <TenantPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
+          <LandlordPropertyCard />
         </div>
       </main>
 
