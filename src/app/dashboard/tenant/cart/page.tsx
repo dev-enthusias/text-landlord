@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function Cart() {
   return (
-    <>
+    <a>
       <header className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-gray-200 bg-white px-3 py-5 lg:top-20">
         <div className="flex gap-x-4">
           <PrevPageButton />
@@ -18,7 +18,7 @@ export default function Cart() {
         </button>
       </header>
 
-      <main className="pb-28 lg:px-10 lg:py-5">
+      <main className="lg:px-10 lg:py-5">
         <div className="grid-cols-5 items-start gap-x-10 lg:grid">
           <section className="space-y-4 p-3 lg:col-span-3 lg:p-0">
             <CartItem />
@@ -78,10 +78,10 @@ export default function Cart() {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 z-50 flex w-full items-center justify-between border-t bg-white px-6 py-4 pb-8 shadow-xl shadow-black lg:hidden">
+      <footer className="fixed bottom-0 z-50 flex w-full items-center justify-between border-t bg-white px-6 py-4 shadow-xl shadow-black lg:hidden">
         <div>
           <p className="text-[14px] leading-none opacity-50">Total</p>
-          <p className="text-[24px] font-semibold">₦10,000,000</p>
+          <p className="text-2xl font-semibold">₦10,000,000</p>
         </div>
         <button
           type="submit"
@@ -90,7 +90,7 @@ export default function Cart() {
           Checkout
         </button>
       </footer>
-    </>
+    </a>
   );
 }
 

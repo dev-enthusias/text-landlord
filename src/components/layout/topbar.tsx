@@ -3,7 +3,7 @@ import Image from "next/image";
 import NotificationBtn from "../ui/notification-btn";
 import { routes } from "@/constants/routes";
 import getRole from "@/utils/getRole";
-import { LucideBellRing, LucideShoppingCart } from "lucide-react";
+import { BellRing, LucideShoppingCart } from "lucide-react";
 
 export default async function Topbar() {
   const roleid = await getRole();
@@ -37,8 +37,11 @@ export default async function Topbar() {
       </Link>
 
       <div className="flex items-center gap-x-4 lg:gap-x-10">
-        <Link href={link.notification} className="lg:hidden">
-          <LucideBellRing />
+        <Link href={link.notification} className="relative lg:hidden">
+          <BellRing className="h-5 w-5" />
+          <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-xxs text-white">
+            2
+          </span>
         </Link>
 
         <NotificationBtn />
