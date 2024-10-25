@@ -14,7 +14,7 @@ export default function TenantDashboard() {
         <Topbar />
       </div>
 
-      <main className="px-5 pb-24 pt-5 lg:px-10 lg:pt-8">
+      <main className="px-5 pt-5 lg:px-10 lg:pt-8">
         {/* Welcome Note */}
         <h1 className="mb-3 flex items-center text-xl font-semibold lg:text-xl xl:text-2xl">
           Welcome Back, Tenant 🎉
