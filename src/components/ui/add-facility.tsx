@@ -30,7 +30,7 @@ export default function AddPropertyFacilityBtn() {
             </header>
             <main className="px-5">
               <fieldset className="space-y-4">
-                <TextInput label="Name" />
+                <TextInput name="" label="Name" />
                 <SelectInput
                   label="Icon"
                   options={[{ value: "land", label: "Land" }]}

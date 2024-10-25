@@ -32,7 +32,7 @@ export default function AddPropertyCategoryBtn() {
             </header>
             <main className="px-5">
               <fieldset className="space-y-4">
-                <TextInput label="Name" />
+                <TextInput name="" label="Name" />
                 <SelectInput
                   label="Parent Category"
                   options={[{ value: "land", label: "Land" }]}

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import RentedProperties from "../rented-properties/page";
 import Wishlist from "../wishlist/page";
@@ -22,25 +21,25 @@ export default function SettingsPage() {
   );
 }
 
-function Profile() {
-  return (
-    <article className="flex items-center gap-x-2">
-      <div className="relative h-16 w-16 overflow-hidden rounded-full bg-gray-500">
-        <Image
-          src="/images/profile-img.jpeg"
-          alt="User profile image"
-          fill
-          sizes="64px"
-          style={{ objectFit: "cover" }}
-        />
-      </div>
-      <div>
-        <h3 className="font-bold">Tenant Homme</h3>
-        <p className="text-sm">tenanthomme@gmail.com</p>
-      </div>
-    </article>
-  );
-}
+// function Profile() {
+//   return (
+//     <article className="flex items-center gap-x-2">
+//       <div className="relative h-16 w-16 overflow-hidden rounded-full bg-gray-500">
+//         <Image
+//           src="/images/profile-img.jpeg"
+//           alt="User profile image"
+//           fill
+//           sizes="64px"
+//           style={{ objectFit: "cover" }}
+//         />
+//       </div>
+//       <div>
+//         <h3 className="font-bold">Tenant Homme</h3>
+//         <p className="text-sm">tenanthomme@gmail.com</p>
+//       </div>
+//     </article>
+//   );
+// }
 
 // function MobileSettingPage() {
 //   return (

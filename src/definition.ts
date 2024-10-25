@@ -14,3 +14,15 @@ export type TrxButtonProps = {
 export type RoleType = {
   role: "landlord" | "agent" | "tenant";
 };
+
+export type ValidationErrors = Record<string, string[] | undefined>;
+
+export type AuthenticateReturn = ValidationErrors | string | undefined | void;
+
+export interface TextInputProps {
+  label: string;
+  name: string;
+  required?: boolean;
+  type?: string;
+  error?: ValidationErrors | undefined;
+}

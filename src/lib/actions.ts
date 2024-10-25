@@ -6,8 +6,13 @@ import { loginSchema } from "./schema";
 import { redirect } from "next/navigation";
 import { ROLE_ROUTES } from "@/constants/data";
 import { routes } from "@/constants/routes";
+import { isAxiosError } from "axios";
+import { AuthenticateReturn } from "@/definition";
 
-export async function authenticate(_currentState: unknown, formData: FormData) {
+export async function authenticate(
+  _currentState: unknown,
+  formData: FormData,
+): Promise<AuthenticateReturn> {
   const validateFields = loginSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -17,7 +22,7 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
     return validateFields.error.flatten().fieldErrors;
   }
 
-  let redirectionPathname: string;
+  let redirectionPathname: string | undefined;
 
   try {
     const res = await axiosInstance.post(
@@ -31,6 +36,7 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
 
       // role_id === 4 means 'Landlord'
       // role_id === 5 means 'Tenant'
+      // role_id === 7 means 'Agent'
 
       cookies().set("session", authToken, {
         httpOnly: true,
@@ -48,8 +54,8 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
 
       redirectionPathname = ROLE_ROUTES[roleId as keyof typeof ROLE_ROUTES];
     }
-  } catch (error: any) {
-    if (error?.status === 401) {
+  } catch (error: unknown) {
+    if (isAxiosError(error) && error?.status === 401) {
       return "Invalid credentials";
     }
 

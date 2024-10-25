@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import CustomCheckbox from "@/components/ui/custome-checkbox";
 import SelectInput from "@/components/ui/select-input";
 import TextInput from "@/components/ui/text-input";
 import { routes } from "@/constants/routes";

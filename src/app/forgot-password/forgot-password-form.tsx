@@ -16,7 +16,7 @@ export default function ForgotPasswordForm() {
         </div>
 
         <div className="mb-10">
-          <TextInput label="Email" required />
+          <TextInput name="" label="Email" required />
         </div>
 
         <button

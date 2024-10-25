@@ -9,9 +9,10 @@ import CustomCheckbox from "@/components/ui/custome-checkbox";
 import SubmitButton from "@/components/forms/submit-button";
 import { authenticate } from "@/lib/actions";
 import { routes } from "@/constants/routes";
+import { AuthenticateReturn, ValidationErrors } from "@/definition";
 
 const authenticateWithToastAndRedirect = async (
-  prevState: any,
+  prevState: unknown,
   formData: FormData,
 ) => {
   const result = await authenticate(prevState, formData);
@@ -22,10 +23,19 @@ const authenticateWithToastAndRedirect = async (
 
 export default function LoginForm() {
   const [checked, setChecked] = useState(true);
-  const [errorMessage, dispatch] = useFormState(
+  const [errorMessage, dispatch] = useFormState<AuthenticateReturn, FormData>(
     authenticateWithToastAndRedirect,
     undefined,
   );
+
+  const getFieldErrors = (
+    error: AuthenticateReturn,
+  ): ValidationErrors | undefined => {
+    if (error && typeof error === "object" && !Array.isArray(error)) {
+      return error as ValidationErrors;
+    }
+    return undefined;
+  };
 
   return (
     <form className="w-full max-w-[480px]" action={dispatch}>
@@ -37,12 +47,18 @@ export default function LoginForm() {
       </section>
 
       <section className="mb-10 space-y-5">
-        <TextInput name="email" label="Email" error={errorMessage} required />
+        <TextInput
+          name="email"
+          label="Email"
+          error={getFieldErrors(errorMessage)}
+          required
+        />
         <div>
           <TextInput
             name="password"
             label="Password"
-            error={errorMessage}
+            type="password"
+            error={getFieldErrors(errorMessage)}
             required
           />
           <div className="mt-2 flex items-center justify-between text-[14px] font-semibold">
