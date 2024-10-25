@@ -1,8 +1,8 @@
 "use client";
 
-import CustomCheckbox from "@/components/auth/custome-checkbox";
-import SelectInput from "@/components/auth/select-input";
-import TextInput from "@/components/auth/text-input";
+import CustomCheckbox from "@/components/ui/custome-checkbox";
+import SelectInput from "@/components/ui/select-input";
+import TextInput from "@/components/ui/text-input";
 import { routes } from "@/constants/routes";
 import { useFormStepStore } from "@/providers/register-form-step-store-provider";
 import Link from "next/link";
@@ -53,9 +53,9 @@ export default function RegisterationForm() {
           </div>
 
           <div className="mb-6 space-y-5">
-            <TextInput label="Full Name" required />
-            <TextInput label="Email" required />
-            <TextInput label="Phone" required />
+            <TextInput name="" label="Full Name" required />
+            <TextInput name="" label="Email" required />
+            <TextInput name="" label="Phone" required />
           </div>
 
           <button
@@ -80,7 +80,7 @@ export default function RegisterationForm() {
           </div>
 
           <div className="mb-6 space-y-5">
-            <TextInput label="Occupation" required />
+            <TextInput name="" label="Occupation" required />
             <SelectInput
               label="Marital Status"
               options={maritalOptions}
@@ -97,7 +97,7 @@ export default function RegisterationForm() {
             />
             <div className="flex gap-5 lg:flex-row">
               <div className="grow lg:w-1/2">
-                <TextInput label="Date of Birth" required />
+                <TextInput name="" label="Date of Birth" required />
               </div>
               <div className="grow lg:w-1/2">
                 <SelectInput
@@ -131,7 +131,7 @@ export default function RegisterationForm() {
           </div>
 
           <div className="mb-6 space-y-5">
-            <TextInput label="Current Address" required />
+            <TextInput name="" label="Current Address" required />
             <SelectInput
               label="Property Owner"
               options={propertyOwnerOptions}
@@ -139,13 +139,13 @@ export default function RegisterationForm() {
               onChange={setSelectedValuePropertyOwner}
               placeholder="Choose an option"
             />
-            <TextInput label="Passport/ID Card No" required />
+            <TextInput name="" label="Passport/ID Card No" required />
             <div className="flex flex-col gap-5 lg:flex-row">
               <div className="lg:w-1/2">
-                <TextInput label="Tin Number" required />
+                <TextInput name="" label="Tin Number" required />
               </div>
               <div className="lg:w-1/2">
-                <TextInput label="SSNIT Number" required />
+                <TextInput name="" label="SSNIT Number" required />
               </div>
             </div>
           </div>
@@ -170,8 +170,8 @@ export default function RegisterationForm() {
           </div>
 
           <div className="mb-6 space-y-5">
-            <TextInput label="Password" required />
-            <TextInput label="Confirm Password" required />
+            <TextInput name="" label="Password" required />
+            <TextInput name="" label="Confirm Password" required />
             <div className="flex items-center gap-x-1">
               <CustomCheckbox
                 id="disabled"

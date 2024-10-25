@@ -7,11 +7,19 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1100px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: "#f2cc53",
+        primary: "#FEBE00",
+        // primary: "#f2cc53",
         "primary-dark": "#FEBE00",
         accent: "#087c7c",
       },
