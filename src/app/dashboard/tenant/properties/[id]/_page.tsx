@@ -9,6 +9,8 @@ import {
   PropertyPricing,
   PropertyPricingDetails,
 } from "@/components/pages/properties";
+import { routes } from "@/constants/routes";
+import Link from "next/link";
 
 export default function PropertyDetailsPage() {
   return (
@@ -20,7 +22,7 @@ export default function PropertyDetailsPage() {
         </div>
       </header>
 
-      <main className="gap-x-5 p-3 pb-28 lg:grid lg:grid-cols-3 lg:px-10 lg:pt-5">
+      <main className="gap-x-5 p-5 lg:grid lg:grid-cols-3 lg:px-10 lg:pt-5">
         <section className="lg:col-span-2">
           <ImageSlider />
 
@@ -32,9 +34,11 @@ export default function PropertyDetailsPage() {
           </div>
 
           <PropertyDescription />
-          <PayRentOrAddToCartBtn />
+          <div className="hidden lg:block">
+            <PayRentOrAddToCartBtn />
+          </div>
 
-          <div className="lg:hidden">
+          <div className="mt-5 lg:hidden">
             <PropertyListerContact />
           </div>
         </section>
@@ -48,10 +52,13 @@ export default function PropertyDetailsPage() {
         </section>
       </main>
 
-      <footer className="fixed bottom-0 flex w-full items-center justify-between space-x-6 border-t border-t-gray-300 bg-white px-6 pb-8 pt-4 lg:hidden">
-        <button className="w-full rounded-lg border-t border-gray-300 bg-foreground py-3 text-lg font-semibold text-white">
+      <footer className="fixed bottom-0 flex w-full items-center justify-between gap-x-5 border-t border-t-gray-300 bg-white px-5 py-4 lg:hidden">
+        <Link
+          href={routes.TENANT_DASHBOARD_CHAT + "/0"}
+          className="rounded-lg border-t border-gray-300 bg-foreground px-6 py-3 text-center text-lg font-semibold text-white"
+        >
           Get in touch
-        </button>
+        </Link>
         <PayRentOrAddToCartBtn />
       </footer>
     </>

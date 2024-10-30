@@ -117,14 +117,16 @@ export function PropertyPricing() {
         <p className="text-2xl font-semibold">₦10,000,000</p>
       </div>
 
-      <PayRentOrAddToCartBtn />
+      <div className="hidden lg:block">
+        <PayRentOrAddToCartBtn />
+      </div>
     </div>
   );
 }
 
 export function PropertyListerContact() {
   return (
-    <article className="rounded-lg border border-accent lg:p-3 xl:p-5">
+    <article className="rounded-lg border border-accent p-3 xl:p-5">
       <h3 className="mb-4 text-sm font-medium">Property Lister</h3>
 
       <p className="font-semibold">Melissa Monroe</p>
@@ -163,7 +165,7 @@ export function PayRentOrAddToCartBtn() {
   const propertyStatus = searchParam.get("property-status");
 
   return (
-    <button className="hidden w-fit rounded-lg bg-primary px-10 py-3 text-lg font-semibold text-black lg:block">
+    <button className="w-fit rounded-lg bg-primary px-10 py-3 text-lg font-semibold text-black lg:block">
       {propertyStatus === "rent" ? "Pay Rent" : "Add to Cart"}
     </button>
   );
