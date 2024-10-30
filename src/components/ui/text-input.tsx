@@ -53,7 +53,7 @@ export default function TextInput({
         <input
           type={type === "password" && isVisible ? "text" : type}
           name={name}
-          className="relative w-full rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm a"
+          className="a relative w-full rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm"
           onFocus={handleFocus}
           onBlur={() => handleBlur()}
           onChange={() => handleChange()}
@@ -64,7 +64,7 @@ export default function TextInput({
             type="button"
             className="absolute right-3.5 top-1/2 -translate-y-1/2"
             onClick={() => toggleVisibility()}
-          >a
+          >
             {isVisible ? (
               <EyeOff className="h-5 w-5" />
             ) : (
