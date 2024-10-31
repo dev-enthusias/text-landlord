@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { lato } from "./font";
+import { cormorant_garamond, dancing_script, roboto } from "./font";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -15,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.className} antialiased`}>
+      <body
+        className={`${roboto.className} ${dancing_script.variable} ${roboto.variable} ${cormorant_garamond.variable} antialiased`}
+      >
         {children}
         <Toaster richColors theme="light" position="top-right" expand={true} />
       </body>

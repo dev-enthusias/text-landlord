@@ -16,7 +16,7 @@ export default function TenantDashboard() {
 
       <main className="px-5 pt-5 lg:px-10 lg:pt-8">
         {/* Welcome Note */}
-        <h1 className="mb-3 flex items-center text-xl font-semibold lg:text-xl xl:text-2xl">
+        <h1 className="font-dancing-script mb-3 flex items-center text-2xl font-bold lg:text-3xl xl:text-4xl">
           Welcome Back, Tenant 🎉
         </h1>
 

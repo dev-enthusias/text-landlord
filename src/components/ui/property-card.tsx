@@ -126,7 +126,7 @@ export function TenantPropertyCard({
             `?property-status=${queryParam}`
           : routes.TENANT_DASHBOARD_SETTINGS + "?path=orderdetails"
       }
-      className="z-40 block"
+      className="z-40 block rounded-lg bg-white p-2"
     >
       <article className="group">
         <PropertyPhoto />
@@ -145,51 +145,53 @@ export function TenantPropertyCard({
             ""
           )}
 
-          {/* Property value & Favourite Btn || Delete Btn */}
-          <div className="flex justify-between pr-2">
-            <PropertyPrice />
+          <div className="px-2">
+            {/* Property value & Favourite Btn || Delete Btn */}
+            <div className="flex justify-between">
+              <PropertyPrice />
 
-            {!pathname.includes("settings") && (
-              <button onClick={(e) => handleFavClick(e)}>
-                {!favProperty ? <HeartStroke /> : <HeartSolid />}
-              </button>
-            )}
+              {!pathname.includes("settings") && (
+                <button onClick={(e) => handleFavClick(e)}>
+                  {!favProperty ? <HeartStroke /> : <HeartSolid />}
+                </button>
+              )}
 
-            {wishlist && (
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
-              >
-                <Trash2 className="h-4 w-4 transition-colors duration-300 hover:text-red-600" />
-              </button>
+              {wishlist && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                >
+                  <Trash2 className="h-4 w-4 transition-colors duration-300 hover:text-red-600" />
+                </button>
+              )}
+            </div>
+
+            {/* Property name and location */}
+            <PropertyNameAndLocation />
+
+            {type !== "order" ? (
+              // Property info
+              <ul className="mt-3 flex items-center justify-between">
+                <li className="flex w-1/3 items-center justify-start gap-x-1 text-sm font-semibold">
+                  <BedIcon className="text-primary-dark" size={18} />
+                  <span className="opacity-50">6 bd</span>
+                </li>
+                <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300 text-sm font-semibold">
+                  <BathIcon className="text-primary-dark" size={18} />
+                  <span className="opacity-50">6 bt</span>
+                </li>
+                <li className="flex w-1/3 items-center justify-end gap-x-1 text-sm font-semibold">
+                  <RulerIcon className="text-primary-dark" size={18} />
+                  <span className="opacity-50">2.62ft</span>
+                </li>
+              </ul>
+            ) : (
+              // Property order date and time
+              <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
             )}
           </div>
-
-          {/* Property name and location */}
-          <PropertyNameAndLocation />
-
-          {type !== "order" ? (
-            // Property info
-            <ul className="mt-3 flex items-center justify-between">
-              <li className="flex w-1/3 items-center justify-start gap-x-1 text-sm font-semibold">
-                <BedIcon className="text-primary-dark" size={18} />
-                <span className="opacity-50">6 bd</span>
-              </li>
-              <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300 text-sm font-semibold">
-                <BathIcon className="text-primary-dark" size={18} />
-                <span className="opacity-50">6 bt</span>
-              </li>
-              <li className="flex w-1/3 items-center justify-end gap-x-1 text-sm font-semibold">
-                <RulerIcon className="text-primary-dark" size={18} />
-                <span className="opacity-50">2.62ft</span>
-              </li>
-            </ul>
-          ) : (
-            // Property order date and time
-            <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
-          )}
         </div>
       </article>
     </Link>

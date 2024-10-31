@@ -24,7 +24,7 @@ export default async function Topbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 justify-between border-b bg-white px-5 lg:h-20 lg:justify-end lg:px-10">
+    <header className="sticky top-0 z-50 flex h-16 justify-between border-b border-[#a59970] bg-[#e9dcbe] px-5 lg:h-20 lg:justify-end lg:px-10">
       <Link href={routes.HOME} className="lg:hidden">
         <Image
           src="/logos/logo-transparent.png"
@@ -66,9 +66,10 @@ export default async function Topbar() {
             />
           </div>
         </Link>
+
         <Link
           href={link.settings + "?path=profile"}
-          className="hidden lg:block"
+          className="hidden items-center gap-x-4 lg:flex"
         >
           <div className="relative h-10 w-10 overflow-hidden rounded-full bg-gray-300 lg:h-12 lg:w-12">
             <Image
@@ -78,6 +79,10 @@ export default async function Topbar() {
               sizes="40px, (min-width: 1024px) 48px"
               style={{ objectFit: "cover" }}
             />
+          </div>
+          <div>
+            <h3 className="font-semibold">Schawn Homme</h3>
+            <p className="text-sm">Tenant</p>
           </div>
         </Link>
       </div>

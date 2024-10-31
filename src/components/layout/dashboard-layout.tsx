@@ -11,8 +11,8 @@ export default function DashboardLayout({
   navlinks: SidebarNavLinks;
 }) {
   return (
-    <section className="relative flex h-dvh overflow-hidden bg-yellow-50/[15%]">
-      <div className="hidden w-[230px] shrink-0 border-r lg:block">
+    <section className="relative flex h-dvh overflow-hidden">
+      <div className="hidden w-[230px] shrink-0 border-r border-[#a59970] bg-[#e9dcbe] lg:block">
         <Sidebar navlinks={navlinks} />
       </div>
 
@@ -20,7 +20,7 @@ export default function DashboardLayout({
         <div className="sticky top-0 z-50 hidden lg:block">
           <Topbar />
         </div>
-        {children}
+        <div className="bg-[#f3f3f3]">{children}</div>
         <AppFooter />
       </div>
     </section>

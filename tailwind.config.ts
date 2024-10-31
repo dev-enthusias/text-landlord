@@ -1,4 +1,3 @@
-import { dancing_script } from "@/app/font";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -25,24 +24,23 @@ const config: Config = {
         accent: "#087c7c",
       },
       fontFamily: {
-        cormorant: "var(--font-cormorant-garamond)",
-        "dancing-script": "var(--font-dancing-script)",
-        lato: "var(--font-cormorant-lato)",
-        roboto: "var(--font-roboto)",
+        cormorant: ["var(--font-cormorant-garamond)"],
+        "dancing-script": ["var(--font-dancing-script)"],
+        roboto: ["var(--font-roboto)"],
       },
     },
     fontSize: {
       "3xs": "0.5rem",
       xxs: "0.625rem",
       xs: "0.75rem",
-      sm: "0.8rem",
+      sm: "0.875rem",
       base: "1rem",
       lg: "1.125rem",
       xl: "1.25rem",
-      "2xl": "1.563rem",
-      "3xl": "1.953rem",
-      "4xl": "2.441rem",
-      "5xl": "3.052rem",
+      "2xl": "1.75rem",
+      "3xl": "2rem",
+      "4xl": "2.25rem",
+      "5xl": "2.5rem",
     },
   },
   plugins: [],

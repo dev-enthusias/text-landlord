@@ -11,7 +11,7 @@ import { logout } from "@/lib/actions";
 export default function Sidebar({ navlinks }: { navlinks: SidebarNavLinks }) {
   return (
     <aside className="pb-10">
-      <div className="flex h-20 items-center justify-center border-b">
+      <div className="flex h-20 items-center justify-center border-b-[1.5px] border-[#a59970]">
         <Link href={routes.HOME} className="relative block h-32 w-32">
           <Image
             src="/logos/logo-transparent.png"
