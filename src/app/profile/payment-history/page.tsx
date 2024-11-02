@@ -10,7 +10,7 @@ const buttons = [
     type: "credit",
   },
   {
-    text: "Debit",
+    text: "Debits",
     link: routes.TENANT_DASHBOARD_PAYMENT_HISTORY + "?trx-type=debit",
     type: "debit",
   },
