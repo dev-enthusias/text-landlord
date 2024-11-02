@@ -128,3 +128,19 @@ export const ROLE_ROUTES = {
   4: "/dashboard/landlord",
   5: "/dashboard/tenant",
 };
+
+export const propertyTypes = [
+  "Apartment",
+  "Building",
+  "Flat",
+  "Land",
+  "Office",
+  "Room",
+  "Shop",
+  "Shortlet",
+];
+
+export const topbarLinks = [
+  { link: "/", name: "Home", exact: true },
+  { link: "/properties", name: "Properties" },
+];

@@ -12,23 +12,23 @@ export default function PaymentHistoryPage({ btns }: { btns: TrxButtonProps }) {
 
   return (
     <>
-      <section className="sticky top-0 w-full border-b border-gray-200 bg-white px-3 py-5 lg:top-[72px] lg:px-10">
-        <div className="mb-10 flex items-center gap-x-8 lg:hidden">
-          <PrevPageButton />
-          <h1 className="text-xl font-semibold">Transaction History</h1>
-        </div>
+      <section>
+        <header className="flex w-full items-center justify-between border-b border-gray-200 bg-white px-3 py-5">
+          <div className="flex gap-x-2">
+            <PrevPageButton className="text-black" />
+            <h1 className="text-xl font-semibold text-black">
+              Payment History
+            </h1>
+          </div>
+        </header>
 
-        <h1 className="mb-4 flex items-center text-xl font-semibold lg:text-xl xl:text-2xl">
-          Transaction History
-        </h1>
-
-        <div className="no-scrollbar overflow-x-auto">
+        <div className="no-scrollbar mt-7 overflow-x-auto px-10">
           <div className="flex space-x-4">
             {btns.map(({ text, link, type }, i) => (
               <Link
                 key={i}
                 href={link}
-                className={`shrink-0 whitespace-nowrap rounded-lg px-4 py-[3px] font-medium ${trxType === type || (type === "all" && trxType === null) ? "bg-primary text-black" : "bg-primary/20 text-black/60"}`}
+                className={`shrink-0 whitespace-nowrap rounded-lg px-4 py-[3px] font-medium ${trxType === type || (type === "all" && trxType === null) ? "bg-gold text-white" : "bg-gold/20 text-black"}`}
               >
                 {text}
               </Link>
@@ -40,7 +40,7 @@ export default function PaymentHistoryPage({ btns }: { btns: TrxButtonProps }) {
       <section className="px-3 py-4 lg:px-10">
         <section className="mb-4">
           <div className="mb-2 flex items-center gap-x-1">
-            <h2 className="text-sm font-bold">NOVEMBER</h2>
+            <h2 className="text-xs font-semibold text-gray-700">NOVEMBER</h2>
             <hr className="h-[1px] grow border-none bg-gray-100" />
           </div>
           <div className="space-y-5">
@@ -52,7 +52,7 @@ export default function PaymentHistoryPage({ btns }: { btns: TrxButtonProps }) {
 
         <section>
           <div className="mb-2 flex items-center gap-x-1">
-            <h2 className="text-sm font-bold">DECEMBER</h2>
+            <h2 className="text-xs font-semibold text-gray-700">DECEMBER</h2>
             <hr className="h-[1px] grow border-none bg-gray-100" />
           </div>
           <div className="space-y-5">

@@ -29,10 +29,10 @@ export default function Wishlist() {
       </div>
 
       <div className="hidden gap-5 lg:grid lg:grid-cols-2 lg:px-3 xl:grid-cols-3">
-        <TenantPropertyCard wishlist={true} />
-        <TenantPropertyCard wishlist />
-        <TenantPropertyCard wishlist />
-        <TenantPropertyCard wishlist />
+        <TenantPropertyCard type="wishlist" />
+        <TenantPropertyCard type="wishlist" />
+        <TenantPropertyCard type="wishlist" />
+        <TenantPropertyCard type="wishlist" />
       </div>
     </>
   );

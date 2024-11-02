@@ -9,6 +9,17 @@ export const routes = {
   REGISTERASAGENT: "/register?type=agent",
   FORGOTPASSWORD: "/forgot-password",
 
+  // Pages
+  CART: "/cart",
+  CHAT: "/chat",
+  PROFILE: "/profile",
+  WISHLIST: "/profile/wishlist",
+  ORDERS: "/profile/orders",
+  PAYMENT_HISTORY: "/profile/payment-history",
+  FUND_WALLET: "/profile/fund-wallet",
+  PAY_RENT: "/profile/pay-rent",
+  CHANGE_PASSWORD: "/profile/change-password",
+
   // Tenant dashboard pages
   TENANT_DASHBOARD: "/dashboard/tenant",
   TENANT_DASHBOARD_PROPERTIES: "/dashboard/tenant/properties",
@@ -40,20 +51,4 @@ export const routes = {
   AGENT_DASHBOARD_SETTINGS: "/dashboard/agent/settings",
   AGENT_DASHBOARD_CHAT: "/dashboard/agent/chat",
   AGENT_DASHBOARD_TRANSACTION_HISTORY: "/dashboard/agent/transaction-history",
-
-  // DASHBOARDPROFILE: "/dashboard/profile",
-  // DASHBOARDHISTORY: "/dashboard/history",
-  // DASHBOARDSETTINGS: "/dashboard/settings",
-  // DASHBOARDNOTIFICATIONS: "/dashboard/notifications",
-  // DASHBOARDCART: "/dashboard/cart",
-  // DASHBOARDWISHLIST: "/dashboard/wishlist",
-  // DASHBOARDORDER: "/dashboard/orders",
-  // DASHBOARDORDERDETAILs: "/dashboard/orders/:orderId",
-  // DASHBOARDADDMONEY: "/dashboard/add-money",
-  // DASHBOARDCHANGEPASSWORD: "/dashboard/change-password",
-  // DASHBOARDRENTEDPROPERTIES: "/dashboard/rented-properties",
-  // DASHBOARDCHAT: "/dashboard/chat",
-  // DASHBOARDTENANT: "/dashboard/tenants",
-  // DASHBOARDREPORTS: "/dashboard/reports",
-  // DASHBOARDBILLS: "/dashboard/bills",
 };

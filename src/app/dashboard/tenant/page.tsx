@@ -16,7 +16,7 @@ export default function TenantDashboard() {
 
       <main className="px-5 pt-5 lg:px-10 lg:pt-8">
         {/* Welcome Note */}
-        <h1 className="font-dancing-script mb-3 flex items-center text-2xl font-bold lg:text-3xl xl:text-4xl">
+        <h1 className="mb-3 flex items-center font-dancing-script text-2xl font-bold lg:text-3xl xl:text-4xl">
           Welcome Back, Tenant 🎉
         </h1>
 
@@ -38,7 +38,9 @@ export default function TenantDashboard() {
           {/* Properties Listing section */}
           <section className="-mx-5">
             <div className="mb-2 flex items-center justify-between px-5 font-semibold">
-              <h2 className="text-lg xl:text-xl">New Properties</h2>
+              <h2 className="font-cormorant text-lg xl:text-xl">
+                New Properties
+              </h2>
               <Link
                 href={routes.TENANT_DASHBOARD_PROPERTIES}
                 className="text-sm text-accent underline lg:text-[14px]"

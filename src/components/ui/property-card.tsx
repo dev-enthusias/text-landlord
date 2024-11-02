@@ -1,19 +1,12 @@
 "use client";
 
 import { routes } from "@/constants/routes";
-import {
-  BathIcon,
-  BedIcon,
-  MapPin,
-  RulerIcon,
-  Trash2,
-  UsersRound,
-} from "lucide-react";
+import { BathIcon, BedIcon, RulerIcon, Trash2, UsersRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { HeartSolid, HeartStroke } from "../svg";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { TenantPropertyCardTypes } from "@/definition";
 
 function PropertyPhoto() {
   return (
@@ -31,10 +24,10 @@ function PropertyPhoto() {
 
 function PropertyPrice() {
   return (
-    <p className="flex items-center gap-x-1 text-lg font-bold text-primary-dark">
+    <p className="flex items-center gap-x-1 text-lg font-bold text-accent">
       ₦5,000,000{" "}
-      <span className="text-[14px] font-medium text-foreground opacity-50">
-        /Year
+      <span className="text-xs font-medium text-gray-500 opacity-80">
+        / year
       </span>
     </p>
   );
@@ -43,11 +36,28 @@ function PropertyPrice() {
 function PropertyNameAndLocation() {
   return (
     <div>
-      <h3 className="font-semibold xl:text-lg">Emperica in Dazil, Villa</h3>
-      <p className="text-medium flex items-center gap-x-0.5 text-xs">
-        <MapPin size={10} /> Palaxisto Emeriando Plaza Road
-      </p>
+      <h3 className="text-sm text-gray-600">Emperica in Dazil, Villa</h3>
+      <p className="text-xs tracking-wide">Palaxisto Emeriando Plaza Road</p>
     </div>
+  );
+}
+
+function PropertyFeatures() {
+  return (
+    <ul className="mt-3 flex items-center justify-between text-xs">
+      <li className="flex w-1/3 items-center justify-start gap-x-1">
+        <BedIcon size={14} />
+        <span>6 bd</span>
+      </li>
+      <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300">
+        <BathIcon size={14} />
+        <span>6 bt</span>
+      </li>
+      <li className="flex w-1/3 items-center justify-end gap-x-1">
+        <RulerIcon size={14} />
+        <span>2.62ft</span>
+      </li>
+    </ul>
   );
 }
 
@@ -67,7 +77,7 @@ export function LandlordPropertyCard({
             `?property-status=${queryParam}`
           : routes.LANDLORD_DASHBOARD_SETTINGS + "?path=orderdetails"
       }
-      className="z-40 block"
+      className="block"
     >
       <article className="group">
         <PropertyPhoto />
@@ -94,19 +104,7 @@ export function LandlordPropertyCard({
   );
 }
 
-// Move the link to the page component at least when you start the endpoint integration.
-export function TenantPropertyCard({
-  type,
-  status,
-  wishlist = false,
-  queryParam,
-}: {
-  type?: "order";
-  status?: string;
-  wishlist?: boolean;
-  queryParam?: string;
-}) {
-  const pathname = usePathname();
+export function TenantPropertyCard({ type }: TenantPropertyCardTypes) {
   const [favProperty, setFavProperty] = useState(false);
 
   const handleFavClick = (
@@ -117,46 +115,24 @@ export function TenantPropertyCard({
     setFavProperty(!favProperty);
   };
 
+  const path = type === "order" ? routes.ORDERS + "/0" : "/properties/id";
+
   return (
     <Link
-      href={
-        type !== "order"
-          ? routes.TENANT_DASHBOARD_PROPERTIES +
-            "/0" +
-            `?property-status=${queryParam}`
-          : routes.TENANT_DASHBOARD_SETTINGS + "?path=orderdetails"
-      }
-      className="z-40 block rounded-lg bg-white p-2"
+      href={path}
+      className="font-lato block w-full rounded-lg border bg-white p-2 shadow-gold transition duration-300 ease-out hover:shadow-lg"
     >
       <article className="group">
         <PropertyPhoto />
 
         {/* Rent status */}
-        <div className="border-b border-b-gray-300 py-2">
-          {status === "upcoming" ? (
-            <p className="text-xxs font-semibold text-accent">
-              Upcoming - Due 21st December, 2024
-            </p>
-          ) : status === "overdue" ? (
-            <p className="text-xxs font-semibold text-red-600">
-              Overdue - Expired 15th September, 2024
-            </p>
-          ) : (
-            ""
-          )}
-
+        <div className="pt-2">
           <div className="px-2">
             {/* Property value & Favourite Btn || Delete Btn */}
-            <div className="flex justify-between">
+            <div className="mb-2 flex justify-between">
               <PropertyPrice />
 
-              {!pathname.includes("settings") && (
-                <button onClick={(e) => handleFavClick(e)}>
-                  {!favProperty ? <HeartStroke /> : <HeartSolid />}
-                </button>
-              )}
-
-              {wishlist && (
+              {type === "wishlist" ? (
                 <button
                   onClick={(e) => {
                     e.preventDefault();
@@ -165,6 +141,22 @@ export function TenantPropertyCard({
                 >
                   <Trash2 className="h-4 w-4 transition-colors duration-300 hover:text-red-600" />
                 </button>
+              ) : type === "rent" ? (
+                <p className="flex items-center justify-center rounded-full bg-green-600/10 px-4 py-0.5 text-xs font-semibold leading-none text-green-500">
+                  Paid
+                </p>
+              ) : type === "order" ? (
+                ""
+              ) : (
+                <button onClick={(e) => handleFavClick(e)}>
+                  {!favProperty ? (
+                    <span className="group-hover:animate-pulse">
+                      <HeartStroke />
+                    </span>
+                  ) : (
+                    <HeartSolid />
+                  )}
+                </button>
               )}
             </div>
 
@@ -172,21 +164,7 @@ export function TenantPropertyCard({
             <PropertyNameAndLocation />
 
             {type !== "order" ? (
-              // Property info
-              <ul className="mt-3 flex items-center justify-between">
-                <li className="flex w-1/3 items-center justify-start gap-x-1 text-sm font-semibold">
-                  <BedIcon className="text-primary-dark" size={18} />
-                  <span className="opacity-50">6 bd</span>
-                </li>
-                <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300 text-sm font-semibold">
-                  <BathIcon className="text-primary-dark" size={18} />
-                  <span className="opacity-50">6 bt</span>
-                </li>
-                <li className="flex w-1/3 items-center justify-end gap-x-1 text-sm font-semibold">
-                  <RulerIcon className="text-primary-dark" size={18} />
-                  <span className="opacity-50">2.62ft</span>
-                </li>
-              </ul>
+              <PropertyFeatures />
             ) : (
               // Property order date and time
               <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
@@ -211,7 +189,7 @@ export function PropertyCardLandscape({
         routes.TENANT_DASHBOARD_PROPERTIES_DETAIL +
         `?property-status=${queryParam}`
       }
-      className="custom-shadow-sm z-40 block rounded-lg"
+      className="custom-shadow-sm block rounded-lg"
     >
       <article className="flex gap-x-3 rounded-lg p-2">
         <div className="relative w-32 overflow-hidden rounded-lg">

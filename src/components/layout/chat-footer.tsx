@@ -37,7 +37,7 @@ export default function ChatFooter() {
       </button>
       <input
         type="text"
-        className="custom-shadow-sm w-full rounded-full bg-white px-7 py-3.5 text-[#8F8F8F]"
+        className="custom-shadow-sm w-full rounded-lg border-b-2 border-b-transparent bg-white px-7 py-2.5 text-sm text-[#8F8F8F] focus:border-b-gold focus:outline-none"
         placeholder="Say Something..."
       />
       <button>

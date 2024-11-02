@@ -1,8 +1,5 @@
 import PrevPageButton from "@/components/ui/prev-page";
-import {
-  PropertyCardLandscape,
-  TenantPropertyCard,
-} from "@/components/ui/property-card";
+import { PropertyCardLandscape } from "@/components/ui/property-card";
 
 export default function RentedProperties() {
   return (
@@ -48,7 +45,7 @@ export default function RentedProperties() {
               <PropertyCardLandscape status="upcoming" queryParam="rent" />
             </div>
             <div className="hidden items-stretch gap-5 lg:grid lg:grid-cols-2 xl:grid-cols-3">
-              <TenantPropertyCard queryParam="rent" />
+              {/* <TenantPropertyCard queryParam="rent" />
               <TenantPropertyCard status="overdue" queryParam="rent" />
               <TenantPropertyCard status="upcoming" queryParam="rent" />
               <TenantPropertyCard queryParam="rent" />
@@ -56,7 +53,7 @@ export default function RentedProperties() {
               <TenantPropertyCard status="upcoming" queryParam="rent" />
               <TenantPropertyCard queryParam="rent" />
               <TenantPropertyCard status="overdue" queryParam="rent" />
-              <TenantPropertyCard status="upcoming" queryParam="rent" />
+              <TenantPropertyCard status="upcoming" queryParam="rent" /> */}
             </div>
           </section>
         </section>

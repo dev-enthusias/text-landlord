@@ -26,3 +26,7 @@ export interface TextInputProps {
   type?: string;
   error?: ValidationErrors | undefined;
 }
+
+export type TenantPropertyCardTypes = {
+  type?: "order" | "rent" | "wishlist";
+};

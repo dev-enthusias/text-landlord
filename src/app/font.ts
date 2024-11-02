@@ -1,4 +1,9 @@
-import { Cormorant_Garamond, Dancing_Script, Roboto } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Dancing_Script,
+  Lato,
+  Roboto,
+} from "next/font/google";
 
 export const cormorant_garamond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -10,6 +15,13 @@ export const cormorant_garamond = Cormorant_Garamond({
 export const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
+  variable: "--font-roboto",
+  display: "swap",
+});
+
+export const lato = Lato({
+  subsets: ["latin"],
+  weight: ["400", "700"],
   variable: "--font-roboto",
   display: "swap",
 });

@@ -1,29 +1,31 @@
-import { routes } from "@/constants/routes";
-import getRole from "@/utils/getRole";
-import { SearchIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { routes } from "@/constants/routes";
+import { SearchIcon } from "lucide-react";
 
 export default function ChatSidebar() {
   return (
-    <div className="w-screen shrink-0 lg:w-[320px] xl:w-[380px]">
-      <div className="px-3 py-5 lg:pb-10 lg:pt-5">
-        <h2 className="text-2xl font-semibold">Chats</h2>
-      </div>
+    <div className="relative w-screen shrink-0 lg:w-[320px] xl:w-[380px]">
+      <div className="sticky top-0 z-40 bg-[#ece6cb] px-7 py-5">
+        <h2 className="mb-2 text-xl font-semibold text-black">Chats</h2>
 
-      <section className="h-full max-w-[429px] px-2.5">
-        <div className="custom-shadow relative mb-7 flex w-full justify-center rounded-lg">
+        <div className="relative flex w-full justify-center rounded-lg">
           <input
             type="search"
-            className="w-full max-w-[378px] rounded-lg border px-4 py-3.5 pl-12"
+            className="w-full max-w-[378px] rounded border-b-gold bg-[#f3f3f3] px-4 py-2 pl-12 text-sm text-black focus:border-b-2 focus:bg-white focus:outline-none"
             placeholder="Search for friends here"
           />
           <div className="absolute left-4 top-1/2 -translate-y-1/2">
-            <SearchIcon className="text-2xl" />
+            <SearchIcon size={18} />
           </div>
         </div>
+      </div>
 
+      <section className="h-full max-w-[429px] px-2.5 pt-5">
         <section>
+          <FriendCard />
+          <FriendCard />
+          <FriendCard />
           <FriendCard />
           <FriendCard />
           <FriendCard />
@@ -37,20 +39,9 @@ export default function ChatSidebar() {
 }
 
 export const FriendCard = async () => {
-  const roleid = await getRole();
-
-  const href =
-    roleid === 4
-      ? routes.LANDLORD_DASHBOARD_CHAT + "/0"
-      : roleid === 5
-        ? routes.TENANT_DASHBOARD_CHAT + "/0"
-        : roleid === 7
-          ? routes.AGENT_DASHBOARD_CHAT + "/0"
-          : "";
-
   return (
-    <Link href={href} replace>
-      <article className="flex items-center gap-x-3.5 rounded-lg px-3.5 py-2 text-[#09132C] hover:bg-primary/10">
+    <Link href={routes.CHAT + "/0"} replace>
+      <article className="flex items-center gap-x-3.5 rounded-lg px-3.5 py-2 text-[#09132C] hover:bg-gold/30">
         <div className="relative h-[50px] w-[50px] shrink-0 overflow-hidden rounded-full">
           <Image
             src="/images/profile-img.jpeg"
@@ -63,13 +54,11 @@ export const FriendCard = async () => {
 
         <div className="flex grow flex-col">
           <div className="flex items-center justify-between">
-            <h3 className="font-medium">Jane Cooper</h3>
-            <p className="text-xs">07:38am</p>
+            <h3 className="text-sm font-semibold">Jane Cooper</h3>
+            <p className="text-xxs">07:38am</p>
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-sm hover:text-[#5A6A9D]">
-              Haha that&apos;s hillarious
-            </p>
+            <p className="text-xs">Haha that&apos;s hillarious</p>
             {false ? (
               <svg
                 width="20"
@@ -92,7 +81,7 @@ export const FriendCard = async () => {
                 />
               </svg>
             ) : (
-              <span className="text-primary-500 rounded-full bg-accent p-1.5 text-xxs leading-none text-white">
+              <span className="text-primary-500 rounded-full bg-gold p-1 text-3xs font-semibold leading-none text-white">
                 10
               </span>
             )}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTogglePassword } from "@/hooks/useToggleVisibility";
 import { Eye, EyeOff } from "lucide-react";
 import { TextInputProps } from "@/definition";
@@ -17,16 +17,16 @@ export default function TextInput({
   const { isVisible, toggleVisibility } = useTogglePassword();
 
   // Get error messages safely
-  const getErrorMessages = (): string[] => {
+  const getErrorMessages = useCallback((): string[] => {
     return error?.[name] || [];
-  };
+  }, [error, name]);
 
   // Reset hasChanged when new errors are received from validation
   useEffect(() => {
     if (getErrorMessages().length > 0) {
       setHasChanged(false); // Reset so that the new error can show
     }
-  }, [error, name]);
+  }, [error, name, getErrorMessages]);
 
   const hasError = getErrorMessages().length > 0;
 
@@ -46,7 +46,10 @@ export default function TextInput({
 
   return (
     <div className="space-y-1">
-      <label htmlFor={label} className="block font-semibold text-gray-600">
+      <label
+        htmlFor={label}
+        className="block text-sm font-medium text-gray-600"
+      >
         {label} {required && <span className="font-bold text-red-500">*</span>}
       </label>
       <div className="relative">
