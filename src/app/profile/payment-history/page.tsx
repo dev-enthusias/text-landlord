@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { routes } from "@/constants/routes";
 import PaymentHistoryPage from "@/components/pages/trx-history";
 
@@ -16,5 +17,9 @@ const buttons = [
 ];
 
 export default function PaymentHistory() {
-  return <PaymentHistoryPage btns={buttons} />;
+  return (
+    <Suspense>
+      <PaymentHistoryPage btns={buttons} />
+    </Suspense>
+  );
 }
