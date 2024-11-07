@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { BackButton } from "@/components/ui/prev-page";
 import PageLayout from "@/components/layout/page-layout";
@@ -5,6 +6,7 @@ import { BsChat } from "react-icons/bs";
 import { PiHeart, PiHeartFill } from "react-icons/pi";
 import { SiStatuspal } from "react-icons/si";
 import { BathIcon, BedIcon, Handshake, RulerIcon } from "lucide-react";
+import { routes } from "@/constants/routes";
 
 export default function PropertyDetails() {
   return (
@@ -131,14 +133,17 @@ export default function PropertyDetails() {
                     <p className="text-xs">sograyemilafi@ogalandlords.com</p>
                   </div>
                 </div>
-                <button className="flex items-center gap-x-2 rounded-full bg-white px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow">
+                <Link
+                  href={routes.CHAT + "/0"}
+                  className="flex items-center gap-x-2 rounded-full bg-white px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
+                >
                   <BsChat /> Chat
-                </button>
+                </Link>
               </article>
             </section>
 
             <section className="space-y-5 rounded-xl bg-white p-5">
-              <p className="text-xl font-bold text-gold">
+              <p className="text-xl font-bold text-accent">
                 ₦500,000{" "}
                 <span className="text-base font-normal text-gray-500">
                   / year

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { BackButton } from "@/components/ui/prev-page";
 import { routes } from "@/constants/routes";
 import { SearchIcon } from "lucide-react";
 
@@ -7,6 +8,8 @@ export default function ChatSidebar() {
   return (
     <div className="relative w-screen shrink-0 lg:w-[320px] xl:w-[380px]">
       <div className="sticky top-0 z-40 bg-[#ece6cb] px-7 py-5">
+        <BackButton className="mb-5 text-lg" />
+
         <h2 className="mb-2 text-xl font-semibold text-black">Chats</h2>
 
         <div className="relative flex w-full justify-center rounded-lg">

@@ -108,11 +108,10 @@ export const profileInfo = [
 ];
 
 export const propertyCategories = [
-  { title: "Rent", icon: <HomeIcon />, number: 10 },
-  { title: "Sale", icon: <HomeIcon />, number: 10 },
-  { title: "Recommended Properties", icon: <HomeIcon />, number: 10 },
-  { title: "Trending Properties", icon: <HomeIcon />, number: 10 },
-  { title: "Discounted Properties", icon: <HomeIcon />, number: 10 },
+  { title: "Residential", icon: <HomeIcon />, number: 10 },
+  { title: "Commercial", icon: <HomeIcon />, number: 10 },
+  { title: "Industrial", icon: <HomeIcon />, number: 10 },
+  { title: "Land", icon: <HomeIcon />, number: 10 },
 ];
 
 export const landloardQuickActionData = [
@@ -143,4 +142,5 @@ export const propertyTypes = [
 export const topbarLinks = [
   { link: "/", name: "Home", exact: true },
   { link: "/properties", name: "Properties" },
+  { link: routes.FUND_WALLET, name: "Fund Wallet" },
 ];

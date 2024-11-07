@@ -30,8 +30,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <NavLink
               href={routes.PROFILE}
               exact
-              className="flex w-full items-center gap-x-2 border-t border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:text-gold"
-              activeClassName="text-gold"
+              className="flex w-full items-center gap-x-2 border-t border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+              activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
             >
               <FaRegUserCircle size={20} />
               PROFILE
@@ -41,24 +41,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <section className="bg-white">
             <NavLink
               href={routes.FUND_WALLET}
-              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:text-gold"
-              activeClassName="text-gold"
+              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+              activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
             >
               <GiReceiveMoney size={24} />
               Fund Wallet
             </NavLink>
             <NavLink
               href={routes.PAY_RENT}
-              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:text-gold"
-              activeClassName="text-gold"
+              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+              activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
             >
               <GiPayMoney size={24} />
               Pay Rent
             </NavLink>
             <NavLink
               href={routes.CHANGE_PASSWORD}
-              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:text-gold"
-              activeClassName="text-gold"
+              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+              activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
             >
               <RiLockPasswordFill size={20} />
               Change Password
@@ -68,24 +68,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <section className="bg-white">
             <NavLink
               href={routes.WISHLIST}
-              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:text-gold"
-              activeClassName="text-gold"
+              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+              activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
             >
               <FaHeart size={18} />
               Wishlist
             </NavLink>
             <NavLink
               href={routes.ORDERS}
-              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:text-gold"
-              activeClassName="text-gold"
+              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+              activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
             >
               <LuHistory size={20} />
               Orders
             </NavLink>
             <NavLink
               href={routes.PAYMENT_HISTORY}
-              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:text-gold"
-              activeClassName="text-gold"
+              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+              activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
             >
               <LuHistory size={20} />
               Payment History

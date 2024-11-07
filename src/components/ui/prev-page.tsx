@@ -15,12 +15,15 @@ export default function PrevPageButton({ className }: { className?: string }) {
   );
 }
 
-export function BackButton() {
+export function BackButton({ className }: { className?: string }) {
   const router = useRouter();
 
   return (
     <button
-      className="group flex items-center gap-x-2 font-medium text-gray-700 transition-colors duration-300 hover:text-black"
+      className={cn(
+        "group flex items-center gap-x-2 font-medium text-gray-700 transition-colors duration-300 hover:text-black",
+        className,
+      )}
       onClick={() => router.back()}
     >
       <FiChevronLeft className="duraton-300 transition-transform ease-out group-hover:-translate-x-1" />
