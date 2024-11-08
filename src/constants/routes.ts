@@ -9,28 +9,20 @@ export const routes = {
   REGISTERASAGENT: "/register?type=agent",
   FORGOTPASSWORD: "/forgot-password",
 
-  // Pages
-  CART: "/cart",
+  // Generic pages
   CHAT: "/chat",
-  PROFILE: "/profile",
-  WISHLIST: "/profile/wishlist",
-  ORDERS: "/profile/orders",
-  PAYMENT_HISTORY: "/profile/payment-history",
-  FUND_WALLET: "/profile/fund-wallet",
-  PAY_RENT: "/profile/pay-rent",
-  CHANGE_PASSWORD: "/profile/change-password",
 
-  // Tenant dashboard pages
-  TENANT_DASHBOARD: "/dashboard/tenant",
-  TENANT_DASHBOARD_PROPERTIES: "/dashboard/tenant/properties",
-  TENANT_DASHBOARD_PROPERTIES_DETAIL:
-    "/dashboard/tenant/properties/:propertyId",
-  TENANT_DASHBOARD_CHAT: "/dashboard/tenant/chat",
-  TENANT_DASHBOARD_PAYMENT_HISTORY: "/dashboard/tenant/payment-history",
-  TENANT_DASHBOARD_SETTINGS: "/dashboard/tenant/settings",
-  TENANT_DASHBOARD_CART: "/dashboard/tenant/cart",
-  TENANT_DASHBOARD_NOTIFICATION: "/dashboard/tenant/notification",
-  TENANT_DASHBOARD_ADD_MONEY: "/dashboard/tenant/add-money",
+  // Tenant pages
+  CART: "/tenant/cart",
+  TENANT_DASHBOARD: "/tenant",
+  PROFILE: "/tenant/profile",
+  ORDERS: "/tenant/profile/orders",
+  PAY_RENT: "/tenant/profile/pay-rent",
+  WISHLIST: "/tenant/profile/wishlist",
+  TENANT_PROPERTIES: "/tenant/properties",
+  FUND_WALLET: "/tenant/profile/fund-wallet",
+  CHANGE_PASSWORD: "/tenant/profile/change-password",
+  PAYMENT_HISTORY: "/tenant/profile/payment-history",
 
   // Landlord dashboard pages
   LANDLORD_DASHBOARD: "/dashboard/landlord",

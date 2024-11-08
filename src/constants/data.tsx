@@ -1,99 +1,12 @@
 import {
-  BotMessageSquareIcon,
-  HeartIcon,
   HomeIcon,
   HousePlus,
-  ListOrderedIcon,
-  LockKeyholeIcon,
-  MapPinnedIcon,
   OctagonAlert,
   UserRoundPlus,
   UsersRound,
   WalletCards,
-  WalletIcon,
 } from "lucide-react";
 import { routes } from "./routes";
-
-export const tenantSettingLinksDesktop = [
-  {
-    name: "Profile",
-    icon: <WalletIcon className="text-primary-dark" size={18} />,
-    link: routes.TENANT_DASHBOARD_SETTINGS + "?path=profile",
-  },
-  {
-    name: "Fund wallet",
-    icon: <WalletIcon className="text-primary-dark" size={18} />,
-    link: routes.TENANT_DASHBOARD_SETTINGS + "?path=wallet",
-  },
-  {
-    name: "Change password",
-    icon: <LockKeyholeIcon className="text-primary-dark" size={18} />,
-    link: routes.TENANT_DASHBOARD_SETTINGS + "?path=password",
-  },
-  {
-    name: "Orders",
-    icon: <ListOrderedIcon className="text-primary-dark" size={18} />,
-    link: routes.TENANT_DASHBOARD_SETTINGS + "?path=order",
-  },
-  {
-    name: "Pay Rent",
-    icon: <HomeIcon className="text-primary-dark" size={18} />,
-    link: routes.TENANT_DASHBOARD_SETTINGS + "?path=properties",
-  },
-  {
-    name: "Wishlist",
-    icon: <HeartIcon className="text-primary-dark" size={18} />,
-    link: routes.TENANT_DASHBOARD_SETTINGS + "?path=wishlist",
-  },
-  {
-    name: "Appointments",
-    icon: <MapPinnedIcon className="text-primary-dark" size={18} />,
-    link: "",
-  },
-  {
-    name: "Support",
-    icon: <BotMessageSquareIcon className="text-primary-dark" size={18} />,
-    link: "",
-  },
-];
-
-export const landlordSettingsLinksDesktop = [
-  {
-    name: "Profile",
-    icon: <WalletIcon className="text-primary-dark" size={18} />,
-    link: routes.LANDLORD_DASHBOARD_SETTINGS + "?path=profile",
-  },
-  {
-    name: "Account",
-    icon: <WalletIcon className="text-primary-dark" size={18} />,
-    link: routes.LANDLORD_DASHBOARD_SETTINGS + "?path=account",
-  },
-  {
-    name: "Change password",
-    icon: <LockKeyholeIcon className="text-primary-dark" size={18} />,
-    link: routes.LANDLORD_DASHBOARD_SETTINGS + "?path=password",
-  },
-  {
-    name: "Orders",
-    icon: <ListOrderedIcon className="text-primary-dark" size={18} />,
-    link: routes.LANDLORD_DASHBOARD_SETTINGS + "?path=order",
-  },
-  {
-    name: "Property Category",
-    icon: <HomeIcon className="text-primary-dark" size={18} />,
-    link: routes.LANDLORD_DASHBOARD_SETTINGS + "?path=category",
-  },
-  {
-    name: "Property Facility Type",
-    icon: <HeartIcon className="text-primary-dark" size={18} />,
-    link: routes.LANDLORD_DASHBOARD_SETTINGS + "?path=facility",
-  },
-  {
-    name: "Appointments",
-    icon: <MapPinnedIcon className="text-primary-dark" size={18} />,
-    link: "",
-  },
-];
 
 export const profileInfo = [
   { title: "Religion", value: "Santorian" },
@@ -124,8 +37,9 @@ export const landloardQuickActionData = [
 ];
 
 export const ROLE_ROUTES = {
-  4: "/dashboard/landlord",
-  5: "/dashboard/tenant",
+  4: "/landlord",
+  5: "/tenant",
+  7: "/agent",
 };
 
 export const propertyTypes = [
@@ -140,7 +54,7 @@ export const propertyTypes = [
 ];
 
 export const topbarLinks = [
-  { link: "/", name: "Home", exact: true },
-  { link: "/properties", name: "Properties" },
+  { link: "/tenant", name: "Home", exact: true },
+  { link: routes.TENANT_PROPERTIES, name: "Properties" },
   { link: routes.FUND_WALLET, name: "Fund Wallet" },
 ];

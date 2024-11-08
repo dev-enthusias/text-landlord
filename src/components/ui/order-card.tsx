@@ -1,19 +1,19 @@
 import Link from "next/link";
 import { routes } from "@/constants/routes";
-import getRole from "@/utils/getRole";
+import { getRole } from "@/lib/actions";
 
 export default async function OrderCard() {
   const roleid = await getRole();
 
-  const href =
-    roleid === 4
-      ? routes.LANDLORD_DASHBOARD_SETTINGS + `?path='orderdetails`
-      : roleid === 5
-        ? routes.TENANT_DASHBOARD_SETTINGS + `?path='orderdetails`
-        : routes.AGENT_DASHBOARD_SETTINGS + "?path=orderdetails";
+  // const href =
+  //   roleid === 4
+  //     ? routes.LANDLORD_DASHBOARD_SETTINGS + `?path='orderdetails`
+  //     : roleid === 5
+  //       ? routes.TENANT_DASHBOARD_SETTINGS + `?path='orderdetails`
+  //       : routes.AGENT_DASHBOARD_SETTINGS + "?path=orderdetails";
 
   return (
-    <Link href={href} className="block">
+    <Link href={""} className="block">
       <article className="custom-shadow-sm flex items-center justify-between rounded-lg bg-white p-3">
         <div>
           <h3 className="font-medium">Emperica in Dazil, Villa</h3>

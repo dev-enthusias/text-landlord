@@ -2,7 +2,7 @@ import { TenantPropertyCard } from "../ui/property-card";
 
 export default function PropertyListing() {
   return (
-    <>
+    <section>
       <div className="mb-6">
         <p className="font-semibold text-black">Showing 577 search results</p>
       </div>
@@ -21,6 +21,6 @@ export default function PropertyListing() {
         <TenantPropertyCard />
         <TenantPropertyCard />
       </div>
-    </>
+    </section>
   );
 }

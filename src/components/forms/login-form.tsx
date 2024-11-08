@@ -1,46 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import { useFormState } from "react-dom";
 import Link from "next/link";
 import { toast } from "sonner";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import TextInput from "@/components/ui/text-input";
 import CustomCheckbox from "@/components/ui/custome-checkbox";
 import SubmitButton from "@/components/forms/submit-button";
-import { authenticate } from "@/lib/actions";
 import { routes } from "@/constants/routes";
-import { AuthenticateReturn, ValidationErrors } from "@/definition";
-
-const authenticateWithToastAndRedirect = async (
-  prevState: unknown,
-  formData: FormData,
-) => {
-  const result = await authenticate(prevState, formData);
-  if (result && typeof result === "string") {
-    toast.error("Error", { description: result });
-  }
-};
+import { authenticate } from "@/lib/actions";
+import { loginSchema } from "@/lib/schema";
+import { LoginDataType } from "@/definition";
 
 export default function LoginForm() {
   const [checked, setChecked] = useState(true);
-  const [errorMessage, dispatch] = useFormState<AuthenticateReturn, FormData>(
-    authenticateWithToastAndRedirect,
-    undefined,
-  );
 
-  const getFieldErrors = (
-    error: AuthenticateReturn,
-  ): ValidationErrors | undefined => {
-    if (error && typeof error === "object" && !Array.isArray(error)) {
-      return error as ValidationErrors;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginDataType>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit: SubmitHandler<LoginDataType> = async (data) => {
+    const res = await authenticate(data);
+
+    if (res && typeof res === "string") {
+      toast.error("Error", { description: res });
     }
-    return undefined;
   };
 
   return (
-    <form className="w-full max-w-[480px]" action={dispatch}>
+    <form
+      className="mx-auto w-full max-w-[480px]"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <section className="mb-6 text-center">
-        <h2 className="text-gray- mb-1 text-3xl font-bold">Welcome Back</h2>
+        <h2 className="text-gray- mb-1 text-3xl font-bold text-gray-900">
+          Welcome Back
+        </h2>
         <p className="text-gray-500">
           Enter credentials to see your listing or rented properties.
         </p>
@@ -48,17 +48,19 @@ export default function LoginForm() {
 
       <section className="mb-10 space-y-5">
         <TextInput
+          register={register}
           name="email"
           label="Email"
-          error={getFieldErrors(errorMessage)}
+          error={errors.email?.message}
           required
         />
         <div>
           <TextInput
+            register={register}
             name="password"
             label="Password"
             type="password"
-            error={getFieldErrors(errorMessage)}
+            error={errors.password?.message}
             required
           />
           <div className="mt-2 flex items-center justify-between text-[14px] font-semibold">
@@ -70,17 +72,14 @@ export default function LoginForm() {
               />
               <p>Remember me</p>
             </div>
-            <Link
-              href={routes.FORGOTPASSWORD}
-              className="opacity-80 hover:opacity-100"
-            >
+            <Link href={routes.FORGOTPASSWORD} className="hover:text-gray-600">
               Forgot Password?
             </Link>
           </div>
         </div>
       </section>
 
-      <SubmitButton text="LOGIN" />
+      <SubmitButton isSubmitting={isSubmitting} text="LOGIN" />
     </form>
   );
 }

@@ -40,11 +40,11 @@ export default function RegisterationForm() {
     useState("");
 
   return (
-    <form className="w-full max-w-[480px]">
+    <form className="mx-auto w-full max-w-[480px]">
       {step === 0 && (
         <section>
           <div className="mb-6 text-center">
-            <h2 className="text-gray- mb-1 text-3xl font-bold">
+            <h2 className="text-gray- mb-1 text-3xl font-bold text-gray-800">
               Create new account
             </h2>
             <p className="text-gray-500">
@@ -60,7 +60,7 @@ export default function RegisterationForm() {
 
           <button
             type="button"
-            className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
+            className="w-full rounded-lg bg-gold py-3 font-semibold text-white transition-colors duration-300 ease-out hover:bg-gold/80"
             onClick={nextStep}
           >
             Continue
@@ -71,7 +71,7 @@ export default function RegisterationForm() {
       {step === 1 && (
         <section className="">
           <div className="mb-6 text-center">
-            <h2 className="text-gray- mb-1 text-3xl font-bold">
+            <h2 className="mb-1 text-3xl font-bold text-gray-800">
               Personal Details
             </h2>
             <p className="text-gray-500">
@@ -113,7 +113,7 @@ export default function RegisterationForm() {
 
           <button
             type="button"
-            className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
+            className="w-full rounded-lg bg-gold py-3 font-semibold text-white transition-colors duration-300 ease-out hover:bg-gold/80"
             onClick={nextStep}
           >
             Continue
@@ -124,7 +124,7 @@ export default function RegisterationForm() {
       {step === 2 && (
         <section>
           <div className="mb-6 text-center">
-            <h2 className="text-gray- mb-1 text-3xl font-bold">
+            <h2 className="text-gray- mb-1 text-3xl font-bold text-gray-800">
               Additional Information
             </h2>
             <p className="text-gray-500">Fill in the required fields</p>
@@ -152,7 +152,7 @@ export default function RegisterationForm() {
 
           <button
             type="button"
-            className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
+            className="w-full rounded-lg bg-gold py-3 font-semibold text-white transition-colors duration-300 ease-out hover:bg-gold/80"
             onClick={nextStep}
           >
             Continue
@@ -161,15 +161,15 @@ export default function RegisterationForm() {
       )}
 
       {step === 3 && (
-        <section>
+        <section className="w-full">
           <div className="mb-6 text-center">
-            <h2 className="text-gray- mb-1 text-3xl font-bold">
+            <h2 className="mb-1 text-3xl font-bold text-gray-800">
               Setup your password
             </h2>
             <p className="text-gray-500">setup your password</p>
           </div>
 
-          <div className="mb-6 space-y-5">
+          <div className="mb-6 w-full space-y-5">
             <TextInput name="" label="Password" required />
             <TextInput name="" label="Confirm Password" required />
             <div className="flex items-center gap-x-1">
@@ -191,7 +191,7 @@ export default function RegisterationForm() {
           </button> */}
           <Link
             href={routes.LOGIN}
-            className="block w-full rounded-lg bg-primary py-3 text-center font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
+            className="block w-full rounded-lg bg-gold py-3 text-center font-semibold text-white transition-colors duration-300 ease-out hover:bg-gold/80"
           >
             Register
           </Link>

@@ -13,12 +13,12 @@ import Image from "next/image";
 export default function RegisterPage() {
   return (
     <FormStepStoreProvider>
-      <main className="flex h-screen max-h-dvh overflow-hidden p-4">
+      <main className="flex h-screen max-h-dvh overflow-hidden bg-white p-4">
         <section className="hidden shrink-0 rounded-lg lg:block">
           <Sidebar />
         </section>
 
-        <section className="no-scrollbar relative flex grow flex-col items-center overflow-y-auto py-10">
+        <section className="no-scrollbar relative flex shrink-0 grow flex-col items-center overflow-y-auto py-10">
           <div className="fixed left-0 top-0 z-50 w-full bg-white py-4 lg:hidden">
             <Indicator />
           </div>
@@ -35,7 +35,7 @@ export default function RegisterPage() {
             </div>
           </Link>
 
-          <div className="px-1 lg:px-0">
+          <div className="w-full px-1 lg:px-0">
             <RegisterationForm />
           </div>
         </section>
@@ -56,7 +56,7 @@ function Sidebar() {
   const { step, updateStep } = useFormStepStore((state) => state);
 
   return (
-    <aside className="relative h-full w-96 rounded-xl bg-gray-200 px-5 py-10">
+    <aside className="relative h-full w-96 rounded-xl bg-gray-200 px-5 py-10 text-gray-800">
       <Link href={routes.HOME} className="mb-10 block">
         <div className="relative h-28 w-40">
           <Image
@@ -77,7 +77,7 @@ function Sidebar() {
             onClick={() => updateStep(i)}
           >
             <div
-              className={`flex h-10 w-10 items-center justify-center rounded border-2 ${step === i ? "border-black bg-primary font-bold" : "border-gray-300 bg-white"} `}
+              className={`flex h-10 w-10 items-center justify-center rounded border-2 text-black ${step === i ? "border-black bg-gold font-bold text-white" : "border-gray-300 bg-white"} `}
             >
               {i + 1}
             </div>
@@ -106,7 +106,7 @@ function Indicator() {
   const IndicatorLine = ({ index }: { index: number }) => {
     return (
       <div
-        className={`h-1 cursor-pointer rounded-full ${step === index ? "bg-primary" : "bg-gray-200"}`}
+        className={`h-1 cursor-pointer rounded-full ${step === index ? "bg-gold" : "bg-gray-200"}`}
         onClick={() => updateStep(index)}
       />
     );

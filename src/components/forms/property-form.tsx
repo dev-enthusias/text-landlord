@@ -61,7 +61,7 @@ export default function PropertyForm() {
         </div>
         <button
           type="submit"
-          className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
+          className="w-full rounded-lg bg-gold py-3 font-semibold transition-colors text-white duration-300 ease-out hover:bg-gold/80"
         >
           Save
         </button>

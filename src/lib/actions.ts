@@ -1,34 +1,25 @@
 "use server";
 
 import { cookies } from "next/headers";
-import axiosInstance from "./axios-instance";
-import { loginSchema } from "./schema";
 import { redirect } from "next/navigation";
+import { isAxiosError } from "axios";
+import axiosInstance from "./axios-instance";
 import { ROLE_ROUTES } from "@/constants/data";
 import { routes } from "@/constants/routes";
-import { isAxiosError } from "axios";
-import { AuthenticateReturn } from "@/definition";
+import { LoginDataType } from "@/definition";
+
+export async function getRole() {
+  const role = cookies().get("role");
+  return role ? parseInt(role.value) : undefined;
+}
 
 export async function authenticate(
-  _currentState: unknown,
-  formData: FormData,
-): Promise<AuthenticateReturn> {
-  const validateFields = loginSchema.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
-  });
-
-  if (!validateFields.success) {
-    return validateFields.error.flatten().fieldErrors;
-  }
-
+  data: LoginDataType,
+): Promise<string | undefined> {
   let redirectionPathname: string | undefined;
 
   try {
-    const res = await axiosInstance.post(
-      "/public/v1/login",
-      validateFields.data,
-    );
+    const res = await axiosInstance.post("/public/v1/login", data);
 
     if (res.status === 200) {
       const authToken = res.data.access_token;

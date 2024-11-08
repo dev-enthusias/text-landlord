@@ -1,172 +1,294 @@
-"use client";
-
-import { useState } from "react";
-import { HeartSolid, HeartStroke } from "../svg";
-import {
-  BathIcon,
-  BedIcon,
-  Boxes,
-  Handshake,
-  HomeIcon,
-  MapPin,
-  MessageCircleIcon,
-  RulerIcon,
-} from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { routes } from "@/constants/routes";
-import { useSearchParams } from "next/navigation";
+import { BsChat } from "react-icons/bs";
+import { SiStatuspal } from "react-icons/si";
+import { PiHeart, PiHeartFill } from "react-icons/pi";
+import { BathIcon, BedIcon, Handshake, RulerIcon } from "lucide-react";
 
-export function PropertyName() {
-  const [favProperty, setFavProperty] = useState(false);
-
+export function PropertyNameAndTags() {
   return (
-    <section className="mb-4">
-      <div className="flex items-center justify-between">
-        <p className="text-xs font-semibold text-accent">Apartment</p>
-        <button onClick={() => setFavProperty(!favProperty)}>
-          {!favProperty ? <HeartStroke /> : <HeartSolid />}
-        </button>
-      </div>
-      <h2 className="font-semibold xl:text-lg">Emperica Dazil, Villa</h2>
-      <p className="flex items-center gap-x-1 text-sm xl:text-[14px]">
-        <MapPin className="h-3 w-3" /> Palaxisto Emeriando Plaza Road
+    <div>
+      <h1 className="font-roboto text-2xl font-semibold text-black">
+        Emperica Havilla Villa
+      </h1>
+      <p className="flex gap-x-2 text-sm tracking-wide">
+        <span>Rent</span> | <span>Apartment</span> | <span>Lagos</span>
       </p>
-    </section>
-  );
-}
-
-export function PropertyFeatures() {
-  return (
-    <ul className="mb-6 mt-4 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-200 bg-black/[1%] px-3 py-2">
-      <li className="flex items-center gap-x-1 text-[14px] font-semibold">
-        <BedIcon className="text-primary-dark" size={18} />
-        <span className="opacity-50">6 bedroom</span>
-      </li>
-      <li className="flex items-center gap-x-1 text-[14px] font-semibold">
-        <BathIcon className="text-primary-dark" size={18} />
-        <span className="opacity-50">6 bathroom</span>
-      </li>
-      <li className="flex items-center gap-x-1 text-[14px] font-semibold">
-        <RulerIcon className="text-primary-dark" size={18} />
-        <span className="opacity-50">2.62 sq ft</span>
-      </li>
-    </ul>
-  );
-}
-
-export function PropertyPricingDetails() {
-  return (
-    <article className="mb-4 flex flex-wrap justify-between gap-x-5 gap-y-2">
-      <div className="flex flex-col items-start">
-        <h3 className="mb-1 flex items-center justify-center gap-x-1 text-[14px]">
-          <HomeIcon size={16} className="text-primary-dark" />
-          <span className="opacity-50">Type</span>
-        </h3>
-        <p className="text-[14px] font-medium">Residential</p>
-      </div>
-      <div className="flex flex-col items-start">
-        <h3 className="mb-1 flex items-center justify-center gap-x-1 text-[14px]">
-          <Boxes size={16} className="text-primary-dark" />
-          <span className="opacity-50">Category</span>
-        </h3>
-        <p className="text-[14px] font-medium">Building</p>
-      </div>
-      <div className="flex flex-col items-start">
-        <h3 className="mb-1 flex items-center justify-center gap-x-1 text-[14px]">
-          <Handshake size={16} className="text-primary-dark" />
-          <span className="opacity-50">Down Payment</span>
-        </h3>
-        <p className="text-[14px] font-medium">₦1,000,000</p>
-      </div>
-    </article>
-  );
-}
-
-export function LandlordPropertyPricingDetails() {
-  return (
-    <article className="mb-4 flex flex-wrap justify-between gap-x-5 gap-y-2">
-      <div className="flex flex-col items-start">
-        <h3 className="mb-1 flex items-center justify-center gap-x-1 text-[14px]">
-          <HomeIcon size={16} className="text-primary-dark" />
-          <span className="opacity-50">Handover</span>
-        </h3>
-        <p className="text-[14px] font-medium">St. Paulinus Avatar</p>
-      </div>
-      <div className="flex flex-col items-start">
-        <h3 className="mb-1 flex items-center justify-center gap-x-1 text-[14px]">
-          <Boxes size={16} className="text-primary-dark" />
-          <span className="opacity-50">Payment Plan</span>
-        </h3>
-        <p className="text-[14px] font-medium">Yearly</p>
-      </div>
-      <div className="flex flex-col items-start">
-        <h3 className="mb-1 flex items-center justify-center gap-x-1 text-[14px]">
-          <Handshake size={16} className="text-primary-dark" />
-          <span className="opacity-50">Down Payment</span>
-        </h3>
-        <p className="text-[14px] font-medium">₦1,000,000</p>
-      </div>
-    </article>
-  );
-}
-
-export function PropertyPricing() {
-  return (
-    <div className="mb-6 flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
-      <div>
-        <p className="text-2xl font-semibold">₦10,000,000</p>
-      </div>
-
-      <div className="hidden lg:block">
-        <PayRentOrAddToCartBtn />
-      </div>
     </div>
   );
 }
 
-export function PropertyListerContact() {
+export function WishlistButton() {
   return (
-    <article className="rounded-lg border border-accent p-3 xl:p-5">
-      <h3 className="mb-4 text-sm font-medium">Property Lister</h3>
-
-      <p className="font-semibold">Melissa Monroe</p>
-      <p className="mb-4 opacity-70 lg:text-xs xl:text-[14px]">
-        Somewhere in bgbadagri, Kondovo
-      </p>
-
-      <Link
-        href={routes.TENANT_DASHBOARD_CHAT}
-        className="flex w-fit items-center gap-x-2 rounded border-2 border-accent px-4 py-1 font-medium"
-      >
-        <MessageCircleIcon size={20} /> Message
-      </Link>
-    </article>
+    <button className="group flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 transition-colors duration-300 ease-out hover:bg-gold/20">
+      {false ? (
+        <PiHeart className="text-xl group-hover:text-black" />
+      ) : (
+        <PiHeartFill className="text-xl text-gold" />
+      )}
+    </button>
   );
 }
 
-export function PropertyDescription() {
+export function Gallery() {
   return (
-    <section className="mb-4 lg:mt-5">
-      <h3 className="mb-2 text-[14px] leading-none opacity-50">Description</h3>
+    <section className="mb-6 grid h-[80vh] grid-cols-4 grid-rows-3 gap-5">
+      <div className="relative col-span-3 row-span-3 overflow-hidden rounded-xl">
+        <Image
+          src="/images/duplex.webp"
+          alt="Photo of apartment"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="relative overflow-hidden rounded-xl">
+        <Image
+          src="/images/image-2.jpeg"
+          alt="photo of apartment"
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="relative overflow-hidden rounded-xl">
+        <Image
+          src="/images/image-3.jpeg"
+          alt="photo of apartment"
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="relative overflow-hidden rounded-xl">
+        <Image
+          src="/images/image-2.jpeg"
+          alt="photo of apartment"
+          fill
+          className="object-cover"
+        />
+      </div>
+    </section>
+  );
+}
+
+export function Description() {
+  return (
+    <section>
+      <h2 className="mb-1 font-roboto text-xl font-medium text-black">
+        Description
+      </h2>
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi
-        doloremque asperiores impedit, mollitia voluptas exercitationem
-        corrupti. Enim facere quam eum? Impedit officiis porro cupiditate
-        nostrum tempore veniam earum? Doloremque quod eaque consectetur ipsa rem
-        quae perspiciatis, cupiditate necessitatibus, vero ex vel accusamus
-        veritatis deserunt atque officiis voluptates eligendi ratione autem!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt enim
+        mollitia rem excepturi, illum cupiditate voluptate odit eius quibusdam
+        minus quaerat molestias reprehenderit ipsa nam, sit odio magni
+        laboriosam sunt deleniti commodi nostrum nemo. Asperiores, laudantium!
+        Autem tenetur fugiat omnis, ipsum atque quae, dignissimos cum distinctio
+        molestias itaque accusamus expedita.
       </p>
     </section>
   );
 }
 
-export function PayRentOrAddToCartBtn() {
-  const searchParam = useSearchParams();
-  const propertyStatus = searchParam.get("property-status");
-
+export function Features() {
   return (
-    <button className="w-fit rounded-lg bg-primary px-10 py-3 text-lg font-semibold text-black lg:block">
-      {propertyStatus === "rent" ? "Pay Rent" : "Add to Cart"}
-    </button>
+    <section>
+      <h2 className="mb-1 font-roboto text-xl font-medium text-black">
+        Features
+      </h2>
+      <ul className="flex flex-col gap-y-5">
+        <li className="flex gap-x-2">
+          <BedIcon size={20} className="text-gray-600" />
+          <span>6 bedrooms</span>
+        </li>
+        <li className="flex gap-x-2">
+          <BathIcon size={20} className="text-gray-600" />
+          <span>6 bathrooms</span>
+        </li>
+        <li className="flex gap-x-2">
+          <RulerIcon size={20} className="text-gray-600" />
+          <span>2.62 square feet</span>
+        </li>
+      </ul>
+    </section>
+  );
+}
+
+export function PropertyOwner() {
+  return (
+    <section>
+      <h2 className="mb-2 font-roboto text-xl font-medium text-black">
+        Property Owner
+      </h2>
+      <article className="flex items-center justify-between">
+        <div className="flex items-start gap-x-2">
+          <div className="relative h-8 w-8 overflow-hidden rounded-full">
+            <Image
+              src="/images/profile-img.jpeg"
+              alt="property owner photo"
+              fill
+              sizes="36px"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h3 className="text-sm text-black">Sograh Emilafia</h3>
+            <p className="text-xs">sograyemilafi@ogalandlords.com</p>
+          </div>
+        </div>
+        <Link
+          href={routes.CHAT + "/0"}
+          className="flex items-center gap-x-2 rounded-full bg-white px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
+        >
+          <BsChat /> Chat
+        </Link>
+      </article>
+    </section>
+  );
+}
+
+// You should later remove this function
+export function PropertyAgent() {
+  return (
+    <section>
+      <h2 className="mb-2 font-roboto text-xl font-medium text-black">
+        Assigned Agent
+      </h2>
+      <article className="flex items-center justify-between">
+        <div className="flex items-start gap-x-2">
+          <div className="relative h-8 w-8 overflow-hidden rounded-full">
+            <Image
+              src="/images/profile-img.jpeg"
+              alt="property owner photo"
+              fill
+              sizes="36px"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h3 className="text-sm text-black">Sograh Emilafia</h3>
+            <p className="text-xs">sograyemilafi@ogalandlords.com</p>
+          </div>
+        </div>
+        <Link
+          href={routes.CHAT + "/0"}
+          className="flex items-center gap-x-2 rounded-full bg-white px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
+        >
+          <BsChat /> Chat
+        </Link>
+      </article>
+    </section>
+  );
+}
+
+export function PurchaseProperty() {
+  return (
+    <section className="space-y-5 rounded-xl bg-white p-5">
+      <p className="text-xl font-bold text-accent">
+        ₦500,000
+        <span className="text-base font-normal text-gray-500">/ year</span>
+      </p>
+
+      <div className="flex flex-wrap justify-between gap-5 rounded-lg bg-background px-5 py-4 text-lg">
+        <div className="flex items-start gap-x-3">
+          <Handshake size={20} className="mt-1 text-gray-600" />
+          <div>
+            <p>Down Payment</p>
+            <p className="font-semibold text-gray-600">₦350,000</p>
+          </div>
+        </div>
+        <div className="flex items-start gap-x-3">
+          <SiStatuspal size={20} className="mt-1 text-gray-600" />
+          <div>
+            <p>Availability</p>
+            <p className="font-semibold text-gray-600">3 vacant rooms</p>
+          </div>
+        </div>
+      </div>
+
+      <button className="w-full rounded-full bg-gold py-3 text-lg font-bold text-white">
+        Add to Cart
+      </button>
+    </section>
+  );
+}
+
+export function Location() {
+  return (
+    <section>
+      <h2 className="mb-1 font-roboto text-xl font-medium text-black">
+        Location
+      </h2>
+      <p className="mb-4">Somewhere in Bgbadagri, inside Oshodi</p>
+
+      <div className="relative h-48">
+        <Image
+          src="/images/map.jpg"
+          alt="Propery location on map"
+          fill
+          quality={100}
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+    </section>
+  );
+}
+
+export function PropertyTenants() {
+  return (
+    <section>
+      <h2 className="mb-2 font-roboto text-xl font-medium text-black">
+        Tenants (3)
+      </h2>
+
+      <div className="space-y-4">
+        <PropertyTenant rentStatus="upcoming" />
+        <PropertyTenant rentStatus="current" />
+        <PropertyTenant rentStatus="overdue" />
+      </div>
+    </section>
+  );
+}
+
+function PropertyTenant({
+  rentStatus,
+}: {
+  rentStatus: "upcoming" | "overdue" | "current";
+}) {
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-x-2">
+        <div className="relative h-8 w-8 overflow-hidden rounded-full">
+          <Image
+            src="/images/profile-img.jpeg"
+            alt="property owner photo"
+            fill
+            sizes="36px"
+            className="object-cover"
+          />
+        </div>
+        <div>
+          <h3 className="text-sm text-black">Sograh Emilafia</h3>
+          <p className="text-xs">sograyemilafi@ogalandlords.com</p>
+        </div>
+      </div>
+      <p
+        className={`text-sm font-bold ${
+          rentStatus === "upcoming"
+            ? "text-green-600"
+            : rentStatus === "current"
+              ? "text-accent"
+              : "text-orange-600"
+        }`}
+      >
+        {rentStatus}
+      </p>
+      <Link
+        href={routes.CHAT + "/0"}
+        className="flex items-center gap-x-2 rounded-full bg-white px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
+      >
+        <BsChat /> Chat
+      </Link>
+    </div>
   );
 }

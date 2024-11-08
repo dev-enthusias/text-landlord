@@ -7,14 +7,14 @@ import { topbarLinks } from "@/constants/data";
 import NavLink from "../ui/navlink";
 import { PiHeart } from "react-icons/pi";
 import { BsChat } from "react-icons/bs";
-import ProfileTopbar from "../ui/profile-topbar";
 import Dropdown from "../ui/dropdown";
 import { FaPowerOff } from "react-icons/fa";
+import { logout } from "@/lib/actions";
 
 export default function Topbar() {
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center justify-between bg-white px-5 lg:h-20 lg:px-10">
-      <Link href={""} className="relative h-28 w-28">
+      <Link href={"/"} className="relative h-28 w-28">
         <Image
           src="/logos/logo-transparent.png"
           alt="Oga landlord logo"
@@ -83,13 +83,35 @@ export default function Topbar() {
               >
                 Orders
               </Link>
-              <button className="flex w-full items-center gap-x-2 rounded px-4 py-2 font-semibold hover:text-gold">
-                <FaPowerOff className="mt-1" size={14} /> Logout
-              </button>
+              <form action={logout}>
+                <button className="flex w-full items-center gap-x-2 rounded px-4 py-2 font-semibold hover:text-gold">
+                  <FaPowerOff className="mt-1" size={14} /> Logout
+                </button>
+              </form>
             </div>
           }
         />
       </div>
     </header>
+  );
+}
+
+function ProfileTopbar() {
+  return (
+    <Link href="" className="hidden items-center gap-x-2 lg:flex">
+      <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gray-300 lg:h-10 lg:w-10">
+        <Image
+          src="/images/profile-img.jpeg"
+          alt="Tenant profile photo"
+          fill
+          sizes="36px, (min-width: 1024px) 40px"
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+      <div>
+        <h3 className="text-sm font-semibold text-gray-600">Schawn Homme</h3>
+        <p className="text-xs">Tenant</p>
+      </div>
+    </Link>
   );
 }

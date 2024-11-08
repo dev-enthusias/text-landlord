@@ -6,13 +6,13 @@ import { routes } from "@/constants/routes";
 
 export default function Login() {
   return (
-    <main className="flex overflow-hidden p-4 lg:h-dvh lg:max-h-dvh">
+    <main className="flex overflow-hidden bg-white p-4 lg:h-dvh lg:max-h-dvh">
       <AuthLeftHandSide />
 
       <section className="no-scrollbar relative flex h-full grow flex-col items-center justify-center overflow-y-auto py-10">
         <AuthLogo />
 
-        <div className="p-1 lg:p-0">
+        <div className="p-1 lg:p-0 w-full">
           <LoginForm />
         </div>
 
@@ -20,21 +20,21 @@ export default function Login() {
           <span className="block lg:mr-2 lg:inline-block">New User?</span>
           <Link
             href={routes.REGISTERASLANDLORD}
-            className="mr-2 text-base font-semibold underline opacity-80 hover:opacity-100"
+            className="mr-2 text-base font-semibold underline transition-all duration-300 ease-out hover:text-gray-700"
           >
             Become Landlord
           </Link>
           <span className="mr-2">or</span>
           <Link
             href={routes.REGISTERASTENANT}
-            className="text-base font-semibold underline opacity-80 hover:opacity-100"
+            className="text-base font-semibold underline transition-all duration-300 ease-out hover:text-gray-700"
           >
             Become Tenant
           </Link>
           <span className="mx-2">or</span>
           <Link
             href={routes.REGISTERASAGENT}
-            className="block text-base font-semibold underline opacity-80 hover:opacity-100"
+            className="block text-base font-semibold underline transition-all duration-300 ease-out hover:text-gray-700"
           >
             Become Agent
           </Link>

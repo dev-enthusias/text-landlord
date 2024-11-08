@@ -6,7 +6,7 @@ import { Arrow } from "@/components/svg";
 
 export default function ForgotPassword() {
   return (
-    <main className="flex h-screen max-h-dvh overflow-hidden p-4">
+    <main className="flex h-screen max-h-dvh overflow-hidden bg-white p-4">
       <section className="hidden shrink-0 rounded-lg lg:block">
         <Sidebar />
       </section>
@@ -24,7 +24,7 @@ export default function ForgotPassword() {
           </div>
         </Link>
 
-        <div className="p-1 lg:p-0">
+        <div className="p-1 lg:p-0 w-full">
           <ForgotPasswordForm />
         </div>
 
@@ -48,7 +48,7 @@ function Sidebar() {
         alt="Photo by USSAMA AZAM on Unsplash"
         fill
         sizes="100vw"
-        style={{objectFit: 'cover'}}
+        style={{ objectFit: "cover" }}
       />
     </div>
   );

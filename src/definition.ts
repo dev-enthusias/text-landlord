@@ -1,3 +1,11 @@
+import { z } from "zod";
+import { Path, UseFormRegister } from "react-hook-form";
+import {
+  changePasswordSchema,
+  forgtotPasswordSchema,
+  loginSchema,
+} from "./lib/schema";
+
 export type SidebarNavLinks = {
   name: string;
   icon: JSX.Element;
@@ -15,18 +23,21 @@ export type RoleType = {
   role: "landlord" | "agent" | "tenant";
 };
 
-export type ValidationErrors = Record<string, string[] | undefined>;
-
-export type AuthenticateReturn = ValidationErrors | string | undefined | void;
-
 export interface TextInputProps {
   label: string;
-  name: string;
+  name: Path<any>;
   required?: boolean;
   type?: string;
-  error?: ValidationErrors | undefined;
+  error?: string;
+  register: UseFormRegister<any>;
 }
 
 export type TenantPropertyCardTypes = {
   type?: "order" | "rent" | "wishlist";
 };
+
+export type LoginDataType = z.infer<typeof loginSchema>;
+
+export type ForgotPasswordDataType = z.infer<typeof forgtotPasswordSchema>;
+
+export type ChangePasswordDataType = z.infer<typeof changePasswordSchema>;

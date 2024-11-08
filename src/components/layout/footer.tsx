@@ -1,9 +1,9 @@
-export default function AppFooter() {
+export default function Footer() {
   return (
-    <footer className="bg-[#e9dcbe]">
-      <section className="py-5 text-center text-sm">
-        <p>© 2024 Oga LandLords . All Rights Reserved.</p>
-      </section>
+    <footer className="bg-[#cecaa3] py-5">
+      <p className="text-center text-black">
+        © 2024 Oga LandLords . All Rights Reserved.
+      </p>
     </footer>
   );
 }

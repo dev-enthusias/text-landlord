@@ -23,13 +23,13 @@ export default function SelectInput({
 
   return (
     <div className="relative w-full">
-      <p className="mb-1 block font-semibold text-gray-600">
+      <p className="mb-1 block font-semibold text-sm text-gray-600">
         {label} {required && <span className="font-bold text-red-500">*</span>}
       </p>
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="focus:border-primary focus:ring-primary relative w-full cursor-pointer rounded-md border border-gray-300 bg-white py-3 pl-4 pr-10 text-left shadow-sm focus:outline-none focus:ring-1"
+        className="relative w-full cursor-pointer rounded-md border border-gray-300 bg-white py-3 pl-4 pr-10 text-left shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
       >
         <span className="block truncate">
           {selectedOption ? selectedOption.label : placeholder}
@@ -50,8 +50,8 @@ export default function SelectInput({
               key={option.value}
               className={` ${
                 option.value === value
-                  ? "bg-primary text-black"
-                  : "hover:bg-primary/20 text-gray-900"
+                  ? "bg-gold text-black"
+                  : "text-gray-900 hover:bg-gold/20"
               } group flex w-full items-center px-3 py-2 text-left`}
               onClick={() => {
                 onChange(option.value);
