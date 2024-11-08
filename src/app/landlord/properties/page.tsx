@@ -18,18 +18,18 @@ export default function Properties() {
           </div>
 
           <div className="lg:grid-cols grid w-full gap-5 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
-            <TenantPropertyCard />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
+            <TenantPropertyCard roleid={4} />
           </div>
         </section>
 
