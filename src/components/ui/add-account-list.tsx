@@ -4,7 +4,6 @@ import SelectInput from "@/components/ui/select-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
-import TextInput from "@/components/ui/text-input";
 import CustomCheckbox from "@/components/ui/custome-checkbox";
 
 export default function AddAccountListBtn() {
@@ -39,8 +38,8 @@ export default function AddAccountListBtn() {
                   onChange={setPropertyType}
                   placeholder="--Select--"
                 />
-                <TextInput name="" label="Account number" />
-                <TextInput name="" label="Account holder" />
+                {/* <TextInput name="" label="Account number" />
+                <TextInput name="" label="Account holder" /> */}
                 <CustomCheckbox
                   id="disabled"
                   checked={checked}

@@ -7,6 +7,7 @@ import { routes } from "@/constants/routes";
 import { useFormStepStore } from "@/providers/register-form-step-store-provider";
 import Link from "next/link";
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const maritalOptions = [
   { value: "divorced", label: "Divorce" },
@@ -39,8 +40,19 @@ export default function RegisterationForm() {
   const [selectedValuePropertyOwner, setSelectedValuePropertyOwner] =
     useState("");
 
+  const { register, handleSubmit } = useForm<any>({
+    // resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit: SubmitHandler<any> = async (data) => {
+    console.log(data);
+  };
+
   return (
-    <form className="mx-auto w-full max-w-[480px]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="mx-auto w-full max-w-[480px]"
+    >
       {step === 0 && (
         <section>
           <div className="mb-6 text-center">
@@ -53,9 +65,27 @@ export default function RegisterationForm() {
           </div>
 
           <div className="mb-6 space-y-5">
-            <TextInput name="" label="Full Name" required />
-            <TextInput name="" label="Email" required />
-            <TextInput name="" label="Phone" required />
+            <TextInput
+              register={register}
+              name="email"
+              label="Full Name"
+              // error={errors.email?.message}
+              required
+            />
+            <TextInput
+              register={register}
+              name="email"
+              label="Email"
+              // error={errors.email?.message}
+              required
+            />
+            <TextInput
+              register={register}
+              name="email"
+              label="Phone"
+              // error={errors.email?.message}
+              required
+            />
           </div>
 
           <button
@@ -80,7 +110,13 @@ export default function RegisterationForm() {
           </div>
 
           <div className="mb-6 space-y-5">
-            <TextInput name="" label="Occupation" required />
+            <TextInput
+              register={register}
+              name="email"
+              label="Occupation"
+              // error={errors.email?.message}
+              required
+            />
             <SelectInput
               label="Marital Status"
               options={maritalOptions}
@@ -97,7 +133,13 @@ export default function RegisterationForm() {
             />
             <div className="flex gap-5 lg:flex-row">
               <div className="grow lg:w-1/2">
-                <TextInput name="" label="Date of Birth" required />
+                <TextInput
+                  register={register}
+                  name="email"
+                  label="Date of Birth"
+                  // error={errors.email?.message}
+                  required
+                />
               </div>
               <div className="grow lg:w-1/2">
                 <SelectInput
@@ -131,7 +173,13 @@ export default function RegisterationForm() {
           </div>
 
           <div className="mb-6 space-y-5">
-            <TextInput name="" label="Current Address" required />
+            <TextInput
+              register={register}
+              name="email"
+              label="Current Address"
+              // error={errors.email?.message}
+              required
+            />
             <SelectInput
               label="Property Owner"
               options={propertyOwnerOptions}
@@ -139,13 +187,29 @@ export default function RegisterationForm() {
               onChange={setSelectedValuePropertyOwner}
               placeholder="Choose an option"
             />
-            <TextInput name="" label="Passport/ID Card No" required />
+            <TextInput
+              register={register}
+              name="email"
+              label="Passport/ID Card No"
+              // error={errors.email?.message}
+              required
+            />
             <div className="flex flex-col gap-5 lg:flex-row">
               <div className="lg:w-1/2">
-                <TextInput name="" label="Tin Number" required />
-              </div>
-              <div className="lg:w-1/2">
-                <TextInput name="" label="SSNIT Number" required />
+                <TextInput
+                  register={register}
+                  name="email"
+                  label="TIN Number"
+                  // error={errors.email?.message}
+                  required
+                />
+                <TextInput
+                  register={register}
+                  name="email"
+                  label="SSNIT Number"
+                  // error={errors.email?.message}
+                  required
+                />
               </div>
             </div>
           </div>
@@ -170,8 +234,20 @@ export default function RegisterationForm() {
           </div>
 
           <div className="mb-6 w-full space-y-5">
-            <TextInput name="" label="Password" required />
-            <TextInput name="" label="Confirm Password" required />
+            <TextInput
+              register={register}
+              name="email"
+              label="Password"
+              // error={errors.email?.message}
+              required
+            />
+            <TextInput
+              register={register}
+              name="email"
+              label="Confirm Password"
+              // error={errors.email?.message}
+              required
+            />
             <div className="flex items-center gap-x-1">
               <CustomCheckbox
                 id="disabled"

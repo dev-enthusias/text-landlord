@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
 import AddEditTenant from "./add-edit-tenant";
+import { IoMdAdd } from "react-icons/io";
 
 export default function AddTenantBtn() {
   const [isAddTenantModalOpen, setAddTenantModal] = useState(false);
@@ -10,10 +11,10 @@ export default function AddTenantBtn() {
   return (
     <>
       <button
-        className="rounded bg-primary-dark px-4 py-2 font-semibold"
+        className="flex items-center gap-x-1 rounded bg-gold px-4 py-2 text-sm font-bold tracking-wide text-black hover:bg-gold/80"
         onClick={() => setAddTenantModal(true)}
       >
-        + Add Tenant
+        <IoMdAdd /> Add Tenant
       </button>
 
       {isAddTenantModalOpen && (

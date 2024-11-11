@@ -4,14 +4,33 @@ import React, { useState } from "react";
 import TextInput from "../ui/text-input";
 import SelectInput from "../ui/select-input";
 import { ImagesIcon } from "lucide-react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 export default function PropertyForm() {
   const [propertyType, setPropertyType] = useState("");
 
+  const { register, handleSubmit } = useForm<any>({});
+
+  const onSubmit: SubmitHandler<any> = async (data) => {
+    // const res = await authenticate(data);
+
+    // if (res && typeof res === "string") {
+    //   toast.error("Error", { description: res });
+    // }
+    console.log(data);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <fieldset className="space-y-4">
-        <TextInput name="" label="Property Name" />
+        <TextInput
+          register={register}
+          name="Property Name"
+          label="Email"
+          // error={errors.email?.message}
+          required
+        />
+
         <SelectInput
           label="Property Type"
           options={[{ value: "land", label: "Land" }]}
@@ -26,7 +45,13 @@ export default function PropertyForm() {
           onChange={setPropertyType}
           placeholder="Choose an option"
         />
-        <TextInput name="" label="Property Address" />
+        <TextInput
+          register={register}
+          name="Property Address"
+          label="Property Address"
+          // error={errors.email?.message}
+          required
+        />
         <SelectInput
           label="Location"
           options={[{ value: "land", label: "Land" }]}
@@ -61,7 +86,7 @@ export default function PropertyForm() {
         </div>
         <button
           type="submit"
-          className="w-full rounded-lg bg-gold py-3 font-semibold transition-colors text-white duration-300 ease-out hover:bg-gold/80"
+          className="w-full rounded-lg bg-gold py-3 font-semibold text-white transition-colors duration-300 ease-out hover:bg-gold/80"
         >
           Save
         </button>

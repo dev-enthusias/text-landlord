@@ -53,8 +53,17 @@ export const propertyTypes = [
   "Shortlet",
 ];
 
-export const topbarLinks = [
+export const tenantTopbarLinks = [
   { link: "/tenant", name: "Home", exact: true },
   { link: routes.TENANT_PROPERTIES, name: "Properties" },
   { link: routes.FUND_WALLET, name: "Fund Wallet" },
+];
+
+export const landlordTopbarLinks = [
+  { link: "/landlord", name: "Home", exact: true },
+  { link: routes.LANDLORD_PROPERTIES, name: "Properties" },
+  { link: routes.AGENTS, name: "Agents" },
+  { link: routes.TENANTS, name: "Tenants" },
+  { link: routes.REPORTS, name: "Reports" },
+  { link: routes.BILL_MANAGEMENT, name: "Bill Management" },
 ];

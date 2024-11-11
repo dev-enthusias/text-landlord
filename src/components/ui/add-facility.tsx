@@ -4,7 +4,6 @@ import SelectInput from "@/components/ui/select-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
-import TextInput from "@/components/ui/text-input";
 
 export default function AddPropertyFacilityBtn() {
   const [propertyType, setPropertyType] = useState("");
@@ -30,7 +29,7 @@ export default function AddPropertyFacilityBtn() {
             </header>
             <main className="px-5">
               <fieldset className="space-y-4">
-                <TextInput name="" label="Name" />
+                {/* <TextInput name="" label="Name" /> */}
                 <SelectInput
                   label="Icon"
                   options={[{ value: "land", label: "Land" }]}

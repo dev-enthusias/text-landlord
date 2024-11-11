@@ -1,12 +1,12 @@
 import { useState } from "react";
 import SelectInput from "../ui/select-input";
+import SubmitButton from "./submit-button";
 
 export default function AgentForm() {
   const [propertyType, setPropertyType] = useState("");
 
   return (
     <form>
-      {" "}
       <fieldset className="space-y-4">
         <SelectInput
           label="Properties"
@@ -23,12 +23,7 @@ export default function AgentForm() {
           placeholder="City"
         />
 
-        <button
-          type="submit"
-          className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
-        >
-          Assign
-        </button>
+        <SubmitButton isSubmitting={false} text="Submit" />
       </fieldset>
     </form>
   );

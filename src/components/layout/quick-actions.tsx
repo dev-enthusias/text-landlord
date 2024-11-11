@@ -22,19 +22,19 @@ export default function QuickActions() {
         setAddPropertyModal(true);
         break;
       case 1:
-        router.push(routes.LANDLORD_DASHBOARD_TENANTS);
+        router.push(routes.TENANTS);
         break;
       case 2:
         setAddTenantModal(true);
         break;
       case 3:
-        router.push(routes.LANDLORD_DASHBOARD_REPORTS);
+        router.push(routes.REPORTS);
         break;
       case 4:
         setAddAgentModal(true);
         break;
       case 5:
-        router.push(routes.LANDLORD_DASHBOARD_BILLS);
+        router.push(routes.BILL_MANAGEMENT);
         break;
       default:
         break;

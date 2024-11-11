@@ -1,11 +1,11 @@
 "use client";
 
-import { routes } from "@/constants/routes";
-import { BathIcon, BedIcon, RulerIcon, Trash2, UsersRound } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { HeartSolid, HeartStroke } from "../svg";
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { HeartSolid, HeartStroke } from "../svg";
+import { BathIcon, BedIcon, RulerIcon, Trash2 } from "lucide-react";
+import { routes } from "@/constants/routes";
 import { TenantPropertyCardTypes } from "@/definition";
 
 function PropertyPhoto() {
@@ -61,50 +61,7 @@ function PropertyFeatures() {
   );
 }
 
-export function LandlordPropertyCard({
-  type,
-  queryParam = "",
-}: {
-  type?: "order";
-  queryParam?: string;
-}) {
-  return (
-    <Link
-      href={
-        type !== "order"
-          ? routes.LANDLORD_DASHBOARD_PROPERTIES +
-            "/0" +
-            `?property-status=${queryParam}`
-          : routes.LANDLORD_DASHBOARD_SETTINGS + "?path=orderdetails"
-      }
-      className="block"
-    >
-      <article className="group">
-        <PropertyPhoto />
-
-        <div className="border-b border-b-gray-300 py-2">
-          <PropertyPrice />
-
-          <PropertyNameAndLocation />
-
-          {/* Number of tenant and vacancy */}
-          <div className="mt-3 flex justify-between text-[14px] font-semibold">
-            <p className="flex items-center gap-x-1">
-              <UsersRound size={18} className="text-primary-dark" />{" "}
-              <span className="opacity-60"> 3 tenants</span>
-            </p>
-            <p className="flex items-center gap-x-1">
-              <UsersRound size={18} className="text-primary-dark" />
-              <span className="opacity-60">12 vacant</span>
-            </p>
-          </div>
-        </div>
-      </article>
-    </Link>
-  );
-}
-
-export function TenantPropertyCard({ type }: TenantPropertyCardTypes) {
+export function TenantPropertyCard({ type, roleid }: TenantPropertyCardTypes) {
   const [favProperty, setFavProperty] = useState(false);
 
   const handleFavClick = (
@@ -115,7 +72,22 @@ export function TenantPropertyCard({ type }: TenantPropertyCardTypes) {
     setFavProperty(!favProperty);
   };
 
-  const path = type === "order" ? routes.ORDERS + "/0" : "/properties/id";
+  const path = (() => {
+    switch (true) {
+      case roleid === 4:
+        return routes.LANDLORD_PROPERTIES + "/0";
+      case roleid === 5:
+        return type === "order"
+          ? routes.TENANT_ORDERS + "/0"
+          : routes.TENANT_PROPERTIES + "/0";
+      case roleid === 4 && type === "order":
+        return routes.LANDLORD_ORDERS + "/0";
+      default:
+        return type === "order"
+          ? routes.AGENT_DASHBOARD_SETTINGS + "?path=orderdetails"
+          : routes.AGENT_PROPERTIES + "/0";
+    }
+  })();
 
   return (
     <Link
@@ -178,19 +150,12 @@ export function TenantPropertyCard({ type }: TenantPropertyCardTypes) {
 
 export function PropertyCardLandscape({
   status,
-  queryParam = "",
 }: {
   status?: string;
   queryParam?: string;
 }) {
   return (
-    <Link
-      href={
-        routes.TENANT_DASHBOARD_PROPERTIES_DETAIL +
-        `?property-status=${queryParam}`
-      }
-      className="custom-shadow-sm block rounded-lg"
-    >
+    <Link href={""} className="custom-shadow-sm block rounded-lg">
       <article className="flex gap-x-3 rounded-lg p-2">
         <div className="relative w-32 overflow-hidden rounded-lg">
           <Image

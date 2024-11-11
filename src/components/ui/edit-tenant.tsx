@@ -10,10 +10,10 @@ export default function EditTenantBtn() {
   return (
     <>
       <button
-        className="rounded bg-primary-dark px-5 py-1 font-semibold"
+        className="rounded bg-gold px-5 py-2 text-sm font-semibold text-black"
         onClick={() => setAddTenantModal(true)}
       >
-        EDIT PROFILE
+        Edit Profile
       </button>
 
       {isAddTenantModalOpen && (

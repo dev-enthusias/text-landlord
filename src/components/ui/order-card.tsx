@@ -1,10 +1,6 @@
 import Link from "next/link";
-import { routes } from "@/constants/routes";
-import { getRole } from "@/lib/actions";
 
 export default async function OrderCard() {
-  const roleid = await getRole();
-
   // const href =
   //   roleid === 4
   //     ? routes.LANDLORD_DASHBOARD_SETTINGS + `?path='orderdetails`

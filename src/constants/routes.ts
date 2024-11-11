@@ -14,33 +14,38 @@ export const routes = {
 
   // Tenant pages
   CART: "/tenant/cart",
-  TENANT_DASHBOARD: "/tenant",
-  PROFILE: "/tenant/profile",
-  ORDERS: "/tenant/profile/orders",
-  PAY_RENT: "/tenant/profile/pay-rent",
+  TENANT_HOME: "/tenant",
+  TENANT_PROFILE: "/tenant/profile",
   WISHLIST: "/tenant/profile/wishlist",
+  PAY_RENT: "/tenant/profile/pay-rent",
   TENANT_PROPERTIES: "/tenant/properties",
+  TENANT_ORDERS: "/tenant/profile/orders",
   FUND_WALLET: "/tenant/profile/fund-wallet",
-  CHANGE_PASSWORD: "/tenant/profile/change-password",
   PAYMENT_HISTORY: "/tenant/profile/payment-history",
+  TENANT_CHANGE_PASSWORD: "/tenant/profile/change-password",
 
-  // Landlord dashboard pages
-  LANDLORD_DASHBOARD: "/dashboard/landlord",
-  LANDLORD_DASHBOARD_PROPERTIES: "/dashboard/landlord/properties",
-  LANDLORD_DASHBOARD_PROPERTIES_DETAIL:
-    "/dashboard/landlord/properties/:propertyId",
-  LANDLORD_DASHBOARD_CHAT: "/dashboard/landlord/chat",
-  LANDLORD_DASHBOARD_TRANSACTION_HISTORY:
-    "/dashboard/landlord/transaction-history",
-  LANDLORD_DASHBOARD_SETTINGS: "/dashboard/landlord/settings",
-  LANDLORD_DASHBOARD_BILLS: "/dashboard/landlord/bills",
-  LANDLORD_DASHBOARD_REPORTS: "/dashboard/landlord/reports",
-  LANDLORD_DASHBOARD_TENANTS: "/dashboard/landlord/tenants",
-  LANDLORD_DASHBOARD_NOTIFICATION: "/dashboard/landlord/notification",
+  // Landlord pages
+  AGENTS: "/landlord/agents",
+  LANDLORD_HOME: "/landlord",
+  TENANTS: "/landlord/tenants",
+  REPORTS: "/landlord/reports",
+  BILL_MANAGEMENT: "/landlord/bills",
+  LANDLORD_ORDERS: "/landlord/orders",
+  LANDLORD_PROFILE: "/landlord/profile",
+  ACCOUNTS: "/landlord/profile/accounts",
+  LANDLORD_PROPERTIES: "/landlord/properties",
+  LANDLORD_NOTIFICATION: "/landlord/notification",
+  PROPERTY_CATEGORY: "/landlord/profile/property-categories",
+  LANDLORD_CHANGE_PASSWORD: "/landlord/profile/change-password",
+  PROPERTY_FACILITIES: "/landlord/profile/property-facilities",
+  TRANSACTION_HISTORY: "/landlord/profile/transaction-history",
 
-  // Agent dashboard pages
-  AGENT_DASHBOARD_NOTIFICATION: "/dashboard/agent/notification",
+  // Agent pages
+  AGENT_ORDERS: "/agent/orders",
+  AGENT_PROFILE: "/agent/profile",
+  AGENT_PROPERTIES: "/agent/properties",
+  AGENT_DASHBOARD_NOTIFICATION: "/agent/notification",
   AGENT_DASHBOARD_SETTINGS: "/dashboard/agent/settings",
-  AGENT_DASHBOARD_CHAT: "/dashboard/agent/chat",
-  AGENT_DASHBOARD_TRANSACTION_HISTORY: "/dashboard/agent/transaction-history",
+  AGENT_CHANGE_PASSWORD: "/agent/profile/change-password",
+  AGENT_DASHBOARD_TRANSACTION_HISTORY: "/agent/transaction-history",
 };

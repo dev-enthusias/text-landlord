@@ -5,6 +5,7 @@ import { ChangePasswordDataType } from "@/definition";
 import { changePasswordSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import SubmitButton from "./submit-button";
 
 export function ChangePasswordForm() {
   const {
@@ -51,9 +52,7 @@ export function ChangePasswordForm() {
             required
           />
         </div>
-        <button className="w-full rounded-lg bg-gold py-3 font-semibold text-white transition-colors duration-300 ease-out hover:bg-gold/80">
-          Reset Password
-        </button>
+        <SubmitButton isSubmitting={isSubmitting} text="Reset Password" />
       </form>
     </section>
   );

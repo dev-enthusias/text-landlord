@@ -10,9 +10,9 @@ export default function Properties() {
       <section className="flex w-full px-2 lg:gap-x-8 xl:gap-x-10">
         <section className="no-scrollbar max-h-screen grow overflow-y-auto">
           <div className="mb-6 flex items-center justify-between">
-            <p className="text-lg font-semibold text-black">
+            <h1 className="text-lg font-semibold text-black">
               My Properties (20)
-            </p>
+            </h1>
 
             <AddPropertyBtn />
           </div>

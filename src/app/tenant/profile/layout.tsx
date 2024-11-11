@@ -26,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             Tenant
           </p>
           <NavLink
-            href={routes.PROFILE}
+            href={routes.TENANT_PROFILE}
             exact
             className="flex w-full items-center gap-x-2 border-t border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
             activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
@@ -54,7 +54,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             Pay Rent
           </NavLink>
           <NavLink
-            href={routes.CHANGE_PASSWORD}
+            href={routes.TENANT_CHANGE_PASSWORD}
             className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
             activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
           >
@@ -73,7 +73,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             Wishlist
           </NavLink>
           <NavLink
-            href={routes.ORDERS}
+            href={routes.TENANT_ORDERS}
             className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
             activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
           >

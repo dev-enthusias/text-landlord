@@ -34,6 +34,7 @@ export interface TextInputProps {
 
 export type TenantPropertyCardTypes = {
   type?: "order" | "rent" | "wishlist";
+  roleid?: number;
 };
 
 export type LoginDataType = z.infer<typeof loginSchema>;

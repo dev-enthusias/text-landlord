@@ -3,15 +3,34 @@ import Image from "next/image";
 import NotificationBtn from "../ui/notification-btn";
 import { routes } from "@/constants/routes";
 import { LucideShoppingCart } from "lucide-react";
-import { topbarLinks } from "@/constants/data";
+import { landlordTopbarLinks, tenantTopbarLinks } from "@/constants/data";
 import NavLink from "../ui/navlink";
 import { PiHeart } from "react-icons/pi";
 import { BsChat } from "react-icons/bs";
 import Dropdown from "../ui/dropdown";
 import { FaPowerOff } from "react-icons/fa";
-import { logout } from "@/lib/actions";
+import { getRole, logout } from "@/lib/actions";
 
-export default function Topbar() {
+export default async function Topbar() {
+  const roleid = await getRole();
+
+  const topbarLinks = roleid === 5 ? tenantTopbarLinks : landlordTopbarLinks;
+
+  const path = {
+    profile:
+      roleid === 5
+        ? routes.TENANT_PROFILE
+        : roleid === 4
+          ? routes.LANDLORD_PROFILE
+          : routes.AGENT_PROFILE,
+    order:
+      roleid === 5
+        ? routes.TENANT_ORDERS
+        : roleid === 4
+          ? routes.LANDLORD_ORDERS
+          : routes.AGENT_ORDERS,
+  };
+
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center justify-between bg-white px-5 lg:h-20 lg:px-10">
       <Link href={"/"} className="relative h-28 w-28">
@@ -24,7 +43,7 @@ export default function Topbar() {
         />
       </Link>
 
-      <div className="flex gap-x-4">
+      <div className="flex gap-x-6">
         {topbarLinks.map((l, i) => (
           <NavLink
             key={i}
@@ -38,12 +57,14 @@ export default function Topbar() {
       </div>
 
       <div className="relative flex items-center gap-x-4 lg:gap-x-5">
-        <Link
-          href={routes.WISHLIST}
-          className="items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
-        >
-          <PiHeart className="h-5 w-5" />
-        </Link>
+        {roleid === 5 && (
+          <Link
+            href={routes.WISHLIST}
+            className="items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
+          >
+            <PiHeart className="h-5 w-5" />
+          </Link>
+        )}
 
         <Link
           href={routes.CHAT}
@@ -54,35 +75,55 @@ export default function Topbar() {
 
         <NotificationBtn />
 
-        <Link
-          href={routes.CART}
-          className="items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
-        >
-          <LucideShoppingCart className="h-5 w-5" />
-        </Link>
+        {roleid === 5 && (
+          <Link
+            href={routes.CART}
+            className="items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
+          >
+            <LucideShoppingCart className="h-5 w-5" />
+          </Link>
+        )}
 
         <Dropdown
-          trigger={<ProfileTopbar />}
+          trigger={roleid && <ProfileTopbar roleid={roleid} />}
           content={
             <div className="space-y-3 py-2">
               <Link
-                href={routes.PROFILE}
+                href={path?.profile}
                 className="hover:text-semibold block rounded px-4 py-2 hover:bg-gold/20 hover:text-black"
               >
                 Profile
               </Link>
+              {roleid === 5 && (
+                <Link
+                  href={routes.FUND_WALLET}
+                  className="hover:text-semibold block rounded px-4 py-2 hover:bg-gold/20 hover:text-black"
+                >
+                  Fund Wallet
+                </Link>
+              )}
               <Link
-                href={routes.FUND_WALLET}
+                href={routes.ACCOUNTS}
                 className="hover:text-semibold block rounded px-4 py-2 hover:bg-gold/20 hover:text-black"
               >
-                Fund Wallet
+                Accounts
               </Link>
-              <Link
-                href={routes.ORDERS}
-                className="hover:text-semibold block rounded px-4 py-2 hover:bg-gold/20 hover:text-black"
-              >
-                Orders
-              </Link>
+              {roleid === 5 && (
+                <Link
+                  href={routes.TENANT_ORDERS}
+                  className="hover:text-semibold block rounded px-4 py-2 hover:bg-gold/20 hover:text-black"
+                >
+                  Orders
+                </Link>
+              )}
+              {roleid === 4 && (
+                <Link
+                  href={routes.TRANSACTION_HISTORY}
+                  className="hover:text-semibold block rounded px-4 py-2 hover:bg-gold/20 hover:text-black"
+                >
+                  Transaction History
+                </Link>
+              )}
               <form action={logout}>
                 <button className="flex w-full items-center gap-x-2 rounded px-4 py-2 font-semibold hover:text-gold">
                   <FaPowerOff className="mt-1" size={14} /> Logout
@@ -96,7 +137,7 @@ export default function Topbar() {
   );
 }
 
-function ProfileTopbar() {
+function ProfileTopbar({ roleid }: { roleid: number }) {
   return (
     <Link href="" className="hidden items-center gap-x-2 lg:flex">
       <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gray-300 lg:h-10 lg:w-10">
@@ -110,7 +151,9 @@ function ProfileTopbar() {
       </div>
       <div>
         <h3 className="text-sm font-semibold text-gray-600">Schawn Homme</h3>
-        <p className="text-xs">Tenant</p>
+        <p className="text-xs">
+          {roleid === 5 ? "Tenant" : roleid === 4 ? "Landlord" : "Agent"}
+        </p>
       </div>
     </Link>
   );

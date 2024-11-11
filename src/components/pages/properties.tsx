@@ -5,6 +5,7 @@ import { BsChat } from "react-icons/bs";
 import { SiStatuspal } from "react-icons/si";
 import { PiHeart, PiHeartFill } from "react-icons/pi";
 import { BathIcon, BedIcon, Handshake, RulerIcon } from "lucide-react";
+import { getRole } from "@/lib/actions";
 
 export function PropertyNameAndTags() {
   return (
@@ -180,7 +181,9 @@ export function PropertyAgent() {
   );
 }
 
-export function PurchaseProperty() {
+export async function PurchaseProperty() {
+  const roleid = await getRole();
+
   return (
     <section className="space-y-5 rounded-xl bg-white p-5">
       <p className="text-xl font-bold text-accent">
@@ -205,9 +208,11 @@ export function PurchaseProperty() {
         </div>
       </div>
 
-      <button className="w-full rounded-full bg-gold py-3 text-lg font-bold text-white">
-        Add to Cart
-      </button>
+      {roleid === 5 && (
+        <button className="w-full rounded-full bg-gold py-3 text-lg font-bold text-white">
+          Add to Cart
+        </button>
+      )}
     </section>
   );
 }

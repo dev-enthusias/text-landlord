@@ -1,8 +1,7 @@
 import Image from "next/image";
 import NavLink from "@/components/ui/navlink";
 import { routes } from "@/constants/routes";
-import { FaHeart, FaRegUserCircle } from "react-icons/fa";
-import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
+import { FaRegUserCircle } from "react-icons/fa";
 import { LuHistory } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { getRole } from "@/lib/actions";
