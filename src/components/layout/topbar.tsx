@@ -102,12 +102,14 @@ export default async function Topbar() {
                   Fund Wallet
                 </Link>
               )}
-              <Link
-                href={routes.ACCOUNTS}
-                className="hover:text-semibold block rounded px-4 py-2 hover:bg-gold/20 hover:text-black"
-              >
-                Accounts
-              </Link>
+              {roleid !== 5 && (
+                <Link
+                  href={routes.ACCOUNTS}
+                  className="hover:text-semibold block rounded px-4 py-2 hover:bg-gold/20 hover:text-black"
+                >
+                  Accounts
+                </Link>
+              )}
               {roleid === 5 && (
                 <Link
                   href={routes.TENANT_ORDERS}

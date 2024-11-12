@@ -3,7 +3,6 @@
 import Image from "next/image";
 import AddAgentBtn from "@/components/modals/add-agent";
 import { BsChat } from "react-icons/bs";
-import EditTenantBtn from "@/components/ui/edit-tenant";
 import AgentCard from "@/components/ui/agent-card";
 import AssignedPropertyCard from "@/components/ui/assigned-property-card";
 
@@ -70,7 +69,6 @@ function AgentDetails() {
       </section>
 
       <section className="my-2 flex items-center gap-x-6">
-        <EditTenantBtn />
         <button className="flex items-center gap-x-2 rounded bg-white px-6 py-2 text-sm font-semibold text-gold">
           <BsChat size={14} />
           Chat

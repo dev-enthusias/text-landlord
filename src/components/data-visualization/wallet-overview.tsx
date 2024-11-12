@@ -9,7 +9,7 @@ export function WalletOverview() {
   const [isVisible, setVisibility] = useState(true);
 
   return (
-    <section className="flex w-full items-start justify-between rounded-lg bg-primary px-4 py-3">
+    <section className="flex w-full items-start justify-between rounded-lg bg-gold px-4 py-3 text-black">
       <div>
         <div className="mb-4 flex items-center gap-x-4">
           <p className="flex items-center gap-x-1 text-sm">
