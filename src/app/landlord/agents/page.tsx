@@ -40,7 +40,6 @@ export default function Agents() {
           <AgentCard />
           <AgentCard />
           <AgentCard />
-          <AgentCard />
         </section>
       </div>
 
