@@ -3,7 +3,11 @@ import Image from "next/image";
 import NotificationBtn from "../ui/notification-btn";
 import { routes } from "@/constants/routes";
 import { LucideShoppingCart } from "lucide-react";
-import { landlordTopbarLinks, tenantTopbarLinks } from "@/constants/data";
+import {
+  agentTopbarLinks,
+  landlordTopbarLinks,
+  tenantTopbarLinks,
+} from "@/constants/data";
 import NavLink from "../ui/navlink";
 import { PiHeart } from "react-icons/pi";
 import { BsChat } from "react-icons/bs";
@@ -14,7 +18,12 @@ import { getRole, logout } from "@/lib/actions";
 export default async function Topbar() {
   const roleid = await getRole();
 
-  const topbarLinks = roleid === 5 ? tenantTopbarLinks : landlordTopbarLinks;
+  const topbarLinks =
+    roleid === 5
+      ? tenantTopbarLinks
+      : roleid === 7
+        ? agentTopbarLinks
+        : landlordTopbarLinks;
 
   const path = {
     profile:

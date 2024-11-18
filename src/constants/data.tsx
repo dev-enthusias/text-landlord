@@ -67,3 +67,11 @@ export const landlordTopbarLinks = [
   { link: routes.REPORTS, name: "Reports" },
   { link: routes.BILL_MANAGEMENT, name: "Bill Management" },
 ];
+
+export const agentTopbarLinks = [
+  { link: "/landlord", name: "Home", exact: true },
+  { link: routes.LANDLORD_PROPERTIES, name: "Properties" },
+  { link: routes.TENANTS, name: "Tenants" },
+  { link: routes.REPORTS, name: "Reports" },
+  { link: routes.BILL_MANAGEMENT, name: "Bill Management" },
+];
