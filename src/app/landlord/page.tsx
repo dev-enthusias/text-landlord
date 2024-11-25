@@ -10,23 +10,56 @@ import { LiaCoinsSolid } from "react-icons/lia";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { MoveDownIcon, MoveUpIcon } from "lucide-react";
 import { FaHourglassHalf, FaUsers } from "react-icons/fa";
+import { getToken, getUsername } from "@/lib/actions";
+import { LandlordDashboardStatisticResponseDataType } from "@/definition";
+import { BASE_URL } from "@/lib/axios-instance";
 
-export default function Home() {
+async function getStatistics(): Promise<
+  LandlordDashboardStatisticResponseDataType | undefined
+> {
+  const token = await getToken();
+  console.log(token);
+
+  try {
+    const response = await fetch(`${BASE_URL}/private/v1/dashboard`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const result = await response.json();
+    console.log(result);
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    return result.data;
+  } catch (error: unknown) {
+    console.error("Fetch error:", error);
+  }
+}
+
+export default async function Home() {
+  const name = await getUsername();
+  const data = await getStatistics();
+
   return (
-    <section className="mx-auto w-full max-w-[1300px] px-20 py-7 pb-20">
-      {/* Gretting */}
+    <section className="mx-auto w-full max-w-[1300px] px-5 py-7 pb-10 sm:pb-20 md:px-10 lg:px-16 xl:px-20">
+      {/* Greeting */}
       <div className="font-cormorant">
-        <h1 className="font-bold text-black lg:text-2xl">
-          Good morning, Samantha Oliver!
+        <h1 className="text-2xl font-bold text-black">
+          Good morning, {name?.split(" ")[0]}!
         </h1>
         <p className="font-semibold text-black">
           Let&apos;s help you get a god view of your properties
         </p>
       </div>
 
-      <div className="mt-6 grid grid-cols-7 items-start gap-5">
-        <section className="col-span-5">
-          <div className="mb-10 flex w-full gap-x-5">
+      <div className="mt-6 grid grid-cols-2 items-start gap-5 lg:grid-cols-7">
+        {/* Left Hand Side */}
+        <section className="col-span-2 lg:col-span-5">
+          <div className="mb-5 grid w-full gap-5 sm:grid-cols-2 md:grid-cols-3 lg:mb-10">
             <FinanceSummary
               title="Total Revenue"
               icon={<LiaCoinsSolid />}
@@ -53,12 +86,16 @@ export default function Home() {
             />
           </div>
 
-          <div className="mb-10 flex gap-x-5">
+          <div className="mb-5 grid w-full gap-5 sm:grid-cols-2 md:grid-cols-3 lg:mb-10">
             <PersonalSummary
               title="Total Properties"
               icon={<MdHomeWork />}
-              total="20"
-              description={<p>180 occupied, 20 vacant</p>}
+              total={data ? data.total_properties : "Loading..."}
+              description={
+                <p>
+                  {data?.total_occupied} occupied, {data?.total_vacant} vacant
+                </p>
+              }
               button={<AddPropertyBtn />}
             />
             <PersonalSummary
@@ -77,7 +114,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="mt-5 rounded-lg bg-white p-5">
+          <div className="rounded-lg bg-white p-5">
             <div className="mb-4">
               <h3 className="text-lg font-semibold text-black">
                 Recent Transactions
@@ -91,18 +128,32 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="col-span-2 space-y-5">
-          <div className="rounded-lg bg-white px-5 py-3">
+
+        {/* Right Hand Side */}
+        <section className="col-span-2 grid items-start gap-5 md:grid-cols-2 lg:grid-cols-1">
+          <div className="rounded-lg bg-white px-5 pb-5 pt-3">
             <h3 className="mb-4 text-lg font-semibold text-black">Chats</h3>
             <div className="no-scrollbar grid w-full gap-y-3 overflow-x-scroll px-1">
               <FriendCard />
               <FriendCard />
               <FriendCard />
+              <div className="hidden gap-y-3 md:grid lg:hidden">
+                <FriendCard />
+                <FriendCard />
+              </div>
             </div>
           </div>
 
-          <div className="rounded-lg bg-white px-5 py-3">
-            <h3 className="mb-4 text-lg font-semibold text-black">Reports</h3>
+          <div className="rounded-lg bg-white px-5 pb-5 pt-3">
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-black">Reports</h3>
+              <Link
+                href={routes.REPORTS}
+                className="text-sm underline transition-colors duration-300 hover:text-black"
+              >
+                View all
+              </Link>
+            </div>
             <div className="space-y-4">
               <Report />
               <Report />
@@ -156,7 +207,7 @@ function PersonalSummary({
 }: {
   title: string;
   icon: React.ReactNode;
-  total: string;
+  total: number | React.ReactNode;
   description?: React.ReactNode;
   button: React.ReactNode;
 }) {
@@ -265,9 +316,9 @@ function FriendCard() {
 
 function TransactionCard({ status }: { status: "credit" | "debit" }) {
   return (
-    <article className="flex items-center justify-between gap-x-1 border-b border-b-gray-200 pb-3 last:border-none">
-      <div className="flex items-center gap-x-2 truncate">
-        <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold lg:h-6 lg:w-6">
+    <article className="flex flex-wrap items-center justify-between gap-2 gap-x-1 border-b border-b-gray-200 pb-3 last:border-none">
+      <div className="flex items-start gap-x-2 sm:items-center">
+        <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
           {status === "credit" ? (
             <MoveDownIcon className="h-3 w-3" />
           ) : (
@@ -278,18 +329,26 @@ function TransactionCard({ status }: { status: "credit" | "debit" }) {
           <h3 className="text-sm font-semibold text-gray-700">
             Emperica in Dazil, Villa
           </h3>
-          <p className="text-medium flex items-center gap-x-0.5 text-xs">
+          <p className="text-xs" title="Palaxisto Emeriando Plaza Road">
+            {/* {"Palaxisto Emeriando Plaza Road another".length > 25
+              ? "Palaxisto Emeriando Plaza Road another".slice(0, 28) + "..."
+              : "Palaxisto Emeriando Plaza Road another"} */}
             Palaxisto Emeriando Plaza Road
+          </p>
+          <p className="text-xxs font-normal text-gray-500 sm:hidden">
+            18th August, 12:17 PM
           </p>
         </div>
       </div>
 
-      <p className="text-sm font-normal text-gray-500">18th August, 12:17 PM</p>
+      <p className="hidden text-sm font-normal text-gray-500 sm:block">
+        18th August, 12:17 PM
+      </p>
 
-      <div className="shrink-0 text-right text-sm font-bold text-black lg:text-base">
-        <p>{status === "debit" && "-"}₦650,000</p>
+      <div className="shrink-0 text-base font-bold text-black">
+        <p>₦650,000</p>
         <p
-          className={`text-xs font-normal ${status === "debit" ? "text-red-600" : "text-green-600"}`}
+          className={`text-left text-xs font-normal ${status === "debit" ? "text-red-600" : "text-green-600"}`}
         >
           {status === "debit" ? "Debit" : "Credit"}
         </p>

@@ -11,7 +11,7 @@ export default function ChangePassword() {
         </div>
       </header>
 
-      <div className="px-10 py-7">
+      <div className="px-5 py-7 lg:px-10">
         <ChangePasswordForm />
       </div>
     </section>

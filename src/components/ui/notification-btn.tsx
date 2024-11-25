@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import NotificationCard from "./notification-card";
-import { BellRing } from "lucide-react";
+import { BellRing, ChevronLeft } from "lucide-react";
 
 export default function NotificationBtn() {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +45,7 @@ export default function NotificationBtn() {
     <div className="relative">
       <button
         ref={buttonRef}
-        className="hidden items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
+        className="items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle notifications"
       >
@@ -61,13 +61,14 @@ export default function NotificationBtn() {
         <div
           ref={notificationRef}
           onClick={handleNotificationClick}
-          className="fixed right-0 top-20 z-50 flex h-[calc(100vh-80px)] w-[420px] flex-col rounded-lg border border-gray-200 bg-white"
+          className="fixed right-0 top-16 z-50 flex h-[calc(100vh-64px)] w-full max-w-[420px] flex-col rounded-lg border border-gray-200 bg-white lg:top-20 lg:h-[calc(100vh-80px)]"
         >
           <section className="flex items-center justify-between border-b border-gray-200 bg-white px-3 py-5">
-            <div className="flex gap-x-4">
-              <h1 className="text-xl font-semibold text-black">
-                Notifications
-              </h1>
+            <div className="flex items-center gap-x-4 text-black">
+              <button onClick={() => setIsOpen(false)} className="md:hidden">
+                <ChevronLeft />
+              </button>
+              <h1 className="text-xl font-semibold">Notifications</h1>
             </div>
             <button
               className="text-[14px] font-semibold text-accent hover:underline"

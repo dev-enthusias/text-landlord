@@ -37,8 +37,8 @@ export default async function Layout({
   };
 
   return (
-    <section className="flex items-start gap-x-10 px-20 py-7 pb-20">
-      <div className="custom-shadow mt-10 w-[320px] shrink-0 space-y-5 overflow-hidden rounded-t-xl text-sm">
+    <section className="flex items-start gap-x-10 py-7 lg:pb-20 lg:px-20">
+      <div className="custom-shadow mt-10 hidden w-[320px] shrink-0 space-y-5 overflow-hidden text-sm lg:block lg:rounded-t-xl">
         <section className="pt relative flex flex-col items-center justify-center gap-2 bg-white pt-5">
           <div className="relative h-28 w-28 overflow-hidden rounded-full">
             <Image

@@ -42,7 +42,7 @@ export default async function Topbar() {
 
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center justify-between bg-white px-5 lg:h-20 lg:px-10">
-      <Link href={"/"} className="relative h-28 w-28">
+      <Link href={""} className="relative h-28 w-28">
         <Image
           src="/logos/logo-transparent.png"
           alt="Oga landlord logo"
@@ -52,7 +52,7 @@ export default async function Topbar() {
         />
       </Link>
 
-      <div className="flex gap-x-6">
+      <div className="hidden gap-x-6 sm:flex">
         {topbarLinks.map((l, i) => (
           <NavLink
             key={i}
@@ -143,6 +143,21 @@ export default async function Topbar() {
             </div>
           }
         />
+
+        <article>
+          <Link
+            href={routes.LANDLORD_SETTINGS}
+            className="relative block h-8 w-8 overflow-hidden rounded-full bg-gray-300 lg:hidden"
+          >
+            <Image
+              src="/images/profile-img.jpeg"
+              alt="Tenant profile photo"
+              fill
+              sizes="36px, (min-width: 1024px) 40px"
+              style={{ objectFit: "cover" }}
+            />
+          </Link>
+        </article>
       </div>
     </header>
   );
@@ -150,7 +165,7 @@ export default async function Topbar() {
 
 function ProfileTopbar({ roleid }: { roleid: number }) {
   return (
-    <Link href="" className="hidden items-center gap-x-2 lg:flex">
+    <article className="hidden items-center gap-x-2 lg:flex">
       <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gray-300 lg:h-10 lg:w-10">
         <Image
           src="/images/profile-img.jpeg"
@@ -160,12 +175,12 @@ function ProfileTopbar({ roleid }: { roleid: number }) {
           style={{ objectFit: "cover" }}
         />
       </div>
-      <div>
+      <div className="hidden md:block">
         <h3 className="text-sm font-semibold text-gray-600">Schawn Homme</h3>
         <p className="text-xs">
           {roleid === 5 ? "Tenant" : roleid === 4 ? "Landlord" : "Agent"}
         </p>
       </div>
-    </Link>
+    </article>
   );
 }

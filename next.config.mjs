@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["lucide-react"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "api.ogalandlords.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

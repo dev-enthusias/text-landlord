@@ -9,10 +9,10 @@ export default function Login() {
     <main className="flex overflow-hidden bg-white p-4 lg:h-dvh lg:max-h-dvh">
       <AuthLeftHandSide />
 
-      <section className="no-scrollbar relative flex h-full grow flex-col items-center justify-center overflow-y-auto py-10">
+      <section className="no-scrollbar relative flex h-full min-h-dvh grow flex-col items-center justify-center overflow-y-auto py-10">
         <AuthLogo />
 
-        <div className="p-1 lg:p-0 w-full">
+        <div className="w-full p-1 lg:p-0">
           <LoginForm />
         </div>
 

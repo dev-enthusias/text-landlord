@@ -8,11 +8,11 @@ import { BathIcon, BedIcon, RulerIcon, Trash2 } from "lucide-react";
 import { routes } from "@/constants/routes";
 import { TenantPropertyCardTypes } from "@/definition";
 
-function PropertyPhoto() {
+function PropertyPhoto({ photo }: { photo: string }) {
   return (
-    <div className="relative h-36 min-w-[240px] overflow-hidden rounded-lg lg:min-w-fit">
+    <div className="relative h-36 min-w-[240px] overflow-hidden rounded-lg shadow lg:min-w-fit">
       <Image
-        src="/images/duplex.webp"
+        src={photo}
         alt="property display photo"
         fill
         sizes="384px"
@@ -33,10 +33,14 @@ function PropertyPrice() {
   );
 }
 
-function PropertyNameAndLocation() {
+function PropertyNameAndLocation({
+  data,
+}: {
+  data: { name: string; location: string };
+}) {
   return (
     <div>
-      <h3 className="text-sm text-gray-600">Emperica in Dazil, Villa</h3>
+      <h3 className="text-sm text-gray-600">{data.name}</h3>
       <p className="text-xs tracking-wide">Palaxisto Emeriando Plaza Road</p>
     </div>
   );
@@ -61,7 +65,7 @@ function PropertyFeatures() {
   );
 }
 
-export function TenantPropertyCard({ type, roleid }: TenantPropertyCardTypes) {
+export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
   const [favProperty, setFavProperty] = useState(false);
 
   const handleFavClick = (
@@ -75,7 +79,7 @@ export function TenantPropertyCard({ type, roleid }: TenantPropertyCardTypes) {
   const path = (() => {
     switch (true) {
       case roleid === 4:
-        return routes.LANDLORD_PROPERTIES + "/0";
+        return routes.LANDLORD_PROPERTIES + `/${data.id}`;
       case roleid === 5:
         return type === "order"
           ? routes.TENANT_ORDERS + "/0"
@@ -95,7 +99,7 @@ export function TenantPropertyCard({ type, roleid }: TenantPropertyCardTypes) {
       className="font-lato block w-full rounded-lg border bg-white p-2 shadow-gold transition duration-300 ease-out hover:shadow-lg"
     >
       <article className="group">
-        <PropertyPhoto />
+        <PropertyPhoto photo={data.image} />
 
         {/* Rent status */}
         <div className="pt-2">
@@ -133,7 +137,7 @@ export function TenantPropertyCard({ type, roleid }: TenantPropertyCardTypes) {
             </div>
 
             {/* Property name and location */}
-            <PropertyNameAndLocation />
+            <PropertyNameAndLocation data={{ name: data.name, location: "" }} />
 
             {type !== "order" ? (
               <PropertyFeatures />

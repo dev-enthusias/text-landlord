@@ -1,6 +1,38 @@
 import PrevPageButton from "@/components/ui/prev-page";
+import { ProfileDetailsRDT } from "@/definition";
+import { getToken } from "@/lib/actions";
+import { BASE_URL } from "@/lib/axios-instance";
 
-export default function Profile() {
+async function getProfileDetails(): Promise<ProfileDetailsRDT | undefined> {
+  const token = await getToken();
+
+  try {
+    const response = await fetch(`${BASE_URL}/private/v1/user/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    // Handle non-200 responses
+    if (!response.ok) {
+      const errorText = await response.text(); // Get full response body
+      console.error(`Error ${response.status}: ${response.statusText}`);
+      console.log("Error response body:", errorText);
+      return;
+    }
+
+    // Parse JSON for a valid response
+    const result = await response.json();
+    console.log(result);
+    return result.data.profile_info;
+  } catch (error: unknown) {
+    console.error("Fetch error:", error);
+  }
+}
+
+export default async function ProfileDetails() {
+  const data = await getProfileDetails();
+
   return (
     <section>
       <header className="flex w-full items-center justify-between border-b border-gray-200 bg-white px-3 py-5">
@@ -13,22 +45,24 @@ export default function Profile() {
         </button>
       </header>
 
-      <div className="px-10 py-7">
-        <form className="grid grid-cols-2 gap-5">
-          <TextInput label="Name" />
-          <TextInput label="Email" />
-          <TextInput label="Phone Number" />
-          <TextInput label="Religion" />
-          <TextInput label="Gender" />
-          <TextInput label="Date of Birth" />
-          <TextInput label="Marital Status" />
-          <TextInput label="Occupation" />
-          <TextInput label="Property Owner" />
-          <TextInput label="Passport/ID No" />
-          <TextInput label="TIN" />
-          <TextInput label="SIN" />
-          <div className="col-span-2">
-            <TextInput label="Address" />
+      <div className="px-5 py-7 lg:px-10">
+        <form>
+          <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
+            <TextInput label="Name" />
+            <TextInput label="Email" />
+            <TextInput label="Phone Number" />
+            <TextInput label="Religion" />
+            <TextInput label="Gender" />
+            <TextInput label="Date of Birth" />
+            <TextInput label="Marital Status" />
+            <TextInput label="Occupation" />
+            <TextInput label="Property Owner" />
+            <TextInput label="Passport/ID No" />
+            <TextInput label="TIN" />
+            <TextInput label="SIN" />
+            <div className="lg:col-span-2">
+              <TextInput label="Address" />
+            </div>
           </div>
         </form>
       </div>
@@ -38,7 +72,7 @@ export default function Profile() {
 
 function TextInput({ label }: { label: string }) {
   return (
-    <div>
+    <div className="w-full">
       <label htmlFor="" className="mb-1 block text-sm text-gray-600">
         {label}
       </label>

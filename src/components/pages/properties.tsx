@@ -7,14 +7,19 @@ import { PiHeart, PiHeartFill } from "react-icons/pi";
 import { BathIcon, BedIcon, Handshake, RulerIcon } from "lucide-react";
 import { getRole } from "@/lib/actions";
 
-export function PropertyNameAndTags() {
+export function PropertyNameAndTags({
+  data,
+}: {
+  data: { name: string; dealType: string; type: string; city: string };
+}) {
   return (
     <div>
       <h1 className="font-roboto text-2xl font-semibold text-black">
-        Emperica Havilla Villa
+        {data.name}
       </h1>
       <p className="flex gap-x-2 text-sm tracking-wide">
-        <span>Rent</span> | <span>Apartment</span> | <span>Lagos</span>
+        <span>{data.dealType}</span> | <span>{data.type}</span> |{" "}
+        <span>{data.city}</span>
       </p>
     </div>
   );

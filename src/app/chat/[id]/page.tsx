@@ -3,10 +3,10 @@ import ChatHeader from "@/components/layout/chat-header";
 
 export default function Chat() {
   return (
-    <section className="flex h-full grow flex-col bg-[#FAFAFA] pb-7">
+    <section className="flex h-full grow flex-col bg-[#FAFAFA] lg:pb-7">
       <ChatHeader />
 
-      <main className="grow overflow-y-auto px-4 lg:px-7"></main>
+      <main className={`chat-content grow overflow-y-auto px-4 lg:px-7`}></main>
 
       <ChatFooter />
     </section>

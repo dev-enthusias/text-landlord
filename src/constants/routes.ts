@@ -34,6 +34,7 @@ export const routes = {
   LANDLORD_PROFILE: "/landlord/profile",
   ACCOUNTS: "/landlord/profile/accounts",
   LANDLORD_PROPERTIES: "/landlord/properties",
+  LANDLORD_SETTINGS: "/landlord/profile/settings",
   LANDLORD_NOTIFICATION: "/landlord/notification",
   PROPERTY_CATEGORY: "/landlord/profile/property-categories",
   LANDLORD_CHANGE_PASSWORD: "/landlord/profile/change-password",

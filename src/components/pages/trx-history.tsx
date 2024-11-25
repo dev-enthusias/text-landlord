@@ -22,7 +22,7 @@ export default function PaymentHistoryPage({ btns }: { btns: TrxButtonProps }) {
           </div>
         </header>
 
-        <div className="no-scrollbar mt-7 overflow-x-auto px-10">
+        <div className="no-scrollbar mt-7 overflow-x-auto px-5 lg:px-10">
           <div className="flex space-x-4">
             {btns.map(({ text, link, type }, i) => (
               <Link
@@ -37,7 +37,7 @@ export default function PaymentHistoryPage({ btns }: { btns: TrxButtonProps }) {
         </div>
       </section>
 
-      <section className="px-3 py-4 lg:px-10">
+      <section className="px-5 py-4 lg:px-10">
         <section className="mb-4">
           <div className="mb-2 flex items-center gap-x-1">
             <h2 className="text-xs font-semibold text-gray-700">NOVEMBER</h2>

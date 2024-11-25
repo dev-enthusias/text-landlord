@@ -27,8 +27,8 @@ export default function LoginForm() {
   const onSubmit: SubmitHandler<LoginDataType> = async (data) => {
     const res = await authenticate(data);
 
-    if (res && typeof res === "string") {
-      toast.error("Error", { description: res });
+    if (res && !res.status) {
+      toast.error("Error", { description: res.message });
     }
   };
 

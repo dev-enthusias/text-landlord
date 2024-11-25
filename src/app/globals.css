@@ -33,22 +33,17 @@ body {
     scrollbar-width: none;
   }
 
-  .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #b59410 transparent;
-  }
-
   .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #b59410;
-    border-radius: 20px;
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #dddacf;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #b59410b1;
+    border-radius: 4px;
   }
 }
 

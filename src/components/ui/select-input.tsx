@@ -23,7 +23,7 @@ export default function SelectInput({
 
   return (
     <div className="relative w-full">
-      <p className="mb-1 block font-semibold text-sm text-gray-600">
+      <p className="mb-1 block text-sm font-semibold text-gray-600">
         {label} {required && <span className="font-bold text-red-500">*</span>}
       </p>
       <button
