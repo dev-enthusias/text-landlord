@@ -40,11 +40,10 @@ export default async function PropertyDetails({
 }) {
   const { id } = params;
   const data = await getLandlordPropertyDetails(id);
-
   if (typeof data === "object" && "error" in data) return data.error;
 
   return (
-    <main className="px-20 py-7 pb-20">
+    <main className="px-5 py-7 pb-10 lg:px-20 lg:pb-20">
       <div className="mb-8 flex justify-between">
         <BackButton />
         <p className="text-sm">
@@ -64,10 +63,10 @@ export default async function PropertyDetails({
       <section className="mb-4 flex items-center justify-between">
         <PropertyNameAndTags
           data={{
-            name: data?.property.name || "",
-            dealType: data?.property.deal_type || "",
-            type: data?.property.type || "",
-            city: data?.property.city || "Nil",
+            name: data?.property?.name || "Radical House",
+            dealType: data?.property?.deal_type || "Rent",
+            type: data?.property?.type || "Duplex",
+            city: data?.property?.city || "Lagos",
           }}
         />
         <EditPropertyBtn />
@@ -75,14 +74,14 @@ export default async function PropertyDetails({
 
       <Gallery />
 
-      <section className="grid grid-cols-5 gap-x-10">
-        <div className="col-span-3 grid gap-y-10">
+      <section className="grid grid-cols-5 gap-10">
+        <div className="col-span-5 grid gap-y-10 lg:col-span-3">
           <Description />
           <Features />
           <Location />
         </div>
 
-        <div className="col-span-2 flex flex-col gap-y-10">
+        <div className="col-span-5 flex flex-col-reverse gap-y-10 lg:col-span-2 lg:flex-col">
           <PropertyAgent />
           <PropertyTenants />
           <PurchaseProperty />

@@ -14,7 +14,7 @@ export function PropertyNameAndTags({
 }) {
   return (
     <div>
-      <h1 className="font-roboto text-2xl font-semibold text-black">
+      <h1 className="font-roboto text-xl font-semibold text-black sm:text-2xl">
         {data.name}
       </h1>
       <p className="flex gap-x-2 text-sm tracking-wide">
@@ -39,8 +39,8 @@ export function WishlistButton() {
 
 export function Gallery() {
   return (
-    <section className="mb-6 grid h-[80vh] grid-cols-4 grid-rows-3 gap-5">
-      <div className="relative col-span-3 row-span-3 overflow-hidden rounded-xl">
+    <section className="mb-6 grid h-[50vh] grid-cols-4 grid-rows-4 gap-2 lg:h-[80vh] lg:grid-rows-3 lg:gap-5">
+      <div className="relative col-span-4 row-span-3 overflow-hidden rounded-xl lg:col-span-3">
         <Image
           src="/images/duplex.webp"
           alt="Photo of apartment"
@@ -49,7 +49,7 @@ export function Gallery() {
           className="object-cover"
         />
       </div>
-      <div className="relative overflow-hidden rounded-xl">
+      <div className="relative h-20 overflow-hidden rounded-xl lg:h-auto">
         <Image
           src="/images/image-2.jpeg"
           alt="photo of apartment"
@@ -57,7 +57,7 @@ export function Gallery() {
           className="object-cover"
         />
       </div>
-      <div className="relative overflow-hidden rounded-xl">
+      <div className="relative h-20 overflow-hidden rounded-xl lg:h-auto">
         <Image
           src="/images/image-3.jpeg"
           alt="photo of apartment"
@@ -65,9 +65,17 @@ export function Gallery() {
           className="object-cover"
         />
       </div>
-      <div className="relative overflow-hidden rounded-xl">
+      <div className="relative h-20 overflow-hidden rounded-xl lg:h-auto">
         <Image
           src="/images/image-2.jpeg"
+          alt="photo of apartment"
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="relative h-20 overflow-hidden rounded-xl lg:hidden lg:h-auto">
+        <Image
+          src="/images/image-3.jpeg"
           alt="photo of apartment"
           fill
           className="object-cover"
@@ -295,9 +303,9 @@ function PropertyTenant({
       </p>
       <Link
         href={routes.CHAT + "/0"}
-        className="flex items-center gap-x-2 rounded-full bg-white px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
+        className="flex items-center gap-x-2 rounded-full bg-white px-1.5 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow sm:px-4"
       >
-        <BsChat /> Chat
+        <BsChat /> <span className="hidden sm:inline-block">Chat</span>
       </Link>
     </div>
   );

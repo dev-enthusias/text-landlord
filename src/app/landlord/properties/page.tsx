@@ -18,16 +18,15 @@ async function getLandlordProperties(): Promise<
 }
 
 export default async function Properties() {
-  // const data = await getLandlordProperties();
-  // console.log(data);
+  const data = await getLandlordProperties();
 
   return (
-    <main className="mb-20 flex px-4 pt-7 sm:px-10 lg:gap-x-8 xl:gap-x-10">
+    <main className="mb-20 flex px-5 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
       {/* <section className="w-[240px] shrink-0 px-2">
         <Filter />
       </section> */}
-      <section className="flex min-h-[65vh] w-full px-2 lg:gap-x-8 xl:gap-x-10">
-        <section className="no-scrollbar max-h-screen grow overflow-y-auto">
+      <section className="flex min-h-[65.5vh] w-full lg:gap-x-8 xl:gap-x-10">
+        <section className="grow">
           <div className="mb-6 flex items-center justify-between">
             <h1 className="text-lg font-semibold text-black">
               My Properties (0)
@@ -36,10 +35,10 @@ export default async function Properties() {
             <AddPropertyBtn />
           </div>
 
-          <div className="lg:grid-cols grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-            {/* {data?.properties.list.map((property) => (
-            ))} */}
-            <PropertyCard roleid={4} data={{}} />
+          <div className="lg:grid-cols grid w-full gap-5 sm:grid-cols-2 min-[875px]:grid-cols-3 2xl:grid-cols-4">
+            {data?.properties.list.map((property) => (
+              <PropertyCard key={property.id} roleid={4} data={property} />
+            ))}
           </div>
         </section>
 

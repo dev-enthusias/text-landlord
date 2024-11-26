@@ -10,7 +10,7 @@ import { TenantPropertyCardTypes } from "@/definition";
 
 function PropertyPhoto({ photo }: { photo: string }) {
   return (
-    <div className="relative h-36 min-w-[240px] overflow-hidden rounded-lg shadow lg:min-w-fit">
+    <div className="relative w-36 overflow-hidden rounded-lg shadow sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
       <Image
         src={photo}
         alt="property display photo"
@@ -40,7 +40,7 @@ function PropertyNameAndLocation({
 }) {
   return (
     <div>
-      <h3 className="text-sm text-gray-600">{data.name}</h3>
+      <h3 className="text-gray-600">Dominaco Plaxa</h3>
       <p className="text-xs tracking-wide">Palaxisto Emeriando Plaza Road</p>
     </div>
   );
@@ -98,11 +98,11 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
       href={path}
       className="font-lato block w-full rounded-lg border bg-white p-2 shadow-gold transition duration-300 ease-out hover:shadow-lg"
     >
-      <article className="group">
+      <article className="group flex gap-x-1 sm:flex-col">
         <PropertyPhoto photo={data.image} />
 
         {/* Rent status */}
-        <div className="pt-2">
+        <div className="grow pt-2">
           <div className="px-2">
             {/* Property value & Favourite Btn || Delete Btn */}
             <div className="mb-2 flex justify-between">
@@ -123,7 +123,7 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
                 </p>
               ) : type === "order" ? (
                 ""
-              ) : (
+              ) : roleid === 5 ? (
                 <button onClick={(e) => handleFavClick(e)}>
                   {!favProperty ? (
                     <span className="group-hover:animate-pulse">
@@ -133,6 +133,8 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
                     <HeartSolid />
                   )}
                 </button>
+              ) : (
+                ""
               )}
             </div>
 
@@ -146,72 +148,6 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
               <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
             )}
           </div>
-        </div>
-      </article>
-    </Link>
-  );
-}
-
-export function PropertyCardLandscape({
-  status,
-}: {
-  status?: string;
-  queryParam?: string;
-}) {
-  return (
-    <Link href={""} className="custom-shadow-sm block rounded-lg">
-      <article className="flex gap-x-3 rounded-lg p-2">
-        <div className="relative w-32 overflow-hidden rounded-lg">
-          <Image
-            src="/images/duplex.webp"
-            alt="property display photo"
-            fill
-            sizes="384px"
-            className="object-cover"
-          />
-        </div>
-
-        <div>
-          {status === "upcoming" ? (
-            <p className="text-xxs font-semibold text-accent">
-              Upcoming - Due 21st December, 2024
-            </p>
-          ) : status === "overdue" ? (
-            <p className="text-xxs font-semibold text-red-600">
-              Overdue - Expired 15th September, 2024
-            </p>
-          ) : (
-            ""
-          )}
-
-          <div>
-            <h3 className="text-lg font-semibold">Emperica in Dazil, Villa</h3>
-            <p className="text-medium flex items-center gap-x-0.5 text-sm">
-              Palaxisto Emeriando Plaza Road
-            </p>
-          </div>
-
-          <p className="my-2 flex items-center gap-x-1 text-lg font-bold text-primary-dark">
-            ₦5,000,000
-            <span className="text-[14px] font-medium text-foreground opacity-50">
-              /Year
-            </span>
-          </p>
-
-          <ul className="flex items-center justify-between">
-            <li className="flex w-1/3 items-center justify-start gap-x-1 text-sm font-semibold">
-              <BedIcon className="text-primary-dark" size={18} />
-              <span className="opacity-50">6 bd</span>
-            </li>
-            <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300 text-sm font-semibold">
-              <BathIcon className="text-primary-dark" size={18} />
-              <span className="opacity-50">6 bt</span>
-            </li>
-            <li className="flex w-1/3 items-center justify-end gap-x-1 text-sm font-semibold">
-              <RulerIcon className="text-primary-dark" size={18} />
-              <span className="opacity-50">2.62ft</span>
-            </li>
-          </ul>
         </div>
       </article>
     </Link>

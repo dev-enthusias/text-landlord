@@ -19,7 +19,7 @@ export default function EditPropertyBtn() {
 
       {isEditPropertyModalOpen && (
         <ModalLayout>
-          <article className="no-scrollbar max-h-[95vh] w-[95%] max-w-[640px] overflow-y-auto rounded-xl bg-white pb-10">
+          <article className="no-scrollbar max-h-[80vh] w-[95%] max-w-[640px] overflow-y-auto rounded-xl bg-white pb-5 lg:max-h-[90vh]">
             <header className="sticky top-0 z-50 mb-4 flex items-center justify-between border-b bg-white p-5 text-black">
               <h3 className="text-lg font-semibold">Edit Property</h3>
               <button
