@@ -3,15 +3,16 @@ import Image from "next/image";
 import { routes } from "@/constants/routes";
 import { WalletOverview } from "@/components/data-visualization/wallet-overview";
 import { LiaCoinsSolid } from "react-icons/lia";
-import { FaHourglassHalf } from "react-icons/fa";
+import { FaHourglassHalf, FaLongArrowAltRight } from "react-icons/fa";
 import { RiErrorWarningFill } from "react-icons/ri";
+
 
 export default function Home() {
   return (
-    <section className="mx-auto w-full max-w-[1240px] px-20 py-7 pb-20">
+    <section className="mx-auto w-full max-w-[1240px] px-5 py-7 pb-20 lg:px-20">
       {/* Gretting */}
       <div className="font-cormorant">
-        <h1 className="font-bold text-black lg:text-2xl">
+        <h1 className="text-2xl font-bold text-black">
           Good morning, Samantha Oliver!
         </h1>
         <p className="font-semibold text-black">
@@ -20,9 +21,9 @@ export default function Home() {
       </div>
 
       <div className="mt-6 grid grid-cols-7 items-start gap-5">
-        <section className="col-span-5 space-y-5">
+        <section className="col-span-7 space-y-5 lg:col-span-5">
           <WalletOverview />
-          <div className="mb-10 flex w-full gap-x-5">
+          <div className="mb-5 grid w-full gap-5 sm:grid-cols-2 md:grid-cols-3 lg:mb-10">
             <FinanceSummary
               title="Rented Properties"
               icon={<LiaCoinsSolid />}
@@ -49,7 +50,7 @@ export default function Home() {
             />
           </div>
         </section>
-        <section className="col-span-2 space-y-5">
+        <section className="col-span-7 space-y-5 lg:col-span-2">
           <div className="rounded-lg bg-white px-5 py-3">
             <h3 className="mb-4 text-lg font-semibold text-black">Chats</h3>
             <div className="no-scrollbar grid w-full gap-y-3 overflow-x-scroll px-1">
@@ -60,8 +61,8 @@ export default function Home() {
           </div>
         </section>
         <section className="col-span-7">
-          <div className="mt-5 rounded-lg bg-white p-5">
-            <div className="mb-4">
+          <div className="mt-5 rounded-lg bg-white sm:p-5">
+            <div className="mb-4 p-5 sm:p-0">
               <h3 className="text-lg font-semibold text-black">
                 Rental Payment Overview
               </h3>
@@ -70,7 +71,7 @@ export default function Home() {
             <div
               role="grid"
               aria-label="Rental Payment Overview"
-              className="space-y-3"
+              className="hidden space-y-3 lg:block"
             >
               <div
                 role="row"
@@ -89,6 +90,15 @@ export default function Home() {
               <PaymentHistoryLine status="overdue" />
               <PaymentHistoryLine status="upcoming" />
               <PaymentHistoryLine
+                status="current"
+                payment_status="successful"
+              />
+            </div>
+
+            <div className="space-y-5 bg-gray-100 sm:bg-transparent lg:hidden">
+              <PaymentHistoryLineMobile status="overdue" />
+              <PaymentHistoryLineMobile status="upcoming" />
+              <PaymentHistoryLineMobile
                 status="current"
                 payment_status="successful"
               />
@@ -196,7 +206,7 @@ function PaymentHistoryLine({
   return (
     <article
       role="row"
-      className="grid grid-cols-8 items-center gap-x-3 border-b border-b-gray-200 pb-2"
+      className="hidden grid-cols-8 items-center gap-x-3 border-b border-b-gray-200 pb-2 lg:grid"
     >
       <div role="gridcell" className="col-span-2">
         <h3 className="text-sm font-semibold text-gray-700">
@@ -224,6 +234,79 @@ function PaymentHistoryLine({
         className={`${payment_status !== "successful" ? "text-[#D32F2F]" : "text-green-600"}`}
       >
         {payment_status === "successful" ? "paid" : "not paid"}
+      </div>
+      <div role="gridcell">
+        {payment_status !== "successful" && (
+          <button className="shrink-0 rounded-full bg-black px-3 py-1 text-sm font-bold text-white">
+            Pay Rent
+          </button>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function PaymentHistoryLineMobile({
+  status,
+  payment_status,
+}: {
+  status: "overdue" | "current" | "upcoming";
+  payment_status?: "successful";
+}) {
+  return (
+    <article className="space-y-3 bg-white px-5 py-3 sm:rounded-xl sm:border sm:border-gray-300 lg:hidden">
+      <p className="flex items-center gap-x-2 border-b border-b-gray-300 pb-2 text-black">
+        18th Aug, 2020{" "}
+        <span>
+          <FaLongArrowAltRight />
+        </span>{" "}
+        18th Aug, 2021
+      </p>
+
+      <div className="flex items-center justify-between">
+        <div className="col-span-2 flex items-center gap-x-1">
+          <p className="text-sm">Rent Status</p>
+        </div>
+        <div>
+          <span
+            className={`rounded-full px-2 py-1 capitalize ${status === "overdue" ? "bg-[#D32F2F]/10 text-[#D32F2F]" : status === "upcoming" ? "bg-[#D4A017]/10 text-[#D4A017]" : "bg-green-600/10 text-green-600"}`}
+          >
+            {status === "overdue"
+              ? "overdue"
+              : status === "upcoming"
+                ? "upcoming"
+                : "current"}
+          </span>
+        </div>
+      </div>
+      <div className="flex items-center justify-between rounded-lg bg-gray-100 px-3 py-3">
+        <div>
+          <h3 className="text-sm font-semibold text-gray-700">
+            Emperica in Dazil, Villa
+          </h3>
+          <p className="text-medium flex items-center gap-x-0.5 text-xs">
+            Palaxisto Emeriando Plaza Road
+          </p>
+        </div>
+        <Link
+          href={routes.LANDLORD_PROPERTIES + "/0"}
+          className="inline-block text-xs underline"
+        >
+          View Property
+        </Link>
+      </div>
+      <div className="flex items-center justify-between rounded-lg px-3">
+        <p className="text-sm">Rent Amount</p>
+        <p className="font-semibold text-black">₦650,000</p>
+      </div>
+      <div className="flex items-center justify-between rounded-lg bg-gray-100 px-3 py-3">
+        <p className="text-sm">Payment Status</p>
+        <div
+          role="gridcell"
+          className={`${payment_status !== "successful" ? "text-[#D32F2F]" : "text-green-600"}`}
+        >
+          {payment_status === "successful" ? "paid" : "not paid"}
+        </div>
       </div>
       <div role="gridcell">
         {payment_status !== "successful" && (

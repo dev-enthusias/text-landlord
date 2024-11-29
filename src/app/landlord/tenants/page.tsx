@@ -3,8 +3,6 @@ import TenantList, {
   TenantListMobile,
 } from "@/components/data-visualization/tenant-list";
 import { CiSearch } from "react-icons/ci";
-import { FaLongArrowAltRight } from "react-icons/fa";
-import Image from "next/image";
 
 export default function Tenants() {
   return (

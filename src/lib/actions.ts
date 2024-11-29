@@ -73,6 +73,7 @@ export async function authenticate(
       };
     }
   } catch (error: unknown) {
+    console.log(error);
     return {
       status: false,
       message:

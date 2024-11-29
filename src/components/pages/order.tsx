@@ -1,5 +1,5 @@
 import PrevPageButton from "@/components/ui/prev-page";
-import { TenantPropertyCard } from "@/components/ui/property-card";
+import { PropertyCard } from "@/components/ui/property-card";
 import OrderCard from "../ui/order-card";
 
 export default function Orders() {
@@ -27,9 +27,23 @@ export default function Orders() {
         </div>
 
         <div className="gap-5 py-3 lg:grid lg:grid-cols-2 xl:grid-cols-3">
-          <TenantPropertyCard type="order" />
-          <TenantPropertyCard type="order" />
-          <TenantPropertyCard type="order" />
+          <PropertyCard
+            type="order"
+            data={{
+              id: 3,
+              name: "Property 1",
+              image: "/images/property-1.jpg",
+              deal_type: "Rent",
+              type: "Commercial",
+              completion: "Completed",
+              status: "pending",
+              total_unit: null,
+              total_occupied: null,
+              total_rent: null,
+              total_sell: null,
+            }}
+            roleid={5}
+          />
         </div>
       </section>
     </section>

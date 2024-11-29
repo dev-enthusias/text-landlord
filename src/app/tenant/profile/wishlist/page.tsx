@@ -1,8 +1,5 @@
 import PrevPageButton from "@/components/ui/prev-page";
-import {
-  PropertyCardLandscape,
-  TenantPropertyCard,
-} from "@/components/ui/property-card";
+import { PropertyCard } from "@/components/ui/property-card";
 
 export default function Wishlist() {
   return (
@@ -15,18 +12,24 @@ export default function Wishlist() {
       </header>
 
       <div className="px-10 py-7">
-        <div className="space-y-5 px-3 py-3 lg:hidden">
-          <PropertyCardLandscape />
-          <PropertyCardLandscape />
-          <PropertyCardLandscape />
-          <PropertyCardLandscape />
-        </div>
-
         <div className="hidden gap-5 lg:grid lg:grid-cols-2 lg:px-3 xl:grid-cols-3">
-          <TenantPropertyCard type="wishlist" />
-          <TenantPropertyCard type="wishlist" />
-          <TenantPropertyCard type="wishlist" />
-          <TenantPropertyCard type="wishlist" />
+          <PropertyCard
+            type="wishlist"
+            data={{
+              id: 3,
+              name: "Property 1",
+              image: "/images/property-1.jpg",
+              deal_type: "Rent",
+              type: "Commercial",
+              completion: "Completed",
+              status: "pending",
+              total_unit: null,
+              total_occupied: null,
+              total_rent: null,
+              total_sell: null,
+            }}
+            roleid={5}
+          />
         </div>
       </div>
     </section>

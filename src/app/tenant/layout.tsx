@@ -1,4 +1,5 @@
 import Footer from "@/components/layout/footer";
+import Menu from "@/components/layout/footer-menu";
 import Topbar from "@/components/layout/topbar";
 
 export default function PageLayout({
@@ -11,6 +12,7 @@ export default function PageLayout({
       <Topbar />
       {children}
       <Footer />
+      <Menu />
     </div>
   );
 }

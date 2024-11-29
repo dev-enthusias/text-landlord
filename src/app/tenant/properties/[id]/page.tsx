@@ -21,7 +21,14 @@ export default function PropertyDetails() {
       </div>
 
       <section className="mb-4 flex items-center justify-between">
-        <PropertyNameAndTags />
+        <PropertyNameAndTags
+          data={{
+            name: "House",
+            dealType: "Rent",
+            type: "House",
+            city: "Lagos",
+          }}
+        />
         <WishlistButton />
       </section>
 

@@ -1,37 +1,34 @@
 import PrevPageButton from "@/components/ui/prev-page";
-import { ProfileDetailsRDT } from "@/definition";
-import { getToken } from "@/lib/actions";
-import { BASE_URL } from "@/lib/axios-instance";
 
-async function getProfileDetails(): Promise<ProfileDetailsRDT | undefined> {
-  const token = await getToken();
+// async function getProfileDetails(): Promise<ProfileDetailsRDT | undefined> {
+//   const token = await getToken();
 
-  try {
-    const response = await fetch(`${BASE_URL}/private/v1/user/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+//   try {
+//     const response = await fetch(`${BASE_URL}/private/v1/user/profile`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
 
-    // Handle non-200 responses
-    if (!response.ok) {
-      const errorText = await response.text(); // Get full response body
-      console.error(`Error ${response.status}: ${response.statusText}`);
-      console.log("Error response body:", errorText);
-      return;
-    }
+//     // Handle non-200 responses
+//     if (!response.ok) {
+//       const errorText = await response.text(); // Get full response body
+//       console.error(`Error ${response.status}: ${response.statusText}`);
+//       console.log("Error response body:", errorText);
+//       return;
+//     }
 
-    // Parse JSON for a valid response
-    const result = await response.json();
-    console.log(result);
-    return result.data.profile_info;
-  } catch (error: unknown) {
-    console.error("Fetch error:", error);
-  }
-}
+//     // Parse JSON for a valid response
+//     const result = await response.json();
+//     console.log(result);
+//     return result.data.profile_info;
+//   } catch (error: unknown) {
+//     console.error("Fetch error:", error);
+//   }
+// }
 
 export default async function ProfileDetails() {
-  const data = await getProfileDetails();
+  // const data = await getProfileDetails();
 
   return (
     <section>

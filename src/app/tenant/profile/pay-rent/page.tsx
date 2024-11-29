@@ -1,8 +1,5 @@
 import PrevPageButton from "@/components/ui/prev-page";
-import {
-  PropertyCardLandscape,
-  TenantPropertyCard,
-} from "@/components/ui/property-card";
+import { PropertyCard } from "@/components/ui/property-card";
 
 export default function PayRent() {
   return (
@@ -31,21 +28,41 @@ export default function PayRent() {
         </div>
 
         <section className="my-6">
-          <div className="space-y-5 lg:hidden">
-            <PropertyCardLandscape queryParam="rent" />
-            <PropertyCardLandscape status="overdue" queryParam="rent" />
-            <PropertyCardLandscape status="upcoming" queryParam="rent" />
-          </div>
           <div className="hidden items-stretch gap-5 lg:grid lg:grid-cols-2 xl:grid-cols-3">
-            <TenantPropertyCard type="rent" />
-            <TenantPropertyCard type="rent" />
-            <TenantPropertyCard type="rent" />
-            <TenantPropertyCard type="rent" />
-            <TenantPropertyCard type="rent" />
-            <TenantPropertyCard type="rent" />
-            <TenantPropertyCard type="rent" />
-            <TenantPropertyCard type="rent" />
-            <TenantPropertyCard type="rent" />
+            <PropertyCard
+              type="order"
+              data={{
+                id: 3,
+                name: "Property 1",
+                image: "/images/property-1.jpg",
+                deal_type: "Rent",
+                type: "Commercial",
+                completion: "Completed",
+                status: "pending",
+                total_unit: null,
+                total_occupied: null,
+                total_rent: null,
+                total_sell: null,
+              }}
+              roleid={5}
+            />
+            <PropertyCard
+              type="order"
+              data={{
+                id: 3,
+                name: "Property 1",
+                image: "/images/property-1.jpg",
+                deal_type: "Rent",
+                type: "Commercial",
+                completion: "Completed",
+                status: "pending",
+                total_unit: null,
+                total_occupied: null,
+                total_rent: null,
+                total_sell: null,
+              }}
+              roleid={5}
+            />
           </div>
         </section>
       </div>

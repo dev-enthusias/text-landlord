@@ -69,7 +69,7 @@ export default async function Topbar() {
         {roleid === 5 && (
           <Link
             href={routes.WISHLIST}
-            className="items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
+            className="hidden items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
           >
             <PiHeart className="h-5 w-5" />
           </Link>
@@ -77,7 +77,7 @@ export default async function Topbar() {
 
         <Link
           href={routes.CHAT}
-          className="items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
+          className="hidden items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
         >
           <BsChat className="h-4 w-4" />
         </Link>
@@ -87,7 +87,7 @@ export default async function Topbar() {
         {roleid === 5 && (
           <Link
             href={routes.CART}
-            className="items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
+            className="hidden items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
           >
             <LucideShoppingCart className="h-5 w-5" />
           </Link>

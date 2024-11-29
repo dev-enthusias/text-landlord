@@ -1,10 +1,10 @@
 import NavLink from "@/components/ui/navlink";
 import { routes } from "@/constants/routes";
-import { getRole } from "@/lib/actions";
+import { getRole, logout } from "@/lib/actions";
 import Image from "next/image";
 import React from "react";
 import { BsBank, BsHousesFill } from "react-icons/bs";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaPowerOff, FaRegUserCircle } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { LuHistory } from "react-icons/lu";
 import { MdCategory } from "react-icons/md";
@@ -35,8 +35,8 @@ export default async function Settings() {
   };
 
   return (
-    <div className="space-y-10 px-5 py-10">
-      <section className="relative flex flex-col items-center justify-center gap-2 bg-white">
+    <div className="px-5 py-10">
+      <section className="relative mb-10 flex flex-col items-center justify-center gap-2 bg-white">
         <div className="relative h-24 w-24 overflow-hidden rounded-full">
           <Image
             src="/images/profile-img.jpeg"
@@ -55,7 +55,7 @@ export default async function Settings() {
         </div>
       </section>
 
-      <section className="flex flex-col rounded-2xl border border-gray-300 bg-gray-50 p-5">
+      <section className="mb-10 flex flex-col rounded-2xl border border-gray-300 bg-gray-50 p-5">
         <NavLink
           href={path.profile}
           exact
@@ -89,7 +89,7 @@ export default async function Settings() {
         </NavLink>
       </section>
 
-      <section className="flex flex-col rounded-2xl border border-gray-300 bg-gray-50 p-5">
+      <section className="mb-3 flex flex-col rounded-2xl border border-gray-300 bg-gray-50 p-5">
         <NavLink
           href={routes.PROPERTY_CATEGORY}
           className="flex w-full items-center justify-between border-b border-b-gray-300 pb-3 tracking-wide text-black"
@@ -121,6 +121,12 @@ export default async function Settings() {
           <FaArrowRightLong className="text-sm text-gray-400" />
         </NavLink>
       </section>
+
+      <form action={logout}>
+        <button className="flex w-full items-center gap-x-2 rounded px-4 py-2 text-lg font-semibold hover:text-gold">
+          <FaPowerOff className="mt-1" size={14} /> Logout
+        </button>
+      </form>
     </div>
   );
 }

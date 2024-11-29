@@ -5,19 +5,17 @@ import { AiOutlineDelete } from "react-icons/ai";
 
 export default function Cart() {
   return (
-    <main className="grid grid-cols-5 items-start gap-x-5 px-40 py-7 pb-20">
-      <section className="col-span-3 space-y-4 rounded-lg bg-white p-3 shadow-lg lg:p-0">
-        <div className="border-b px-3 py-5 text-xl font-bold text-black">
+    <main className="grid grid-cols-5 items-start gap-5 py-7 pb-20 lg:px-40">
+      <section className="col-span-5 space-y-4 bg-white px-5 lg:col-span-3 lg:rounded-lg lg:p-3 lg:shadow-lg">
+        <div className="-mx-5 border-b px-5 py-5 text-xl font-bold text-black">
           Cart (6)
         </div>
         <CartItem />
         <CartItem />
         <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
       </section>
-      <div className="col-span-2 hidden rounded-lg border bg-white lg:block">
+
+      <div className="col-span-5 rounded-lg bg-white lg:col-span-2 lg:block lg:border">
         <section className="border-b p-5">
           <h3 className="mb-6 font-medium text-black">Order Summary</h3>
           <div className="space-y-1">
@@ -53,7 +51,7 @@ export default function Cart() {
 
 function CartItem() {
   return (
-    <article className="relative flex items-start gap-x-2 border-b border-gray-300 p-3">
+    <article className="relative flex items-start gap-x-2 border-b border-gray-300 p-3 last:border-0">
       <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg">
         <Image
           src="/images/duplex.webp"

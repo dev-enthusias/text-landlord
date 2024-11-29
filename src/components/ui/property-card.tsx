@@ -38,6 +38,8 @@ function PropertyNameAndLocation({
 }: {
   data: { name: string; location: string };
 }) {
+  console.log(data);
+
   return (
     <div>
       <h3 className="text-gray-600">Dominaco Plaxa</h3>

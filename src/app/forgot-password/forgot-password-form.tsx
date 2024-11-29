@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import TextInput from "@/components/ui/text-input";
 import SubmitButton from "@/components/forms/submit-button";
 import { ForgotPasswordDataType } from "@/definition";
-import { forgtotPasswordSchema } from "@/lib/schema";
+import { forgotPasswordSchema } from "@/lib/schema";
 
 export default function ForgotPasswordForm() {
   const {
@@ -13,7 +13,7 @@ export default function ForgotPasswordForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ForgotPasswordDataType>({
-    resolver: zodResolver(forgtotPasswordSchema),
+    resolver: zodResolver(forgotPasswordSchema),
   });
 
   const onSubmit: SubmitHandler<ForgotPasswordDataType> = async (data) => {
