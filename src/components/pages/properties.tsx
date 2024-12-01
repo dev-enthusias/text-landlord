@@ -27,7 +27,7 @@ export function PropertyNameAndTags({
 
 export function WishlistButton() {
   return (
-    <button className="group flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 transition-colors duration-300 ease-out hover:bg-gold/20">
+    <button className="group flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-200 transition-colors duration-300 ease-out hover:bg-gold/20">
       {false ? (
         <PiHeart className="text-xl group-hover:text-black" />
       ) : (

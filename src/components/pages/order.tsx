@@ -1,6 +1,5 @@
 import PrevPageButton from "@/components/ui/prev-page";
 import { PropertyCard } from "@/components/ui/property-card";
-import OrderCard from "../ui/order-card";
 
 export default function Orders() {
   return (
@@ -18,12 +17,6 @@ export default function Orders() {
           <p className="opacity-50">
             You can view all your orders and transaction details here
           </p>
-        </div>
-
-        <div className="space-y-5 py-3 lg:hidden">
-          <OrderCard />
-          <OrderCard />
-          <OrderCard />
         </div>
 
         <div className="gap-5 py-3 lg:grid lg:grid-cols-2 xl:grid-cols-3">

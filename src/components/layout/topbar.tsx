@@ -38,6 +38,12 @@ export default async function Topbar() {
         : roleid === 4
           ? routes.LANDLORD_ORDERS
           : routes.AGENT_ORDERS,
+    settings:
+      roleid === 5
+        ? routes.TENANT_SETTINGS
+        : roleid === 4
+          ? routes.LANDLORD_SETTINGS
+          : routes.AGENT_SETTINGS,
   };
 
   return (
@@ -146,7 +152,7 @@ export default async function Topbar() {
 
         <article>
           <Link
-            href={routes.LANDLORD_SETTINGS}
+            href={path?.settings}
             className="relative block h-8 w-8 overflow-hidden rounded-full bg-gray-300 lg:hidden"
           >
             <Image

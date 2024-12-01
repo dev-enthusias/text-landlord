@@ -6,7 +6,6 @@ import { LiaCoinsSolid } from "react-icons/lia";
 import { FaHourglassHalf, FaLongArrowAltRight } from "react-icons/fa";
 import { RiErrorWarningFill } from "react-icons/ri";
 
-
 export default function Home() {
   return (
     <section className="mx-auto w-full max-w-[1240px] px-5 py-7 pb-20 lg:px-20">

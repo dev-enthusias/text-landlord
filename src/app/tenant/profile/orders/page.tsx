@@ -1,4 +1,4 @@
-import OrderCard from "@/components/ui/order-card";
+
 import PrevPageButton from "@/components/ui/prev-page";
 import { PropertyCard } from "@/components/ui/property-card";
 
@@ -12,14 +12,8 @@ export default function Orders() {
         </div>
       </header>
 
-      <section className="px-10 py-7">
-        <div className="space-y-5 py-3 lg:hidden">
-          <OrderCard />
-          <OrderCard />
-          <OrderCard />
-        </div>
-
-        <div className="gap-5 py-3 lg:grid lg:grid-cols-2 xl:grid-cols-3">
+      <section className="px-5 py-7 lg:px-10">
+        <div className="grid gap-5 py-3 lg:grid-cols-2 xl:grid-cols-3">
           <PropertyCard
             type="order"
             data={{

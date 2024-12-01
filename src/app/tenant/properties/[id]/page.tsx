@@ -12,7 +12,7 @@ import {
 
 export default function PropertyDetails() {
   return (
-    <main className="px-20 py-7 pb-20">
+    <main className="px-5 py-7 pb-10 lg:px-20 lg:pb-20">
       <div className="mb-8 flex justify-between">
         <BackButton />
         <p className="text-sm">
@@ -29,18 +29,23 @@ export default function PropertyDetails() {
             city: "Lagos",
           }}
         />
-        <WishlistButton />
+        <div className="flex gap-x-2">
+          <WishlistButton />
+          <button className="w-full rounded-full bg-gold py-2 px-4 font-bold text-sm text-white">
+            Add to Cart
+          </button>
+        </div>
       </section>
 
       <Gallery />
 
-      <section className="grid grid-cols-5 gap-x-10">
-        <div className="col-span-3 grid gap-y-10">
+      <section className="grid grid-cols-5 gap-10">
+        <div className="col-span-5 grid gap-y-10 lg:col-span-3">
           <Description />
           <Features />
         </div>
 
-        <div className="col-span-2 flex flex-col gap-y-10">
+        <div className="col-span-5 flex flex-col gap-y-10 lg:col-span-2">
           <PropertyOwner />
           <PurchaseProperty />
         </div>

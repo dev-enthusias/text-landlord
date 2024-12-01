@@ -3,20 +3,33 @@
 import { useState } from "react";
 import CustomCheckbox from "../ui/custome-checkbox";
 import { propertyCategories, propertyTypes } from "@/constants/data";
+import { X } from "lucide-react";
 
-export default function Filter() {
+export default function Filter({
+  setFilterModal,
+}: {
+  setFilterModal?: (bool: boolean) => void;
+}) {
   const [checked, setChecked] = useState(false);
 
   return (
     <>
-      <header className="mb-4 flex justify-between">
+      <header className="mb-4 flex items-center justify-between">
         <h2 className="font-semibold text-black">Filters</h2>
-        <button>
-          <span className="text-xs underline">Reset Filters</span>{" "}
-          <span className="bg-gold/60 ml-0.5 rounded px-1 py-0.5 text-xxs font-semibold text-black">
-            3
-          </span>
-        </button>
+        <div className="flex items-center gap-x-2">
+          <button>
+            <span className="text-xs underline">Reset Filters</span>{" "}
+            <span className="ml-0.5 rounded bg-gold/60 px-1 py-0.5 text-xxs font-semibold text-black">
+              3
+            </span>
+          </button>
+          <button
+            className="rounded bg-gray-200 p-1"
+            onClick={() => setFilterModal && setFilterModal(false)}
+          >
+            <X size={20} />
+          </button>
+        </div>
       </header>
 
       <div className="space-y-6">
@@ -61,7 +74,7 @@ export default function Filter() {
             <h3 className="mb-2 text-sm font-medium text-gray-700">
               Min. Price
             </h3>
-            <select className="focus:border-gold focus:ring-gold w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:outline-none focus:ring-2">
+            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
               <option value="any">150,000</option>
               <option value="any">250,000</option>
               <option value="any">350,000</option>
@@ -73,7 +86,7 @@ export default function Filter() {
             <h3 className="mb-2 text-sm font-medium text-gray-700">
               Max. Price
             </h3>
-            <select className="focus:border-gold focus:ring-gold w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:outline-none focus:ring-2">
+            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
               <option value="any">150,000</option>
               <option value="any">250,000</option>
               <option value="any">350,000</option>
@@ -86,7 +99,7 @@ export default function Filter() {
         <div className="grid grid-cols-2 gap-x-5">
           <section>
             <h3 className="mb-2 text-sm font-medium text-gray-700">Bedroom</h3>
-            <select className="focus:border-gold focus:ring-gold w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:outline-none focus:ring-2">
+            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
               <option value="any">Any</option>
               <option value="any">1</option>
               <option value="any">2</option>
@@ -97,7 +110,7 @@ export default function Filter() {
           </section>
           <section>
             <h3 className="mb-2 text-sm font-medium text-gray-700">Bathroom</h3>
-            <select className="focus:border-gold focus:ring-gold w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:outline-none focus:ring-2">
+            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
               <option value="any">Any</option>
               <option value="any">1</option>
               <option value="any">2</option>
@@ -113,7 +126,7 @@ export default function Filter() {
             <h3 className="mb-2 text-sm font-medium text-gray-700">
               Size (Min)
             </h3>
-            <select className="focus:border-gold focus:ring-gold w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:outline-none focus:ring-2">
+            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
               <option value="any">Any</option>
               <option value="any">1</option>
               <option value="any">2</option>
@@ -126,7 +139,7 @@ export default function Filter() {
             <h3 className="mb-2 text-sm font-medium text-gray-700">
               Size (Max)
             </h3>
-            <select className="focus:border-gold focus:ring-gold w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:outline-none focus:ring-2">
+            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
               <option value="any">Any</option>
               <option value="any">1</option>
               <option value="any">2</option>

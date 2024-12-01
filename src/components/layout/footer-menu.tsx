@@ -24,9 +24,16 @@ export default async function Menu() {
             Home
           </NavLink>
         </li>
+
         <li>
           <NavLink
-            href="/landlord/properties"
+            href={
+              roleid === 4
+                ? "/landlord/properties"
+                : roleid === 5
+                  ? "/tenant/properties"
+                  : "/agent/properties"
+            }
             className="flex flex-col items-center justify-center gap-y-1 text-sm"
             activeClassName="text-gold font-bold"
           >
@@ -34,6 +41,7 @@ export default async function Menu() {
             Properties
           </NavLink>
         </li>
+
         {roleid === 4 && (
           <>
             <li>

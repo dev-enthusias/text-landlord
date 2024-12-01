@@ -24,7 +24,7 @@ export default function ChatSidebar() {
         </div>
       </div>
 
-      <section className="h-full max-w-[429px] px-2.5 pt-5">
+      <section className="mb-10 h-full max-w-[429px] overflow-y-auto px-2.5 pt-5">
         <section>
           <FriendCard />
           <FriendCard />

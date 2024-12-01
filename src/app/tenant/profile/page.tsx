@@ -13,8 +13,8 @@ export default function Profile() {
         </button>
       </header>
 
-      <div className="px-10 py-7">
-        <form className="grid grid-cols-2 gap-5">
+      <div className="px-5 py-7 lg:px-10">
+        <form className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           <TextInput label="Name" />
           <TextInput label="Email" />
           <TextInput label="Phone Number" />
@@ -27,7 +27,7 @@ export default function Profile() {
           <TextInput label="Passport/ID No" />
           <TextInput label="TIN" />
           <TextInput label="SIN" />
-          <div className="col-span-2">
+          <div className="lg:col-span-2">
             <TextInput label="Address" />
           </div>
         </form>

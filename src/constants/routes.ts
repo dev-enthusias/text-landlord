@@ -21,6 +21,7 @@ export const routes = {
   TENANT_PROPERTIES: "/tenant/properties",
   TENANT_ORDERS: "/tenant/profile/orders",
   FUND_WALLET: "/tenant/profile/fund-wallet",
+  TENANT_SETTINGS: "/tenant/profile/settings",
   PAYMENT_HISTORY: "/tenant/profile/payment-history",
   TENANT_CHANGE_PASSWORD: "/tenant/profile/change-password",
 
@@ -45,6 +46,7 @@ export const routes = {
   AGENT_ORDERS: "/agent/orders",
   AGENT_PROFILE: "/agent/profile",
   AGENT_PROPERTIES: "/agent/properties",
+  AGENT_SETTINGS: "/agent/profile/settings",
   AGENT_DASHBOARD_NOTIFICATION: "/agent/notification",
   AGENT_DASHBOARD_SETTINGS: "/dashboard/agent/settings",
   AGENT_CHANGE_PASSWORD: "/agent/profile/change-password",
