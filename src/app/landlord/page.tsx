@@ -13,12 +13,29 @@ import { FaHourglassHalf, FaUsers } from "react-icons/fa";
 import { getToken, getUsername } from "@/lib/actions";
 import { LandlordDashboardStatisticResponseDataType } from "@/definition";
 import { BASE_URL } from "@/lib/axios-instance";
+import { Suspense } from "react";
+import { GrTransaction } from "react-icons/gr";
+
+export default async function Home() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[90vh] items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold">Loading dashboard data...</h2>
+          </div>
+        </div>
+      }
+    >
+      <DashboardContent />
+    </Suspense>
+  );
+}
 
 async function getStatistics(): Promise<
   LandlordDashboardStatisticResponseDataType | undefined
 > {
   const token = await getToken();
-  console.log(token);
 
   try {
     const response = await fetch(`${BASE_URL}/private/v1/dashboard`, {
@@ -28,7 +45,6 @@ async function getStatistics(): Promise<
     });
 
     const result = await response.json();
-    console.log(result);
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -40,9 +56,22 @@ async function getStatistics(): Promise<
   }
 }
 
-export default async function Home() {
+async function DashboardContent() {
   const name = await getUsername();
   const data = await getStatistics();
+
+  if (!data) {
+    return (
+      <div className="flex min-h-[90vh] items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold">
+            Unable to load dashboard data
+          </h2>
+          <p className="text-gray-600">Please refresh the page to try again</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section className="mx-auto w-full max-w-[1300px] px-5 py-7 pb-10 sm:pb-20 md:px-10 lg:px-16 xl:px-20">
@@ -63,7 +92,7 @@ export default async function Home() {
             <FinanceSummary
               title="Total Revenue"
               icon={<LiaCoinsSolid />}
-              total="₦200M"
+              total="₦0"
               description={<p>Total paid rent this year</p>}
               color="#4A4A4A"
               textColor="#ffffff"
@@ -71,16 +100,16 @@ export default async function Home() {
             <FinanceSummary
               title="Total Overdue"
               icon={<RiErrorWarningFill size={14} />}
-              total="20"
-              description={<p>₦3M Sum of overdue rent</p>}
+              total="0"
+              description={<p>₦0 Sum of overdue rent</p>}
               color="#D32F2F"
               textColor="#ffffff"
             />
             <FinanceSummary
               title="Total Upcoming"
               icon={<FaHourglassHalf size={14} />}
-              total="50"
-              description={<p>₦600M Sum of upcoming rent</p>}
+              total="0"
+              description={<p>₦0 Sum of upcoming rent</p>}
               color="#D4A017"
               textColor="#000000"
             />
@@ -90,7 +119,7 @@ export default async function Home() {
             <PersonalSummary
               title="Total Properties"
               icon={<MdHomeWork />}
-              total={data ? data.total_properties : "Loading..."}
+              total={data ? data.total_properties : 0}
               description={
                 <p>
                   {data?.total_occupied} occupied, {data?.total_vacant} vacant
@@ -101,15 +130,15 @@ export default async function Home() {
             <PersonalSummary
               title="Total Tenants"
               icon={<FaUsers />}
-              total="15"
-              description={<p>195 active, 5 inactive</p>}
+              total="0"
+              description={<p>0 active, 0 inactive</p>}
               button={<AddTenantBtn />}
             />
             <PersonalSummary
               title="Total Agents"
               icon={<LuUsers2 />}
-              total="20"
-              description={<p>30 assigned to properties</p>}
+              total="0"
+              description={<p>0 assigned to properties</p>}
               button={<AddAgentBtn />}
             />
           </div>
@@ -121,10 +150,17 @@ export default async function Home() {
               </h3>
             </div>
 
-            <div className="space-y-3">
-              <TransactionCard status="credit" />
-              <TransactionCard status="debit" />
-              <TransactionCard status="debit" />
+            <div className="grid gap-y-3">
+              {data.transactions.length === 0 ? (
+                <div className="flex flex-col items-center justify-center gap-y-1 text-center">
+                  <div className="flex items-center justify-center rounded-full bg-gray-200 p-2 text-black">
+                    <GrTransaction />
+                  </div>
+                  You don&apos;t have any available transaction!
+                </div>
+              ) : (
+                data.transactions.map(() => <TransactionCard status="credit" />)
+              )}
             </div>
           </div>
         </section>

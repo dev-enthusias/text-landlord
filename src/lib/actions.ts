@@ -73,7 +73,6 @@ export async function authenticate(
       };
     }
   } catch (error: unknown) {
-    console.log(error);
     return {
       status: false,
       message:
@@ -95,8 +94,6 @@ export async function registerUser(data: RegisterDataType) {
     });
     const result = await res.json();
 
-    console.log(result);
-
     if (result?.errors?.email) {
       return {
         status: false,
@@ -108,7 +105,6 @@ export async function registerUser(data: RegisterDataType) {
         message: "You have successfully registered on this platform.",
       };
   } catch (error: unknown) {
-    console.log(error);
     return {
       status: false,
       message:
