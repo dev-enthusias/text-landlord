@@ -1,43 +1,38 @@
-import { BASE_URL } from "@/api/config";
+import { apiGet } from "@/api/config";
+import { propertyEndpoints } from "@/api/endpoints";
 import AddPropertyBtn from "@/components/modals/add-property";
 import { PropertyCard } from "@/components/ui/property-card";
 import { LandlordPropertiesResponseDataType } from "@/definition";
 
-import { isAxiosError } from "axios";
-
-async function getLandlordProperties(): Promise<
-  LandlordPropertiesResponseDataType | undefined
-> {
-  try {
-    const res = await fetch(`${BASE_URL}/private/v1/property/list`);
-    const result = await res.json();
-    console.log(result);
-    // if (res.status === 200 && res.data.result) return res.data.data;
-  } catch (error: unknown) {
-    if (isAxiosError(error)) return error.response?.data;
-  }
+async function getProperties() {
+  const res = await apiGet<LandlordPropertiesResponseDataType>(
+    propertyEndpoints.LANDLORD_PROPERTIES,
+  );
+  return res.data;
 }
 
 export default async function Properties() {
-  const data = await getLandlordProperties();
+  const data = await getProperties();
+
+  if (!data) return null;
 
   return (
-    <main className="mb-20 flex px-5 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
+    <main className="flex h-full px-5 pb-20 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
       {/* <section className="w-[240px] shrink-0 px-2">
         <Filter />
       </section> */}
-      <section className="flex min-h-[65.5vh] w-full lg:gap-x-8 xl:gap-x-10">
+      <section className="flex w-full lg:gap-x-8 xl:gap-x-10">
         <section className="grow">
           <div className="mb-6 flex items-center justify-between">
             <h1 className="text-lg font-semibold text-black">
-              My Properties (0)
+              My Properties ({data.properties.list.length})
             </h1>
 
             <AddPropertyBtn />
           </div>
 
           <div className="lg:grid-cols grid w-full gap-5 sm:grid-cols-2 min-[875px]:grid-cols-3 2xl:grid-cols-4">
-            {data?.properties.list.map((property) => (
+            {data.properties.list.map((property) => (
               <PropertyCard key={property.id} roleid={4} data={property} />
             ))}
           </div>
