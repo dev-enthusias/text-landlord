@@ -1,7 +1,8 @@
+import { BASE_URL } from "@/api/config";
 import AddPropertyBtn from "@/components/modals/add-property";
 import { PropertyCard } from "@/components/ui/property-card";
 import { LandlordPropertiesResponseDataType } from "@/definition";
-import { BASE_URL } from "@/lib/axios-instance";
+
 import { isAxiosError } from "axios";
 
 async function getLandlordProperties(): Promise<

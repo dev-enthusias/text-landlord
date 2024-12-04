@@ -12,11 +12,37 @@ import { MoveDownIcon, MoveUpIcon } from "lucide-react";
 import { FaHourglassHalf, FaUsers } from "react-icons/fa";
 import { getToken, getUsername } from "@/lib/actions";
 import { LandlordDashboardStatisticResponseDataType } from "@/definition";
-import { BASE_URL } from "@/lib/axios-instance";
 import { Suspense } from "react";
 import { GrTransaction } from "react-icons/gr";
+import { BASE_URL } from "@/api/config";
+
+async function getStatistics() {
+  const token = await getToken();
+  const response = await fetch(`${BASE_URL}/private/v1/dashboard`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json();
+  return result.data;
+}
+
+async function getProperties() {
+  const token = await getToken();
+  const response = await fetch(`${BASE_URL}/private/v1/property/list`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json();
+  return result.data.properties.list;
+}
 
 export default async function Home() {
+  const statistics = await getStatistics();
+  const properties = await getProperties();
+  console.log(properties);
+
   return (
     <Suspense
       fallback={
@@ -27,51 +53,17 @@ export default async function Home() {
         </div>
       }
     >
-      <DashboardContent />
+      <DashboardContent statistics={statistics} />
     </Suspense>
   );
 }
 
-async function getStatistics(): Promise<
-  LandlordDashboardStatisticResponseDataType | undefined
-> {
-  const token = await getToken();
-
-  try {
-    const response = await fetch(`${BASE_URL}/private/v1/dashboard`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    return result.data;
-  } catch (error: unknown) {
-    console.error("Fetch error:", error);
-  }
-}
-
-async function DashboardContent() {
+async function DashboardContent({
+  statistics,
+}: {
+  statistics: LandlordDashboardStatisticResponseDataType;
+}) {
   const name = await getUsername();
-  const data = await getStatistics();
-
-  if (!data) {
-    return (
-      <div className="flex min-h-[90vh] items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-xl font-semibold">
-            Unable to load dashboard data
-          </h2>
-          <p className="text-gray-600">Please refresh the page to try again</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <section className="mx-auto w-full max-w-[1300px] px-5 py-7 pb-10 sm:pb-20 md:px-10 lg:px-16 xl:px-20">
@@ -119,10 +111,11 @@ async function DashboardContent() {
             <PersonalSummary
               title="Total Properties"
               icon={<MdHomeWork />}
-              total={data ? data.total_properties : 0}
+              total={statistics.total_properties}
               description={
                 <p>
-                  {data?.total_occupied} occupied, {data?.total_vacant} vacant
+                  {statistics.total_occupied} occupied,{" "}
+                  {statistics.total_vacant} vacant
                 </p>
               }
               button={<AddPropertyBtn />}
@@ -151,7 +144,7 @@ async function DashboardContent() {
             </div>
 
             <div className="grid gap-y-3">
-              {data.transactions.length === 0 ? (
+              {statistics.transactions.length === 0 ? (
                 <div className="flex flex-col items-center justify-center gap-y-1 text-center">
                   <div className="flex items-center justify-center rounded-full bg-gray-200 p-2 text-black">
                     <GrTransaction />
@@ -159,7 +152,9 @@ async function DashboardContent() {
                   You don&apos;t have any available transaction!
                 </div>
               ) : (
-                data.transactions.map(() => <TransactionCard status="credit" />)
+                statistics.transactions.map((transaction, i) => (
+                  <TransactionCard key={i} status="credit" />
+                ))
               )}
             </div>
           </div>

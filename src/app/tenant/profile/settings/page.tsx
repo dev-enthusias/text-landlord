@@ -1,6 +1,8 @@
+
+import { logout } from "@/api/services/auth";
 import NavLink from "@/components/ui/navlink";
 import { routes } from "@/constants/routes";
-import { getRole, logout } from "@/lib/actions";
+import { getRole } from "@/lib/actions";
 import Image from "next/image";
 import React from "react";
 import { FaHeart, FaPowerOff, FaRegUserCircle } from "react-icons/fa";
