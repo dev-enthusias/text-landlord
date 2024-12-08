@@ -4,7 +4,7 @@ import { routes } from "@/constants/routes";
 import { FaRegUserCircle } from "react-icons/fa";
 import { LuHistory } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { getRole } from "@/lib/actions";
+import { getProfileDetails, getRole } from "@/lib/actions";
 import { MdCategory } from "react-icons/md";
 import { BsBank, BsHousesFill } from "react-icons/bs";
 
@@ -14,6 +14,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const roleid = await getRole();
+  const profileDetails = await getProfileDetails();
 
   const path = {
     profile:
@@ -37,23 +38,34 @@ export default async function Layout({
   };
 
   return (
-    <section className="flex items-start gap-x-10 py-7 lg:pb-20 lg:px-20">
+    <section className="flex items-start gap-x-10 py-7 lg:px-20 lg:pb-20">
       <div className="custom-shadow mt-10 hidden w-[320px] shrink-0 space-y-5 overflow-hidden text-sm lg:block lg:rounded-t-xl">
-        <section className="pt relative flex flex-col items-center justify-center gap-2 bg-white pt-5">
+        <section className="pb-5 relative flex flex-col items-center justify-center gap-2 bg-white pt-5">
           <div className="relative h-28 w-28 overflow-hidden rounded-full">
-            <Image
-              src="/images/profile-img.jpeg"
-              alt="Profile photo of tenant"
-              fill
-              quality={100}
-              sizes="130px"
-              className="object-cover"
-            />
+            {profileDetails?.profile_info.user_image ? (
+              <Image
+                src={profileDetails?.profile_info.user_image ?? ""}
+                alt="Landlord profile photo"
+                fill
+                quality={100}
+                sizes="130px"
+                className="custom-shadow object-cover"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-blue-300 font-bold">
+                {profileDetails?.profile_info.name[0]}
+              </div>
+            )}
           </div>
-          <p className="text-lg text-black">Anotion Markiwa</p>
+          <p className="text-lg font-semibold text-black">
+            {profileDetails?.profile_info.name}
+          </p>
           <p className="absolute right-0 top-0 bg-accent/10 px-2 py-1 text-accent">
             {roleid === 5 ? "Tenant" : roleid === 4 ? "Landlord" : "Agent"}
           </p>
+        </section>
+
+        <section className="bg-white">
           <NavLink
             href={path.profile}
             exact
@@ -61,11 +73,8 @@ export default async function Layout({
             activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
           >
             <FaRegUserCircle size={20} />
-            PROFILE
+            Profile
           </NavLink>
-        </section>
-
-        <section className="bg-white">
           <NavLink
             href={routes.ACCOUNTS}
             className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"

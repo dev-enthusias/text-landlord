@@ -1,190 +1,149 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import SelectInput from "@/components/ui/select-input";
 import TextInput from "@/components/ui/text-input";
-import { routes } from "@/constants/routes";
-import { X } from "lucide-react";
+import { ProfileFormData, UserDetailsResponseDataType } from "@/definition";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useState } from "react";
+import { toast } from "sonner";
+import { updateProfile } from "@/lib/actions";
 
-const maritalOptions = [
-  { value: "divorced", label: "Divorce" },
-  { value: "married", label: "Married" },
-  { value: "single", label: "Single" },
-];
-
-const religionOptions = [
-  { value: "christian", label: "Christian" },
-  { value: "muslim", label: "Muslim" },
-];
-
-const genderOptions = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-];
-
-const propertyOwnerOptions = [
-  { value: "individual", label: "Individual" },
-  { value: "organization", label: "Organization" },
-  { value: "joint", label: "Joint" },
-];
-
-export default function EditProfileForm({
-  setAddTenantModal,
+export default function ProfileForm({
+  data,
 }: {
-  setAddTenantModal: React.Dispatch<React.SetStateAction<boolean>>;
+  data: UserDetailsResponseDataType;
 }) {
-  const [selectedValueMarriage, setSelectedValueMarriage] = useState("");
-  const [selectedValueReligion, setSelectedValueReligion] = useState("");
-  const [selectedValueGender, setSelectedValueGender] = useState("");
-  const [selectedValuePropertyOwner, setSelectedValuePropertyOwner] =
-    useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   const {
     register,
     handleSubmit,
-    // formState: { errors, isSubmitting },
-  } = useForm<any>({
-    // resolver: zodResolver(loginSchema),
+    formState: { errors, isSubmitting },
+  } = useForm<ProfileFormData>({
+    defaultValues: {
+      name: data.profile_info.name,
+      email: data.profile_info.email,
+      phone: data.profile_info.phone,
+      gender: data.profile_info.gender as
+        | "Male"
+        | "Female"
+        | "other"
+        | undefined,
+      date_of_birth: data.profile_info.date_of_birth,
+      occupation: data.profile_info.occupation,
+      passport: data.profile_info.passport,
+      designation: data.profile_info.designation,
+      institution: data.profile_info.institution,
+      nid: data.profile_info.nid,
+    },
   });
 
-  const onSubmit: SubmitHandler<any> = async (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<ProfileFormData> = async (data) => {
+    try {
+      const res = await updateProfile(data);
+      console.log(res);
+      setIsEditing(false);
+      toast.success("Profile updated successfully");
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+      toast.error("Failed to update profile");
+    }
   };
 
   return (
-    <article className="no-scrollbar max-h-[95vh] w-[95%] max-w-[640px] overflow-y-auto bg-white pb-10">
-      <header className="sticky top-0 z-50 mb-4 flex justify-between border-b bg-white p-5">
-        <h3 className="text-lg font-semibold">Edit Profile</h3>
-        <button className="" onClick={() => setAddTenantModal(false)}>
-          <X size={20} />
-        </button>
-      </header>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="grid w-full gap-y-5 px-5"
-      >
-        <TextInput
-          register={register}
-          name="email"
-          label="Full Name"
-          // error={errors.email?.message}
-          required
-        />
-        <TextInput
-          register={register}
-          name="email"
-          label="Email"
-          // error={errors.email?.message}
-          required
-        />
-        <TextInput
-          register={register}
-          name="email"
-          label="Phone"
-          // error={errors.email?.message}
-          required
-        />
-        <TextInput
-          register={register}
-          name="email"
-          label="Occupation"
-          // error={errors.email?.message}
-          required
-        />
-        <SelectInput
-          label="Marital Status"
-          options={maritalOptions}
-          value={selectedValueMarriage}
-          onChange={setSelectedValueMarriage}
-          placeholder="Choose an option"
-        />
-        <SelectInput
-          label="Religion"
-          options={religionOptions}
-          value={selectedValueReligion}
-          onChange={setSelectedValueReligion}
-          placeholder="Choose an option"
-        />
-        <div className="flex gap-5 lg:flex-row">
-          <div className="grow lg:w-1/2">
-            <TextInput
-              register={register}
-              name="email"
-              label="Date of Birth"
-              // error={errors.email?.message}
-              required
-            />
-          </div>
-          <div className="grow lg:w-1/2">
-            <SelectInput
-              label="Gender"
-              options={genderOptions}
-              value={selectedValueGender}
-              onChange={setSelectedValueGender}
-              placeholder="Choose an option"
-            />
-          </div>
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-4 flex justify-end">
+          {!isEditing ? (
+            <div
+              onClick={() => setIsEditing(true)}
+              className="cursor-pointer rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            >
+              Edit Profile
+            </div>
+          ) : (
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 disabled:bg-green-300"
+            >
+              {isSubmitting ? "Saving..." : "Save Changes"}
+            </button>
+          )}
         </div>
 
-        <TextInput
-          register={register}
-          name="email"
-          label="Current Address"
-          // error={errors.email?.message}
-          required
-        />
-        <SelectInput
-          label="Property Owner"
-          options={propertyOwnerOptions}
-          value={selectedValuePropertyOwner}
-          onChange={setSelectedValuePropertyOwner}
-          placeholder="Choose an option"
-        />
-        <TextInput
-          register={register}
-          name="email"
-          label="Passport/ID Number"
-          // error={errors.email?.message}
-          required
-        />
-
-        <div className="flex flex-col gap-5 lg:flex-row">
-          <div className="lg:w-1/2">
-            <TextInput
-              register={register}
-              name="email"
-              label="TIN Number"
-              // error={errors.email?.message}
-              required
-            />
-          </div>
-          <div className="lg:w-1/2">
-            <TextInput
-              register={register}
-              name="email"
-              label="SSNIT Number"
-              // error={errors.email?.message}
-              required
-            />
-          </div>
+        <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
+          <TextInput
+            label="Name"
+            name="name"
+            register={register}
+            disabled={!isEditing}
+            error={errors.name?.message}
+          />
+          <TextInput
+            label="Email"
+            name="email"
+            register={register}
+            disabled={true}
+            error={errors.email?.message}
+          />
+          <TextInput
+            label="Phone Number"
+            name="phone"
+            register={register}
+            disabled={!isEditing}
+            error={errors.phone?.message}
+          />
+          <TextInput
+            label="Gender"
+            name="gender"
+            register={register}
+            disabled={!isEditing}
+            error={errors.gender?.message}
+          />
+          <TextInput
+            label="Date of Birth"
+            name="date_of_birth"
+            register={register}
+            disabled={!isEditing}
+            error={errors.date_of_birth?.message}
+          />
+          <TextInput
+            label="Company Name"
+            name="institution"
+            register={register}
+            disabled={!isEditing}
+            error={errors.institution?.message}
+          />
+          <TextInput
+            label="Occupation"
+            register={register}
+            name="occupation"
+            disabled={!isEditing}
+            error={errors.occupation?.message}
+          />
+          <TextInput
+            label="Passport/ID No"
+            name="passport"
+            register={register}
+            disabled={!isEditing}
+            error={errors.passport?.message}
+          />
+          <TextInput
+            label="National ID"
+            name="nid"
+            register={register}
+            disabled={!isEditing}
+            error={errors.nid?.message}
+          />
+          <TextInput
+            label="Address"
+            name="designation"
+            register={register}
+            disabled={!isEditing}
+            error={errors.designation?.message}
+          />
         </div>
-
-        {/* Change this later */}
-        {/* <button
-            type="submit"
-            className="w-full rounded-lg bg-primary py-3 font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
-          >
-            Continue
-          </button> */}
-        <Link
-          href={routes.LOGIN}
-          className="block w-full rounded-lg bg-primary py-3 text-center font-semibold transition-colors duration-300 ease-out hover:bg-primary/80"
-        >
-          Update
-        </Link>
       </form>
-    </article>
+    </div>
   );
 }

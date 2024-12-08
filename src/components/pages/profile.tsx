@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { profileInfo } from "@/constants/data";
 import { RoleType } from "@/definition";
-import EditProfileBtn from "../ui/edit-profile-btn";
 
 export default function ProfilePage({ role }: RoleType) {
   return (
@@ -20,7 +19,6 @@ export default function ProfilePage({ role }: RoleType) {
             />
           </div>
         </header>
-        <EditProfileBtn />
       </div>
 
       <main className="pb-10">

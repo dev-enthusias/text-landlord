@@ -1,24 +1,36 @@
 "use client";
 
-import { useState } from "react";
-import SelectInput from "../ui/select-input";
 import TextInput from "../ui/text-input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import SubmitButton from "./submit-button";
+import { AddTenantDataType } from "@/definition";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addTenantSchema } from "@/lib/schema";
+import { propertyService } from "@/api/services/property";
+import SelectInput from "../ui/select-input";
 
 export default function TenantForm() {
-  const [propertyType, setPropertyType] = useState("");
-
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<any>({
-    // resolver: zodResolver(loginSchema),
+    control,
+    formState: { isSubmitting, errors },
+  } = useForm<AddTenantDataType>({
+    resolver: zodResolver(addTenantSchema),
   });
 
-  const onSubmit: SubmitHandler<any> = async (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<AddTenantDataType> = async (data) => {
+    const res = await propertyService.addTenant(data);
+
+    console.log(res);
+
+    if (res && !res.status) {
+      // toast.error("Error", { description: res.message });
+    }
+
+    if (res && res.status) {
+      // toast.success("Success", { description: res.message });
+    }
   };
 
   return (
@@ -27,47 +39,17 @@ export default function TenantForm() {
         <TextInput
           register={register}
           name="email"
-          label="First Name"
+          label="Email"
           required
-        />
-        <TextInput
-          register={register}
-          name="email"
-          label="Last Name"
-          required
-        />
-        <TextInput register={register} name="email" label="Email" required />
-        <TextInput register={register} name="email" label="Phone" required />
-        <TextInput
-          register={register}
-          name="email"
-          label="Occupation"
-          required
-        />
-
-        <SelectInput
-          label="Location"
-          options={[{ value: "land", label: "Land" }]}
-          value={propertyType}
-          onChange={setPropertyType}
-          placeholder="Country"
+          error={errors?.email?.message}
         />
         <SelectInput
           label=""
-          options={[{ value: "land", label: "Land" }]}
-          value={propertyType}
-          onChange={setPropertyType}
-          placeholder="State"
-        />
-        <SelectInput
-          label=""
-          options={[{ value: "land", label: "Land" }]}
-          value={propertyType}
-          onChange={setPropertyType}
+          options={[{ id: "land", name: "Land" }]}
+          control={control}
+          name="country_id"
           placeholder="City"
         />
-        <TextInput register={register} name="email" label="Address" required />
-
         <SubmitButton isSubmitting={isSubmitting} text="Save" />
       </fieldset>
     </form>

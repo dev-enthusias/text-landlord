@@ -38,12 +38,12 @@ function PropertyNameAndLocation({
 }: {
   data: { name: string; location: string };
 }) {
-  console.log(data);
-
   return (
     <div>
-      <h3 className="text-gray-600">Dominaco Plaxa</h3>
-      <p className="text-xs tracking-wide">Palaxisto Emeriando Plaza Road</p>
+      <h3 className="text-gray-600">{data.name}</h3>
+      <p className="text-xs tracking-wide">
+        {data.location || "Add the address for this property"}
+      </p>
     </div>
   );
 }
@@ -140,7 +140,6 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
               )}
             </div>
 
-            {/* Property name and location */}
             <PropertyNameAndLocation data={{ name: data.name, location: "" }} />
 
             {type !== "order" ? (

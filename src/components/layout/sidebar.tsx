@@ -6,7 +6,8 @@ import NavLink from "../ui/navlink";
 import { LogOutIcon } from "lucide-react";
 import { routes } from "@/constants/routes";
 import { SidebarNavLinks } from "@/definition";
-import { logout } from "@/lib/actions";
+import { logout } from "@/api/services/auth";
+
 
 export default function Sidebar({ navlinks }: { navlinks: SidebarNavLinks }) {
   return (

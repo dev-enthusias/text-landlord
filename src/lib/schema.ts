@@ -62,3 +62,74 @@ export const changePasswordSchema = z
     path: ["confirm_password"], // specify the path of the error
     message: "New Password and Confirm Password do not match",
   });
+
+export const addPropertySchema = z.object({
+  name: z.string().min(1, { message: "Please input property name" }),
+  type: z.string().min(1, { message: "Please select property type" }),
+  default_image: z.string().min(1, { message: "Please upload default image" }),
+  address: z.string().min(1, { message: "Please input property address" }),
+  country_id: z.string().min(1, { message: "Please select country" }),
+  division_id: z.string().min(1, { message: "Please select state" }),
+  district_id: z.string().min(1, { message: "Please select city" }),
+  upazila_id: z.string().min(1, { message: "Please select upazila" }),
+  property_category_id: z
+    .string()
+    .min(1, { message: "Please selct property category" }),
+  property_deed: z.string().min(1, "Please provide your porperty deeds"),
+  post_code: z.string().optional(),
+});
+
+export const addTenantSchema = z.object({
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" }),
+});
+
+export const profileSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be less than 50 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z
+    .string()
+    .regex(
+      /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
+      "Invalid phone number format",
+    )
+    .optional()
+    .or(z.literal("")),
+  gender: z.enum(["Male", "Female", "other"], {
+    errorMap: () => ({ message: "Please select a valid gender" }),
+  }),
+  date_of_birth: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Use YYYY-MM-DD format")
+    .refine((date) => !isNaN(Date.parse(date)), "Invalid date"),
+  occupation: z
+    .string()
+    .min(2, "Occupation must be at least 2 characters")
+    .optional()
+    .or(z.literal("")),
+  passport: z
+    .string()
+    .min(5, "Passport/ID must be at least 5 characters")
+    .optional()
+    .or(z.literal("")),
+  designation: z
+    .string()
+    .min(5, "Address must be at least 5 characters")
+    .optional()
+    .or(z.literal("")),
+  institution: z
+    .string()
+    .min(2, "Company name must be at least 2 characters")
+    .optional()
+    .or(z.literal("")),
+  nid: z
+    .string()
+    .min(10, "National ID must be at least 10 characters")
+    .optional()
+    .or(z.literal("")),
+});

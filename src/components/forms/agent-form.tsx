@@ -1,18 +1,17 @@
-import { useState } from "react";
-import SelectInput from "../ui/select-input";
+// import { useState } from "react";
+// import SelectInput from "../ui/select-input";
 import SubmitButton from "./submit-button";
 
 export default function AgentForm() {
-  const [propertyType, setPropertyType] = useState("");
+  // const [propertyType, setPropertyType] = useState("");
 
   return (
     <form>
       <fieldset className="space-y-4">
-        <SelectInput
+        {/* <SelectInput
+
           label="Properties"
-          options={[{ value: "land", label: "Land" }]}
-          value={propertyType}
-          onChange={setPropertyType}
+          options={[{ id: "land", name: "Land" }]}
           placeholder="State"
         />
         <SelectInput
@@ -21,7 +20,7 @@ export default function AgentForm() {
           value={propertyType}
           onChange={setPropertyType}
           placeholder="City"
-        />
+        /> */}
 
         <SubmitButton isSubmitting={false} text="Submit" />
       </fieldset>

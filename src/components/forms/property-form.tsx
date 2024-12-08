@@ -1,17 +1,37 @@
 "use client";
 
-import React, { useState } from "react";
 import TextInput from "../ui/text-input";
 import SelectInput from "../ui/select-input";
 import { ImagesIcon } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { AddPropertyDataType } from "@/definition";
+import { useEffect, useState } from "react";
+import { PropertyMetadataResponseDataType } from "@/definition";
+import { propertyService } from "@/api/services/property";
 
 export default function PropertyForm() {
-  const [propertyType, setPropertyType] = useState("");
+  const [categories, setCategories] =
+    useState<PropertyMetadataResponseDataType["categories"]>();
+  const [types, setTypes] =
+    useState<PropertyMetadataResponseDataType["type"]>();
 
-  const { register, handleSubmit } = useForm<any>({});
+  useEffect(() => {
+    const fetchMetadata = async () => {
+      const res = await propertyService.getPropertyMetadata();
+      setCategories(res?.data?.categories);
+      setTypes(res?.data?.type);
+    };
+    fetchMetadata();
+  }, []);
 
-  const onSubmit: SubmitHandler<any> = async (data) => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<AddPropertyDataType>({});
+
+  const onSubmit: SubmitHandler<AddPropertyDataType> = async (data) => {
     // const res = await authenticate(data);
 
     // if (res && typeof res === "string") {
@@ -25,52 +45,57 @@ export default function PropertyForm() {
       <fieldset className="space-y-4">
         <TextInput
           register={register}
-          name="Property Name"
-          label="Email"
-          // error={errors.email?.message}
+          name="name"
+          label="Property Name"
+          error={errors.name?.message}
           required
         />
-
         <SelectInput
+          control={control}
+          name="type"
           label="Property Type"
-          options={[{ value: "land", label: "Land" }]}
-          value={propertyType}
-          onChange={setPropertyType}
+          options={types ?? []}
           placeholder="Choose an option"
+          required
+          error={errors.type?.message}
         />
         <SelectInput
+          control={control}
+          name="property_category_id"
           label="Property Category"
-          options={[{ value: "land", label: "Land" }]}
-          value={propertyType}
-          onChange={setPropertyType}
+          options={categories ?? []}
           placeholder="Choose an option"
+          required
+          error={errors.property_category_id?.message}
         />
         <TextInput
           register={register}
           name="Property Address"
           label="Property Address"
-          // error={errors.email?.message}
+          error={errors.address?.message}
           required
         />
         <SelectInput
-          label="Location"
-          options={[{ value: "land", label: "Land" }]}
-          value={propertyType}
-          onChange={setPropertyType}
+          control={control}
+          name="name"
+          label=""
+          options={[{ id: "land", name: "Land" }]}
           placeholder="Country"
+          error={errors.name?.message}
         />
         <SelectInput
           label=""
-          options={[{ value: "land", label: "Land" }]}
-          value={propertyType}
-          onChange={setPropertyType}
+          control={control}
+          name="country_id"
+          options={[{ id: "land", name: "Land" }]}
           placeholder="State"
+          error={errors.name?.message}
         />
         <SelectInput
           label=""
-          options={[{ value: "land", label: "Land" }]}
-          value={propertyType}
-          onChange={setPropertyType}
+          options={[{ id: "land", name: "Land" }]}
+          control={control}
+          name="country_id"
           placeholder="City"
         />
         <div className="flex flex-col gap-y-1">

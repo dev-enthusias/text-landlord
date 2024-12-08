@@ -1,12 +1,12 @@
 "use client";
 
-import SelectInput from "@/components/ui/select-input";
+// import SelectInput from "@/components/ui/select-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
 
 export default function AddPropertyFacilityBtn() {
-  const [propertyType, setPropertyType] = useState("");
+  // const [propertyType, setPropertyType] = useState("");
   const [isGenerateBillModalOpen, setGenerateBillModal] = useState(false);
 
   return (
@@ -30,9 +30,9 @@ export default function AddPropertyFacilityBtn() {
             <main className="px-5">
               <fieldset className="space-y-4">
                 {/* <TextInput name="" label="Name" /> */}
-                <SelectInput
+                {/* <SelectInput
                   label="Icon"
-                  options={[{ value: "land", label: "Land" }]}
+                  options={[{ id: "land", label: "Land" }]}
                   value={propertyType}
                   onChange={setPropertyType}
                   placeholder="--Select--"
@@ -43,7 +43,7 @@ export default function AddPropertyFacilityBtn() {
                   value={propertyType}
                   onChange={setPropertyType}
                   placeholder="--Select--"
-                />
+                /> */}
 
                 <button
                   type="submit"

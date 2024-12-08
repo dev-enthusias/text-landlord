@@ -4,7 +4,7 @@ import SubmitButton from "./submit-button";
 import TextInput from "@/components/ui/text-input";
 import { routes } from "@/constants/routes";
 import { FormOneDataType } from "@/definition";
-import { registerUser } from "@/lib/actions";
+import { registerUser } from "@/api/services/auth";
 import { registerFormSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";

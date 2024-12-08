@@ -1,13 +1,11 @@
 "use client";
 
-import SelectInput from "@/components/ui/select-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
 import CustomCheckbox from "@/components/ui/custome-checkbox";
 
 export default function AddAccountListBtn() {
-  const [propertyType, setPropertyType] = useState("");
   const [checked, setChecked] = useState(false);
   const [isGenerateBillModalOpen, setGenerateBillModal] = useState(false);
 
@@ -31,13 +29,11 @@ export default function AddAccountListBtn() {
             </header>
             <main className="px-5">
               <fieldset className="space-y-4">
-                <SelectInput
+                {/* <SelectInput
                   label="Account category"
-                  options={[{ value: "land", label: "Land" }]}
-                  value={propertyType}
-                  onChange={setPropertyType}
+                  options={[{ id: "land", name: "Land" }]}
                   placeholder="--Select--"
-                />
+                /> */}
                 {/* <TextInput name="" label="Account number" />
                 <TextInput name="" label="Account holder" /> */}
                 <CustomCheckbox

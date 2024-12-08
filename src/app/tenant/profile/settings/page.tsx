@@ -1,9 +1,8 @@
-
 import { logout } from "@/api/services/auth";
+import ProfileImageForm from "@/components/forms/profile-image-form";
 import NavLink from "@/components/ui/navlink";
 import { routes } from "@/constants/routes";
 import { getRole } from "@/lib/actions";
-import Image from "next/image";
 import React from "react";
 import { FaHeart, FaPowerOff, FaRegUserCircle } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -38,16 +37,7 @@ export default async function Settings() {
   return (
     <div className="px-5 py-10">
       <section className="relative mb-10 flex flex-col items-center justify-center gap-2 bg-white">
-        <div className="relative h-24 w-24 overflow-hidden rounded-full">
-          <Image
-            src="/images/profile-img.jpeg"
-            alt="Profile photo of tenant"
-            fill
-            quality={100}
-            sizes="130px"
-            className="object-cover"
-          />
-        </div>
+        <ProfileImageForm imgUrl={""} name={""} />
         <div className="flex items-center gap-x-4">
           <p className="text-xl font-bold text-black">Anotion Markiwa</p>
           <p className="bg-accent/10 px-2 text-xs text-accent">

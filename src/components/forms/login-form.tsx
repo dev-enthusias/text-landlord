@@ -9,12 +9,15 @@ import TextInput from "@/components/ui/text-input";
 import CustomCheckbox from "@/components/ui/custome-checkbox";
 import SubmitButton from "@/components/forms/submit-button";
 import { routes } from "@/constants/routes";
-import { authenticate } from "@/lib/actions";
 import { loginSchema } from "@/lib/schema";
 import { LoginDataType } from "@/definition";
+import { authenticate } from "@/api/services/auth";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginForm() {
   const [checked, setChecked] = useState(true);
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("redirect");
 
   const {
     register,
@@ -29,6 +32,12 @@ export default function LoginForm() {
 
     if (res && !res.status) {
       toast.error("Error", { description: res.message });
+    }
+
+    if (res && res.status) {
+      window.location.href = redirectPath
+        ? decodeURIComponent(redirectPath)
+        : res.redirectUrl!;
     }
   };
 

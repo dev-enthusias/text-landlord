@@ -3,8 +3,23 @@ import TenantList, {
   TenantListMobile,
 } from "@/components/data-visualization/tenant-list";
 import { CiSearch } from "react-icons/ci";
+import { getTenants } from "./actions";
 
-export default function Tenants() {
+export default async function Tenants() {
+  const tenants = await getTenants();
+
+  if (typeof tenants === "string")
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center py-10">
+        <h1 className="text-2xl font-semibold">Something went wrong!</h1>
+        <p>Check your internet connection and try again</p>
+      </div>
+    );
+
+  if (!tenants) return null;
+
+  const totalTenants = tenants.list?.length;
+
   return (
     <main className="mb-20 pt-7 lg:gap-x-8 min-[1140px]:px-10 xl:gap-x-10">
       <div className="grow overflow-y-auto">
@@ -19,7 +34,9 @@ export default function Tenants() {
 
         <section className="hidden rounded-2xl bg-white p-5 lg:block">
           <div className="mb-3 flex items-end justify-between">
-            <p className="text-sm font-semibold">Total 20 tenants</p>
+            <p className="text-sm font-semibold">
+              Total {totalTenants} tenants
+            </p>
 
             <div className="w-full lg:max-w-[240px] xl:max-w-[440px] xl:gap-x-20">
               <input
@@ -53,14 +70,14 @@ export default function Tenants() {
               <h3 role="columnheader">Action</h3>
             </div>
 
-            <TenantList status="overdue" tenant_status="active" />
-            <TenantList status="current" />
-            <TenantList status="overdue" tenant_status="active" />
-            <TenantList status="current" tenant_status="active" />
-            <TenantList status="current" />
-            <TenantList status="upcoming" tenant_status="active" />
-            <TenantList status="current" tenant_status="active" />
-            <TenantList status="upcoming" tenant_status="active" />
+            {tenants.list.map((tenant) => (
+              <TenantList
+                key={tenant.id}
+                status="overdue"
+                tenant_status="active"
+                data={tenant}
+              />
+            ))}
           </div>
         </section>
 
@@ -79,14 +96,23 @@ export default function Tenants() {
 
           <div className="-mx-5 space-y-5">
             <div className="mb-3 flex items-center justify-between border-y border-gray-300 bg-white px-5 py-3">
-              <p>Total tenants 20</p>
-              <p>11-14 of 20 results</p>
+              <p>Total tenants {totalTenants}</p>
+              <p>
+                {totalTenants > 0
+                  ? `1-${totalTenants} of ${totalTenants} results`
+                  : "No results"}
+              </p>
             </div>
 
             <div className="grid gap-5 sm:px-5 md:grid-cols-2">
-              <TenantListMobile status="overdue" tenant_status="active" />
-              <TenantListMobile status="upcoming" tenant_status="active" />
-              <TenantListMobile status="current" tenant_status="inactive" />
+              {tenants.list.map((tenant) => (
+                <TenantListMobile
+                  key={tenant.id}
+                  status="overdue"
+                  tenant_status="active"
+                  data={tenant}
+                />
+              ))}
             </div>
           </div>
         </section>

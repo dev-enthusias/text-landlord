@@ -11,7 +11,7 @@ export default async function Menu() {
   const roleid = await getRole();
 
   return (
-    <footer className="mt-20 bg-[#cecaa3] lg:hidden">
+    <footer className="mt-20 shrink-0 bg-[#cecaa3] lg:hidden">
       <ul className="fixed bottom-0 flex w-full justify-between rounded-t-3xl bg-black px-5 py-4 text-background">
         <li>
           <NavLink

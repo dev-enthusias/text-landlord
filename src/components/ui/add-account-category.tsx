@@ -1,12 +1,10 @@
 "use client";
 
-import SelectInput from "@/components/ui/select-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
 
 export default function AddAccountCategoryBtn() {
-  const [propertyType, setPropertyType] = useState("");
   const [isGenerateBillModalOpen, setGenerateBillModal] = useState(false);
 
   return (
@@ -30,20 +28,16 @@ export default function AddAccountCategoryBtn() {
             <main className="px-5">
               <fieldset className="space-y-4">
                 {/* <TextInput name="" label="Name" /> */}
-                <SelectInput
+                {/* <SelectInput
                   label="Type"
-                  options={[{ value: "land", label: "Land" }]}
-                  value={propertyType}
-                  onChange={setPropertyType}
+                  options={[{ id: "land", name: "Land" }]}
                   placeholder="--Select--"
                 />
                 <SelectInput
                   label="Status"
-                  options={[{ value: "land", label: "Land" }]}
-                  value={propertyType}
-                  onChange={setPropertyType}
-                  placeholder="--Select--"
-                />
+                  options={[{ id: "land", name: "Land" }]}
+                  placeholder="--Select--" 
+                />*/}
 
                 <button
                   type="submit"

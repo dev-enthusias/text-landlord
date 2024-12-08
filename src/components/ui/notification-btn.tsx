@@ -3,12 +3,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import NotificationCard from "./notification-card";
 import { BellRing, ChevronLeft } from "lucide-react";
+import { NotificationResponseType } from "@/definition";
+import { markAllNotificationAsRead } from "@/lib/actions";
 
-export default function NotificationBtn() {
+export default function NotificationBtn({
+  notifications,
+}: {
+  notifications: NotificationResponseType;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const notificationRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const unreadCount = 2;
+  const unreadCount = notifications?.notifications?.filter(
+    (notification) => !notification.is_read,
+  ).length;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -31,10 +39,6 @@ export default function NotificationBtn() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const handleMarkAllAsRead = () => {
-    console.log("Marking all as read");
-  };
 
   const handleNotificationClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // Prevent click from bubbling up and triggering the outside click handler
@@ -70,21 +74,20 @@ export default function NotificationBtn() {
               </button>
               <h1 className="text-xl font-semibold">Notifications</h1>
             </div>
-            <button
-              className="text-[14px] font-semibold text-accent hover:underline"
-              onClick={handleMarkAllAsRead}
-            >
-              Mark all as read
-            </button>
+            <form action={markAllNotificationAsRead}>
+              <button className="text-[14px] font-semibold text-accent hover:underline">
+                Mark all as read
+              </button>
+            </form>
           </section>
           <section className="no-scrollbar h-full grow overflow-y-scroll">
             <div className="divide-y divide-gray-100">
-              <NotificationCard />
-              <NotificationCard />
-              <NotificationCard />
-              <NotificationCard />
-              <NotificationCard />
-              <NotificationCard />
+              {notifications.notifications.map((notification) => (
+                <NotificationCard
+                  key={notification.id}
+                  notification={notification}
+                />
+              ))}
             </div>
           </section>
         </div>

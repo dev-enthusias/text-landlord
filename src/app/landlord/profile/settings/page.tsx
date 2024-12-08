@@ -1,7 +1,7 @@
 import { logout } from "@/api/services/auth";
 import NavLink from "@/components/ui/navlink";
 import { routes } from "@/constants/routes";
-import { getRole } from "@/lib/actions";
+import { getProfileDetails, getRole } from "@/lib/actions";
 import Image from "next/image";
 import React from "react";
 import { BsBank, BsHousesFill } from "react-icons/bs";
@@ -13,6 +13,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 
 export default async function Settings() {
   const roleid = await getRole();
+  const profileDetails = await getProfileDetails();
 
   const path = {
     profile:
@@ -36,20 +37,29 @@ export default async function Settings() {
   };
 
   return (
-    <div className="px-5 py-10">
+    <div className="hidden px-5 py-10 max-[1100px]:block">
       <section className="relative mb-10 flex flex-col items-center justify-center gap-2 bg-white">
         <div className="relative h-24 w-24 overflow-hidden rounded-full">
-          <Image
-            src="/images/profile-img.jpeg"
-            alt="Profile photo of tenant"
-            fill
-            quality={100}
-            sizes="130px"
-            className="object-cover"
-          />
+          {profileDetails?.profile_info.user_image ? (
+            <Image
+              src={profileDetails?.profile_info.user_image ?? ""}
+              alt="Tenant profile photo"
+              fill
+              quality={100}
+              sizes="130px"
+              style={{ objectFit: "cover" }}
+              className="custom-shadow-sm"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-blue-300 font-bold">
+              {profileDetails?.profile_info.name[0]}
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-x-4">
-          <p className="text-xl font-bold text-black">Anotion Markiwa</p>
+          <p className="text-xl font-bold text-black">
+            {profileDetails?.profile_info.name}
+          </p>
           <p className="bg-accent/10 px-2 text-xs text-accent">
             {roleid === 5 ? "Tenant" : roleid === 4 ? "Landlord" : "Agent"}
           </p>

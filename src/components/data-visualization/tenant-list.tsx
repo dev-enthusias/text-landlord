@@ -1,6 +1,7 @@
 "use client";
 
 import { routes } from "@/constants/routes";
+import { LandlordTenantType } from "@/definition";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,12 +10,26 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoMdCall } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date
+    .toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    })
+    .replace(",", "")
+    .replace(/(\d+)(?=\s)/, "$1th");
+}
+
 export default function TenantList({
   status,
   tenant_status,
+  data,
 }: {
   status: "overdue" | "current" | "upcoming";
   tenant_status?: "active" | "inactive";
+  data: LandlordTenantType;
 }) {
   const [showActions, setShowActions] = useState(false);
 
@@ -24,24 +39,30 @@ export default function TenantList({
       className="grid grid-cols-10 items-center gap-x-3 border-b border-b-gray-200 px-5 pb-2 text-gray-800 last:border-none"
     >
       <div role="gridcell" className="col-span-2 flex items-center gap-x-3">
-        <div className="relative h-10 w-10 overflow-hidden rounded-full">
-          <Image
-            src="/images/profile-img.jpeg"
-            fill
-            alt="profile image"
-            className="object-cover"
-          />
+        <div
+          className={`relative h-10 w-10 overflow-hidden rounded-full ${data.avater ? "custom-shadow-sm" : ""}`}
+        >
+          {data.avater ? (
+            <Image
+              src={data.avater}
+              fill
+              alt="profile image"
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-200 font-bold">
+              {data.name[0]}
+            </div>
+          )}
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold text-gray-700">
-            Markiwa Anotion
-          </h3>
+          <h3 className="text-sm font-semibold text-gray-700">{data.name}</h3>
           <p className="text-medium flex items-center gap-x-0.5 text-xs">
-            zaminastadium@gmail.com
+            {data.email}
           </p>
           <p className="text-medium flex items-center gap-x-0.5 text-xs">
-            09080010168
+            {data.phone}
           </p>
         </div>
       </div>
@@ -50,7 +71,7 @@ export default function TenantList({
           Emperica in Dazil, Villa
         </h3>
         <p className="text-medium flex items-center gap-x-0.5 text-xs">
-          Palaxisto Emeriando Plaza Road
+          {data.address ?? "No address added yet"}
         </p>
         <Link
           href={routes.LANDLORD_PROPERTIES + "/0"}
@@ -59,7 +80,7 @@ export default function TenantList({
           View Property
         </Link>
       </div>
-      <div role="gridcell">12/12/2023</div>
+      <div role="gridcell">{data.join_date}</div>
       <div role="gridcell">12/12/2024</div>
       <div role="gridcell">₦650,000</div>
       <div role="gridcell">
@@ -96,13 +117,13 @@ export default function TenantList({
               aria-orientation="vertical"
               aria-labelledby="options-menu"
             >
-              <button
-                className="mb-2 flex w-full items-center justify-center gap-x-2 rounded bg-gold px-6 py-2 text-sm font-semibold text-white"
-                role="menuitem"
+              <Link
+                href={routes.LANDLORD_PROPERTIES + `/${data.id}`}
+                className="mb-2 flex items-center justify-center gap-x-2 rounded bg-gold px-4 py-2 font-semibold text-white"
               >
-                <BsChat size={14} />
+                <BsChat size={14} className="shrink-0" />
                 Chat
-              </button>
+              </Link>
               <button
                 className="flex w-full items-center justify-center gap-x-2 rounded bg-red-600 px-6 py-2 text-sm font-bold text-white"
                 role="menuitem"
@@ -120,14 +141,16 @@ export default function TenantList({
 export function TenantListMobile({
   status,
   tenant_status,
+  data,
 }: {
   status: "overdue" | "current" | "upcoming";
   tenant_status?: "active" | "inactive";
+  data: LandlordTenantType;
 }) {
   return (
     <article className="space-y-3 bg-white px-5 py-3 sm:rounded-xl sm:border sm:border-gray-300">
       <p className="flex items-center gap-x-2 border-b border-b-gray-300 pb-2 text-black">
-        18th Aug, 2020{" "}
+        {formatDate(data.join_date)}{" "}
         <span>
           <FaLongArrowAltRight />
         </span>{" "}
@@ -136,21 +159,25 @@ export function TenantListMobile({
 
       <div className="flex items-center justify-between">
         <div className="col-span-2 flex items-center gap-x-1">
-          <div className="relative h-10 w-10 overflow-hidden rounded-full">
-            <Image
-              src="/images/profile-img.jpeg"
-              fill
-              alt="profile image"
-              className="object-cover"
-            />
+          <div className="relative h-10 w-10 overflow-hidden rounded-full shadow-lg">
+            {data.avater ? (
+              <Image
+                src={data.avater}
+                fill
+                alt="profile image"
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-200 font-bold">
+                {data.name[0]}
+              </div>
+            )}
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-gray-700">
-              Markiwa Anotion
-            </h3>
+            <h3 className="text-sm font-semibold text-gray-700">{data.name}</h3>
             <p className="text-medium flex items-center gap-x-0.5 text-xs">
-              zaminastadium@gmail.com
+              {data.email}
             </p>
           </div>
         </div>
@@ -172,7 +199,7 @@ export function TenantListMobile({
             Emperica in Dazil, Villa
           </h3>
           <p className="text-medium flex items-center gap-x-0.5 text-xs">
-            Palaxisto Emeriando Plaza Road
+            {data.address ?? "Address have not yet been added"}
           </p>
         </div>
         <Link
@@ -195,28 +222,28 @@ export function TenantListMobile({
           {tenant_status === "active" ? "active" : "inactive"}
         </div>
       </div>
-      <div className="flex items-center gap-x-3">
+      <div className="grid grid-cols-3 items-center gap-x-2">
         <Link
-          href={`tel:${"09080010168"}`}
-          className="flex w-full items-center justify-center gap-x-2 rounded bg-blue-600 px-6 py-2 font-bold text-white"
+          href={`tel:${data.phone}`}
+          className="flex items-center justify-center gap-x-2 rounded bg-blue-600 px-4 py-2 font-bold text-white"
           role="menuitem"
         >
-          <IoMdCall />
+          <IoMdCall className="shrink-0" />
           Call
         </Link>
         <Link
-          href={routes.LANDLORD_PROPERTIES + "/0"}
-          className="flex w-full items-center justify-center gap-x-2 rounded bg-gold px-6 py-2 font-semibold text-white"
+          href={routes.LANDLORD_PROPERTIES + `/${data.id}`}
+          className="flex items-center justify-center gap-x-2 rounded bg-gold px-4 py-2 font-semibold text-white"
         >
-          <BsChat size={14} />
+          <BsChat size={14} className="shrink-0" />
           Chat
         </Link>
         <Link
-          href={routes.LANDLORD_PROPERTIES + "/0"}
-          className="flex w-full items-center justify-center gap-x-2 rounded bg-gray-600 px-6 py-2 font-bold text-white"
+          href={routes.LANDLORD_PROPERTIES + `/${data.id}`}
+          className="flex items-center justify-center gap-x-2 rounded bg-gray-600 px-4 py-2 font-bold text-white"
           role="menuitem"
         >
-          <MdDelete />
+          <MdDelete className="shrink-0" />
           Delete
         </Link>
       </div>

@@ -1,12 +1,12 @@
 "use client";
 
-import SelectInput from "@/components/ui/select-input";
+// import SelectInput from "@/components/ui/select-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
 
 export default function GenerateBillBtn() {
-  const [propertyType, setPropertyType] = useState("");
+  // const [propertyType, setPropertyType] = useState("");
   const [isGenerateBillModalOpen, setGenerateBillModal] = useState(false);
 
   return (
@@ -29,9 +29,9 @@ export default function GenerateBillBtn() {
             </header>
             <main className="px-5">
               <fieldset className="space-y-4">
-                <SelectInput
+                {/* <SelectInput
                   label="Occupied Property"
-                  options={[{ value: "land", label: "Land" }]}
+                  options={[{ valu: "land", label: "Land" }]}
                   value={propertyType}
                   onChange={setPropertyType}
                   placeholder="--Select--"
@@ -42,7 +42,7 @@ export default function GenerateBillBtn() {
                   value={propertyType}
                   onChange={setPropertyType}
                   placeholder="Select Status"
-                />
+                /> */}
 
                 <button
                   type="submit"

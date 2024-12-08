@@ -10,7 +10,7 @@ import { LiaCoinsSolid } from "react-icons/lia";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { MoveDownIcon, MoveUpIcon } from "lucide-react";
 import { FaHourglassHalf, FaUsers } from "react-icons/fa";
-import { getToken, getUsername } from "@/lib/actions";
+import { getProfileDetails, getToken } from "@/lib/actions";
 import { LandlordDashboardStatisticResponseDataType } from "@/definition";
 import { Suspense } from "react";
 import { GrTransaction } from "react-icons/gr";
@@ -27,21 +27,20 @@ async function getStatistics() {
   return result.data;
 }
 
-async function getProperties() {
-  const token = await getToken();
-  const response = await fetch(`${BASE_URL}/private/v1/property/list`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const result = await response.json();
-  return result.data.properties.list;
-}
+// async function getProperties() {
+//   const token = await getToken();
+//   const response = await fetch(`${BASE_URL}/private/v1/property/list`, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
+//   const result = await response.json();
+//   return result.data.properties.list;
+// }
 
 export default async function Home() {
   const statistics = await getStatistics();
-  const properties = await getProperties();
-  console.log(properties);
+  const profileDetails = await getProfileDetails();
 
   return (
     <Suspense
@@ -53,18 +52,21 @@ export default async function Home() {
         </div>
       }
     >
-      <DashboardContent statistics={statistics} />
+      <DashboardContent
+        statistics={statistics}
+        name={profileDetails?.profile_info.name ?? ""}
+      />
     </Suspense>
   );
 }
 
 async function DashboardContent({
   statistics,
+  name,
 }: {
   statistics: LandlordDashboardStatisticResponseDataType;
+  name: string;
 }) {
-  const name = await getUsername();
-
   return (
     <section className="mx-auto w-full max-w-[1300px] px-5 py-7 pb-10 sm:pb-20 md:px-10 lg:px-16 xl:px-20">
       {/* Greeting */}

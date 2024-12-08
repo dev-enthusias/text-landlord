@@ -13,10 +13,26 @@ import { PiHeart } from "react-icons/pi";
 import { BsChat } from "react-icons/bs";
 import Dropdown from "../ui/dropdown";
 import { FaPowerOff } from "react-icons/fa";
-import { getRole, logout } from "@/lib/actions";
+import { getProfileDetails, getRole } from "@/lib/actions";
+import { logout } from "@/api/services/auth";
+import { notificationEndpoints } from "@/api/endpoints";
+import { apiPost } from "@/api/config";
+import { NotificationResponseType } from "@/definition";
+
+async function getNotifications() {
+  const res = await apiPost<NotificationResponseType, any>(
+    notificationEndpoints.GET_NOTIFICATIONS,
+    {},
+    "notifications",
+  );
+
+  return res.data;
+}
 
 export default async function Topbar() {
   const roleid = await getRole();
+  const notifications = (await getNotifications()) as NotificationResponseType;
+  const profileDetails = await getProfileDetails();
 
   const topbarLinks =
     roleid === 5
@@ -47,7 +63,7 @@ export default async function Topbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 items-center justify-between bg-white px-5 lg:h-20 lg:px-10">
+    <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center justify-between bg-white px-5 lg:h-20 lg:px-10">
       <Link href={""} className="relative h-28 w-28">
         <Image
           src="/logos/logo-transparent.png"
@@ -88,7 +104,7 @@ export default async function Topbar() {
           <BsChat className="h-4 w-4" />
         </Link>
 
-        <NotificationBtn />
+        <NotificationBtn notifications={notifications} />
 
         {roleid === 5 && (
           <Link
@@ -155,13 +171,20 @@ export default async function Topbar() {
             href={path?.settings}
             className="relative block h-8 w-8 overflow-hidden rounded-full bg-gray-300 lg:hidden"
           >
-            <Image
-              src="/images/profile-img.jpeg"
-              alt="Tenant profile photo"
-              fill
-              sizes="36px, (min-width: 1024px) 40px"
-              style={{ objectFit: "cover" }}
-            />
+            {profileDetails?.profile_info.user_image ? (
+              <Image
+                src={profileDetails?.profile_info.user_image ?? ""}
+                alt="Tenant profile photo"
+                fill
+                sizes="36px, (min-width: 1024px) 40px"
+                style={{ objectFit: "cover" }}
+                className="custom-shadow-sm"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-blue-300 font-bold">
+                {profileDetails?.profile_info.name[0]}
+              </div>
+            )}
           </Link>
         </article>
       </div>
@@ -169,20 +192,31 @@ export default async function Topbar() {
   );
 }
 
-function ProfileTopbar({ roleid }: { roleid: number }) {
+async function ProfileTopbar({ roleid }: { roleid: number }) {
+  const profileDetails = await getProfileDetails();
+
   return (
     <article className="hidden items-center gap-x-2 lg:flex">
       <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gray-300 lg:h-10 lg:w-10">
-        <Image
-          src="/images/profile-img.jpeg"
-          alt="Tenant profile photo"
-          fill
-          sizes="36px, (min-width: 1024px) 40px"
-          style={{ objectFit: "cover" }}
-        />
+        {profileDetails?.profile_info.user_image ? (
+          <Image
+            src={profileDetails?.profile_info.user_image ?? ""}
+            alt="Tenant profile photo"
+            fill
+            sizes="36px, (min-width: 1024px) 40px"
+            style={{ objectFit: "cover" }}
+            className="custom-shadow-sm"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center rounded-full bg-blue-300 font-bold">
+            {profileDetails?.profile_info.name[0]}
+          </div>
+        )}
       </div>
       <div className="hidden md:block">
-        <h3 className="text-sm font-semibold text-gray-600">Schawn Homme</h3>
+        <h3 className="text-sm font-semibold text-gray-600">
+          {profileDetails?.profile_info.name}
+        </h3>
         <p className="text-xs">
           {roleid === 5 ? "Tenant" : roleid === 4 ? "Landlord" : "Agent"}
         </p>

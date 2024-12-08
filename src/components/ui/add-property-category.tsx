@@ -1,13 +1,13 @@
 "use client";
 
-import SelectInput from "@/components/ui/select-input";
+// import SelectInput from "@/components/ui/select-input";
 import { X } from "lucide-react";
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
 import CustomCheckbox from "@/components/ui/custome-checkbox";
 
 export default function AddPropertyCategoryBtn() {
-  const [propertyType, setPropertyType] = useState("");
+  // const [propertyType, setPropertyType] = useState("");
   const [isGenerateBillModalOpen, setGenerateBillModal] = useState(false);
   const [checked, setChecked] = useState(false);
 
@@ -32,9 +32,9 @@ export default function AddPropertyCategoryBtn() {
             <main className="px-5">
               <fieldset className="space-y-4">
                 {/* <TextInput name="" label="Name" /> */}
-                <SelectInput
+                {/* <SelectInput
                   label="Parent Category"
-                  options={[{ value: "land", label: "Land" }]}
+                  options={[{ id: "land", name: "Land" }]}
                   value={propertyType}
                   onChange={setPropertyType}
                   placeholder="--Select--"
@@ -45,7 +45,7 @@ export default function AddPropertyCategoryBtn() {
                   value={propertyType}
                   onChange={setPropertyType}
                   placeholder="--Select--"
-                />
+                /> */}
                 <CustomCheckbox
                   id="disabled"
                   checked={checked}

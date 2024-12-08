@@ -25,7 +25,6 @@ const config: Config = {
       },
       fontFamily: {
         cormorant: ["var(--font-cormorant)"],
-        "dancing-script": ["var(--font-dancing-script)"],
         roboto: ["var(--font-roboto)"],
       },
     },
