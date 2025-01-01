@@ -1,7 +1,7 @@
 import { routes } from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
-import ForgotPasswordForm from "./forgot-password-form";
+import ForgotPasswordForm from "../../components/forms/forgot-password-form";
 import { Arrow } from "@/components/svg";
 
 export default function ForgotPassword() {

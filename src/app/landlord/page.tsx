@@ -27,16 +27,22 @@ async function getStatistics() {
   return result.data;
 }
 
-// async function getProperties() {
-//   const token = await getToken();
-//   const response = await fetch(`${BASE_URL}/private/v1/property/list`, {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-//   const result = await response.json();
-//   return result.data.properties.list;
-// }
+async function getPropertyTypeAndCategory() {
+  const token = await getToken();
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/property/create`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const data = await res.json();
+  const { type, categories } = data.data;
+  return { type, categories };
+}
 
 export default async function Home() {
   const statistics = await getStatistics();
@@ -67,6 +73,8 @@ async function DashboardContent({
   statistics: LandlordDashboardStatisticResponseDataType;
   name: string;
 }) {
+  const { type, categories } = await getPropertyTypeAndCategory();
+
   return (
     <section className="mx-auto w-full max-w-[1300px] px-5 py-7 pb-10 sm:pb-20 md:px-10 lg:px-16 xl:px-20">
       {/* Greeting */}
@@ -120,7 +128,7 @@ async function DashboardContent({
                   {statistics.total_vacant} vacant
                 </p>
               }
-              button={<AddPropertyBtn />}
+              button={<AddPropertyBtn categories={categories} types={type} />}
             />
             <PersonalSummary
               title="Total Tenants"

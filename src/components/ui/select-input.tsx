@@ -5,7 +5,7 @@ import { ChevronDown, Check } from "lucide-react";
 import { useController, Control } from "react-hook-form";
 
 type Option = {
-  id: string | number;
+  id: number | string;
   name: string;
 };
 
@@ -29,7 +29,7 @@ export default function SelectInput({
   const [isOpen, setIsOpen] = useState(false);
 
   // Transform either format to Option array
-  const options: Option[] =
+  const options =
     Array.isArray(rawOptions) && typeof rawOptions[0] === "string"
       ? (rawOptions as string[]).map((item) => ({
           id: item,
@@ -71,29 +71,23 @@ export default function SelectInput({
 
       {isOpen && (
         <div className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-gray-300 focus:outline-none sm:text-sm">
-          {options.map((option) => {
-            console.log(value);
-            console.log(option.id, option.name);
-            return (
-              <button
-                key={option.id}
-                className={`${
-                  value && option.id === value?.toString()
-                    ? "bg-gold text-black"
-                    : "text-gray-900 hover:bg-gold/20"
-                } group flex w-full items-center px-3 py-2 text-left`}
-                onClick={() => {
-                  onChange(option.id);
-                  setIsOpen(false);
-                }}
-              >
-                <span className="flex-grow truncate">{option.name}</span>
-                {option.id === value.toString() && (
-                  <Check className="ml-2 h-4 w-4" />
-                )}
-              </button>
-            );
-          })}
+          {options.map((option) => (
+            <button
+              key={option.id}
+              className={`${
+                value && option.id === value?.toString()
+                  ? "bg-gold text-black"
+                  : "text-gray-900 hover:bg-gold/20"
+              } group flex w-full items-center px-3 py-2 text-left`}
+              onClick={() => {
+                onChange(option.id);
+                setIsOpen(false);
+              }}
+            >
+              <span className="flex-grow truncate">{option.name}</span>
+              {option.id === value && <Check className="ml-2 h-4 w-4" />}
+            </button>
+          ))}
         </div>
       )}
 

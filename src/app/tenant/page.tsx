@@ -14,8 +14,8 @@ export default function Home() {
         <h1 className="text-2xl font-bold text-black">
           Good morning, Samantha Oliver!
         </h1>
-        <p className="font-semibold text-black">
-          Let&apos;s us help you track your rentals
+        <p className="font-semibold text-black lg:text-lg">
+          Let us help you track your rentals
         </p>
       </div>
 

@@ -3,6 +3,8 @@ import { propertyEndpoints } from "@/api/endpoints";
 import AddPropertyBtn from "@/components/modals/add-property";
 import { PropertyCard } from "@/components/ui/property-card";
 import { LandlordPropertiesResponseDataType } from "@/definition";
+import { getToken } from "@/lib/actions";
+import Image from "next/image";
 
 async function getProperties() {
   const res = await apiGet<LandlordPropertiesResponseDataType>(
@@ -11,13 +13,30 @@ async function getProperties() {
   return res.data;
 }
 
+async function getPropertyTypeAndCategory() {
+  const token = await getToken();
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/property/create`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const data = await res.json();
+  const { type, categories } = data.data;
+  return { type, categories };
+}
+
 export default async function Properties() {
-  const data = await getProperties();
-  console.log(data);
+  const [properties, propertyTypeAndCategory] = await Promise.all([
+    getProperties(),
+    getPropertyTypeAndCategory(),
+  ]);
 
-  if (!data) return null;
-
-
+  if (!properties) return null;
 
   return (
     <main className="flex h-full px-5 pb-20 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
@@ -28,16 +47,33 @@ export default async function Properties() {
         <section className="grow">
           <div className="mb-6 flex items-center justify-between">
             <h1 className="text-lg font-semibold text-black">
-              My Properties ({data.properties.list.length})
+              My Properties ({properties.properties.list.length})
             </h1>
 
-            <AddPropertyBtn />
+            <AddPropertyBtn
+              categories={propertyTypeAndCategory.categories}
+              types={propertyTypeAndCategory.type}
+            />
           </div>
 
-          <div className="lg:grid-cols grid w-full gap-5 sm:grid-cols-2 min-[875px]:grid-cols-3 2xl:grid-cols-4">
-            {data.properties.list.map((property) => (
-              <PropertyCard key={property.id} roleid={4} data={property} />
-            ))}
+          <div className="grid w-full gap-5 sm:grid-cols-2 min-[875px]:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-4">
+            {properties.properties.list.length <= 0 ? (
+              <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-y-2 px-5">
+                <Image
+                  src="/illustrations/undraw_quiet-street.svg"
+                  alt="no properties illustration"
+                  width={600}
+                  height={600}
+                />
+                <p className="text-center font-semibold text-black">
+                  You have not added or listed any property yet.
+                </p>
+              </div>
+            ) : (
+              properties.properties.list.map((property) => (
+                <PropertyCard key={property.id} roleid={4} data={property} />
+              ))
+            )}
           </div>
         </section>
       </section>

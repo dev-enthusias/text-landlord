@@ -16,7 +16,7 @@ type ApiResponse<T> = {
 };
 
 type RetryConfig = {
-  maxRetries?: number;
+  maxRetries?: number;   
   delayMs?: number;
 };
 

@@ -32,6 +32,7 @@ export default function PayRent() {
             <PropertyCard
               type="order"
               data={{
+                price: "$1000",
                 id: 3,
                 name: "Property 1",
                 image: "/images/property-1.jpg",
@@ -50,6 +51,7 @@ export default function PayRent() {
               type="order"
               data={{
                 id: 3,
+                price: "$1000",
                 name: "Property 1",
                 image: "/images/property-1.jpg",
                 deal_type: "Rent",

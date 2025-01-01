@@ -5,25 +5,16 @@ import SelectInput from "../ui/select-input";
 import { ImagesIcon } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AddPropertyDataType } from "@/definition";
-import { useEffect, useState } from "react";
 import { PropertyMetadataResponseDataType } from "@/definition";
-import { propertyService } from "@/api/services/property";
 
-export default function PropertyForm() {
-  const [categories, setCategories] =
-    useState<PropertyMetadataResponseDataType["categories"]>();
-  const [types, setTypes] =
-    useState<PropertyMetadataResponseDataType["type"]>();
+export default function PropertyForm({
+  categories,
 
-  useEffect(() => {
-    const fetchMetadata = async () => {
-      const res = await propertyService.getPropertyMetadata();
-      setCategories(res?.data?.categories);
-      setTypes(res?.data?.type);
-    };
-    fetchMetadata();
-  }, []);
-
+  types,
+}: {
+  categories: PropertyMetadataResponseDataType["categories"];
+  types: PropertyMetadataResponseDataType["type"];
+}) {
   const {
     register,
     handleSubmit,
@@ -54,7 +45,7 @@ export default function PropertyForm() {
           control={control}
           name="type"
           label="Property Type"
-          options={types ?? []}
+          options={types}
           placeholder="Choose an option"
           required
           error={errors.type?.message}

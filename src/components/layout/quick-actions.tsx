@@ -9,12 +9,32 @@ import { routes } from "@/constants/routes";
 import PropertyForm from "../forms/property-form";
 import AgentForm from "../forms/agent-form";
 import TenantForm from "../forms/tenant-form";
+import { types } from "util";
+
+async function getPropertyTypeAndCategory() {
+  const token = await getToken();
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/property/create`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const data = await res.json();
+  const { type, categories } = data.data;
+  return { type, categories };
+}
 
 export default function QuickActions() {
   const router = useRouter();
   const [isAddPropertyModalOpen, setAddPropertyModal] = useState(false);
   const [isAddTenantModalOpen, setAddTenantModal] = useState(false);
   const [isAddAgentModalOpen, setAddAgentModal] = useState(false);
+
+  const { type, categories } = getPropertyTypeAndCategory();
 
   const handleQuickAction = (id: number) => {
     switch (id) {
@@ -69,7 +89,7 @@ export default function QuickActions() {
             </header>
 
             <main className="px-5">
-              <PropertyForm />
+              <PropertyForm types={types} categories={categories} />
             </main>
           </article>
         </ModalLayout>

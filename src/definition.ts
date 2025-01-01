@@ -79,6 +79,7 @@ interface Property {
   total_occupied: null;
   total_rent: null;
   total_sell: null;
+  price: string;
 }
 
 export interface LandlordPropertiesResponseDataType {

@@ -7,6 +7,7 @@ import { HeartSolid, HeartStroke } from "../svg";
 import { BathIcon, BedIcon, RulerIcon, Trash2 } from "lucide-react";
 import { routes } from "@/constants/routes";
 import { TenantPropertyCardTypes } from "@/definition";
+import { removePropertyFromWishlist } from "@/api/services/wishlist";
 
 function PropertyPhoto({ photo }: { photo: string }) {
   return (
@@ -22,10 +23,10 @@ function PropertyPhoto({ photo }: { photo: string }) {
   );
 }
 
-function PropertyPrice() {
+function PropertyPrice({ price }: { price: string }) {
   return (
     <p className="flex items-center gap-x-1 text-lg font-bold text-accent">
-      ₦5,000,000{" "}
+      {price}
       <span className="text-xs font-medium text-gray-500 opacity-80">
         / year
       </span>
@@ -84,14 +85,14 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
         return routes.LANDLORD_PROPERTIES + `/${data.id}`;
       case roleid === 5:
         return type === "order"
-          ? routes.TENANT_ORDERS + "/0"
-          : routes.TENANT_PROPERTIES + "/0";
+          ? routes.TENANT_ORDERS + `/${data.id}`
+          : routes.TENANT_PROPERTIES + `/${data.id}`;
       case roleid === 4 && type === "order":
-        return routes.LANDLORD_ORDERS + "/0";
+        return routes.LANDLORD_ORDERS + `/${data.id}`;
       default:
         return type === "order"
           ? routes.AGENT_DASHBOARD_SETTINGS + "?path=orderdetails"
-          : routes.AGENT_PROPERTIES + "/0";
+          : routes.AGENT_PROPERTIES + `/${data.id}`;
     }
   })();
 
@@ -108,12 +109,15 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
           <div className="px-2">
             {/* Property value & Favourite Btn || Delete Btn */}
             <div className="mb-2 flex justify-between">
-              <PropertyPrice />
+              <PropertyPrice price={data.price} />
 
               {type === "wishlist" ? (
                 <button
+                  type="submit"
                   onClick={(e) => {
+                    console.log("clicked");
                     e.preventDefault();
+                    removePropertyFromWishlist(data.id);
                     e.stopPropagation();
                   }}
                 >

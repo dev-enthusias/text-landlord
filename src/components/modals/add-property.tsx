@@ -6,7 +6,7 @@ import PropertyForm from "../forms/property-form";
 import { X } from "lucide-react";
 import { IoMdAdd } from "react-icons/io";
 
-export default function AddPropertyBtn() {
+export default function AddPropertyBtn({ categories, types }) {
   const [isAddPropertyModalOpen, setAddPropertyModal] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ export default function AddPropertyBtn() {
             </header>
 
             <main className="px-5">
-              <PropertyForm />
+              <PropertyForm categories={categories} types={types} />
             </main>
           </article>
         </ModalLayout>

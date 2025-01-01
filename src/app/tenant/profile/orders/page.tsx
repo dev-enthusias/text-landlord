@@ -18,6 +18,7 @@ export default function Orders() {
             type="order"
             data={{
               id: 3,
+              price: "$1000",
               name: "Property 1",
               image: "/images/property-1.jpg",
               deal_type: "Rent",
@@ -35,6 +36,7 @@ export default function Orders() {
             type="order"
             data={{
               id: 3,
+              price: "$1000",
               name: "Property 1",
               image: "/images/property-1.jpg",
               deal_type: "Rent",
