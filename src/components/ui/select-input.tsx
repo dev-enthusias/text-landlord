@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, Check } from "lucide-react";
 import { useController, Control } from "react-hook-form";
+import { useGlobalStore } from "@/stores/global-store";
 
 type Option = {
   id: number | string;
@@ -26,6 +27,8 @@ export default function SelectInput({
   placeholder?: string;
   error?: string;
 }) {
+  const updateCountryId = useGlobalStore((state) => state.updateCountryId);
+  const updateStateId = useGlobalStore((state) => state.updateStateId);
   const [isOpen, setIsOpen] = useState(false);
 
   // Transform either format to Option array
@@ -42,10 +45,21 @@ export default function SelectInput({
   } = useController({
     name,
     control,
-    rules: { required },
+    // rules: { required },
   });
 
   const selectedOption = options.find((opt) => opt.id === value);
+
+  const handleOptionClick = (optionId: string | number) => {
+    onChange(optionId);
+    setIsOpen(false);
+    if (name === "country_id") {
+      updateCountryId(optionId);
+    }
+    if (name === "state_id") {
+      updateStateId(optionId);
+    }
+  };
 
   return (
     <div className="relative w-full">
@@ -75,14 +89,11 @@ export default function SelectInput({
             <button
               key={option.id}
               className={`${
-                value && option.id === value?.toString()
+                value && option.id === value
                   ? "bg-gold text-black"
                   : "text-gray-900 hover:bg-gold/20"
               } group flex w-full items-center px-3 py-2 text-left`}
-              onClick={() => {
-                onChange(option.id);
-                setIsOpen(false);
-              }}
+              onClick={() => handleOptionClick(option.id)}
             >
               <span className="flex-grow truncate">{option.name}</span>
               {option.id === value && <Check className="ml-2 h-4 w-4" />}

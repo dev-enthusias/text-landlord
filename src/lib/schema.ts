@@ -1,5 +1,13 @@
 import * as z from "zod";
 
+const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
+
 export const loginSchema = z.object({
   email: z
     .string()
@@ -66,17 +74,14 @@ export const changePasswordSchema = z
 export const addPropertySchema = z.object({
   name: z.string().min(1, { message: "Please input property name" }),
   type: z.string().min(1, { message: "Please select property type" }),
-  default_image: z.string().min(1, { message: "Please upload default image" }),
+  default_image: z.custom<FileList>(),
   address: z.string().min(1, { message: "Please input property address" }),
-  country_id: z.string().min(1, { message: "Please select country" }),
-  division_id: z.string().min(1, { message: "Please select state" }),
-  district_id: z.string().min(1, { message: "Please select city" }),
-  upazila_id: z.string().min(1, { message: "Please select upazila" }),
+  country_id: z.number().min(1, { message: "Please select country" }),
+  state_id: z.number().min(1, { message: "Please select state" }),
+  city_id: z.number().min(1, { message: "Please select city" }),
   property_category_id: z
-    .string()
-    .min(1, { message: "Please selct property category" }),
-  property_deed: z.string().min(1, "Please provide your porperty deeds"),
-  post_code: z.string().optional(),
+    .number()
+    .min(1, { message: "Please select property category" }),
 });
 
 export const addTenantSchema = z.object({

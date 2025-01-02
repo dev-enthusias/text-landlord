@@ -9,7 +9,7 @@ import { routes } from "@/constants/routes";
 import PropertyForm from "../forms/property-form";
 import AgentForm from "../forms/agent-form";
 import TenantForm from "../forms/tenant-form";
-import { types } from "util";
+import { getToken } from "@/lib/actions";
 
 async function getPropertyTypeAndCategory() {
   const token = await getToken();
@@ -28,13 +28,13 @@ async function getPropertyTypeAndCategory() {
   return { type, categories };
 }
 
-export default function QuickActions() {
+export default async function QuickActions() {
   const router = useRouter();
   const [isAddPropertyModalOpen, setAddPropertyModal] = useState(false);
   const [isAddTenantModalOpen, setAddTenantModal] = useState(false);
   const [isAddAgentModalOpen, setAddAgentModal] = useState(false);
 
-  const { type, categories } = getPropertyTypeAndCategory();
+  const { type, categories } = await getPropertyTypeAndCategory();
 
   const handleQuickAction = (id: number) => {
     switch (id) {
@@ -89,7 +89,7 @@ export default function QuickActions() {
             </header>
 
             <main className="px-5">
-              <PropertyForm types={types} categories={categories} />
+              <PropertyForm types={type} categories={categories} />
             </main>
           </article>
         </ModalLayout>

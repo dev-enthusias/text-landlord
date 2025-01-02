@@ -15,6 +15,7 @@ import { LandlordDashboardStatisticResponseDataType } from "@/definition";
 import { Suspense } from "react";
 import { GrTransaction } from "react-icons/gr";
 import { BASE_URL } from "@/api/config";
+import { propertyService } from "@/api/services/property";
 
 async function getStatistics() {
   const token = await getToken();
@@ -25,23 +26,6 @@ async function getStatistics() {
   });
   const result = await response.json();
   return result.data;
-}
-
-async function getPropertyTypeAndCategory() {
-  const token = await getToken();
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/property/create`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-
-  const data = await res.json();
-  const { type, categories } = data.data;
-  return { type, categories };
 }
 
 export default async function Home() {
@@ -73,7 +57,8 @@ async function DashboardContent({
   statistics: LandlordDashboardStatisticResponseDataType;
   name: string;
 }) {
-  const { type, categories } = await getPropertyTypeAndCategory();
+  const { type, categories } =
+    await propertyService.getPropertyTypeAndCategory();
 
   return (
     <section className="mx-auto w-full max-w-[1300px] px-5 py-7 pb-10 sm:pb-20 md:px-10 lg:px-16 xl:px-20">

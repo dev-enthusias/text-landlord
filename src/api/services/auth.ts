@@ -2,10 +2,11 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { BASE_URL } from "../config";
 import { ROLE_ROUTES } from "@/constants/data";
 import { routes } from "@/constants/routes";
 import { LoginDataType, RegisterDataType } from "@/definition";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function authenticate(
   data: LoginDataType,

@@ -1,9 +1,9 @@
 import { apiGet } from "@/api/config";
 import { propertyEndpoints } from "@/api/endpoints";
+import { propertyService } from "@/api/services/property";
 import AddPropertyBtn from "@/components/modals/add-property";
 import { PropertyCard } from "@/components/ui/property-card";
 import { LandlordPropertiesResponseDataType } from "@/definition";
-import { getToken } from "@/lib/actions";
 import Image from "next/image";
 
 async function getProperties() {
@@ -13,27 +13,11 @@ async function getProperties() {
   return res.data;
 }
 
-async function getPropertyTypeAndCategory() {
-  const token = await getToken();
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/property/create`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-
-  const data = await res.json();
-  const { type, categories } = data.data;
-  return { type, categories };
-}
-
 export default async function Properties() {
-  const [properties, propertyTypeAndCategory] = await Promise.all([
+  const [properties, propertyTypeAndCategory, country] = await Promise.all([
     getProperties(),
-    getPropertyTypeAndCategory(),
+    propertyService.getPropertyTypeAndCategory(),
+    propertyService.getCountry(),
   ]);
 
   if (!properties) return null;
@@ -53,6 +37,7 @@ export default async function Properties() {
             <AddPropertyBtn
               categories={propertyTypeAndCategory.categories}
               types={propertyTypeAndCategory.type}
+              country={country}
             />
           </div>
 
@@ -65,7 +50,7 @@ export default async function Properties() {
                   width={600}
                   height={600}
                 />
-                <p className="text-center font-semibold text-black">
+                <p className="text-center text-black">
                   You have not added or listed any property yet.
                 </p>
               </div>

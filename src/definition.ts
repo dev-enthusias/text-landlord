@@ -308,3 +308,15 @@ export interface UserDetailsResponseDataType {
     user_image: string;
   };
 }
+
+export interface Country {
+  id: number;
+  code: string;
+  name: string;
+  status: number;
+}
+
+export interface LocationList {
+  id: number;
+  name: string;
+}
