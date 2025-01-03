@@ -3,7 +3,9 @@ import TenantList, {
   TenantListMobile,
 } from "@/components/data-visualization/tenant-list";
 import { CiSearch } from "react-icons/ci";
-import { getTenants } from "./actions";
+import { getTenants } from "@/api/services/tenant";
+import Image from "next/image";
+import { getPropertyTypeAndCategory } from "@/api/services/property";
 
 export default async function Tenants() {
   const tenants = await getTenants();
@@ -70,14 +72,32 @@ export default async function Tenants() {
               <h3 role="columnheader">Action</h3>
             </div>
 
-            {tenants.list.map((tenant) => (
-              <TenantList
-                key={tenant.id}
-                status="overdue"
-                tenant_status="active"
-                data={tenant}
-              />
-            ))}
+            {totalTenants <= 0 ? (
+              <div className="flex flex-col items-center justify-center gap-y-2 pb-8 pt-4 text-center">
+                <Image
+                  src="/illustrations/undraw_add-tenants.svg"
+                  alt="no properties illustration"
+                  width={200}
+                  height={100}
+                />
+                <div className="text-center text-black">
+                  <p>Oops! It seems like there is nobody here yet.</p>
+                  <p>
+                    Never mind, just list your property/properties and wait for
+                    tenants to find you.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              tenants.list.map((tenant) => (
+                <TenantList
+                  key={tenant.id}
+                  status="overdue"
+                  tenant_status="active"
+                  data={tenant}
+                />
+              ))
+            )}
           </div>
         </section>
 
@@ -104,16 +124,30 @@ export default async function Tenants() {
               </p>
             </div>
 
-            <div className="grid gap-5 sm:px-5 md:grid-cols-2">
-              {tenants.list.map((tenant) => (
+            {totalTenants <= 0 ? (
+              <div className="flex flex-col items-center justify-center gap-y-2 pt-4 text-center">
+                <Image
+                  src="/illustrations/undraw_add-tenants.svg"
+                  alt="no properties illustration"
+                  width={150}
+                  height={100}
+                />
+                <div>
+                  <p className="text-center text-black">
+                    Oops! It seems like there is nobody here yet.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              tenants.list.map((tenant) => (
                 <TenantListMobile
                   key={tenant.id}
                   status="overdue"
                   tenant_status="active"
                   data={tenant}
                 />
-              ))}
-            </div>
+              ))
+            )}
           </div>
         </section>
       </div>

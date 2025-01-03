@@ -6,7 +6,6 @@ import SubmitButton from "./submit-button";
 import { AddTenantDataType } from "@/definition";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addTenantSchema } from "@/lib/schema";
-import { propertyService } from "@/api/services/property";
 import SelectInput from "../ui/select-input";
 
 export default function TenantForm() {
@@ -20,17 +19,15 @@ export default function TenantForm() {
   });
 
   const onSubmit: SubmitHandler<AddTenantDataType> = async (data) => {
-    const res = await propertyService.addTenant(data);
-
-    console.log(res);
-
-    if (res && !res.status) {
-      // toast.error("Error", { description: res.message });
-    }
-
-    if (res && res.status) {
-      // toast.success("Success", { description: res.message });
-    }
+    // const res = await addTenant(data);
+    // console.log(res);
+    // if (res && !res.status) {
+    //   // toast.error("Error", { description: res.message });
+    // }
+    // if (res && res.status) {
+    //   // toast.success("Success", { description: res.message });
+    // }
+    console.log(data);
   };
 
   return (

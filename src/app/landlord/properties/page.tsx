@@ -1,6 +1,9 @@
 import { apiGet } from "@/api/config";
 import { propertyEndpoints } from "@/api/endpoints";
-import { propertyService } from "@/api/services/property";
+import {
+  getCountry,
+  getPropertyTypeAndCategory,
+} from "@/api/services/property";
 import AddPropertyBtn from "@/components/modals/add-property";
 import { PropertyCard } from "@/components/ui/property-card";
 import { LandlordPropertiesResponseDataType } from "@/definition";
@@ -16,8 +19,8 @@ async function getProperties() {
 export default async function Properties() {
   const [properties, propertyTypeAndCategory, country] = await Promise.all([
     getProperties(),
-    propertyService.getPropertyTypeAndCategory(),
-    propertyService.getCountry(),
+    getPropertyTypeAndCategory(),
+    getCountry(),
   ]);
 
   if (!properties) return null;

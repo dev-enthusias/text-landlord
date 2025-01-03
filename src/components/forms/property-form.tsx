@@ -10,7 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { addPropertySchema } from "@/lib/schema";
 import { useEffect, useState } from "react";
 import { useGlobalStore } from "@/stores/global-store";
-import { propertyService } from "@/api/services/property";
+import { addProperty, getCities, getStates } from "@/api/services/property";
+import SubmitButton from "./submit-button";
 
 export default function PropertyForm({
   categories,
@@ -32,17 +33,13 @@ export default function PropertyForm({
       if (!countryId) {
         setStates([{ id: 0, name: "Select a country first" }]);
       } else {
-        const states = (await propertyService.getStates(
-          countryId,
-        )) as LocationList[];
+        const states = (await getStates(countryId)) as LocationList[];
         setStates(states);
       }
       if (!stateId) {
         setCities([{ id: 0, name: "Select a state first" }]);
       } else {
-        const cities = (await propertyService.getCities(
-          stateId,
-        )) as LocationList[];
+        const cities = (await getCities(stateId)) as LocationList[];
         setCities(cities);
       }
     };
@@ -55,18 +52,18 @@ export default function PropertyForm({
     handleSubmit,
     control,
     setValue,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<AddPropertyDataType>({
     resolver: zodResolver(addPropertySchema),
   });
 
   const onSubmit: SubmitHandler<AddPropertyDataType> = async (data) => {
-    // const res = await authenticate(data);
+    const res = await addProperty({
+      ...data,
+      post_code: "12234",
+    });
 
-    // if (res && typeof res === "string") {
-    //   toast.error("Error", { description: res });
-    // }
-    console.log(data);
+    console.log(res);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -175,12 +172,7 @@ export default function PropertyForm({
             </div>
           )}
         </div>
-        <button
-          type="submit"
-          className="w-full rounded-lg bg-gold py-3 font-semibold text-white transition-colors duration-300 ease-out hover:bg-gold/80"
-        >
-          Save
-        </button>
+        <SubmitButton isSubmitting={isSubmitting} text="SAVE" />
       </fieldset>
     </form>
   );
