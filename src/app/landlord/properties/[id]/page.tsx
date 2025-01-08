@@ -16,6 +16,7 @@ import { apiGet } from "@/api/config";
 import { LandlordPropertyDetailsResponseDataType } from "@/definition";
 import Gallery from "@/components/gallery";
 import { getPropertyTypeAndCategory } from "@/api/services/property";
+import AdvertisePropertyBtn from "@/components/modals/advertise-property";
 
 async function getPropertyDetails(id: string) {
   const res = await apiGet<LandlordPropertyDetailsResponseDataType>(
@@ -76,15 +77,27 @@ export default async function PropertyDetails({
             city: data.property.city ?? "House in Mars",
           }}
         />
-        <UpdatePropertyBtn
-          type={editedType}
-          completion={editedCompletion}
-          name={data.property.name}
-          id={data.property.id}
-          propertyType={data.property.type}
-          gallery={gallery}
-          floorPlanPhoto={floorPlanPhoto ? [floorPlanPhoto?.path] : []}
-        />
+
+        <div className="flex gap-x-2">
+          <AdvertisePropertyBtn
+            type={editedType}
+            completion={editedCompletion}
+            name={data.property.name}
+            id={data.property.id}
+            propertyType={data.property.type}
+            gallery={gallery}
+            floorPlanPhoto={floorPlanPhoto ? [floorPlanPhoto?.path] : []}
+          />
+          <UpdatePropertyBtn
+            type={editedType}
+            completion={editedCompletion}
+            name={data.property.name}
+            id={data.property.id}
+            propertyType={data.property.type}
+            gallery={gallery}
+            floorPlanPhoto={floorPlanPhoto ? [floorPlanPhoto?.path] : []}
+          />
+        </div>
       </section>
 
       <Gallery displayPhoto={data.property.image} gallery={gallery} />

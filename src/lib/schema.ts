@@ -41,6 +41,11 @@ export const forgotPasswordSchema = z.object({
     .email({ message: "Invalid email address" }),
 });
 
+export const createAdvertSchema = z.object({
+  advertisement_type: z.coerce.number(),
+  rent_type: z.coerce.number(),
+});
+
 export const changePasswordSchema = z
   .object({
     old_password: z.string().min(1, { message: "Input your old password" }),

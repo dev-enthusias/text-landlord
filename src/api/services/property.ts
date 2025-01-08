@@ -47,6 +47,22 @@ export const addPropertyBasicInfo = async (data: any, id: number) => {
   return result;
 };
 
+export const createAdvert = async (data: any) => {
+  const token = await getToken();
+
+  const res = await fetch(`${BASE_URL}/private/v1/advertisement/create`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await res.json();
+  return result;
+};
+
 export const addGalleryPhoto = async (
   data: { [key: string]: any } & AddGalleryPhotoDataType,
 ) => {

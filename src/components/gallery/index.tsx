@@ -90,6 +90,18 @@ export default function Gallery({
     images.length - (windowWidth < 1100 ? 5 : 4),
   );
 
+  // Pause timer on hover
+  const handleMouseEnter = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+  };
+
+  // Resume timer on mouse leave
+  const handleMouseLeave = () => {
+    resetTimer();
+  };
+
   return (
     <section className="mb-6 grid h-[50vh] grid-cols-4 grid-rows-4 gap-2 lg:h-[80vh] lg:grid-rows-3 lg:gap-5">
       {visibleImages.map((image, index) => (
@@ -97,6 +109,8 @@ export default function Gallery({
           {index === 0 && (
             <div
               className={`relative col-span-4 row-span-3 overflow-hidden rounded-xl border border-gray-200 lg:row-span-4 ${images.length <= 1 ? "lg:col-span-4" : "lg:col-span-3"}`}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               <Image
                 src={images[currentIndex]}

@@ -6,6 +6,7 @@ import {
   addTenantSchema,
   basicPropertyInfoSchema,
   changePasswordSchema,
+  createAdvertSchema,
   forgotPasswordSchema,
   loginSchema,
   profileSchema,
@@ -54,6 +55,7 @@ export type AddGalleryPhotoDataType = z.infer<typeof addGalleryPhotoSchema>;
 export type AddTenantDataType = z.infer<typeof addTenantSchema>;
 export type ProfileFormData = z.infer<typeof profileSchema>;
 export type BasicPropertyInfoDataType = z.infer<typeof basicPropertyInfoSchema>;
+export type CreateAdvertDataType = z.infer<typeof createAdvertSchema>;
 
 export interface LandlordDashboardStatisticResponseDataType {
   total_properties: number;
