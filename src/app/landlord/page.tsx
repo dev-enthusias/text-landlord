@@ -15,7 +15,10 @@ import { LandlordDashboardStatisticResponseDataType } from "@/definition";
 import { Suspense } from "react";
 import { GrTransaction } from "react-icons/gr";
 import { BASE_URL } from "@/api/config";
-import { getPropertyTypeAndCategory } from "@/api/services/property";
+import {
+  getCountry,
+  getPropertyTypeAndCategory,
+} from "@/api/services/property";
 
 async function getStatistics() {
   const token = await getToken();
@@ -116,7 +119,7 @@ async function DashboardContent({
                 <AddPropertyBtn
                   categories={categories}
                   types={type}
-                  // country={country}
+                  country={await getCountry()}
                 />
               }
             />
