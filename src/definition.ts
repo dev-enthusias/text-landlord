@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { Path, UseFormRegister } from "react-hook-form";
 import {
+  addGalleryPhotoSchema,
   addPropertySchema,
   addTenantSchema,
   basicPropertyInfoSchema,
@@ -49,6 +50,7 @@ export type ForgotPasswordDataType = z.infer<typeof forgotPasswordSchema>;
 export type ChangePasswordDataType = z.infer<typeof changePasswordSchema>;
 export type FormOneDataType = z.infer<typeof registerFormSchema>;
 export type AddPropertyDataType = z.infer<typeof addPropertySchema>;
+export type AddGalleryPhotoDataType = z.infer<typeof addGalleryPhotoSchema>;
 export type AddTenantDataType = z.infer<typeof addTenantSchema>;
 export type ProfileFormData = z.infer<typeof profileSchema>;
 export type BasicPropertyInfoDataType = z.infer<typeof basicPropertyInfoSchema>;

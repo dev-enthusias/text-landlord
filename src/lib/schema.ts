@@ -76,6 +76,10 @@ export const addPropertySchema = z.object({
     .min(1, { message: "Please select property category" }),
 });
 
+export const addGalleryPhotoSchema = z.object({
+  image: z.custom<FileList>().optional(),
+});
+
 export const basicPropertyInfoSchema = z.object({
   name: z.string().min(1, { message: "Please input property name" }),
   type: z.coerce.number(),

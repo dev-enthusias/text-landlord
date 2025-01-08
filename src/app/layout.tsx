@@ -19,7 +19,15 @@ export default function RootLayout({
         className={`${lato.className} ${roboto.variable} ${cormorant_garamond.variable} antialiased`}
       >
         {children}
-        <Toaster richColors theme="light" position="top-right" expand={true} />
+        <Toaster
+          richColors
+          theme="light"
+          position="top-right"
+          expand={true}
+          toastOptions={{
+            style: { zIndex: 9999 },
+          }}
+        />
       </body>
     </html>
   );

@@ -78,6 +78,7 @@ export default async function PropertyDetails({
           name={data.property.name}
           id={data.property.id}
           propertyType={data.property.type}
+          gallery={gallery}
         />
       </section>
 

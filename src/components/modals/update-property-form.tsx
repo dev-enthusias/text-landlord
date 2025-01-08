@@ -14,11 +14,13 @@ export default function UpdatePropertyBtn({
   name,
   propertyType,
   id,
+  gallery,
 }: {
   name: string;
   id: number;
   propertyType: string;
   type: { id: number; name: string }[];
+  gallery: string[];
   completion: PropertyMetadataResponseDataType["completion"];
 }) {
   const [isEditPropertyModalOpen, setEditPropertyModal] = useState(false);
@@ -91,7 +93,13 @@ export default function UpdatePropertyBtn({
                   setEditPropertyModal={setEditPropertyModal}
                 />
               )}
-              {activeForm === "gallery" && <GalleryForm />}
+              {activeForm === "gallery" && (
+                <GalleryForm
+                  gallery={gallery}
+                  id={id}
+                  setEditPropertyModal={setEditPropertyModal}
+                />
+              )}
               {activeForm === "floor" && <FloorPlanForm />}
             </main>
           </article>

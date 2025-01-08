@@ -1,3 +1,4 @@
+import { AddGalleryPhotoDataType, AddPropertyDataType } from "@/definition";
 import { propertyEndpoints } from "../endpoints";
 import { getToken } from "@/lib/actions";
 
@@ -42,6 +43,32 @@ export const addPropertyBasicInfo = async (data: any, id: number) => {
       },
     },
   );
+
+  const result = await res.json();
+  return result;
+};
+
+export const addGalleryPhoto = async (data: { [key: string]: any } & AddGalleryPhotoDataType) => {
+  const token = await getToken();
+  const formData = new FormData();
+
+  console.log(data);
+
+  for (const key in data) {
+    if (key === "image" && data.image) {
+      formData.append("image", data?.image[0]);
+    } else {
+      formData.append(key, data[key]);
+    }
+  }
+
+  const res = await fetch(`${BASE_URL}/private/v1/property/add-gallery`, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   const result = await res.json();
   return result;
