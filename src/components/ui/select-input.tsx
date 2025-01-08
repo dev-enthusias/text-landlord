@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown, Check } from "lucide-react";
 import { useController, Control } from "react-hook-form";
 import { useGlobalStore } from "@/stores/global-store";
@@ -18,6 +18,7 @@ export default function SelectInput({
   required,
   placeholder = "Select an option",
   error,
+  defaultValue,
 }: {
   options: string[] | Option[];
   name: string;
@@ -26,6 +27,7 @@ export default function SelectInput({
   required?: boolean;
   placeholder?: string;
   error?: string;
+  defaultValue?: string | number;
 }) {
   const updateCountryId = useGlobalStore((state) => state.updateCountryId);
   const updateStateId = useGlobalStore((state) => state.updateStateId);
@@ -45,8 +47,14 @@ export default function SelectInput({
   } = useController({
     name,
     control,
-    // rules: { required },
+    defaultValue,
   });
+
+  useEffect(() => {
+    if (defaultValue !== undefined && value === undefined) {
+      onChange(defaultValue);
+    }
+  }, [defaultValue, value, onChange]);
 
   const selectedOption = options.find((opt) => opt.id === value);
 
@@ -72,7 +80,11 @@ export default function SelectInput({
         className="relative w-full cursor-pointer rounded-md border border-gray-300 bg-white py-3 pl-4 pr-10 text-left shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
       >
         <span className="block truncate">
-          {selectedOption ? selectedOption.name : placeholder}
+          {selectedOption ? (
+            selectedOption.name
+          ) : (
+            <span className="text-gray-300">{placeholder}</span>
+          )}
         </span>
         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <ChevronDown
@@ -89,14 +101,14 @@ export default function SelectInput({
             <button
               key={option.id}
               className={`${
-                value && option.id === value
+                value === option.id
                   ? "bg-gold text-black"
                   : "text-gray-900 hover:bg-gold/20"
               } group flex w-full items-center px-3 py-2 text-left`}
               onClick={() => handleOptionClick(option.id)}
             >
               <span className="flex-grow truncate">{option.name}</span>
-              {option.id === value && <Check className="ml-2 h-4 w-4" />}
+              {value === option.id && <Check className="ml-2 h-4 w-4" />}
             </button>
           ))}
         </div>

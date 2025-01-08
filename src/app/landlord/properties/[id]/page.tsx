@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BackButton } from "@/components/ui/prev-page";
-import EditPropertyBtn from "@/components/modals/edit-property";
+import UpdatePropertyBtn from "@/components/modals/update-property-form";
 import {
   Description,
   DetailedFeatures,
@@ -15,6 +15,7 @@ import { routes } from "@/constants/routes";
 import { apiGet } from "@/api/config";
 import { LandlordPropertyDetailsResponseDataType } from "@/definition";
 import Gallery from "@/components/gallery";
+import { getPropertyTypeAndCategory } from "@/api/services/property";
 
 async function getPropertyDetails(id: string) {
   const res = await apiGet<LandlordPropertyDetailsResponseDataType>(
@@ -29,10 +30,20 @@ export default async function PropertyDetails({
   params: { id: string };
 }) {
   const data = await getPropertyDetails(params.id);
+  const { type, completion } = await getPropertyTypeAndCategory();
 
   if (!data) return null;
 
   const gallery = data.gallery.map((item) => item.path);
+
+  const editedCompletion = completion.map((d: string, i: number) => ({
+    id: i,
+    name: d,
+  }));
+  const editedType = type.map((d: string, i: number) => ({
+    id: i,
+    name: d,
+  }));
 
   return (
     <main className="px-5 py-7 pb-10 lg:px-20 lg:pb-20">
@@ -61,7 +72,13 @@ export default async function PropertyDetails({
             city: data.property.city ?? "House in Mars",
           }}
         />
-        <EditPropertyBtn />
+        <UpdatePropertyBtn
+          type={editedType}
+          completion={editedCompletion}
+          name={data.property.name}
+          id={data.property.id}
+          propertyType={data.property.type}
+        />
       </section>
 
       <Gallery displayPhoto={data.property.image} gallery={gallery} />

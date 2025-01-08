@@ -15,7 +15,7 @@ import { LandlordDashboardStatisticResponseDataType } from "@/definition";
 import { Suspense } from "react";
 import { GrTransaction } from "react-icons/gr";
 import { BASE_URL } from "@/api/config";
-import { propertyService } from "@/api/services/property";
+import { getPropertyTypeAndCategory } from "@/api/services/property";
 
 async function getStatistics() {
   const token = await getToken();
@@ -57,8 +57,7 @@ async function DashboardContent({
   statistics: LandlordDashboardStatisticResponseDataType;
   name: string;
 }) {
-  const { type, categories } =
-    await propertyService.getPropertyTypeAndCategory();
+  const { type, categories } = await getPropertyTypeAndCategory();
 
   return (
     <section className="mx-auto w-full max-w-[1300px] px-5 py-7 pb-10 sm:pb-20 md:px-10 lg:px-16 xl:px-20">
@@ -113,7 +112,13 @@ async function DashboardContent({
                   {statistics.total_vacant} vacant
                 </p>
               }
-              button={<AddPropertyBtn categories={categories} types={type} />}
+              button={
+                <AddPropertyBtn
+                  categories={categories}
+                  types={type}
+                  // country={country}
+                />
+              }
             />
             <PersonalSummary
               title="Total Tenants"

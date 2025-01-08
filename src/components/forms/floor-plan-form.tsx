@@ -4,48 +4,15 @@ import TextInput from "../ui/text-input";
 import SelectInput from "../ui/select-input";
 import { ImagesIcon } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AddPropertyDataType, Country, LocationList } from "@/definition";
-import { PropertyMetadataResponseDataType } from "@/definition";
+import { AddPropertyDataType } from "@/definition";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addPropertySchema } from "@/lib/schema";
-import { useEffect, useState } from "react";
-import { useGlobalStore } from "@/stores/global-store";
-import { addProperty, getCities, getStates } from "@/api/services/property";
+import { useState } from "react";
+import { addProperty } from "@/api/services/property";
 import SubmitButton from "./submit-button";
 
-export default function PropertyForm({
-  categories,
-  country,
-  types,
-}: {
-  categories: PropertyMetadataResponseDataType["categories"];
-  types: PropertyMetadataResponseDataType["type"];
-  country: Country[];
-}) {
+export default function FloorPlanForm() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const countryId = useGlobalStore((state) => state.countryId);
-  const stateId = useGlobalStore((state) => state.stateId);
-  const [states, setStates] = useState<LocationList[]>([]);
-  const [cities, setCities] = useState<LocationList[]>([]);
-
-  useEffect(() => {
-    const fetchStatesAndCities = async () => {
-      if (!countryId) {
-        setStates([{ id: 0, name: "Select a country first" }]);
-      } else {
-        const states = (await getStates(countryId)) as LocationList[];
-        setStates(states);
-      }
-      if (!stateId) {
-        setCities([{ id: 0, name: "Select a state first" }]);
-      } else {
-        const cities = (await getCities(stateId)) as LocationList[];
-        setCities(cities);
-      }
-    };
-
-    fetchStatesAndCities();
-  }, [countryId, stateId]);
 
   const {
     register,
@@ -80,62 +47,6 @@ export default function PropertyForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <fieldset className="space-y-4">
-        <TextInput
-          register={register}
-          name="name"
-          label="Property Name"
-          error={errors.name?.message}
-          required
-        />
-        <SelectInput
-          control={control}
-          name="type"
-          label="Property Type"
-          options={types}
-          placeholder="Choose an option"
-          required
-          error={errors.type?.message}
-        />
-        <SelectInput
-          control={control}
-          name="property_category_id"
-          label="Property Category"
-          options={categories ?? []}
-          placeholder="Choose an option"
-          required
-          error={errors.property_category_id?.message}
-        />
-        <TextInput
-          register={register}
-          name="address"
-          label="Property Address"
-          error={errors.address?.message}
-          required
-        />
-        <SelectInput
-          control={control}
-          name="country_id"
-          label=""
-          options={country}
-          placeholder="Select a country"
-          error={errors.country_id?.message}
-        />
-        <SelectInput
-          label=""
-          control={control}
-          name="state_id"
-          options={states}
-          placeholder="Select a state"
-          error={errors.state_id?.message}
-        />
-        <SelectInput
-          label=""
-          options={cities}
-          control={control}
-          name="city_id"
-          placeholder="Select a city"
-          error={errors.city_id?.message}
-        />
         <div className="flex flex-col gap-y-1">
           <p className="mb-1 block font-semibold text-gray-600">Image</p>
           <div className="grid grid-cols-3 gap-x-2">

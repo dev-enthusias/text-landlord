@@ -28,7 +28,7 @@ export default function TextInput({
           type={type === "password" && isVisible ? "text" : type}
           id={name}
           {...register(name)}
-          className="relative w-full rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+          className="relative w-full appearance-none rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
           disabled={disabled}
         />
 

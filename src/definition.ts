@@ -3,6 +3,7 @@ import { Path, UseFormRegister } from "react-hook-form";
 import {
   addPropertySchema,
   addTenantSchema,
+  basicPropertyInfoSchema,
   changePasswordSchema,
   forgotPasswordSchema,
   loginSchema,
@@ -50,6 +51,7 @@ export type FormOneDataType = z.infer<typeof registerFormSchema>;
 export type AddPropertyDataType = z.infer<typeof addPropertySchema>;
 export type AddTenantDataType = z.infer<typeof addTenantSchema>;
 export type ProfileFormData = z.infer<typeof profileSchema>;
+export type BasicPropertyInfoDataType = z.infer<typeof basicPropertyInfoSchema>;
 
 export interface LandlordDashboardStatisticResponseDataType {
   total_properties: number;
@@ -113,7 +115,7 @@ export interface LandlordPropertyDetailsResponseDataType {
     name: string;
     image: string;
     deal_type: "Rent";
-    type: "Commercial";
+    type: "Commercial" | "Residential";
     completion: "Under Construction" | "Completed";
     total_unit: number | null;
     total_occupied: number | null;

@@ -1,13 +1,5 @@
 import * as z from "zod";
 
-const MAX_FILE_SIZE = 5000000;
-const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
-
 export const loginSchema = z.object({
   email: z
     .string()
@@ -82,6 +74,34 @@ export const addPropertySchema = z.object({
   property_category_id: z
     .number()
     .min(1, { message: "Please select property category" }),
+});
+
+export const basicPropertyInfoSchema = z.object({
+  name: z.string().min(1, { message: "Please input property name" }),
+  type: z.coerce.number(),
+  description: z
+    .string()
+    .min(1, { message: "Please input property description" }),
+  flat_no: z.string().optional(),
+  rent_amount: z.coerce
+    .number()
+    .positive({ message: "Rent amount must be a positive number" })
+    .min(1, { message: "Please input rent amount" }),
+  bathroom: z.coerce
+    .number()
+    .int()
+    .positive({ message: "Number of bathrooms must be a positive integer" })
+    .min(1, { message: "Please input number of bathrooms" }),
+  bedroom: z.coerce
+    .number()
+    .int()
+    .positive({ message: "Number of bedrooms must be a positive integer" })
+    .min(1, { message: "Please input number of bedrooms" }),
+  size: z.coerce
+    .number()
+    .positive({ message: "Property size must be a positive number" })
+    .min(1, { message: "Please input property size" }),
+  completion: z.coerce.number(),
 });
 
 export const addTenantSchema = z.object({

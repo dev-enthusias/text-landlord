@@ -7,8 +7,6 @@ export const addProperty = async (data: any) => {
   const token = await getToken();
   const formData = new FormData();
 
-  console.log(data);
-
   for (const key in data) {
     if (key === "default_image") {
       formData.append("default_image", data.default_image[0]);
@@ -30,6 +28,25 @@ export const addProperty = async (data: any) => {
   return result;
 };
 
+export const addPropertyBasicInfo = async (data: any, id: number) => {
+  const token = await getToken();
+
+  const res = await fetch(
+    `${BASE_URL}/private/v1/property/update-basic-info/${id}`,
+    {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const result = await res.json();
+  return result;
+};
+
 export const getPropertyTypeAndCategory = async () => {
   const token = await getToken();
   const res = await fetch(
@@ -43,8 +60,8 @@ export const getPropertyTypeAndCategory = async () => {
   );
 
   const data = await res.json();
-  const { type, categories } = data.data;
-  return { type, categories };
+  const { type, categories, completion } = data.data;
+  return { type, categories, completion };
 };
 
 export const getCountry = async () => {
