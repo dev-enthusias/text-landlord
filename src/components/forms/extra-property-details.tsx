@@ -37,7 +37,6 @@ export default function ExtraPropertyDetailsForm({
     register,
     handleSubmit,
     control,
-    setValue,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<BasicPropertyInfoDataType>({

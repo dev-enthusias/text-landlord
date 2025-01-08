@@ -1,4 +1,4 @@
-import { AddGalleryPhotoDataType, AddPropertyDataType } from "@/definition";
+import { AddGalleryPhotoDataType } from "@/definition";
 import { propertyEndpoints } from "../endpoints";
 import { getToken } from "@/lib/actions";
 

@@ -5,7 +5,6 @@ import TenantList, {
 import { CiSearch } from "react-icons/ci";
 import { getTenants } from "@/api/services/tenant";
 import Image from "next/image";
-import { getPropertyTypeAndCategory } from "@/api/services/property";
 
 export default async function Tenants() {
   const tenants = await getTenants();

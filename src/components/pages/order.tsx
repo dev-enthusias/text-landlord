@@ -34,6 +34,7 @@ export default function Orders() {
               total_occupied: null,
               total_rent: null,
               total_sell: null,
+              price: "$1000",
             }}
             roleid={5}
           />

@@ -61,7 +61,7 @@ export default function FloorPlanForm({
   };
 
   const handleRemoveImage = (index: number) => {
-    selectedImage && setSelectedImage(null);
+    console.log(index);
   };
 
   return (

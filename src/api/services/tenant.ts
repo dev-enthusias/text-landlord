@@ -1,4 +1,3 @@
-import { apiGet } from "@/api/config";
 import { tenantEndpoints } from "@/api/endpoints";
 import { LandlordTenantsResponseType } from "@/definition";
 import { getToken } from "@/lib/actions";

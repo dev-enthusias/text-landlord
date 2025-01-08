@@ -10,6 +10,7 @@ import PropertyForm from "../forms/property-form";
 import AgentForm from "../forms/agent-form";
 import TenantForm from "../forms/tenant-form";
 import { getToken } from "@/lib/actions";
+import { getCountry } from "@/api/services/property";
 
 async function getPropertyTypeAndCategory() {
   const token = await getToken();
@@ -89,7 +90,11 @@ export default async function QuickActions() {
             </header>
 
             <main className="px-5">
-              <PropertyForm types={type} categories={categories} />
+              <PropertyForm
+                types={type}
+                categories={categories}
+                country={await getCountry()}
+              />
             </main>
           </article>
         </ModalLayout>
