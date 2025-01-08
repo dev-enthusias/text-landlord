@@ -12,7 +12,6 @@ export const addProperty = async (data: any) => {
     if (key === "default_image") {
       formData.append("default_image", data.default_image[0]);
     } else {
-      console.log(key, data[key]);
       formData.append(key, data[key]);
     }
   }
@@ -48,11 +47,11 @@ export const addPropertyBasicInfo = async (data: any, id: number) => {
   return result;
 };
 
-export const addGalleryPhoto = async (data: { [key: string]: any } & AddGalleryPhotoDataType) => {
+export const addGalleryPhoto = async (
+  data: { [key: string]: any } & AddGalleryPhotoDataType,
+) => {
   const token = await getToken();
   const formData = new FormData();
-
-  console.log(data);
 
   for (const key in data) {
     if (key === "image" && data.image) {
@@ -63,6 +62,32 @@ export const addGalleryPhoto = async (data: { [key: string]: any } & AddGalleryP
   }
 
   const res = await fetch(`${BASE_URL}/private/v1/property/add-gallery`, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await res.json();
+  return result;
+};
+
+export const addFloorPlanPhoto = async (
+  data: { [key: string]: any } & AddGalleryPhotoDataType,
+) => {
+  const token = await getToken();
+  const formData = new FormData();
+
+  for (const key in data) {
+    if (key === "image" && data.image) {
+      formData.append("image", data?.image[0]);
+    } else {
+      formData.append(key, data[key]);
+    }
+  }
+
+  const res = await fetch(`${BASE_URL}/private/v1/property/add-floorplan`, {
     method: "POST",
     body: formData,
     headers: {

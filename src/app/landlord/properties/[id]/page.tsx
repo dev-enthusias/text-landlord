@@ -36,6 +36,10 @@ export default async function PropertyDetails({
 
   const gallery = data.gallery.map((item) => item.path);
 
+  const floorPlanPhoto = data.gallery.find((item) =>
+    item.title.toLowerCase().includes("floor plan"),
+  );
+
   const editedCompletion = completion.map((d: string, i: number) => ({
     id: i,
     name: d,
@@ -79,6 +83,7 @@ export default async function PropertyDetails({
           id={data.property.id}
           propertyType={data.property.type}
           gallery={gallery}
+          floorPlanPhoto={floorPlanPhoto ? [floorPlanPhoto?.path] : []}
         />
       </section>
 

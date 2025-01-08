@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { useGlobalStore } from "@/stores/global-store";
 import { addProperty, getCities, getStates } from "@/api/services/property";
 import SubmitButton from "./submit-button";
+import { toast } from "sonner";
+import revalidate from "@/utils/revalidate";
 
 export default function PropertyForm({
   categories,
@@ -63,7 +65,11 @@ export default function PropertyForm({
       post_code: "12234",
     });
 
-    console.log(res);
+    if (res.result) {
+      toast.success("Success", { description: res.message });
+      revalidate("/landlord/properties");
+      
+    }
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
