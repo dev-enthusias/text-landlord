@@ -70,7 +70,7 @@ export default function AdvertisePropertyForm({
           error={errors.rent_type?.message}
         />
 
-        <SubmitButton isSubmitting={isSubmitting} text="SAVE" />
+        <SubmitButton isSubmitting={isSubmitting} text="Advertise Property" />
       </fieldset>
     </form>
   );

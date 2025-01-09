@@ -21,14 +21,6 @@ export async function getUsername() {
   return username ? username.value : undefined;
 }
 
-export async function getProfileDetails() {
-  const res = await apiGet<UserDetailsResponseDataType>(
-    userEndpoints.GET_USER_DETAILS,
-    "userdetails",
-  );
-  return res.data;
-}
-
 export async function markNotificationAsRead(notificationId: number) {
   await apiPut(
     notificationEndpoints.MARK_NOTIFICATION_AS_READ + "/" + notificationId,
@@ -42,10 +34,4 @@ export async function markAllNotificationAsRead() {
   await apiPut(notificationEndpoints.MARK_ALL_NOTIFICATIONS_AS_READ, {});
 
   revalidateTag("notifications");
-}
-
-export async function updateProfile(data: ProfileFormData) {
-  await apiPut(userEndpoints.UPDATE_USER_DETAILS, data);
-
-  // revalidateTag("userdetails"); when user details are updated
 }

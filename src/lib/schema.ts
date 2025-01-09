@@ -48,7 +48,7 @@ export const createAdvertSchema = z.object({
 
 export const changePasswordSchema = z
   .object({
-    old_password: z.string().min(1, { message: "Input your old password" }),
+    password: z.string().min(1, { message: "Input your old password" }),
     new_password: z
       .string()
       .min(8, { message: "Password should be at least 8 characters" })
@@ -134,7 +134,7 @@ export const profileSchema = z.object({
     )
     .optional()
     .or(z.literal("")),
-  gender: z.enum(["Male", "Female", "other"], {
+  gender: z.enum(["male", "female"], {
     errorMap: () => ({ message: "Please select a valid gender" }),
   }),
   date_of_birth: z

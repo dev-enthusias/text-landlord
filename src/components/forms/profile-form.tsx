@@ -5,7 +5,10 @@ import { ProfileFormData, UserDetailsResponseDataType } from "@/definition";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "sonner";
-import { updateProfile } from "@/lib/actions";
+import SelectInput from "../ui/select-input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { profileSchema } from "@/lib/schema";
+import { updateProfile } from "@/api/services/profile";
 
 export default function ProfileForm({
   data,
@@ -14,20 +17,19 @@ export default function ProfileForm({
 }) {
   const [isEditing, setIsEditing] = useState(false);
 
+  console.log(data);
+
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ProfileFormData>({
+    resolver: zodResolver(profileSchema),
     defaultValues: {
       name: data.profile_info.name,
       email: data.profile_info.email,
       phone: data.profile_info.phone,
-      gender: data.profile_info.gender as
-        | "Male"
-        | "Female"
-        | "other"
-        | undefined,
       date_of_birth: data.profile_info.date_of_birth,
       occupation: data.profile_info.occupation,
       passport: data.profile_info.passport,
@@ -38,16 +40,20 @@ export default function ProfileForm({
   });
 
   const onSubmit: SubmitHandler<ProfileFormData> = async (data) => {
-    try {
-      const res = await updateProfile(data);
-      console.log(res);
-      setIsEditing(false);
-      toast.success("Profile updated successfully");
-    } catch (error) {
-      console.error("Failed to update profile:", error);
-      toast.error("Failed to update profile");
-    }
+    const res = await updateProfile(data);
+
+    console.log(res);
+    setIsEditing(false);
+    toast.success("Profile updated successfully");
   };
+
+  const defaultGenderValue =
+    data.profile_info.gender !== null &&
+    data.profile_info.gender?.toLowerCase() === "male"
+      ? [{ id: "male", name: "Male" }]
+      : data.profile_info.gender?.toLowerCase() === "male"
+        ? [{ id: "female", name: "Female" }]
+        : [];
 
   return (
     <div>
@@ -88,20 +94,28 @@ export default function ProfileForm({
           />
           <TextInput
             label="Phone Number"
+            type="tel"
             name="phone"
             register={register}
             disabled={!isEditing}
             error={errors.phone?.message}
           />
-          <TextInput
-            label="Gender"
+          <SelectInput
+            control={control}
             name="gender"
-            register={register}
-            disabled={!isEditing}
+            label="Gender"
+            options={[
+              { id: "male", name: "Male" },
+              { id: "female", name: "Female" },
+            ]}
+            placeholder="Choose an option"
+            required
+            defaultValue={defaultGenderValue[0]?.id}
             error={errors.gender?.message}
           />
           <TextInput
             label="Date of Birth"
+            type="date"
             name="date_of_birth"
             register={register}
             disabled={!isEditing}

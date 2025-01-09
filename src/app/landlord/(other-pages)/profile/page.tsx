@@ -1,26 +1,21 @@
-import { apiGet } from "@/api/config";
-import { userEndpoints } from "@/api/endpoints";
 import ProfileForm from "@/components/forms/profile-form";
 import PrevPageButton from "@/components/ui/prev-page";
 import { UserDetailsResponseDataType } from "@/definition";
-
-async function getProfileDetails() {
-  const res = await apiGet<UserDetailsResponseDataType>(
-    userEndpoints.GET_USER_DETAILS,
-  );
-  return res.data;
-}
+import { getToken } from "@/lib/actions";
 
 export default async function ProfileDetails() {
-  const data = await getProfileDetails();
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/user/profile`,
+    {
+      headers: {
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    },
+  );
+  const result = await res.json();
+  const data = result.data as UserDetailsResponseDataType;
 
-  if (!data) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-lg">Loading profile details...</p>
-      </div>
-    );
-  }
+  console.log(data);
 
   return (
     <section>

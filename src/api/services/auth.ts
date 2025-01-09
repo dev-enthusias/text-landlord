@@ -4,7 +4,13 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ROLE_ROUTES } from "@/constants/data";
 import { routes } from "@/constants/routes";
-import { LoginDataType, RegisterDataType } from "@/definition";
+import {
+  ChangePasswordDataType,
+  LoginDataType,
+  RegisterDataType,
+} from "@/definition";
+import { get } from "http";
+import { getToken } from "@/lib/actions";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -112,4 +118,19 @@ export async function logout() {
   cookies().delete("role");
 
   redirect(routes.LOGIN);
+}
+
+export async function changePassword(data: ChangePasswordDataType) {
+  const res = await fetch(`${BASE_URL}/private/v1/user/change-password`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getToken()}`,
+    },
+  });
+
+  const result = await res.json();
+
+  return result;
 }

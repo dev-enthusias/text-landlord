@@ -13,34 +13,12 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const roleid = await getRole();
   const profileDetails = await getProfileDetails();
-
-  const path = {
-    profile:
-      roleid === 5
-        ? routes.TENANT_PROFILE
-        : roleid === 4
-          ? routes.LANDLORD_PROFILE
-          : routes.AGENT_PROFILE,
-    order:
-      roleid === 5
-        ? routes.TENANT_ORDERS
-        : roleid === 4
-          ? routes.LANDLORD_ORDERS
-          : routes.AGENT_ORDERS,
-    "change-password":
-      roleid === 5
-        ? routes.TENANT_CHANGE_PASSWORD
-        : roleid === 4
-          ? routes.LANDLORD_CHANGE_PASSWORD
-          : routes.AGENT_CHANGE_PASSWORD,
-  };
 
   return (
     <section className="flex items-start gap-x-10 py-7 lg:px-20 lg:pb-20">
       <div className="custom-shadow mt-10 hidden w-[320px] shrink-0 space-y-5 overflow-hidden text-sm lg:block lg:rounded-t-xl">
-        <section className="pb-5 relative flex flex-col items-center justify-center gap-2 bg-white pt-5">
+        <section className="relative flex flex-col items-center justify-center gap-2 bg-white pb-5 pt-5">
           <div className="relative h-28 w-28 overflow-hidden rounded-full">
             {profileDetails?.profile_info.user_image ? (
               <Image
@@ -61,13 +39,13 @@ export default async function Layout({
             {profileDetails?.profile_info.name}
           </p>
           <p className="absolute right-0 top-0 bg-accent/10 px-2 py-1 text-accent">
-            {roleid === 5 ? "Tenant" : roleid === 4 ? "Landlord" : "Agent"}
+            Landlord
           </p>
         </section>
 
         <section className="bg-white">
           <NavLink
-            href={path.profile}
+            href={routes.LANDLORD_PROFILE}
             exact
             className="flex w-full items-center gap-x-2 border-t border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
             activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
