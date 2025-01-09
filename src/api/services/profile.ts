@@ -1,4 +1,4 @@
-import { ProfileFormData, UserDetailsResponseDataType } from "@/definition";
+import { ProfileFormData } from "@/definition";
 import { getToken } from "@/lib/actions";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;

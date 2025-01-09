@@ -1,7 +1,7 @@
 import Image from "next/image";
 import NavLink from "@/components/ui/navlink";
 import { routes } from "@/constants/routes";
-import { FaRegUserCircle, FaUserEdit } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
 import { LuHistory } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { BsBank } from "react-icons/bs";

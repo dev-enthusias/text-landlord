@@ -9,7 +9,6 @@ import {
   LoginDataType,
   RegisterDataType,
 } from "@/definition";
-import { get } from "http";
 import { getToken } from "@/lib/actions";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;

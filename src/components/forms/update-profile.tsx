@@ -28,6 +28,7 @@ export default function UpdateProfilePhoto() {
           toast.error("Error", { description: res.message });
         }
       } catch (error) {
+        console.error(error);
         toast.error("Error", { description: "Something went wrong" });
       }
 

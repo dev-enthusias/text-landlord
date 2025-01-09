@@ -10,7 +10,7 @@ import { LiaCoinsSolid } from "react-icons/lia";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { MoveDownIcon, MoveUpIcon } from "lucide-react";
 import { FaHourglassHalf, FaUsers } from "react-icons/fa";
-import { getProfileDetails, getToken } from "@/lib/actions";
+import { getToken } from "@/lib/actions";
 import { LandlordDashboardStatisticResponseDataType } from "@/definition";
 import { Suspense } from "react";
 import { GrTransaction } from "react-icons/gr";
@@ -19,6 +19,7 @@ import {
   getCountry,
   getPropertyTypeAndCategory,
 } from "@/api/services/property";
+import { getProfileDetails } from "@/api/services/profile";
 
 async function getStatistics() {
   const token = await getToken();
