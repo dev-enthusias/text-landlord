@@ -13,11 +13,15 @@ import { PiHeart } from "react-icons/pi";
 import { BsChat } from "react-icons/bs";
 import Dropdown from "../ui/dropdown";
 import { FaPowerOff } from "react-icons/fa";
-import { getProfileDetails, getRole } from "@/lib/actions";
+import { getRole } from "@/lib/actions";
 import { logout } from "@/api/services/auth";
 import { notificationEndpoints } from "@/api/endpoints";
 import { apiPost } from "@/api/config";
-import { NotificationResponseType } from "@/definition";
+import {
+  NotificationResponseType,
+  UserDetailsResponseDataType,
+} from "@/definition";
+import { getProfileDetails } from "@/api/services/profile";
 
 async function getNotifications() {
   const res = await apiPost<NotificationResponseType, any>(
@@ -32,7 +36,8 @@ async function getNotifications() {
 export default async function Topbar() {
   const roleid = await getRole();
   const notifications = (await getNotifications()) as NotificationResponseType;
-  const profileDetails = await getProfileDetails();
+  const profileDetails =
+    (await getProfileDetails()) as UserDetailsResponseDataType;
 
   const topbarLinks =
     roleid === 5

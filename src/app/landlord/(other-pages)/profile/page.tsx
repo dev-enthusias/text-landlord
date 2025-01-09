@@ -1,19 +1,10 @@
+import { getProfileDetails } from "@/api/services/profile";
 import ProfileForm from "@/components/forms/profile-form";
 import PrevPageButton from "@/components/ui/prev-page";
 import { UserDetailsResponseDataType } from "@/definition";
-import { getToken } from "@/lib/actions";
 
 export default async function ProfileDetails() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/user/profile`,
-    {
-      headers: {
-        Authorization: `Bearer ${await getToken()}`,
-      },
-    },
-  );
-  const result = await res.json();
-  const data = result.data as UserDetailsResponseDataType;
+  const data = (await getProfileDetails()) as UserDetailsResponseDataType;
 
   console.log(data);
 

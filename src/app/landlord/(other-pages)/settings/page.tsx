@@ -1,7 +1,8 @@
 import { logout } from "@/api/services/auth";
+import { getProfileDetails } from "@/api/services/profile";
 import NavLink from "@/components/ui/navlink";
 import { routes } from "@/constants/routes";
-import { getProfileDetails, getRole } from "@/lib/actions";
+import { getRole } from "@/lib/actions";
 import Image from "next/image";
 import React from "react";
 import { BsBank, BsHousesFill } from "react-icons/bs";

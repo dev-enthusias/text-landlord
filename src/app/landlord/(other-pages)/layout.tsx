@@ -1,12 +1,12 @@
 import Image from "next/image";
 import NavLink from "@/components/ui/navlink";
 import { routes } from "@/constants/routes";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegUserCircle, FaUserEdit } from "react-icons/fa";
 import { LuHistory } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { getProfileDetails, getRole } from "@/lib/actions";
-import { MdCategory } from "react-icons/md";
-import { BsBank, BsHousesFill } from "react-icons/bs";
+import { BsBank } from "react-icons/bs";
+import { getProfileDetails } from "@/api/services/profile";
+import UpdateProfilePhoto from "@/components/forms/update-profile";
 
 export default async function Layout({
   children,
@@ -19,7 +19,7 @@ export default async function Layout({
     <section className="flex items-start gap-x-10 py-7 lg:px-20 lg:pb-20">
       <div className="custom-shadow mt-10 hidden w-[320px] shrink-0 space-y-5 overflow-hidden text-sm lg:block lg:rounded-t-xl">
         <section className="relative flex flex-col items-center justify-center gap-2 bg-white pb-5 pt-5">
-          <div className="relative h-28 w-28 overflow-hidden rounded-full">
+          <div className="relative h-28 w-28 overflow-hidden">
             {profileDetails?.profile_info.user_image ? (
               <Image
                 src={profileDetails?.profile_info.user_image ?? ""}
@@ -27,18 +27,20 @@ export default async function Layout({
                 fill
                 quality={100}
                 sizes="130px"
-                className="custom-shadow object-cover"
+                className="custom-shadow rounded-full object-cover"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center rounded-full bg-blue-300 font-bold">
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-blue-300 text-5xl font-bold">
                 {profileDetails?.profile_info.name[0]}
               </div>
             )}
+            <UpdateProfilePhoto />
           </div>
+
           <p className="text-lg font-semibold text-black">
             {profileDetails?.profile_info.name}
           </p>
-          <p className="absolute right-0 top-0 bg-accent/10 px-2 py-1 text-accent">
+          <p className="absolute left-0 top-0 bg-accent/10 px-2 py-1 text-accent">
             Landlord
           </p>
         </section>
@@ -72,22 +74,6 @@ export default async function Layout({
         </section>
 
         <section className="bg-white">
-          <NavLink
-            href={routes.PROPERTY_CATEGORY}
-            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
-            activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
-          >
-            <MdCategory size={18} />
-            Property Category
-          </NavLink>
-          <NavLink
-            href={routes.PROPERTY_FACILITIES}
-            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
-            activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
-          >
-            <BsHousesFill size={20} />
-            Property Facility Type
-          </NavLink>
           <NavLink
             href={routes.TRANSACTION_HISTORY}
             className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"

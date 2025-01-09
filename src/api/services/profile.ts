@@ -1,4 +1,4 @@
-import { ProfileFormData } from "@/definition";
+import { ProfileFormData, UserDetailsResponseDataType } from "@/definition";
 import { getToken } from "@/lib/actions";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -22,4 +22,34 @@ export const updateProfile = async (data: ProfileFormData) => {
   const result = await res.json();
 
   return result;
+};
+
+export const updateProfilePhoto = async (data: any) => {
+  const token = await getToken();
+
+  const res = await fetch(`${BASE_URL}/private/v1/user/profile-image-update`, {
+    method: "POST",
+    body: data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await res.json();
+
+  return result;
+};
+
+export const getProfileDetails = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/user/profile`,
+    {
+      headers: {
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    },
+  );
+  const result = await res.json();
+
+  return result.data;
 };

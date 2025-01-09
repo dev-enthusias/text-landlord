@@ -17,8 +17,6 @@ export default function ProfileForm({
 }) {
   const [isEditing, setIsEditing] = useState(false);
 
-  console.log(data);
-
   const {
     register,
     control,

@@ -1,8 +1,7 @@
 "use server";
 
-import { apiGet, apiPut } from "@/api/config";
-import { notificationEndpoints, userEndpoints } from "@/api/endpoints";
-import { ProfileFormData, UserDetailsResponseDataType } from "@/definition";
+import { apiPut } from "@/api/config";
+import { notificationEndpoints } from "@/api/endpoints";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
