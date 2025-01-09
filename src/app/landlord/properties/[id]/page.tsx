@@ -79,15 +79,6 @@ export default async function PropertyDetails({
         />
 
         <div className="flex gap-x-2">
-          <AdvertisePropertyBtn
-            type={editedType}
-            completion={editedCompletion}
-            name={data.property.name}
-            id={data.property.id}
-            propertyType={data.property.type}
-            gallery={gallery}
-            floorPlanPhoto={floorPlanPhoto ? [floorPlanPhoto?.path] : []}
-          />
           <UpdatePropertyBtn
             type={editedType}
             completion={editedCompletion}
@@ -97,6 +88,7 @@ export default async function PropertyDetails({
             gallery={gallery}
             floorPlanPhoto={floorPlanPhoto ? [floorPlanPhoto?.path] : []}
           />
+          <AdvertisePropertyBtn id={data.property.id} />
         </div>
       </section>
 

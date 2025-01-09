@@ -3,35 +3,15 @@
 import { useState } from "react";
 import ModalLayout from "../ui/modal-layout";
 import { X } from "lucide-react";
-import { PropertyMetadataResponseDataType } from "@/definition";
 import AdvertisePropertyForm from "../forms/advertise-property-form";
 
-export default function AdvertisePropertyBtn({
-  type,
-  completion,
-  name,
-  propertyType,
-  id,
-  gallery,
-  floorPlanPhoto,
-}: {
-  name: string;
-  id: number;
-  propertyType: string;
-  type: { id: number; name: string }[];
-  gallery: string[];
-  floorPlanPhoto: string[];
-  completion: PropertyMetadataResponseDataType["completion"];
-}) {
+export default function AdvertisePropertyBtn({ id }: { id: number }) {
   const [isEditPropertyModalOpen, setEditPropertyModal] = useState(false);
-  const [activeForm, setActiveForm] = useState<"extra" | "gallery" | "floor">(
-    "extra",
-  );
 
   return (
     <>
       <button
-        className="flex items-center gap-x-1 rounded bg-gold px-4 py-2 text-sm font-bold tracking-wide text-black hover:bg-gold/80"
+        className="flex items-center gap-x-1 rounded bg-accent px-4 py-3 text-sm font-bold tracking-wide text-white hover:bg-accent/80"
         onClick={() => setEditPropertyModal(true)}
       >
         Advertise Property

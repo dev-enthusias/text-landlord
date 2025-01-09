@@ -37,10 +37,10 @@ export const routes = {
   LANDLORD_PROPERTIES: "/landlord/properties",
   LANDLORD_SETTINGS: "/landlord/profile/settings",
   LANDLORD_NOTIFICATION: "/landlord/notification",
-  PROPERTY_CATEGORY: "/landlord/profile/property-categories",
-  LANDLORD_CHANGE_PASSWORD: "/landlord/profile/change-password",
-  PROPERTY_FACILITIES: "/landlord/profile/property-facilities",
-  TRANSACTION_HISTORY: "/landlord/profile/transaction-history",
+  PROPERTY_CATEGORY: "/landlord/property-categories",
+  LANDLORD_CHANGE_PASSWORD: "/landlord/change-password",
+  PROPERTY_FACILITIES: "/landlord/property-facilities",
+  TRANSACTION_HISTORY: "/landlord/transaction-history",
 
   // Agent pages
   AGENT_ORDERS: "/agent/orders",
