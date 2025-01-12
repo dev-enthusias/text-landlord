@@ -7,9 +7,10 @@ import { toast } from "sonner";
 import TextInput from "../ui/text-input";
 import SelectInput from "../ui/select-input";
 import SubmitButton from "./submit-button";
-import { resolveAccount } from "@/api/services/account";
+import { addAccount, resolveAccount } from "@/api/services/account";
 import { addAccountSchema } from "@/lib/schema";
 import { AddAccountDataType, BankType } from "@/definition";
+import revalidate from "@/utils/revalidate";
 
 export default function AddAccountForm({
   banks,
@@ -34,7 +35,16 @@ export default function AddAccountForm({
   });
 
   const onSubmit: SubmitHandler<AddAccountDataType> = async (data) => {
-    console.log(data);
+    if (!accountName) return;
+
+    const res = await addAccount(data);
+
+    if (res.status) {
+      reset();
+      toast.success("Success", { description: res.message });
+      setModalVisibility(false);
+      revalidate(`/landlord/accounts`);
+    }
   };
 
   const bankOptions = banks.map((bank) => ({
@@ -107,6 +117,7 @@ export default function AddAccountForm({
           name="bank_code"
           options={bankOptions}
           placeholder="Select Bank"
+          required
           error={errors.bank_code?.message}
         />
 
