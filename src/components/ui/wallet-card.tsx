@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AccountType } from "@/definition";
 import { LandmarkIcon } from "lucide-react";
 
-import { setAsDefault } from "@/api/services/account";
+import { deleteAccount, setAsDefault } from "@/api/services/account";
 import { toast } from "sonner";
 import LoadingSpinner from "./loading-spinner";
 import revalidate from "@/utils/revalidate";
@@ -12,7 +12,6 @@ import CustomCheckbox from "./custome-checkbox";
 
 export default function WalletCard({ data }: { data: AccountType }) {
   const [isSettingDefault, setIsSettingDefault] = useState(false);
-  const [isChecked, setIsChecked] = useState(data.status === 1);
 
   const setDefaultAccount = async () => {
     try {
@@ -20,22 +19,36 @@ export default function WalletCard({ data }: { data: AccountType }) {
       const res = await setAsDefault(data.id);
 
       if (res.status) {
-        toast.success("Success", { description: res.message });
         revalidate("/landlord/accounts");
-        setIsChecked(true);
+        toast.success("Success", { description: res.message });
       }
     } catch (error) {
       console.error("Error setting default account:", error);
       toast.error("Error setting default account");
-      setIsChecked(false);
     } finally {
       setIsSettingDefault(false);
     }
   };
 
   const handleCheckboxChange = () => {
-    if (!isChecked) {
+    if (data.status !== 1) {
       setDefaultAccount();
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (window.confirm("Are you sure you want to delete this account?")) {
+      if (data.status === 1) {
+        toast.error("Cannot delete default account");
+        return;
+      }
+
+      const res = await deleteAccount(data.id);
+
+      if (res.status) {
+        toast.success("Success", { description: res.message });
+        revalidate("landlord/accounts");
+      }
     }
   };
 
@@ -58,11 +71,11 @@ export default function WalletCard({ data }: { data: AccountType }) {
             ) : (
               <CustomCheckbox
                 id={`checkbox-${data.id}`}
-                checked={isChecked}
+                checked={data.status === 1 ? true : false}
                 onChange={handleCheckboxChange}
               />
             )}
-            {isChecked ? (
+            {data.status === 1 ? (
               <p className="font-bold">Default Account</p>
             ) : (
               <p>Set as default</p>
@@ -89,11 +102,14 @@ export default function WalletCard({ data }: { data: AccountType }) {
       </ul>
 
       <div className="mb-1 flex justify-between gap-x-4">
-        <button className="w-full rounded-full bg-gold/10 py-3 text-sm font-semibold text-gold">
-          Copy Number
+        <button
+          className="w-full rounded-full bg-gold/10 py-3 text-sm font-semibold text-gold"
+          onClick={handleDeleteAccount}
+        >
+          Delete Account
         </button>
-        <button className="w-full rounded-full bg-gold py-3 text-sm font-semibold text-white">
-          Share Details
+        <button className="w-full rounded-full bg-gold py-3 text-sm font-semibold tracking-wider text-white">
+          Edit Details
         </button>
       </div>
     </section>

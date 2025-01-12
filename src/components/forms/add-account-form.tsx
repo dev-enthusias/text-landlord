@@ -147,7 +147,7 @@ export default function AddAccountForm({
             }`}
           >
             {validatingAccount ? (
-              <p>Verifying Beneficiary...</p>
+              <p className="text-sm">Verifying Beneficiary...</p>
             ) : (
               <p className="font-semibold uppercase">{accountName}</p>
             )}

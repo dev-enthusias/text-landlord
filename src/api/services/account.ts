@@ -102,6 +102,18 @@ export const updateDefaultAccount = async (id: number) => {
   return result;
 };
 
+export const deleteAccount = async (id: number) => {
+  const res = await fetch(`${BASE_URL}/private/v1/bank-account/delete/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getToken()}`,
+    },
+  });
+  const result = await res.json();
+  return result;
+};
+
 export const getDefaultAccont = async () => {
   const res = await fetch(
     `${BASE_URL}/private/v1/bank-account/active-Account/`,
