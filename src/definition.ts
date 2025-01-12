@@ -347,3 +347,22 @@ export interface BankType {
   type: string;
   updatedAt: string;
 }
+
+export interface AccountType {
+  id: number;
+  user_id: number;
+  name: string;
+  branch: null | string;
+  account_number: string;
+  account_name: string;
+  route_number: string;
+  branch_address: null | string;
+  sub_account_id: null | string;
+  sub_account: string;
+  status: number;
+  split_id: string;
+  split_name: string;
+  split_code: string;
+  created_at: string;
+  updated_at: string;
+}

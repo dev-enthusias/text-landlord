@@ -7,7 +7,11 @@ import { toast } from "sonner";
 import TextInput from "../ui/text-input";
 import SelectInput from "../ui/select-input";
 import SubmitButton from "./submit-button";
-import { addAccount, resolveAccount } from "@/api/services/account";
+import {
+  addAccount,
+  addAccountToOgaLandlord,
+  resolveAccount,
+} from "@/api/services/account";
 import { addAccountSchema } from "@/lib/schema";
 import { AddAccountDataType, BankType } from "@/definition";
 import revalidate from "@/utils/revalidate";
@@ -39,9 +43,18 @@ export default function AddAccountForm({
 
     const res = await addAccount(data);
 
+    console.log("res1", res);
+
     if (res.status) {
+      const res2 = await addAccountToOgaLandlord({
+        name: data.business_name,
+        sub_account: res.data.subaccount_code,
+        account_number: res.data.account_number,
+        account_name: res.data.account_name,
+      });
+      console.log("res2", res);
       reset();
-      toast.success("Success", { description: res.message });
+      toast.success("Success", { description: res2.message });
       setModalVisibility(false);
       revalidate(`/landlord/accounts`);
     }

@@ -2,6 +2,7 @@ import { AddAccountDataType } from "@/definition";
 import { getToken } from "@/lib/actions";
 
 const SECRET_KEY = process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const getBanks = async (country: string) => {
   const res = await fetch(`https://api.paystack.co/bank?country=${country}`, {
@@ -41,4 +42,35 @@ export const addAccount = async (data: AddAccountDataType) => {
 
   const result = await res.json();
   return result;
+};
+
+export const addAccountToOgaLandlord = async (data: {
+  name: string;
+  sub_account: string;
+  account_number: string;
+  account_name: string;
+}) => {
+  const res = await fetch(`${BASE_URL}/private/v1/bank-account/add`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getToken()}`,
+    },
+  });
+
+  const result = await res.json();
+  return result;
+};
+
+export const getAllAcounts = async () => {
+  const res = await fetch(`${BASE_URL}/private/v1/bank-account/accounts`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getToken()}`,
+    },
+  });
+  const result = await res.json();
+
+  return result.data;
 };

@@ -1,4 +1,4 @@
-import FundWalletPage from "@/components/pages/fund-wallet";
+import FundWalletPage from "@/components/ui/wallet-card";
 import PrevPageButton from "@/components/ui/prev-page";
 
 export default function FundWallet() {

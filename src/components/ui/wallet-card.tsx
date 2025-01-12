@@ -1,6 +1,7 @@
+import { AccountType } from "@/definition";
 import { ChevronRightIcon, LandmarkIcon } from "lucide-react";
 
-export default function FundWalletPage() {
+export default function WalletCard({ data }: { data: AccountType }) {
   return (
     <section className="custom-shadow max-w-[540px] rounded-lg bg-white p-3">
       <article className="mb-2 flex items-center justify-between border-b border-dashed border-gray-200 pb-2">
@@ -21,15 +22,17 @@ export default function FundWalletPage() {
       <ul className="mb-4 space-y-3">
         <li>
           <h4 className="text-sm">Account Number</h4>
-          <p className="text-2xl font-medium text-black">9080010168</p>
+          <p className="text-2xl font-medium text-black">
+            {data.account_number}
+          </p>
         </li>
         <li>
           <h4 className="text-sm leading-none">Account Name</h4>
-          <p className="text font-medium">Anakor Joshua Arinze</p>
+          <p className="text font-medium">{data.account_name}</p>
         </li>
         <li>
           <h4 className="text-sm leading-none">Bank Name</h4>
-          <p className="text font-medium">Opay</p>
+          <p className="text font-medium capitalize">{data.name}</p>
         </li>
       </ul>
 
