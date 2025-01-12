@@ -74,3 +74,45 @@ export const getAllAcounts = async () => {
 
   return result.data;
 };
+
+export const setAsDefault = async (id: number) => {
+  const res = await fetch(
+    `${BASE_URL}/private/v1/bank-account/active-Account/${id}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    },
+  );
+  const result = await res.json();
+  return result;
+};
+
+export const updateDefaultAccount = async (id: number) => {
+  const res = await fetch(`${BASE_URL}/private/v1/bank-account/update/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getToken()}`,
+    },
+  });
+  const result = await res.json();
+  return result;
+};
+
+export const getDefaultAccont = async () => {
+  const res = await fetch(
+    `${BASE_URL}/private/v1/bank-account/active-Account/`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    },
+  );
+
+  const result = await res.json();
+  return result;
+};

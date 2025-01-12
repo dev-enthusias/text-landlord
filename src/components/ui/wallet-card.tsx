@@ -1,7 +1,44 @@
+"use client";
+
+import { useState } from "react";
 import { AccountType } from "@/definition";
-import { ChevronRightIcon, LandmarkIcon } from "lucide-react";
+import { LandmarkIcon } from "lucide-react";
+
+import { setAsDefault } from "@/api/services/account";
+import { toast } from "sonner";
+import LoadingSpinner from "./loading-spinner";
+import revalidate from "@/utils/revalidate";
+import CustomCheckbox from "./custome-checkbox";
 
 export default function WalletCard({ data }: { data: AccountType }) {
+  const [isSettingDefault, setIsSettingDefault] = useState(false);
+  const [isChecked, setIsChecked] = useState(data.status === 1);
+
+  const setDefaultAccount = async () => {
+    try {
+      setIsSettingDefault(true);
+      const res = await setAsDefault(data.id);
+
+      if (res.status) {
+        toast.success("Success", { description: res.message });
+        revalidate("/landlord/accounts");
+        setIsChecked(true);
+      }
+    } catch (error) {
+      console.error("Error setting default account:", error);
+      toast.error("Error setting default account");
+      setIsChecked(false);
+    } finally {
+      setIsSettingDefault(false);
+    }
+  };
+
+  const handleCheckboxChange = () => {
+    if (!isChecked) {
+      setDefaultAccount();
+    }
+  };
+
   return (
     <section className="custom-shadow max-w-[540px] rounded-lg bg-white p-3">
       <article className="mb-2 flex items-center justify-between border-b border-dashed border-gray-200 pb-2">
@@ -14,9 +51,24 @@ export default function WalletCard({ data }: { data: AccountType }) {
             <p className="text-xs">Add money via mobile or internet banking</p>
           </div>
         </div>
-        <button>
-          <ChevronRightIcon />
-        </button>
+        <form className="flex items-center gap-x-1 text-[14px]">
+          <div className="flex items-center gap-x-1">
+            {isSettingDefault ? (
+              <LoadingSpinner />
+            ) : (
+              <CustomCheckbox
+                id={`checkbox-${data.id}`}
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+              />
+            )}
+            {isChecked ? (
+              <p className="font-bold">Default Account</p>
+            ) : (
+              <p>Set as default</p>
+            )}
+          </div>
+        </form>
       </article>
 
       <ul className="mb-4 space-y-3">

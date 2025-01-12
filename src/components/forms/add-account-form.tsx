@@ -43,11 +43,9 @@ export default function AddAccountForm({
 
     const res = await addAccount(data);
 
-    console.log("res1", res);
-
     if (res.status) {
       const res2 = await addAccountToOgaLandlord({
-        name: data.business_name,
+        name: res.data.settlement_bank,
         sub_account: res.data.subaccount_code,
         account_number: res.data.account_number,
         account_name: res.data.account_name,

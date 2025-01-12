@@ -26,9 +26,9 @@ export default function CustomCheckbox({
         />
         <label
           htmlFor={id}
-          className={`peer-checked border-grey-300 peer-checked:border-gold peer-checked:bg-gold flex h-5 w-5 cursor-pointer items-center justify-center rounded border-2 bg-white transition-colors duration-200 peer-focus:ring-offset-2 peer-disabled:cursor-not-allowed peer-disabled:opacity-50`}
+          className={`peer-checked border-grey-300 flex h-5 w-5 cursor-pointer items-center justify-center rounded border-2 bg-white transition-colors duration-200 peer-checked:border-gold peer-checked:bg-gold peer-focus:ring-offset-2 peer-disabled:cursor-not-allowed peer-disabled:opacity-50`}
         >
-          {checked && <Check className="h-4 w-4 text-black" />}
+          {checked && <Check className={`h-4 w-4 text-black`} />}
         </label>
       </div>
       {label && (

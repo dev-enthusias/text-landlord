@@ -27,9 +27,11 @@ export default async function Accounts() {
         {accounts.length <= 0 ? (
           <p className="text-center">You have not added any account yet.</p>
         ) : (
-          accounts.map((account) => (
-            <WalletCard key={account.id} data={account} />
-          ))
+          <div className="grid gap-5 lg:grid-cols-2">
+            {accounts.map((account) => (
+              <WalletCard key={account.id} data={account} />
+            ))}
+          </div>
         )}
       </section>
     </section>
