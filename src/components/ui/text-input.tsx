@@ -12,6 +12,7 @@ export default function TextInput({
   error,
   type = "text",
   disabled,
+  maxLength,
 }: TextInputProps) {
   const { isVisible, toggleVisibility } = useTogglePassword();
 
@@ -30,6 +31,7 @@ export default function TextInput({
           {...register(name)}
           className="relative w-full appearance-none rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
           disabled={disabled}
+          maxLength={maxLength}
         />
 
         {type === "password" && (

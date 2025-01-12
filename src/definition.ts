@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { Path, UseFormRegister } from "react-hook-form";
 import {
+  addAccountSchema,
   addGalleryPhotoSchema,
   addPropertySchema,
   addTenantSchema,
@@ -37,6 +38,7 @@ export interface TextInputProps {
   type?: string;
   error?: string;
   disabled?: boolean;
+  maxLength?: number;
   register: UseFormRegister<any>;
 }
 
@@ -56,6 +58,7 @@ export type AddTenantDataType = z.infer<typeof addTenantSchema>;
 export type ProfileFormData = z.infer<typeof profileSchema>;
 export type BasicPropertyInfoDataType = z.infer<typeof basicPropertyInfoSchema>;
 export type CreateAdvertDataType = z.infer<typeof createAdvertSchema>;
+export type AddAccountDataType = z.infer<typeof addAccountSchema>;
 
 export interface LandlordDashboardStatisticResponseDataType {
   total_properties: number;
@@ -325,4 +328,22 @@ export interface Country {
 export interface LocationList {
   id: number;
   name: string;
+}
+
+export interface BankType {
+  active: boolean;
+  code: string;
+  country: string;
+  createdAt: string;
+  currency: string;
+  gateway: string;
+  id: number;
+  is_deleted: boolean;
+  longcode: string;
+  name: string;
+  pay_with_bank: boolean;
+  slug: string;
+  supports_transfer: boolean;
+  type: string;
+  updatedAt: string;
 }

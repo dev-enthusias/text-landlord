@@ -81,6 +81,12 @@ export const addPropertySchema = z.object({
     .min(1, { message: "Please select property category" }),
 });
 
+export const addAccountSchema = z.object({
+  business_name: z.string().min(1, { message: "Please input business name" }),
+  bank_code: z.string().min(1, { message: "Select a bank" }),
+  account_number: z.string().min(1, { message: "Please input account number" }),
+});
+
 export const addGalleryPhotoSchema = z.object({
   image: z.custom<FileList>().optional(),
 });
