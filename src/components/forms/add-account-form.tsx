@@ -96,7 +96,7 @@ export default function AddAccountForm({
     validateAccount();
 
     return () => {
-      isMounted = false; // Cleanup
+      isMounted = false;
     };
   }, [accountNumber, bankCode]);
 
@@ -143,7 +143,11 @@ export default function AddAccountForm({
           </div>
         </div>
 
-        <SubmitButton isSubmitting={isSubmitting} text="SAVE" />
+        <SubmitButton
+          disabled={accountName ? false : true}
+          isSubmitting={isSubmitting}
+          text="SAVE"
+        />
       </fieldset>
     </form>
   );
