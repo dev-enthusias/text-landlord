@@ -26,6 +26,8 @@ export async function authenticate(
     });
     const result = await res.json();
 
+    console.log(result);
+
     if (result.role_id) {
       const authToken = result.access_token;
       const roleId = result.role_id;
@@ -48,6 +50,13 @@ export async function authenticate(
       });
 
       cookies().set("name", userDetails.name, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 60 * 60 * 24 * 7,
+        path: "/",
+      });
+
+      cookies().set("userid", result.id, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60 * 24 * 7,

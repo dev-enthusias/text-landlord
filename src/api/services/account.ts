@@ -1,5 +1,5 @@
 import { AddAccountDataType } from "@/definition";
-import { getToken } from "@/lib/actions";
+import { getToken, getUserId } from "@/lib/actions";
 
 const SECRET_KEY = process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -29,8 +29,8 @@ export const resolveAccount = async (bankCode: string, accNo: string) => {
   return result;
 };
 
-export const addAccount = async (data: AddAccountDataType) => {
-  const newData = { ...data, percentage_charge: 10 };
+export const createSubAccount = async (data: AddAccountDataType) => {
+  const newData = { ...data, percentage_charge: 0 };
 
   const res = await fetch(`https://api.paystack.co/subaccount`, {
     method: "POST",
@@ -117,6 +117,23 @@ export const deleteAccount = async (id: number) => {
 export const getDefaultAccont = async () => {
   const res = await fetch(
     `${BASE_URL}/private/v1/bank-account/active-Account/`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    },
+  );
+
+  const result = await res.json();
+  return result;
+};
+
+export const checkIfSubAccountExists = async () => {
+  const userid = await getUserId();
+
+  const res = await fetch(
+    `${BASE_URL}/private/v1/bank-account/landlord-active-split-data/${userid}`,
     {
       headers: {
         "Content-Type": "application/json",

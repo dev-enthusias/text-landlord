@@ -8,15 +8,16 @@ import TextInput from "../ui/text-input";
 import SelectInput from "../ui/select-input";
 import SubmitButton from "./submit-button";
 import {
-  addAccount,
   addAccountToOgaLandlord,
+  checkIfSubAccountExists,
+  createSubAccount,
   resolveAccount,
 } from "@/api/services/account";
 import { addAccountSchema } from "@/lib/schema";
 import { AddAccountDataType, BankType } from "@/definition";
 import revalidate from "@/utils/revalidate";
 
-export default function AddAccountForm({
+export default function aAddAccountForm({
   banks,
   setModalVisibility,
 }: {
@@ -25,6 +26,7 @@ export default function AddAccountForm({
 }) {
   const [validatingAccount, setValidatingAccount] = useState(false);
   const [accountName, setAccountName] = useState("");
+  const [selectedBankName, setSelectedBankName] = useState("");
 
   const {
     register,
@@ -41,20 +43,46 @@ export default function AddAccountForm({
   const onSubmit: SubmitHandler<AddAccountDataType> = async (data) => {
     if (!accountName) return;
 
-    const res = await addAccount(data);
+    const existingSubAccount = await checkIfSubAccountExists();
 
-    if (res.status) {
-      const res2 = await addAccountToOgaLandlord({
-        name: res.data.settlement_bank,
-        sub_account: res.data.subaccount_code,
-        account_number: res.data.account_number,
-        account_name: res.data.account_name,
+    console.log(existingSubAccount);
+
+    if (existingSubAccount.status) {
+      console.log("sub account exists");
+      const res = await addAccountToOgaLandlord({
+        name: selectedBankName,
+        sub_account: existingSubAccount.data.sub_account,
+        account_number: data.account_number,
+        account_name: accountName,
       });
-      console.log("res2", res);
-      reset();
-      toast.success("Success", { description: res2.message });
-      setModalVisibility(false);
-      revalidate(`/landlord/accounts`);
+
+      if (res.status) {
+        reset();
+        toast.success("Success", {
+          description: res.message,
+        });
+        setModalVisibility(false);
+        revalidate(`/landlord/accounts`);
+      }
+    } else {
+      console.log("sub account doesnt exists");
+      const res = await createSubAccount(data);
+
+      if (res.status) {
+        const res2 = await addAccountToOgaLandlord({
+          name: res.data.settlement_bank,
+          sub_account: res.data.subaccount_code,
+          account_number: res.data.account_number,
+          account_name: res.data.account_name,
+        });
+
+        reset();
+        toast.success("Success", {
+          description: res2.message,
+        });
+        setModalVisibility(false);
+        revalidate(`/landlord/accounts`);
+      }
     }
   };
 
@@ -68,6 +96,11 @@ export default function AddAccountForm({
 
   // Validate account number
   useEffect(() => {
+    if (bankCode) {
+      const selectedBank = bankOptions.find((bank) => bank.id === bankCode);
+      setSelectedBankName(selectedBank?.name || "");
+    }
+
     let isMounted = true; // Add mounted check
 
     const validateAccount = async () => {
@@ -76,6 +109,8 @@ export default function AddAccountForm({
 
         try {
           const res = await resolveAccount(bankCode, accountNumber);
+
+          console.log(res);
 
           if (isMounted) {
             // Only update state if component is mounted

@@ -68,7 +68,6 @@ export default function PropertyForm({
     if (res.result) {
       toast.success("Success", { description: res.message });
       revalidate("/landlord/properties");
-      
     }
   };
 

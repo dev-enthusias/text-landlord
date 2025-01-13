@@ -20,6 +20,11 @@ export async function getUsername() {
   return username ? username.value : undefined;
 }
 
+export async function getUserId() {
+  const userid = cookies().get('userid');
+  return userid ? userid.value : undefined;
+}
+
 export async function markNotificationAsRead(notificationId: number) {
   await apiPut(
     notificationEndpoints.MARK_NOTIFICATION_AS_READ + "/" + notificationId,
