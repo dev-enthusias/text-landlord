@@ -15,22 +15,20 @@ import { routes } from "@/constants/routes";
 import { apiGet } from "@/api/config";
 import { LandlordPropertyDetailsResponseDataType } from "@/definition";
 import Gallery from "@/components/gallery";
-import { getPropertyTypeAndCategory } from "@/api/services/property";
+import {
+  getPropertyDetails,
+  getPropertyTypeAndCategory,
+} from "@/api/services/property";
 import AdvertisePropertyBtn from "@/components/modals/advertise-property";
-
-async function getPropertyDetails(id: string) {
-  const res = await apiGet<LandlordPropertyDetailsResponseDataType>(
-    `/private/v1/property/${id}/details-list/`,
-  );
-  return res.data;
-}
 
 export default async function PropertyDetails({
   params,
 }: {
   params: { id: string };
 }) {
-  const data = await getPropertyDetails(params.id);
+  const data = (await getPropertyDetails(
+    params.id,
+  )) as LandlordPropertyDetailsResponseDataType;
   const { type, completion } = await getPropertyTypeAndCategory();
 
   if (!data) return null;

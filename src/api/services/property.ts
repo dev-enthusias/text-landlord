@@ -4,6 +4,49 @@ import { getToken } from "@/lib/actions";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+export async function getAllProperties() {
+  const token = await getToken();
+  const res = await fetch(`${BASE_URL}/private/v1/property/list`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await res.json();
+  return data.data;
+}
+
+export async function getPropertyDetails(id: string | number) {
+  const token = await getToken();
+
+  const res = await fetch(
+    `${BASE_URL}/private/v1/property/${id}/details-list/`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  const data = await res.json();
+  return data.data;
+}
+
+export async function getAdvertisedProperties() {
+  const token = await getToken();
+  const res = await fetch(`${BASE_URL}/private/v1/advertisement/list`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await res.json();
+  return data.data;
+}
+
 export const addProperty = async (data: any) => {
   const token = await getToken();
   const formData = new FormData();
@@ -128,8 +171,7 @@ export const getPropertyTypeAndCategory = async () => {
   );
 
   const data = await res.json();
-  const { type, categories, completion } = data.data;
-  return { type, categories, completion };
+  return data.data;
 };
 
 export const getCountry = async () => {

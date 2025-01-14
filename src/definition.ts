@@ -76,7 +76,7 @@ export interface LandlordDashboardStatisticResponseDataType {
   transactions: [];
 }
 
-interface Property {
+export interface Property {
   id: number;
   name: string;
   image: string;
@@ -84,11 +84,22 @@ interface Property {
   type: "Commercial";
   completion: "Completed";
   status: "pending";
-  total_unit: null;
-  total_occupied: null;
-  total_rent: null;
-  total_sell: null;
+  total_unit: number | string | null;
+  total_occupied: number | string | null;
+  total_rent: number | string | null;
+  total_sell: number | string | null;
   price: string;
+  address: string;
+  bathroom: number;
+  bedroom: number;
+  city: string;
+  country: string;
+  description: string;
+  dining_combined: number | string | null;
+  flat_no: number | string | null;
+  rent_amount: number;
+  size: string;
+  zip_code: string;
 }
 
 export interface LandlordPropertiesResponseDataType {
@@ -365,4 +376,51 @@ export interface AccountType {
   split_code: string;
   created_at: string;
   updated_at: string;
+}
+
+export interface AdvertisementListResponse {
+  current_page: number;
+  data: {
+    advertisement_type: number;
+    approval_status: number;
+    approved_at: null | string | number;
+    approved_by: null | string | number;
+    booking_amount: null | string | number;
+    caretaker_duration: null | string | number;
+    created_at: string;
+    id: number;
+    lease_amount: null | string | number;
+    lease_duration: null | string | number;
+    max_member: null | string | number;
+    mortgage_amount: null | string | number;
+    mortgage_duration: null | string | number;
+    negotiable: number;
+    property_creator_id: number;
+    property_id: number;
+    rent_amount: number;
+    rent_end_date: null | string | number;
+    rent_start_date: null | string | number;
+    rent_type: number;
+    sell_amount: null | number | string;
+    sell_start_date: null | string;
+    status: number;
+    terms_condition: string;
+    updated_at: string;
+    user_id: number;
+  }[];
+  first_page_url: string;
+  from: null | string;
+  last_page: number;
+  last_page_url: string;
+  links: {
+    url: string | null;
+    label: string;
+    active: boolean;
+  }[];
+  next_page_url: null | string;
+  path: string;
+  per_page: number;
+  prev_page_url: null | string;
+  to: null | string | number;
+  total: number;
 }
