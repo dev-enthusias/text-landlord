@@ -1,4 +1,3 @@
-import FundWalletPage from "@/components/ui/wallet-card";
 import PrevPageButton from "@/components/ui/prev-page";
 
 export default function FundWallet() {
@@ -11,9 +10,7 @@ export default function FundWallet() {
         </div>
       </header>
 
-      <main className="p-5">
-        <FundWalletPage />
-      </main>
+      <main className="p-5">{/* <WalletCard data={} /> */}</main>
     </div>
   );
 }

@@ -17,7 +17,7 @@ import { addAccountSchema } from "@/lib/schema";
 import { AddAccountDataType, BankType } from "@/definition";
 import revalidate from "@/utils/revalidate";
 
-export default function aAddAccountForm({
+export default function AddAccountForm({
   banks,
   setModalVisibility,
 }: {

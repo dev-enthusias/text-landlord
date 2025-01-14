@@ -157,7 +157,7 @@ function DeleteModal({
       </h2>
 
       <p className="py-5">
-        "{accountName} {accountNumber}"
+        &quot;{accountName} {accountNumber}&quot;
       </p>
 
       <div className="mb-1 flex justify-between gap-x-4">
