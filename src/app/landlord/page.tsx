@@ -37,20 +37,10 @@ export default async function Home() {
   const profileDetails = await getProfileDetails();
 
   return (
-    <Suspense
-      fallback={
-        <div className="flex min-h-[90vh] items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-xl font-semibold">Loading dashboard data...</h2>
-          </div>
-        </div>
-      }
-    >
-      <DashboardContent
-        statistics={statistics}
-        name={profileDetails?.profile_info.name ?? ""}
-      />
-    </Suspense>
+    <DashboardContent
+      statistics={statistics}
+      name={profileDetails?.profile_info.name ?? ""}
+    />
   );
 }
 

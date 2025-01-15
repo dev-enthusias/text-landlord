@@ -83,7 +83,7 @@ export interface Property {
   deal_type: "Rent";
   type: "Commercial";
   completion: "Completed";
-  status: "pending";
+  status: "pending" | "approved";
   total_unit: number | string | null;
   total_occupied: number | string | null;
   total_rent: number | string | null;

@@ -5,14 +5,12 @@ import { useState } from "react";
 import AddPropertyBtn from "@/components/modals/add-property";
 import { PropertyCard } from "@/components/ui/property-card";
 import {
-  AdvertisementListResponse,
   Country,
   LandlordPropertiesResponseDataType,
   LandlordPropertyDetailsResponseDataType,
   Property,
   PropertyMetadataResponseDataType,
 } from "@/definition";
-import { getPropertyDetails } from "@/api/services/property";
 
 export default function PropertiesPage({
   properties,
@@ -38,9 +36,6 @@ export default function PropertiesPage({
 
   return (
     <main className="relative flex h-full px-5 pb-20 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
-      {/* <section className="w-[240px] shrink-0 px-2">
-    <Filter />
-  </section> */}
       <section className="flex w-full lg:gap-x-8 xl:gap-x-10">
         <section className="grow">
           <div className="mb-6 flex items-center justify-between">

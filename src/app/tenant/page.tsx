@@ -5,14 +5,22 @@ import { WalletOverview } from "@/components/data-visualization/wallet-overview"
 import { LiaCoinsSolid } from "react-icons/lia";
 import { FaHourglassHalf, FaLongArrowAltRight } from "react-icons/fa";
 import { RiErrorWarningFill } from "react-icons/ri";
+import { getProfileDetails } from "@/api/services/profile";
 
-export default function Home() {
+export default async function Home() {
+  const profileDetails = await getProfileDetails();
+
+  const date = new Date();
+  const hour = date.getHours();
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+
   return (
     <section className="mx-auto w-full max-w-[1240px] px-5 py-7 pb-20 lg:px-20">
       {/* Gretting */}
       <div className="font-cormorant">
         <h1 className="text-2xl font-bold text-black">
-          Good morning, Samantha Oliver!
+          {greeting}, {profileDetails?.profile_info.name ?? ""}
         </h1>
         <p className="font-semibold text-black lg:text-lg">
           Let us help you track your rentals
