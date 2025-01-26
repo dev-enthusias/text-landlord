@@ -3,13 +3,13 @@ import Image from "next/image";
 import { routes } from "@/constants/routes";
 import { BsBuildingsFill, BsChat } from "react-icons/bs";
 import { SiStatuspal } from "react-icons/si";
-import { PiHeart, PiHeartFill } from "react-icons/pi";
 import { BathIcon, BedIcon, Handshake, RulerIcon } from "lucide-react";
 import { getRole } from "@/lib/actions";
 import React from "react";
 import { MdDining } from "react-icons/md";
 import { formatCurrency } from "@/utils/formatCurrency";
 import dynamic from "next/dynamic";
+import WishlistForm from "../forms/wishlist-form";
 
 export function PropertyNameAndTags({
   data,
@@ -29,16 +29,8 @@ export function PropertyNameAndTags({
   );
 }
 
-export function WishlistButton() {
-  return (
-    <button className="group flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-200 transition-colors duration-300 ease-out hover:bg-gold/20">
-      {false ? (
-        <PiHeart className="text-xl group-hover:text-black" />
-      ) : (
-        <PiHeartFill className="text-xl text-gold" />
-      )}
-    </button>
-  );
+export function WishlistButton({ state, id }: { state: boolean; id: number }) {
+  return <WishlistForm id={id} state={state} />;
 }
 
 export function Description({ description }: { description: string }) {
@@ -57,8 +49,8 @@ export function Features({
 }: {
   features: {
     size: null | string;
-    bedroom: null | string;
-    bathroom: null | string;
+    bedroom: null | string | number;
+    bathroom: null | string | number;
   };
 }) {
   return (
@@ -162,7 +154,15 @@ export function Facilities({
   );
 }
 
-export function PropertyOwner() {
+export function PropertyOwner({
+  landlord,
+}: {
+  landlord: {
+    email: string;
+    name: string;
+    avatar: string;
+  };
+}) {
   return (
     <section>
       <h2 className="mb-2 font-roboto text-xl font-medium text-black">
@@ -172,7 +172,7 @@ export function PropertyOwner() {
         <div className="flex items-start gap-x-2">
           <div className="relative h-8 w-8 overflow-hidden rounded-full">
             <Image
-              src="/images/profile-img.jpeg"
+              src={landlord.avatar}
               alt="property owner photo"
               fill
               sizes="36px"
@@ -180,8 +180,8 @@ export function PropertyOwner() {
             />
           </div>
           <div>
-            <h3 className="text-sm text-black">Sograh Emilafia</h3>
-            <p className="text-xs">sograyemilafi@ogalandlords.com</p>
+            <h3 className="text-sm text-black">{landlord.name}</h3>
+            <p className="text-xs">{landlord.email}</p>
           </div>
         </div>
         <Link

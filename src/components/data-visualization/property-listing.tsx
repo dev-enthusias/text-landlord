@@ -1,5 +1,6 @@
 import { PropertyCard } from "../ui/property-card";
 import FilterBtn from "../modals/filter";
+import { AllAdvertsListType } from "@/definition";
 
 export default function PropertyListing({ properties }: { properties: any }) {
   return (
@@ -15,26 +16,8 @@ export default function PropertyListing({ properties }: { properties: any }) {
         {properties.length <= 0 ? (
           <p>There are no advertised properties</p>
         ) : (
-          properties.map((property: any) => (
-            <PropertyCard
-              type="wishlist"
-              key={property.id}
-              data={{
-                id: 3,
-                name: "Property 1",
-                price: "$1000",
-                image: "/images/property-1.jpg",
-                deal_type: "Rent",
-                type: "Commercial",
-                completion: "Completed",
-                status: "pending",
-                total_unit: null,
-                total_occupied: null,
-                total_rent: null,
-                total_sell: null,
-              }}
-              roleid={5}
-            />
+          properties.map((property: AllAdvertsListType) => (
+            <PropertyCard key={property.id} data={property} roleid={5} />
           ))
         )}
       </div>

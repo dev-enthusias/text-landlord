@@ -40,7 +40,6 @@ export default function ProfileForm({
   const onSubmit: SubmitHandler<ProfileFormData> = async (data) => {
     const res = await updateProfile(data);
 
-    console.log(res);
     setIsEditing(false);
     toast.success("Profile updated successfully");
   };
@@ -145,7 +144,7 @@ export default function ProfileForm({
             name="nid"
             register={register}
             disabled={!isEditing}
-            error={errors.nid?.message}
+            error={errors.nid?.messatge}
           />
           <TextInput
             label="Address"

@@ -1,20 +1,11 @@
 import Filter from "@/components/layout/filter";
 import PropertyListing from "@/components/data-visualization/property-listing";
-import { getToken } from "@/lib/actions";
+import { getAllAdvertisedProperties } from "@/api/services/property";
 
 export default async function Properties() {
-  const token = await getToken();
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/properties`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-  const data = await res.json();
-  const properties = data.data;
+  const properties = await getAllAdvertisedProperties({
+    types: ["Commercial", "Residential", "Industrial", "Land"],
+  });
 
   return (
     <main className="mb-20 flex px-5 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">

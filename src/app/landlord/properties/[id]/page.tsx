@@ -12,7 +12,6 @@ import {
   PurchaseProperty,
 } from "@/components/pages/properties";
 import { routes } from "@/constants/routes";
-import { apiGet } from "@/api/config";
 import { LandlordPropertyDetailsResponseDataType } from "@/definition";
 import Gallery from "@/components/gallery";
 import {
@@ -31,8 +30,6 @@ export default async function PropertyDetails({
   )) as LandlordPropertyDetailsResponseDataType;
   const { type, completion } = await getPropertyTypeAndCategory();
 
-  if (!data) return null;
-
   const gallery = data.gallery.map((item) => item.path);
 
   const floorPlanPhoto = data.gallery.find((item) =>
@@ -43,6 +40,7 @@ export default async function PropertyDetails({
     id: i,
     name: d,
   }));
+
   const editedType = type.map((d: string, i: number) => ({
     id: i,
     name: d,
@@ -86,6 +84,7 @@ export default async function PropertyDetails({
             gallery={gallery}
             floorPlanPhoto={floorPlanPhoto ? [floorPlanPhoto?.path] : []}
           />
+
           <AdvertisePropertyBtn id={data.property.id} />
         </div>
       </section>

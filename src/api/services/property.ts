@@ -34,6 +34,20 @@ export async function getPropertyDetails(id: string | number) {
   return data.data;
 }
 
+export async function getAdvertisedPropertyDetails(id: string | number) {
+  const token = await getToken();
+
+  const res = await fetch(`${BASE_URL}/private/v1/property-details/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await res.json();
+  return data.data;
+}
+
 export async function getAdvertisedProperties() {
   const token = await getToken();
   const res = await fetch(`${BASE_URL}/private/v1/advertisement/list`, {
@@ -45,6 +59,23 @@ export async function getAdvertisedProperties() {
 
   const data = await res.json();
   return data.data;
+}
+
+export async function getAllAdvertisedProperties(data: { types: string[] }) {
+  const token = await getToken();
+  const res = await fetch(`${BASE_URL}/private/v1/properties`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  console.log(res);
+
+  const result = await res.json();
+  return result.data;
 }
 
 export const addProperty = async (data: any) => {

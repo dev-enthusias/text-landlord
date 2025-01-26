@@ -42,27 +42,31 @@ function PropertyNameAndLocation({
   return (
     <div>
       <h3 className="text-gray-600">{data.name}</h3>
-      <p className="text-xs tracking-wide">
+      <p className="text-xs capitalize tracking-wide">
         {data.location || "Add the address for this property"}
       </p>
     </div>
   );
 }
 
-function PropertyFeatures() {
+function PropertyFeatures(data: {
+  bedrooms: string | null;
+  bathrooms: string | null;
+  size: string | null;
+}) {
   return (
     <ul className="mt-3 flex items-center justify-between text-xs">
       <li className="flex w-1/3 items-center justify-start gap-x-1">
         <BedIcon size={14} />
-        <span>6 bd</span>
+        <span>{data.bedrooms || 0} bd</span>
       </li>
       <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300">
         <BathIcon size={14} />
-        <span>6 bt</span>
+        <span>{data.bathrooms || 0} bt</span>
       </li>
       <li className="flex w-1/3 items-center justify-end gap-x-1">
         <RulerIcon size={14} />
-        <span>2.62ft</span>
+        <span>{data.size || 0} ft</span>
       </li>
     </ul>
   );
@@ -144,14 +148,22 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
               )}
             </div>
 
-            <PropertyNameAndLocation data={{ name: data.name, location: "" }} />
+            {/* <PropertyNameAndLocation
+              data={{ name: data.name, location: data.address.address }}
+            />
 
             {type !== "order" ? (
-              <PropertyFeatures />
+              <PropertyFeatures
+                data={{
+                  bedrooms: data.bedrooms,
+                  bathrooms: data.bathrooms,
+                  size: data.size,
+                }}
+              />
             ) : (
               // Property order date and time
               <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
-            )}
+            )} */}
           </div>
         </div>
       </article>

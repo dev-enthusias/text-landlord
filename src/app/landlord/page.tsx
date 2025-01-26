@@ -53,15 +53,22 @@ async function DashboardContent({
 }) {
   const { type, categories } = await getPropertyTypeAndCategory();
 
+  const date = new Date();
+  const hour = date.getHours();
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+
   return (
     <section className="mx-auto w-full max-w-[1300px] px-5 py-7 pb-10 sm:pb-20 md:px-10 lg:px-16 xl:px-20">
       {/* Greeting */}
       <div className="font-cormorant">
         <h1 className="text-2xl font-bold text-black">
-          Good morning, {name?.split(" ")[0]}!
+          <h1 className="text-2xl font-bold text-black">
+            {greeting}, {name?.split(" ")[0]}!
+          </h1>
         </h1>
         <p className="font-semibold text-black">
-          Let&apos;s help you get a god view of your properties
+          Let&apos;s help you get a good view of your properties
         </p>
       </div>
 
