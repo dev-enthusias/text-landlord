@@ -26,8 +26,6 @@ export async function authenticate(
     });
     const result = await res.json();
 
-    console.log(result);
-
     if (result.role_id) {
       const authToken = result.access_token;
       const roleId = result.role_id;

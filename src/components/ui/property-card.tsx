@@ -7,7 +7,7 @@ import { HeartSolid, HeartStroke } from "../svg";
 import { BathIcon, BedIcon, RulerIcon, Trash2 } from "lucide-react";
 import { routes } from "@/constants/routes";
 import { TenantPropertyCardTypes } from "@/definition";
-import { removePropertyFromWishlist } from "@/api/services/wishlist";
+import { togglePropertyInWishlist } from "@/api/services/wishlist";
 
 function PropertyPhoto({ photo }: { photo: string }) {
   return (
@@ -119,9 +119,8 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
                 <button
                   type="submit"
                   onClick={(e) => {
-                    console.log("clicked");
                     e.preventDefault();
-                    removePropertyFromWishlist(data.id);
+                    togglePropertyInWishlist(data.id);
                     e.stopPropagation();
                   }}
                 >
@@ -148,7 +147,7 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
               )}
             </div>
 
-            {/* <PropertyNameAndLocation
+            <PropertyNameAndLocation
               data={{ name: data.name, location: data.address.address }}
             />
 
@@ -163,7 +162,7 @@ export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
             ) : (
               // Property order date and time
               <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
-            )} */}
+            )}
           </div>
         </div>
       </article>

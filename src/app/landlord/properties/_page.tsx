@@ -27,8 +27,6 @@ export default function PropertiesPage({
     "all",
   );
 
-  console.log(advertisedProperties);
-
   const totalProperties =
     allOrAdvertised === "all"
       ? properties.properties.list.length

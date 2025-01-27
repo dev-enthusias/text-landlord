@@ -72,8 +72,6 @@ export async function getAllAdvertisedProperties(data: { types: string[] }) {
     },
   });
 
-  console.log(res);
-
   const result = await res.json();
   return result.data;
 }

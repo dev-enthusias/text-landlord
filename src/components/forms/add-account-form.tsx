@@ -45,10 +45,7 @@ export default function AddAccountForm({
 
     const existingSubAccount = await checkIfSubAccountExists();
 
-    console.log(existingSubAccount);
-
     if (existingSubAccount.status) {
-      console.log("sub account exists");
       const res = await addAccountToOgaLandlord({
         name: selectedBankName,
         sub_account: existingSubAccount.data.sub_account,
@@ -65,7 +62,6 @@ export default function AddAccountForm({
         revalidate(`/landlord/accounts`);
       }
     } else {
-      console.log("sub account doesnt exists");
       const res = await createSubAccount(data);
 
       if (res.status) {
@@ -109,8 +105,6 @@ export default function AddAccountForm({
 
         try {
           const res = await resolveAccount(bankCode, accountNumber);
-
-          console.log(res);
 
           if (isMounted) {
             // Only update state if component is mounted

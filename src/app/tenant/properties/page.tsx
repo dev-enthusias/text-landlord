@@ -7,6 +7,8 @@ export default async function Properties() {
     types: ["Commercial", "Residential", "Industrial", "Land"],
   });
 
+  console.log()
+
   return (
     <main className="mb-20 flex px-5 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
       <section className="hidden w-[240px] shrink-0 px-2 lg:block">

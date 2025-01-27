@@ -22,8 +22,6 @@ export function ChangePasswordForm() {
   const onSubmit: SubmitHandler<ChangePasswordDataType> = async (data) => {
     const res = await changePassword(data);
 
-    console.log(res);
-
     reset();
     toast.success("Success", { description: res.message });
   };

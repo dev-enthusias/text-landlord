@@ -11,7 +11,6 @@ import {
 import Gallery from "@/components/gallery";
 import {
   getAdvertisedPropertyDetails,
-  getCities,
   getStates,
 } from "@/api/services/property";
 import { TenantAdvertisedPropertyDetails } from "@/definition";
@@ -32,8 +31,6 @@ export default async function PropertyDetails({
     data.advertisement.property.location.country.id,
   );
 
-  console.log(data.advertisement);
-
   const propertyState = states.find(
     (city: any) => city.id === data.advertisement.property.location.state_id,
   );
@@ -41,8 +38,6 @@ export default async function PropertyDetails({
   const galleries = data.advertisement.property.galleries.map(
     (gallery) => url + gallery.image.path,
   );
-
-  console.log(data.advertisement.property.location.city_id);
 
   return (
     <main className="px-5 py-7 pb-10 lg:px-20 lg:pb-20">
