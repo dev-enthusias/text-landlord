@@ -1,13 +1,90 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { HeartSolid, HeartStroke } from "../svg";
 import { BathIcon, BedIcon, RulerIcon, Trash2 } from "lucide-react";
 import { routes } from "@/constants/routes";
-import { TenantPropertyCardTypes } from "@/definition";
 import { togglePropertyInWishlist } from "@/api/services/wishlist";
+import {
+  TenantAdvertisedProperties,
+  TenantPropertyCardTypes,
+} from "@/definition";
+
+export function PropertyCard({
+  type,
+  roleid,
+  data,
+}: TenantPropertyCardTypes<TenantAdvertisedProperties>) {
+  const path = (() => {
+    switch (true) {
+      case roleid === 4:
+        return routes.LANDLORD_PROPERTIES + `/${data.id}`;
+      case roleid === 5:
+        return type === "order"
+          ? routes.TENANT_ORDERS + `/${data.id}`
+          : routes.TENANT_PROPERTIES + `/${data.slug}`;
+      case roleid === 4 && type === "order":
+        return routes.LANDLORD_ORDERS + `/${data.id}`;
+      default:
+        return type === "order"
+          ? routes.AGENT_DASHBOARD_SETTINGS + "?path=orderdetails"
+          : routes.AGENT_PROPERTIES + `/${data.id}`;
+    }
+  })();
+
+  return (
+    <Link
+      href={path}
+      className="font-lato block w-full rounded-lg border bg-white p-2 shadow-gold transition duration-300 ease-out hover:shadow-lg"
+    >
+      <article className="group flex gap-x-1 sm:flex-col">
+        <PropertyPhoto photo={data.image} />
+
+        {/* Rent status */}
+        <div className="grow pt-2">
+          <div className="px-2">
+            {/* Property value & Favourite Btn || Delete Btn */}
+            <div className="flex justify-between">
+              <PropertyPrice price={data.price} />
+
+              {type === "wishlist" ? (
+                <button
+                  type="submit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    togglePropertyInWishlist(data.id);
+                    e.stopPropagation();
+                  }}
+                >
+                  <Trash2 className="h-4 w-4 transition-colors duration-300 hover:text-red-600" />
+                </button>
+              ) : type === "rent" ? (
+                <p className="flex items-center justify-center rounded-full bg-green-600/10 px-4 py-0.5 text-xs font-semibold leading-none text-green-500">
+                  Paid
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
+
+            <PropertyNameAndLocation
+              data={{ name: data.name, location: data.address.address }}
+            />
+
+            {type !== "order" ? (
+              <PropertyFeatures
+                bedrooms={data.bedrooms}
+                bathrooms={data.bathrooms}
+                size={data.size}
+              />
+            ) : (
+              // Property order date and time
+              <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
+            )}
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
+}
 
 function PropertyPhoto({ photo }: { photo: string }) {
   return (
@@ -41,7 +118,7 @@ function PropertyNameAndLocation({
 }) {
   return (
     <div>
-      <h3 className="text-gray-600">{data.name}</h3>
+      <h3 className="font-bold text-gray-600">{data.name}</h3>
       <p className="text-xs capitalize tracking-wide">
         {data.location || "Add the address for this property"}
       </p>
@@ -50,12 +127,12 @@ function PropertyNameAndLocation({
 }
 
 function PropertyFeatures(data: {
-  bedrooms: string | null;
-  bathrooms: string | null;
-  size: string | null;
+  bedrooms: number;
+  bathrooms: number;
+  size: string;
 }) {
   return (
-    <ul className="mt-3 flex items-center justify-between text-xs">
+    <ul className="mt-2 flex items-center justify-between text-xs">
       <li className="flex w-1/3 items-center justify-start gap-x-1">
         <BedIcon size={14} />
         <span>{data.bedrooms || 0} bd</span>
@@ -69,103 +146,5 @@ function PropertyFeatures(data: {
         <span>{data.size || 0} ft</span>
       </li>
     </ul>
-  );
-}
-
-export function PropertyCard({ type, roleid, data }: TenantPropertyCardTypes) {
-  const [favProperty, setFavProperty] = useState(false);
-
-  const handleFavClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setFavProperty(!favProperty);
-  };
-
-  const path = (() => {
-    switch (true) {
-      case roleid === 4:
-        return routes.LANDLORD_PROPERTIES + `/${data.id}`;
-      case roleid === 5:
-        return type === "order"
-          ? routes.TENANT_ORDERS + `/${data.id}`
-          : routes.TENANT_PROPERTIES + `/${data.id}`;
-      case roleid === 4 && type === "order":
-        return routes.LANDLORD_ORDERS + `/${data.id}`;
-      default:
-        return type === "order"
-          ? routes.AGENT_DASHBOARD_SETTINGS + "?path=orderdetails"
-          : routes.AGENT_PROPERTIES + `/${data.id}`;
-    }
-  })();
-
-  return (
-    <Link
-      href={path}
-      className="font-lato block w-full rounded-lg border bg-white p-2 shadow-gold transition duration-300 ease-out hover:shadow-lg"
-    >
-      <article className="group flex gap-x-1 sm:flex-col">
-        <PropertyPhoto photo={data.image} />
-
-        {/* Rent status */}
-        <div className="grow pt-2">
-          <div className="px-2">
-            {/* Property value & Favourite Btn || Delete Btn */}
-            <div className="mb-2 flex justify-between">
-              <PropertyPrice price={data.price} />
-
-              {type === "wishlist" ? (
-                <button
-                  type="submit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    togglePropertyInWishlist(data.id);
-                    e.stopPropagation();
-                  }}
-                >
-                  <Trash2 className="h-4 w-4 transition-colors duration-300 hover:text-red-600" />
-                </button>
-              ) : type === "rent" ? (
-                <p className="flex items-center justify-center rounded-full bg-green-600/10 px-4 py-0.5 text-xs font-semibold leading-none text-green-500">
-                  Paid
-                </p>
-              ) : type === "order" ? (
-                ""
-              ) : roleid === 5 ? (
-                <button onClick={(e) => handleFavClick(e)}>
-                  {!favProperty ? (
-                    <span className="group-hover:animate-pulse">
-                      <HeartStroke />
-                    </span>
-                  ) : (
-                    <HeartSolid />
-                  )}
-                </button>
-              ) : (
-                ""
-              )}
-            </div>
-
-            <PropertyNameAndLocation
-              data={{ name: data.name, location: data.address.address }}
-            />
-
-            {type !== "order" ? (
-              <PropertyFeatures
-                data={{
-                  bedrooms: data.bedrooms,
-                  bathrooms: data.bathrooms,
-                  size: data.size,
-                }}
-              />
-            ) : (
-              // Property order date and time
-              <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
-            )}
-          </div>
-        </div>
-      </article>
-    </Link>
   );
 }

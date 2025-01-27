@@ -1,8 +1,12 @@
 import { PropertyCard } from "../ui/property-card";
 import FilterBtn from "../modals/filter";
-import { AllAdvertsListType } from "@/definition";
+import { TenantAdvertisedProperties } from "@/definition";
 
-export default function PropertyListing({ properties }: { properties: any }) {
+export default function PropertyListing({
+  properties,
+}: {
+  properties: TenantAdvertisedProperties[];
+}) {
   return (
     <section>
       <div className="mb-6 flex items-center justify-between">
@@ -16,7 +20,7 @@ export default function PropertyListing({ properties }: { properties: any }) {
         {properties.length <= 0 ? (
           <p>There are no advertised properties</p>
         ) : (
-          properties.map((property: AllAdvertsListType) => (
+          properties.map((property) => (
             <PropertyCard key={property.id} data={property} roleid={5} />
           ))
         )}

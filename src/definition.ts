@@ -42,10 +42,10 @@ export interface TextInputProps {
   register: UseFormRegister<any>;
 }
 
-export type TenantPropertyCardTypes = {
+export type TenantPropertyCardTypes<T> = {
   type?: "order" | "rent" | "wishlist";
   roleid?: number;
-  data: Property;
+  data: T;
 };
 
 export type LoginDataType = z.infer<typeof loginSchema>;
@@ -425,41 +425,6 @@ export interface AdvertisementListResponse {
   total: number;
 }
 
-export interface AllAdvertsListType {
-  id: number;
-  advertise_id: number;
-  name: string;
-  slug: string;
-  address: {
-    address: string;
-    address_lat: string;
-    address_long: string;
-    city: string;
-    city_lat: string;
-    city_long: string;
-    state: string;
-    state_lat: string;
-    state_long: string;
-    zip: string;
-    country: string;
-  };
-  bedrooms: string | null;
-  bathrooms: string | null;
-  size: null | string;
-  booking_amount: string;
-  price: string;
-  discount_amount: string;
-  discount_type: string;
-  rent_type: null | string;
-  image: string;
-  type: string;
-  vacant: string;
-  flat_no: null | string;
-  completion: string;
-  deal_type: string;
-  category: string;
-}
-
 export interface TenantAdvertisedPropertyDetails {
   advertisement: {
     id: number;
@@ -795,4 +760,39 @@ export interface TenantAdvertisedPropertyDetails {
     "5": 0;
   };
   agvRating: 0;
+}
+
+export interface TenantAdvertisedProperties {
+  id: number;
+  advertise_id: number;
+  name: string;
+  slug: string;
+  address: {
+    address: string;
+    address_lat: string;
+    address_long: string;
+    city: string;
+    city_lat: string;
+    city_long: string;
+    state: string;
+    state_lat: string;
+    state_long: string;
+    zip: string;
+    country: string;
+  };
+  bedrooms: number;
+  bathrooms: number;
+  size: string;
+  booking_amount: string;
+  price: string;
+  discount_amount: string;
+  discount_type: string;
+  rent_type: null | string;
+  image: string;
+  type: string;
+  vacant: string;
+  flat_no: string | null;
+  completion: string;
+  deal_type: string;
+  category: string;
 }
