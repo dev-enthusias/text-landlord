@@ -22,6 +22,7 @@ import {
   UserDetailsResponseDataType,
 } from "@/definition";
 import { getProfileDetails } from "@/api/services/profile";
+import { getPropertiesInCart } from "@/api/services/cart";
 
 async function getNotifications() {
   const res = await apiPost<NotificationResponseType, any>(
@@ -35,10 +36,12 @@ async function getNotifications() {
 
 export default async function Topbar() {
   const roleid = await getRole();
+  const cartItems = await getPropertiesInCart();
   const notifications = (await getNotifications()) as NotificationResponseType;
   const profileDetails =
     (await getProfileDetails()) as UserDetailsResponseDataType;
 
+  console.log(cartItems);
   const topbarLinks =
     roleid === 5
       ? tenantTopbarLinks
@@ -114,9 +117,14 @@ export default async function Topbar() {
         {roleid === 5 && (
           <Link
             href={routes.CART}
-            className="hidden items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
+            className="relative hidden items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
           >
             <LucideShoppingCart className="h-5 w-5" />
+            {cartItems.data.length > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gold/70 text-xxs font-bold leading-[0px] text-black">
+                {cartItems.data.length}
+              </span>
+            )}
           </Link>
         )}
 

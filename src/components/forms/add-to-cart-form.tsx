@@ -1,10 +1,10 @@
 "use client";
 
 import { addToCart } from "@/api/services/cart";
-import React from "react";
 import { useForm } from "react-hook-form";
 import LoadingSpinner from "../ui/loading-spinner";
 import { toast } from "sonner";
+import revalidate from "@/utils/revalidate";
 
 export default function AddToCartButton({
   values,
@@ -29,6 +29,7 @@ export default function AddToCartButton({
     const response = await addToCart(data);
     if (response.status) {
       toast.success("Success", { description: "Successfully added to cart" });
+      revalidate("/tenant", "layout");
     }
   };
 

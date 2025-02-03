@@ -1,19 +1,10 @@
+import { getPropertyInWishlist } from "@/api/services/wishlist";
 import PrevPageButton from "@/components/ui/prev-page";
-import { PropertyCard } from "@/components/ui/property-card";
-import { getToken } from "@/lib/actions";
+import { WishlistPropertyCard } from "@/components/ui/wishlist-card";
+import { WishlistProperty } from "@/definition";
 
 export default async function Wishlist() {
-  const token = await getToken();
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/tenant/wishlist`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-  const data = await res.json();
+  const data = (await getPropertyInWishlist()) as WishlistProperty;
   const properties = data.data.list;
 
   return (
@@ -31,12 +22,7 @@ export default async function Wishlist() {
             <p>You have not added any property to wishlist</p>
           ) : (
             properties.map((list: any) => (
-              <PropertyCard
-                type="wishlist"
-                roleid={5}
-                key={list.id}
-                data={list.property}
-              />
+              <WishlistPropertyCard key={list.id} data={list.property} />
             ))
           )}
         </div>

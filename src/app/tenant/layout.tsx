@@ -10,7 +10,7 @@ export default function PageLayout({
   return (
     <div className="relative flex min-h-screen flex-col">
       <Topbar />
-      {children}
+      <div className="grow">{children}</div>
       <Footer />
       <Menu />
     </div>

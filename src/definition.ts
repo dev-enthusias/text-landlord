@@ -533,3 +533,127 @@ export interface TenantAdvertisedPropertyDetails {
   ratting: { "1": number; "2": number; "3": number; "4": number; "5": number };
   agvRating: number;
 }
+
+export interface WishlistProperty {
+  status: boolean;
+  message: string;
+  data: {
+    list: Array<{
+      id: number;
+      created_at: string;
+      property: {
+        id: number;
+        advertisement: {
+          id: number;
+          user_id: number;
+          property_id: number;
+          property_creator_id: number;
+          advertisement_type: number;
+          booking_amount: number | null;
+          rent_amount: number;
+          rent_type: number;
+          rent_start_date: string | null;
+          rent_end_date: string | null;
+          max_member: number | null;
+          mortgage_amount: number | null;
+          mortgage_duration: string | null;
+          lease_amount: number | null;
+          lease_duration: string | null;
+          caretaker_duration: string | null;
+          sell_amount: number | null;
+          sell_start_date: string | null;
+          negotiable: number;
+          status: number;
+          approval_status: number;
+          approved_by: number | null;
+          approved_at: string | null;
+          terms_condition: string;
+          created_at: string;
+          updated_at: string;
+        };
+        name: string;
+        slug: string;
+        address: string | null;
+        bedrooms: number;
+        bathrooms: number;
+        size: string;
+        price: string;
+        image: string;
+        type: number;
+        vacant: string;
+        flat_no: string | null;
+        completion: string;
+        deal_type: string;
+        category: string;
+      };
+    }>;
+    links: {
+      first: string;
+      last: string;
+      prev: string | null;
+      next: string | null;
+    };
+    pagination: {
+      total: number;
+      count: number;
+      per_page: number;
+      current_page: number;
+      total_pages: number;
+    };
+  };
+}
+
+export interface CartProperty {
+  status: boolean;
+  message: string;
+  data: Array<{
+    id: number;
+    tenant_id: number;
+    property_id: number;
+    advertisement_id: number;
+    discount_amount: string;
+    amount: string;
+    start_date: string | null;
+    end_date: string | null;
+    type: string | null;
+    durations: number;
+    created_at: string;
+    updated_at: string;
+    property: {
+      id: 34;
+      name: "Adesh Villa";
+      slug: "adesh-villa-WvPry";
+      size: "1000";
+      dining_combined: null;
+      bedroom: 8;
+      bathroom: 3;
+      rent_amount: 8400000;
+      price_range: null;
+      flat_no: "1";
+      description: "Beautiful condo house in Ikoyi";
+      vacant: "1";
+      completion: 1;
+      deal_type: 1;
+      status: "approved";
+      type: 2;
+      total_unit: null;
+      total_occupied: null;
+      total_rent: null;
+      total_sell: null;
+      discount_type: "fixed";
+      discount_amount: 0;
+      user_id: 73;
+      default_image: 171;
+      property_category_id: 2;
+      video_verification: null;
+      video_verification_status: 0;
+      created_at: "2025-01-18T12:15:26.000000Z";
+      updated_at: "2025-01-20T08:14:04.000000Z";
+      is_trending: 0;
+      is_populer: 0;
+      is_recommended: 0;
+      is_most_populer: 0;
+      type_id: 1;
+    };
+  }>;
+}
