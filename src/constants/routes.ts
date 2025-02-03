@@ -15,15 +15,15 @@ export const routes = {
   // Tenant pages
   CART: "/tenant/cart",
   TENANT_HOME: "/tenant",
+  PAY_RENT: "/tenant/pay-rent",
+  WISHLIST: "/tenant/wishlist",
+  TENANT_ORDERS: "/tenant/orders",
   TENANT_PROFILE: "/tenant/profile",
-  WISHLIST: "/tenant/profile/wishlist",
-  PAY_RENT: "/tenant/profile/pay-rent",
+  FUND_WALLET: "/tenant/fund-wallet",
+  TENANT_SETTINGS: "/tenant/settings",
   TENANT_PROPERTIES: "/tenant/properties",
-  TENANT_ORDERS: "/tenant/profile/orders",
-  FUND_WALLET: "/tenant/profile/fund-wallet",
-  TENANT_SETTINGS: "/tenant/profile/settings",
-  PAYMENT_HISTORY: "/tenant/profile/payment-history",
-  TENANT_CHANGE_PASSWORD: "/tenant/profile/change-password",
+  PAYMENT_HISTORY: "/tenant/payment-history",
+  TENANT_CHANGE_PASSWORD: "/tenant/change-password",
 
   // Landlord pages
   AGENTS: "/landlord/agents",
