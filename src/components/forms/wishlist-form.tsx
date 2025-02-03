@@ -1,3 +1,5 @@
+"use client";
+
 import { togglePropertyInWishlist } from "@/api/services/wishlist";
 import { useForm } from "react-hook-form";
 import { PiHeart, PiHeartFill } from "react-icons/pi";
@@ -17,16 +19,19 @@ export default function WishlistForm({
 
   const onSubmit = async (data: { property_id: number }) => {
     const res = await togglePropertyInWishlist(data.property_id);
+    console.log(res);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" name="property_id" />
-      <button className="group flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-200 transition-colors duration-300 ease-out hover:bg-gold/20">
+      <button
+        className={`group flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ease-out hover:bg-gold/20 ${state ? "bg-gold/20" : "bg-white"}`}
+      >
         {state ? (
-          <PiHeart className="text-xl group-hover:text-black" />
-        ) : (
           <PiHeartFill className="text-xl text-gold" />
+        ) : (
+          <PiHeart className="text-xl group-hover:text-black" />
         )}
       </button>
     </form>

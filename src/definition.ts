@@ -425,343 +425,6 @@ export interface AdvertisementListResponse {
   total: number;
 }
 
-export interface TenantAdvertisedPropertyDetails {
-  advertisement: {
-    id: number;
-    user_id: number;
-    property_id: number;
-    property_creator_id: number;
-    advertisement_type: number;
-    booking_amount: number;
-    rent_amount: number;
-    rent_type: number;
-    rent_start_date: string;
-    rent_end_date: string;
-    max_member: number;
-    mortgage_amount: null;
-    mortgage_duration: null;
-    lease_amount: null;
-    lease_duration: null;
-    caretaker_duration: null;
-    negotiable: number;
-    status: number;
-    approval_status: number;
-    approved_by: null;
-    approved_at: null;
-    terms_condition: string;
-    created_at: string;
-    updated_at: string;
-    property: {
-      id: number;
-      name: string;
-      slug: string;
-      size: string;
-      dining_combined: string;
-      bedroom: number;
-      bathroom: number;
-      rent_amount: number;
-      price_range: null;
-      flat_no: string;
-      description: null | string;
-      vacant: string;
-      completion: number;
-      deal_type: number;
-      status: "approved";
-      type: number;
-      total_unit: null;
-      total_occupied: null;
-      total_rent: null;
-      discount_type: string;
-      discount_amount: number;
-      user_id: number;
-      default_image: {
-        id: number;
-        path: string;
-        created_at: string;
-        updated_at: string;
-      };
-      property_category_id: number;
-      video_verification: null;
-      video_verification_status: number;
-      created_at: string;
-      updated_at: string;
-      is_trending: string;
-      is_populer: string;
-      is_recommended: string;
-      is_most_populer: string;
-      type_id: string;
-      facilities: [];
-      property_type: {
-        id: string;
-        name: string;
-        slug: string;
-        icon: string;
-        image_id: null;
-        serial: null;
-        status: string;
-        is_featured: 1;
-        created_at: string;
-        updated_at: string;
-      };
-      category: {
-        id: number;
-        name: string;
-        slug: string;
-        icon_class: string;
-        image_id: number;
-        serial: null;
-        status: string;
-        is_featured: number;
-        parent_id: null;
-        created_at: string;
-        updated_at: string;
-      };
-      user: {
-        id: number;
-        name: string;
-        email: string;
-        date_of_birth: string;
-        join_date: null;
-        gender: null;
-        email_verified_at: string;
-        token: null;
-        phone: string;
-        alt_phone: string;
-        new_password: null;
-        confirm_password: null;
-        permanent_address: null;
-        present_address: null;
-        institution: null;
-        country_id: string;
-        city_id: string;
-        state_id: string;
-        zip_code: string;
-        address: string;
-        per_country_id: null;
-        per_city_id: null;
-        per_state_id: null;
-        per_zip_code: null;
-        per_address: null;
-        occupation: string;
-        nid: string;
-        social_security_number: string;
-        passport: string;
-        nationality: string;
-        blood_group: string;
-        tax_certificate: string;
-        lang: null;
-        property_count: number;
-        otp: number;
-        permissions: string[];
-        status: number;
-        image_id: number;
-        document_id: null;
-        role_id: number;
-        designation_id: number;
-        department_id: null;
-        address_verify: number;
-        req_address_verify: number;
-        address_details: null;
-        created_at: string;
-        updated_at: string;
-        active_status: number;
-        avatar: string;
-        dark_mode: number;
-        messenger_color: null;
-        property_owner: null;
-        tin_number: null;
-        marital_status: null;
-        religion: null;
-        firebase_key: null;
-      };
-      location: {
-        id: number;
-        property_id: number;
-        user_id: number;
-        address: string;
-        country_id: number;
-        state_id: number;
-        city_id: number;
-        division_id: null;
-        district_id: null;
-        upazila_id: null;
-        post_code: null;
-        latitude: string;
-        longitude: null;
-        status: number;
-        created_at: string;
-        updated_at: string;
-        country: {
-          id: number;
-          name: string;
-          iso3: string;
-          numeric_code: string;
-          iso2: string;
-          phonecode: string;
-          capital: string;
-          currency: string;
-          currency_name: string;
-          currency_symbol: string;
-          tld: string;
-          native: string;
-          region: string;
-          subregion: string;
-          timezones: {
-            zoneName: string;
-            gmtOffset: number;
-            gmtOffsetName: string;
-            abbreviation: string;
-            tzName: string;
-          }[];
-          latitude: string;
-          longitude: string;
-          emoji: string;
-          emojiU: string;
-          created_at: string;
-          updated_at: string;
-          flag: number;
-          status: number;
-        };
-      };
-      galleries: [
-        {
-          id: 1;
-          type: "gallery";
-          title: null;
-          property_id: 1;
-          image_id: 41;
-          status: 1;
-          is_default: 0;
-          serial: 1;
-          created_at: "2024-09-27T21:05:41.000000Z";
-          updated_at: "2024-09-27T21:05:41.000000Z";
-          image: {
-            id: 41;
-            path: "backend/uploads/properties/1727471141.jpg";
-            created_at: "2024-09-27T21:05:41.000000Z";
-            updated_at: "2024-09-27T21:05:41.000000Z";
-          };
-        },
-        {
-          id: 2;
-          type: "gallery";
-          title: null;
-          property_id: 1;
-          image_id: 42;
-          status: 1;
-          is_default: 0;
-          serial: 2;
-          created_at: "2024-09-27T21:05:55.000000Z";
-          updated_at: "2024-09-27T21:05:55.000000Z";
-          image: {
-            id: 42;
-            path: "backend/uploads/properties/1727471155.jpg";
-            created_at: "2024-09-27T21:05:55.000000Z";
-            updated_at: "2024-09-27T21:05:55.000000Z";
-          };
-        },
-      ];
-      floor_plans: [
-        {
-          id: 1;
-          type: "gallery";
-          title: null;
-          property_id: 1;
-          image_id: 41;
-          status: 1;
-          is_default: 0;
-          serial: 1;
-          created_at: "2024-09-27T21:05:41.000000Z";
-          updated_at: "2024-09-27T21:05:41.000000Z";
-        },
-        {
-          id: 2;
-          type: "gallery";
-          title: null;
-          property_id: 1;
-          image_id: 42;
-          status: 1;
-          is_default: 0;
-          serial: 2;
-          created_at: "2024-09-27T21:05:55.000000Z";
-          updated_at: "2024-09-27T21:05:55.000000Z";
-        },
-      ];
-      tenants: [];
-      document: null;
-    };
-  };
-  property: {
-    id: 1;
-    name: "Duplex";
-    image: "https://api.ogalandlords.com/backend/uploads/properties/1727470731.jpg";
-    deal_type: "Rent";
-    type: "Residential";
-    completion: "Completed";
-    total_unit: null;
-    total_occupied: null;
-    total_rent: null;
-    total_sell: null;
-    size: "1000";
-    dining_combined: "1";
-    bedroom: 3;
-    bathroom: 3;
-    rent_type: null;
-    amount: 1500000;
-    discount_amount: 0;
-    discount_type: "fixed";
-    booking_amount: 2000;
-    flat_no: "1";
-    description: null;
-    category: "Building";
-    user_email: "ben360degree@gmail.com";
-    user_phone: "08012345678";
-    wishlist: true;
-  };
-  address: {
-    id: 1;
-    country: "Nigeria";
-    latitude: "161";
-    longitude: null;
-    address: "35 Association Avenue, Ilupeju";
-  };
-  galleries: [
-    {
-      id: 1;
-      name: null;
-      image: "https://api.ogalandlords.com/backend/uploads/properties/1727471141.jpg";
-    },
-    {
-      id: 2;
-      name: null;
-      image: "https://api.ogalandlords.com/backend/uploads/properties/1727471155.jpg";
-    },
-  ];
-  floorPlans: [];
-  user: {
-    id: 1;
-    name: "Engr. Idowu Okegbenro";
-    email: "ben360degree@gmail.com";
-    phone: "08012345678";
-  };
-  tenants: [];
-  facilities: [];
-  category: {
-    id: 2;
-    name: "Building";
-  };
-  document: null;
-  property_reviews: [];
-  ratting: {
-    "1": 0;
-    "2": 0;
-    "3": 0;
-    "4": 0;
-    "5": 0;
-  };
-  agvRating: 0;
-}
-
 export interface TenantAdvertisedProperties {
   id: number;
   advertise_id: number;
@@ -795,4 +458,78 @@ export interface TenantAdvertisedProperties {
   completion: string;
   deal_type: string;
   category: string;
+}
+
+export interface TenantAdvertisedPropertyDetails {
+  advertisement: {
+    id: number;
+    property_id: number;
+    property_creator_id: number;
+    advertisement_type: number;
+    booking_amount: number | null;
+    rent_amount: number;
+    rent_type: number;
+    rent_start_date: string | null;
+    rent_end_date: string | null;
+    max_member: number | null;
+    lease_amount: number | null;
+    lease_duration: string | null;
+    caretaker_duration: string | null;
+    terms_condition: string;
+  };
+  property: {
+    id: number;
+    name: string;
+    image: string;
+    type: string | null;
+    completion: string;
+    total_unit: number | null;
+    total_occupied: number | null;
+    total_rent: number | null;
+    total_sell: number | null;
+    size: string;
+    dining_combined: string | null;
+    bedroom: number;
+    bathroom: number;
+    rent_type: string | null;
+    amount: number;
+    discount_amount: number;
+    discount_type: string;
+    booking_amount: number | null;
+    flat_no: string | null;
+    description: string;
+    category: string;
+    user_email: string;
+    user_phone: string;
+    wishlist: boolean;
+  };
+  address: {
+    id: number;
+    country: string;
+    latitude: number | null;
+    longitude: number | null;
+    address: string;
+  };
+  galleries: Array<{
+    id: number;
+    name: string;
+    image: string;
+  }>;
+  floorPlans: {
+    [key: string]: {
+      id: number;
+      name: string;
+      image: string;
+    };
+  };
+  user: {
+    id: string;
+    name: string;
+    photo: string;
+  };
+  facilities: [];
+  category: { id: number; name: string };
+  property_reviews: [];
+  ratting: { "1": number; "2": number; "3": number; "4": number; "5": number };
+  agvRating: number;
 }

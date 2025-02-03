@@ -70,7 +70,7 @@ export default async function PropertyDetails({
             name: data.property.name,
             dealType: data.property.deal_type,
             type: data.property.type,
-            city: data.property.city ?? "House in Mars",
+            category: data.property.category,
           }}
         />
 
@@ -101,7 +101,7 @@ export default async function PropertyDetails({
           />
           <DetailedFeatures
             features={{
-              size: data.property.size ?? 0,
+              size: data.property.size,
               bedroom: data.property.bedroom ?? 0,
               bathroom: data.property.bathroom ?? 0,
               dining_combined:
@@ -113,7 +113,6 @@ export default async function PropertyDetails({
           <Facilities facilities={data.facilities} />
           <Location
             address={data.location.address}
-            city={data.property.city}
             country={data.property.country}
             cord={[
               data.location?.city?.latitude

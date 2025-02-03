@@ -21,7 +21,7 @@ export function BackButton({ className }: { className?: string }) {
   return (
     <button
       className={cn(
-        "group flex items-center gap-x-2 font-medium text-gray-700 transition-colors duration-300 hover:text-black",
+        "group flex items-center gap-x-2 rounded-full bg-gray-100 px-4 py-2 font-medium text-gray-700 transition-all duration-300 hover:bg-gray-200 hover:text-black",
         className,
       )}
       onClick={() => router.back()}

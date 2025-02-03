@@ -2,28 +2,39 @@ import Link from "next/link";
 import Image from "next/image";
 import { routes } from "@/constants/routes";
 import { BsBuildingsFill, BsChat } from "react-icons/bs";
-import { SiStatuspal } from "react-icons/si";
-import { BathIcon, BedIcon, Handshake, RulerIcon } from "lucide-react";
+import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import { getRole } from "@/lib/actions";
 import React from "react";
-import { MdDining } from "react-icons/md";
+import { MdCategory, MdDining } from "react-icons/md";
 import { formatCurrency } from "@/utils/formatCurrency";
 import dynamic from "next/dynamic";
 import WishlistForm from "../forms/wishlist-form";
+import { IoHome } from "react-icons/io5";
+import AddToCartButton from "../forms/add-to-cart-form";
 
 export function PropertyNameAndTags({
   data,
 }: {
-  data: { name: string; dealType: string; type: string; city: string };
+  data: {
+    name: string;
+    dealType: string;
+    type: string | null;
+    category: string;
+  };
 }) {
   return (
     <div>
       <h1 className="font-roboto text-xl font-semibold text-black sm:text-2xl">
         {data.name}
       </h1>
-      <p className="flex gap-x-2 text-sm tracking-wide">
-        <span>{data.dealType}</span> | <span>{data.type}</span> |{" "}
-        <span>{data.city}</span>
+      <p className="flex gap-x-2 text-xs font-semibold tracking-wide">
+        <span className="rounded bg-primary-dark px-2 py-0.5 text-black">
+          {data.dealType}
+        </span>
+        <span className="rounded bg-accent px-2 py-0.5 text-white">
+          {data.type}
+        </span>
+        <span>{data.category}</span>
       </p>
     </div>
   );
@@ -35,7 +46,7 @@ export function WishlistButton({ state, id }: { state: boolean; id: number }) {
 
 export function Description({ description }: { description: string }) {
   return (
-    <section>
+    <section className="rounded-xl bg-white p-4">
       <h2 className="mb-1 font-roboto text-xl font-medium text-black">
         Description
       </h2>
@@ -44,51 +55,19 @@ export function Description({ description }: { description: string }) {
   );
 }
 
-export function Features({
-  features,
-}: {
-  features: {
-    size: null | string;
-    bedroom: null | string | number;
-    bathroom: null | string | number;
-  };
-}) {
-  return (
-    <section>
-      <h2 className="mb-1 font-roboto text-xl font-medium text-black">
-        Features
-      </h2>
-      <ul className="flex flex-col gap-y-5">
-        <li className="flex gap-x-2">
-          <BedIcon size={20} className="text-gray-600" />
-          <span>{features.bedroom} bedrooms</span>
-        </li>
-        <li className="flex gap-x-2">
-          <BathIcon size={20} className="text-gray-600" />
-          <span>{features.bathroom} bathrooms</span>
-        </li>
-        <li className="flex gap-x-2">
-          <RulerIcon size={20} className="text-gray-600" />
-          <span>{features.size} square feet</span>
-        </li>
-      </ul>
-    </section>
-  );
-}
-
 export function DetailedFeatures({
   features,
 }: {
   features: {
-    size: null | number;
-    dining_combined: string | null;
+    size: null | string | number;
     bedroom: null | number;
     bathroom: null | number;
+    dining_combined: string | null;
     flat_no: null | string;
   };
 }) {
   return (
-    <section>
+    <section className="rounded-xl bg-white p-5">
       <h2 className="mb-1 font-roboto text-xl font-medium text-black">
         Features
       </h2>
@@ -105,14 +84,18 @@ export function DetailedFeatures({
           <RulerIcon size={20} className="text-gray-600" />
           <span>{features.size} square feet</span>
         </li>
-        <li className="flex gap-x-2">
-          <MdDining size={20} className="text-gray-600" />
-          <span>{features.dining_combined}</span>
-        </li>
-        <li className="flex gap-x-2">
-          <BsBuildingsFill size={20} className="text-gray-600" />
-          <span>Flat {features.flat_no}</span>
-        </li>
+        {features.dining_combined !== null && (
+          <li className="flex gap-x-2">
+            <MdDining size={20} className="text-gray-600" />
+            <span>{features.dining_combined}</span>
+          </li>
+        )}
+        {features.flat_no !== null && (
+          <li className="flex gap-x-2">
+            <BsBuildingsFill size={20} className="text-gray-600" />
+            <span>Flat {features.flat_no}</span>
+          </li>
+        )}
       </ul>
     </section>
   );
@@ -121,14 +104,19 @@ export function DetailedFeatures({
 export function Facilities({
   facilities,
 }: {
-  facilities: { name: string; content: string; image: string; id: number }[];
+  facilities: {
+    id: number;
+    name: string;
+    content: string;
+    icon: string;
+  }[];
 }) {
   return (
-    <section>
+    <section className="rounded-xl bg-white p-5">
       <h2 className="mb-1 font-roboto text-xl font-medium text-black">
         Facilities
       </h2>
-      <ul className="flex flex-wrap justify-between gap-5">
+      <ul className="grid grid-cols-3 gap-5">
         {facilities.length <= 0 ? (
           <p>This property has no facilities or you may have not added any.</p>
         ) : (
@@ -136,7 +124,7 @@ export function Facilities({
             <li key={facility.id} className="flex items-center gap-x-2">
               <div className="relative h-5 w-5">
                 <Image
-                  src={facility.image}
+                  src={facility.icon}
                   alt={facility.name}
                   fill
                   className="object-cover"
@@ -164,7 +152,7 @@ export function PropertyOwner({
   };
 }) {
   return (
-    <section>
+    <section className="rounded-xl bg-white p-4">
       <h2 className="mb-2 font-roboto text-xl font-medium text-black">
         Property Owner
       </h2>
@@ -186,7 +174,7 @@ export function PropertyOwner({
         </div>
         <Link
           href={routes.CHAT + "/0"}
-          className="flex items-center gap-x-2 rounded-full bg-white px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
+          className="flex items-center gap-x-2 rounded-full bg-black px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
         >
           <BsChat /> Chat
         </Link>
@@ -231,10 +219,16 @@ export function PropertyAgent() {
 
 export async function PurchaseProperty({
   rent,
-  totalVacant,
+  type,
+  category,
+  propertyId,
+  advertisementId,
 }: {
   rent: number;
-  totalVacant: number;
+  type: string | null;
+  category: string;
+  propertyId: number;
+  advertisementId: number;
 }) {
   const roleid = await getRole();
 
@@ -245,29 +239,32 @@ export async function PurchaseProperty({
         <span className="text-base font-normal text-gray-500">/ year</span>
       </p>
 
-      <div className="flex flex-wrap justify-between gap-5 rounded-lg bg-background px-5 py-4 text-lg">
+      <div className="grid grid-cols-2 gap-5 rounded-lg bg-background px-5 py-4 text-lg">
         <div className="flex items-start gap-x-3">
-          <Handshake size={20} className="mt-1 text-gray-600" />
+          <IoHome size={20} className="mt-1 text-gray-600" />
           <div>
-            <p>Down Payment</p>
-            <p className="font-semibold text-gray-600">₦350,000</p>
+            <p>Property Type</p>
+            <p className="font-semibold text-gray-600">{type}</p>
           </div>
         </div>
         <div className="flex items-start gap-x-3">
-          <SiStatuspal size={20} className="mt-1 text-gray-600" />
+          <MdCategory size={20} className="mt-1 text-gray-600" />
           <div>
-            <p>Availability</p>
-            <p className="font-semibold text-gray-600">
-              {totalVacant} vacant rooms
-            </p>
+            <p>Category</p>
+            <p className="font-semibold text-gray-600">{category}</p>
           </div>
         </div>
       </div>
 
       {roleid === 5 && (
-        <button className="w-full rounded-full bg-gold py-3 text-lg font-bold text-white">
-          Add to Cart
-        </button>
+        <AddToCartButton
+          className="flex w-full items-center justify-center gap-x-2 rounded-full bg-gold py-3 text-lg font-bold text-white"
+          values={{
+            propertyId: propertyId,
+            advertisementId: advertisementId,
+            amount: rent,
+          }}
+        />
       )}
     </section>
   );
@@ -275,12 +272,10 @@ export async function PurchaseProperty({
 
 export function Location({
   address,
-  city,
   country,
   cord,
 }: {
   address: string | null;
-  city: string | null;
   country: string | null;
   cord: [number, number];
 }) {
@@ -296,8 +291,7 @@ export function Location({
         Location
       </h2>
       <p className="mb-4 capitalize">
-        {address ?? "No address added"}, {city ?? "No city added"},{" "}
-        {country ?? "No country added"}
+        {address ?? "No address added"}, {country ?? "No country added"}
       </p>
 
       <div className="relative h-48">
