@@ -1,4 +1,5 @@
 import { getPropertiesInCart } from "@/api/services/cart";
+import CheckoutButton from "@/components/forms/checkout-btn";
 import RemovePropertyFromCart from "@/components/ui/remove-property-from-cart";
 import { CartProperty } from "@/definition";
 import Image from "next/image";
@@ -38,31 +39,44 @@ export default async function Cart() {
         <div className="col-span-5 rounded-lg bg-white lg:col-span-2 lg:block lg:border">
           <section className="border-b p-5">
             <h3 className="mb-6 font-medium text-black">Order Summary</h3>
-            <div className="space-y-1">
-              <div className="text-14 flex items-center justify-between">
-                <div className="flex gap-x-4">
-                  <p>x3</p>
-                  <p>Acen-Fighting Toner</p>
+            <div className="space-y-1.5">
+              {data.data.map((property) => (
+                <div
+                  key={property.id}
+                  className="text-14 flex items-center justify-between"
+                >
+                  <p className="flex">{property.property.name}</p>
+
+                  <p className="text-gray-700">
+                    {Intl.NumberFormat("en-NG", {
+                      style: "currency",
+                      currency: "NGN",
+                    }).format(property.property.rent_amount)}
+                  </p>
                 </div>
-                <p className="text-gray-700">$14.25</p>
-              </div>
+              ))}
             </div>
           </section>
 
           <section className="border-b p-5">
             <div className="flex justify-between">
-              <p className="">Amount</p>
-              <p className="font-bold text-black">$100,000</p>
+              <p className="">Total Amount</p>
+              <p className="font-bold text-black">
+                {Intl.NumberFormat("en-NG", {
+                  style: "currency",
+                  currency: "NGN",
+                }).format(
+                  data.data.reduce(
+                    (total, property) => total + property.property.rent_amount,
+                    0,
+                  ),
+                )}
+              </p>
             </div>
           </section>
 
           <section className="p-5">
-            <button
-              type="submit"
-              className="w-full rounded-lg bg-gold py-3 font-semibold text-white transition-colors duration-300 ease-out hover:bg-gold/80"
-            >
-              Checkout
-            </button>
+            <CheckoutButton cartItems={data.data} />
           </section>
         </div>
       )}
