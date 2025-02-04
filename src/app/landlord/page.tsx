@@ -12,7 +12,6 @@ import { MoveDownIcon, MoveUpIcon } from "lucide-react";
 import { FaHourglassHalf, FaUsers } from "react-icons/fa";
 import { getToken } from "@/lib/actions";
 import { LandlordDashboardStatisticResponseDataType } from "@/definition";
-import { Suspense } from "react";
 import { GrTransaction } from "react-icons/gr";
 import { BASE_URL } from "@/api/config";
 import {

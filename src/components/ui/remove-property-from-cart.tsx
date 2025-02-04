@@ -20,6 +20,7 @@ export default function RemovePropertyFromCart({ id }: { id: number }) {
         toast.success("Success", { description: "Property removed from cart" });
       }
     } catch (error) {
+      console.error(error);
     } finally {
       setRemoving(false);
     }

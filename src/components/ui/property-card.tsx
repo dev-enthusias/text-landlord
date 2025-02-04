@@ -3,16 +3,10 @@ import Image from "next/image";
 import { BathIcon, BedIcon, RulerIcon, Trash2 } from "lucide-react";
 import { routes } from "@/constants/routes";
 import { togglePropertyInWishlist } from "@/api/services/wishlist";
-import {
-  TenantAdvertisedProperties,
-  TenantPropertyCardTypes,
-} from "@/definition";
 
-export function PropertyCard({
-  type,
-  roleid,
-  data,
-}: TenantPropertyCardTypes<TenantAdvertisedProperties>) {
+// TenantPropertyCardTypes<TenantAdvertisedProperties>
+
+export function PropertyCard({ type, roleid, data }: any) {
   const path = (() => {
     switch (true) {
       case roleid === 4:

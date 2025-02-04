@@ -19,7 +19,7 @@ export function PropertyNameAndTags({
     name: string;
     dealType: string;
     type: string | null;
-    category: string;
+    category?: string;
   };
 }) {
   return (

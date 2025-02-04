@@ -18,7 +18,9 @@ export default function WishlistForm({
   });
 
   const onSubmit = async (data: { property_id: number }) => {
-    const res = await togglePropertyInWishlist(data.property_id);
+    const res = await togglePropertyInWishlist({
+      property_id: data.property_id,
+    });
     console.log(res);
   };
 

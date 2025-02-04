@@ -9,7 +9,6 @@ import {
   PropertyAgent,
   PropertyNameAndTags,
   PropertyTenants,
-  PurchaseProperty,
 } from "@/components/pages/properties";
 import { routes } from "@/constants/routes";
 import { LandlordPropertyDetailsResponseDataType } from "@/definition";
@@ -29,6 +28,8 @@ export default async function PropertyDetails({
     params.id,
   )) as LandlordPropertyDetailsResponseDataType;
   const { type, completion } = await getPropertyTypeAndCategory();
+
+  console.log(data);
 
   const gallery = data.gallery.map((item) => item.path);
 
@@ -70,7 +71,7 @@ export default async function PropertyDetails({
             name: data.property.name,
             dealType: data.property.deal_type,
             type: data.property.type,
-            category: data.property.category,
+            category: "",
           }}
         />
 
@@ -128,13 +129,13 @@ export default async function PropertyDetails({
         <div className="col-span-5 flex flex-col-reverse gap-y-10 lg:col-span-2 lg:flex-col">
           <PropertyAgent />
           <PropertyTenants />
-          <PurchaseProperty
+          {/* <PurchaseProperty
             rent={data.property.rent_amount}
             totalVacant={
               (data.property.total_unit ?? 0) -
               (data.property.total_occupied ?? 0)
             }
-          />
+          /> */}
         </div>
       </section>
     </main>

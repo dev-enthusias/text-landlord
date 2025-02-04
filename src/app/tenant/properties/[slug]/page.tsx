@@ -10,7 +10,6 @@ import {
   WishlistButton,
 } from "@/components/pages/properties";
 import Gallery from "@/components/gallery";
-import { addToCart } from "@/api/services/cart";
 import {
   getAdvertisedPropertyDetails,
   getAllAdvertisedProperties,
