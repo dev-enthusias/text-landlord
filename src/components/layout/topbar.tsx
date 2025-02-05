@@ -120,7 +120,7 @@ export default async function Topbar() {
             className="relative hidden items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
           >
             <LucideShoppingCart className="h-5 w-5" />
-            {cartItems.data.length > 0 && (
+            {cartItems?.data?.length > 0 && (
               <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gold/70 text-xxs font-bold leading-[0px] text-black">
                 {cartItems.data.length}
               </span>

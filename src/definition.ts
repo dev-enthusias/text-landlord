@@ -670,3 +670,77 @@ export interface SplitDetailsType {
     split_name: string | null;
   };
 }
+
+export interface Order {
+  id: number;
+  invoice_no: string;
+  tenant_id: number;
+  billing_address_id: number | null;
+  date: string;
+  subtotal: string;
+  discount_amount: string;
+  coupon_amount: string;
+  grand_total: string;
+  paid_amount: string;
+  due_amount: string;
+}
+
+export interface OrdersDataType {
+  status: boolean;
+  message: string;
+  data: {
+    list: Array<Order>;
+    links: {
+      first: string;
+      last: string;
+      prev: string | null;
+      next: string | null;
+    };
+    pagination: {
+      total: number;
+      count: number;
+      per_page: number;
+      current_page: number;
+      total_pages: number;
+    };
+  };
+}
+
+export interface OrderDetailsDataType {
+  status: boolean;
+  message: string;
+  data: {
+    list: {
+      id: number;
+      order_id: number;
+      property_id: number;
+      advertisement_id: number;
+      start_date: string | null;
+      end_date: string | null;
+      price: string;
+      discount_amount: string;
+      total_amount: string;
+      payment_status: string;
+      status: string;
+      property: {
+        id: number;
+        name: string;
+        slug: string;
+        image: string;
+      };
+    }[];
+    links: {
+      first: string;
+      last: string;
+      prev: string | null;
+      next: string | null;
+    };
+    pagination: {
+      total: number;
+      count: number;
+      per_page: number;
+      current_page: number;
+      total_pages: number;
+    };
+  };
+}

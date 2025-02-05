@@ -1,8 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
-import { BathIcon, BedIcon, RulerIcon, Trash2 } from "lucide-react";
+import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import { routes } from "@/constants/routes";
-import { togglePropertyInWishlist } from "@/api/services/wishlist";
+import PropertyPhoto from "./property-photo";
 
 // TenantPropertyCardTypes<TenantAdvertisedProperties>
 
@@ -32,65 +31,32 @@ export function PropertyCard({ type, roleid, data }: any) {
       <article className="group flex gap-x-1 sm:flex-col">
         <PropertyPhoto photo={data.image} />
 
-        {/* Rent status */}
         <div className="grow pt-2">
           <div className="px-2">
-            {/* Property value & Favourite Btn || Delete Btn */}
+            {/* Property value & Status */}
             <div className="flex justify-between">
               <PropertyPrice price={data.price} />
 
-              {type === "wishlist" ? (
-                <button
-                  type="submit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    togglePropertyInWishlist(data.id);
-                    e.stopPropagation();
-                  }}
-                >
-                  <Trash2 className="h-4 w-4 transition-colors duration-300 hover:text-red-600" />
-                </button>
-              ) : type === "rent" ? (
+              {type === "rent" && (
                 <p className="flex items-center justify-center rounded-full bg-green-600/10 px-4 py-0.5 text-xs font-semibold leading-none text-green-500">
                   Paid
                 </p>
-              ) : (
-                ""
               )}
             </div>
 
             <PropertyNameAndLocation
-              data={{ name: data.name, location: data.address.address }}
+              data={{ name: data.name, location: data.address }}
             />
 
-            {type !== "order" ? (
-              <PropertyFeatures
-                bedrooms={data.bedrooms}
-                bathrooms={data.bathrooms}
-                size={data.size}
-              />
-            ) : (
-              // Property order date and time
-              <p className="mt-1 text-sm">10/10/2024 - 01:30PM</p>
-            )}
+            <PropertyFeatures
+              bedrooms={data.bedrooms}
+              bathrooms={data.bathrooms}
+              size={data.size}
+            />
           </div>
         </div>
       </article>
     </Link>
-  );
-}
-
-function PropertyPhoto({ photo }: { photo: string }) {
-  return (
-    <div className="relative w-36 overflow-hidden rounded-lg shadow sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
-      <Image
-        src={photo}
-        alt="property display photo"
-        fill
-        sizes="384px"
-        className="object-cover transition-all duration-700 group-hover:scale-110"
-      />
-    </div>
   );
 }
 
