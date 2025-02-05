@@ -23,7 +23,7 @@ export default async function Layout({
             {profileDetails?.profile_info.user_image ? (
               <Image
                 src={profileDetails?.profile_info.user_image ?? ""}
-                alt="Landlord profile photo"
+                alt="Your profile photo"
                 fill
                 quality={100}
                 sizes="130px"
