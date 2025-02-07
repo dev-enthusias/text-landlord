@@ -18,6 +18,7 @@ export default function SelectInput({
   required,
   placeholder = "Select an option",
   error,
+  disabled,
   defaultValue,
 }: {
   options: string[] | Option[];
@@ -27,6 +28,7 @@ export default function SelectInput({
   required?: boolean;
   placeholder?: string;
   error?: string;
+  disabled?: boolean;
   defaultValue?: string | number;
 }) {
   const updateCountryId = useGlobalStore((state) => state.updateCountryId);
@@ -77,7 +79,7 @@ export default function SelectInput({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="relative w-full cursor-pointer rounded-md border border-gray-300 bg-white py-3 pl-4 pr-10 text-left shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+        className={`relative w-full cursor-pointer rounded-md border border-gray-300 bg-white py-3 pl-4 pr-10 text-left shadow-sm ${disabled ? "" : "focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"}`}
       >
         <span className="block truncate">
           {selectedOption ? (
@@ -89,13 +91,13 @@ export default function SelectInput({
         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <ChevronDown
             className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${
-              isOpen ? "rotate-180 transform" : ""
+              isOpen && !disabled ? "rotate-180 transform" : ""
             }`}
           />
         </span>
       </button>
 
-      {isOpen && (
+      {isOpen && !disabled && (
         <div className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-gray-300 focus:outline-none sm:text-sm">
           {options.map((option) => (
             <button

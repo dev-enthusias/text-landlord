@@ -49,7 +49,7 @@ export default async function Layout({
           <NavLink
             href={routes.TENANT_PROFILE}
             exact
-            className="flex w-full items-center gap-x-2 border-t border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
             activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
           >
             <FaRegUserCircle size={20} />
@@ -99,12 +99,12 @@ export default async function Layout({
             Orders
           </NavLink>
           <NavLink
-            href={routes.PAYMENT_HISTORY}
+            href={routes.APPOINTMENTS}
             className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
             activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
           >
             <LuHistory size={20} />
-            Payment History
+            Appointment
           </NavLink>
         </section>
       </div>

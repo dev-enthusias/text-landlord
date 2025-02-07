@@ -6,6 +6,7 @@ import {
   addPropertySchema,
   addTenantSchema,
   basicPropertyInfoSchema,
+  bookAppointmentSchema,
   changePasswordSchema,
   createAdvertSchema,
   forgotPasswordSchema,
@@ -39,6 +40,7 @@ export interface TextInputProps {
   error?: string;
   disabled?: boolean;
   maxLength?: number;
+  placeholder?: string;
   register: UseFormRegister<any>;
 }
 
@@ -53,6 +55,7 @@ export type ForgotPasswordDataType = z.infer<typeof forgotPasswordSchema>;
 export type ChangePasswordDataType = z.infer<typeof changePasswordSchema>;
 export type FormOneDataType = z.infer<typeof registerFormSchema>;
 export type AddPropertyDataType = z.infer<typeof addPropertySchema>;
+export type BookAppointmentDataType = z.infer<typeof bookAppointmentSchema>;
 export type AddGalleryPhotoDataType = z.infer<typeof addGalleryPhotoSchema>;
 export type AddTenantDataType = z.infer<typeof addTenantSchema>;
 export type ProfileFormData = z.infer<typeof profileSchema>;
@@ -523,7 +526,7 @@ export interface TenantAdvertisedPropertyDetails {
     };
   };
   user: {
-    id: string;
+    id: number;
     name: string;
     photo: string;
   };
@@ -735,6 +738,32 @@ export interface OrderDetailsDataType {
       prev: string | null;
       next: string | null;
     };
+    pagination: {
+      total: number;
+      count: number;
+      per_page: number;
+      current_page: number;
+      total_pages: number;
+    };
+  };
+}
+
+export interface AppointmentType {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  property_address: string;
+  message: string;
+  date: string;
+  time: string;
+}
+
+export interface AppointmentDataType {
+  status: true;
+  message: "successful";
+  data: {
+    list: AppointmentType[];
     pagination: {
       total: number;
       count: number;

@@ -81,6 +81,22 @@ export const addPropertySchema = z.object({
     .min(1, { message: "Please select property category" }),
 });
 
+export const bookAppointmentSchema = z.object({
+  name: z.string(),
+  phone: z.string(),
+  email: z.string().email(),
+  property_address: z.string(),
+  message: z.string(),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: "Invalid date format, expected YYYY-MM-DD",
+  }),
+  time: z.string().regex(/^\d{2}:\d{2}$/, {
+    message: "Invalid time format, expected HH:MM",
+  }),
+  property_id: z.number(),
+  property_owner_id: z.number(),
+});
+
 export const addAccountSchema = z.object({
   business_name: z.string().min(1, { message: "Please input business name" }),
   bank_code: z.string().min(1, { message: "Select a bank" }),

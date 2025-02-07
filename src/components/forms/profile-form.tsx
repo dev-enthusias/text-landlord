@@ -102,6 +102,7 @@ export default function ProfileForm({
             control={control}
             name="gender"
             label="Gender"
+            disabled={!isEditing}
             options={[
               { id: "male", name: "Male" },
               { id: "female", name: "Female" },

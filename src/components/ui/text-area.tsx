@@ -10,6 +10,7 @@ export default function TextareaInput({
   required,
   error,
   disabled,
+  placeholder,
 }: TextInputProps) {
   const [charCount, setCharCount] = useState(0);
   const maxLength = 1200;
@@ -37,9 +38,10 @@ export default function TextareaInput({
         <textarea
           id={name}
           {...register(name)}
-          className="relative w-full resize-none rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+          className="relative w-full resize-none rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold placeholder:font-normal placeholder:opacity-80"
           disabled={disabled}
           maxLength={maxLength}
+          placeholder={placeholder}
           onChange={handleInputChange}
         />
       </div>

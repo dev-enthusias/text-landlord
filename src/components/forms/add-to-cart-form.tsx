@@ -8,7 +8,7 @@ import revalidate from "@/utils/revalidate";
 
 export default function AddToCartButton({
   values,
-  className = "w-full rounded-full bg-gold px-4 py-2 text-sm font-bold text-white flex items-center gap-x-2 justify-center",
+  className = "w-full rounded-full bg-gold px-6 py-3 text-sm font-bold text-white flex items-center gap-x-2 justify-center",
 }: {
   className?: string;
   values: { propertyId: number; amount: number; advertisementId: number };

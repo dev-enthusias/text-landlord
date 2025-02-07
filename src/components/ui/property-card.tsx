@@ -45,7 +45,7 @@ export function PropertyCard({ type, roleid, data }: any) {
             </div>
 
             <PropertyNameAndLocation
-              data={{ name: data.name, location: data.address }}
+              data={{ name: data.name, location: data.address.address }}
             />
 
             <PropertyFeatures

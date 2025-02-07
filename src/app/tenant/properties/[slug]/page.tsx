@@ -19,6 +19,8 @@ import {
   TenantAdvertisedPropertyDetails,
 } from "@/definition";
 import AddToCartButton from "@/components/forms/add-to-cart-form";
+import BookAppointment from "@/components/forms/book-appointment-btn";
+import { getProfileDetails } from "@/api/services/profile";
 
 export default async function PropertyDetails({
   params,
@@ -31,12 +33,15 @@ export default async function PropertyDetails({
   const property = properties.find(
     (property: TenantAdvertisedProperties) => property.slug === params.slug,
   );
+  const profile = await getProfileDetails();
 
   const data = (await getAdvertisedPropertyDetails(
     property.advertise_id,
   )) as TenantAdvertisedPropertyDetails;
 
   const galleries = data?.galleries?.map((gallery) => gallery.image);
+
+  console.log(profile);
 
   return (
     <main className="px-5 py-7 pb-10 lg:px-20 lg:pb-20">
@@ -57,10 +62,21 @@ export default async function PropertyDetails({
           }}
         />
 
-        <div className="flex gap-x-2">
+        <div className="flex items-center gap-x-2">
           <WishlistButton
             id={data.property.id}
             state={data.property.wishlist}
+          />
+
+          <BookAppointment
+            data={{
+              name: profile.profile_info.name,
+              phone: profile.profile_info.phone,
+              email: profile.profile_info.email,
+              property_address: data.address.address,
+              property_id: data.property.id,
+              property_owner_id: data.user.id,
+            }}
           />
 
           <AddToCartButton

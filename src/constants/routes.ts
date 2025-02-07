@@ -21,6 +21,7 @@ export const routes = {
   TENANT_PROFILE: "/tenant/profile",
   FUND_WALLET: "/tenant/fund-wallet",
   TENANT_SETTINGS: "/tenant/settings",
+  APPOINTMENTS: "/tenant/appointments",
   TENANT_PROPERTIES: "/tenant/properties",
   PAYMENT_HISTORY: "/tenant/payment-history",
   TENANT_CHANGE_PASSWORD: "/tenant/change-password",
