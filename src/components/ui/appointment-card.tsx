@@ -8,7 +8,10 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { formatDateToLong } from "@/utils/formatDate";
 import { useState } from "react";
 import LoadingSpinner from "./loading-spinner";
-import { cancelAppointment, deleteAppointment } from "@/api/services/appointment";
+import {
+  cancelAppointment,
+  deleteAppointment,
+} from "@/api/services/appointment";
 import { toast } from "sonner";
 import revalidate from "@/utils/revalidate";
 
@@ -25,6 +28,7 @@ export default function AppointmentCard({ data }: { data: AppointmentType }) {
         revalidate("/tenant/appointments");
       }
     } catch (error) {
+      console.error(error);
       toast.error("Something went wrong");
     } finally {
       setDeleting(false);
@@ -40,6 +44,7 @@ export default function AppointmentCard({ data }: { data: AppointmentType }) {
         revalidate("/tenant/appointments");
       }
     } catch (error) {
+      console.error(error);
       toast.error("Something went wrong");
     } finally {
       setCanceling(false);
