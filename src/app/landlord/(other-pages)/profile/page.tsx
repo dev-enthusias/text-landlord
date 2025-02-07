@@ -11,7 +11,7 @@ export default async function ProfileDetails() {
       <header className="flex w-full items-center justify-between border-b border-gray-200 bg-white px-3 py-5">
         <div className="flex gap-x-2">
           <PrevPageButton className="text-black" />
-          <h1 className="text-xl font-semibold text-black">Account Overview</h1>
+          <h1 className="text-xl font-semibold text-black">Profile</h1>
         </div>
       </header>
 

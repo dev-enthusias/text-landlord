@@ -5,6 +5,7 @@ import NotificationCard from "./notification-card";
 import { BellRing, ChevronLeft } from "lucide-react";
 import { NotificationResponseType } from "@/definition";
 import { markAllNotificationAsRead } from "@/lib/actions";
+import { IoNotificationsOffSharp } from "react-icons/io5";
 
 export default function NotificationBtn({
   notifications,
@@ -82,12 +83,19 @@ export default function NotificationBtn({
           </section>
           <section className="no-scrollbar h-full grow overflow-y-scroll">
             <div className="divide-y divide-gray-100">
-              {notifications.notifications.map((notification) => (
-                <NotificationCard
-                  key={notification.id}
-                  notification={notification}
-                />
-              ))}
+              {notifications.notifications.length <= 0 ? (
+                <p className="flex items-center gap-x-1 px-5 py-4 tracking-wide">
+                  <IoNotificationsOffSharp /> You currently do not have any
+                  notification
+                </p>
+              ) : (
+                notifications.notifications.map((notification) => (
+                  <NotificationCard
+                    key={notification.id}
+                    notification={notification}
+                  />
+                ))
+              )}
             </div>
           </section>
         </div>
