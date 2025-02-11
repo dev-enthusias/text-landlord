@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, Lato, Roboto } from "next/font/google";
+import { Cormorant_Garamond, Lato, Open_Sans, Roboto } from "next/font/google";
 
 export const cormorant_garamond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -18,5 +18,12 @@ export const lato = Lato({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-roboto",
+  display: "swap",
+});
+
+export const openSans = Open_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-open-sans",
   display: "swap",
 });

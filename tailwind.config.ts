@@ -26,6 +26,8 @@ const config: Config = {
       fontFamily: {
         cormorant: ["var(--font-cormorant)"],
         roboto: ["var(--font-roboto)"],
+        lato: ["var(--font-lato)"],
+        "open-sans": ["var(--font-open-sans)"],
       },
     },
     fontSize: {

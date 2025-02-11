@@ -75,3 +75,26 @@ export const agentTopbarLinks = [
   { link: routes.REPORTS, name: "Reports" },
   { link: routes.BILL_MANAGEMENT, name: "Bill Management" },
 ];
+
+export const howItWorks = [
+  {
+    title: "Search for a Property",
+    description:
+      "Easily browse thousands of properties across Nigeria, filter by your preferences (location, budget, size), and save your favorites for later",
+  },
+  {
+    title: "Schedule an Appointment or Chat with the Property Owner",
+    description:
+      "Connect directly with landlords or property managers through in-app messaging or schedule convenient viewing appointments.",
+  },
+  {
+    title: "Secure Your Rental Online",
+    description:
+      "Effortlessly secure your preferred property with our secure online payment system and digital documentation.",
+  },
+  {
+    title: "Move In and Enjoy",
+    description:
+      "Settle into your new home with peace of mind. Our platform provides ongoing support to ensure a smooth and enjoyable rental experience.",
+  },
+];

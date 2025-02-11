@@ -41,6 +41,12 @@ body {
     scrollbar-width: none;
   }
 
+  .underline-squiggly {
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: currentColor;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
   }
