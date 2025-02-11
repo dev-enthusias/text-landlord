@@ -11,6 +11,7 @@ import {
   FaTiktok,
 } from "react-icons/fa";
 import { FaArrowRightLong, FaXTwitter } from "react-icons/fa6";
+import { IoMdArrowDown } from "react-icons/io";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 
 export default function Home() {
@@ -20,8 +21,7 @@ export default function Home() {
       <PropertyCategories />
       <TrendingProperties />
       <HowItWorks />
-      <Testimonials />
-      <section className="mb-16 px-[6.25rem]">
+      <section className="mb-[6.25rem] px-[6.25rem]">
         <section className="relative overflow-hidden rounded-3xl border-2 border-gold/50">
           <GetTheApp />
           <div className="absolute left-1/2 top-1/2 z-10 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#796425] from-5% to-[#fefaf0]/20 to-90%" />
@@ -29,6 +29,7 @@ export default function Home() {
           <div className="from-2% absolute -top-[300px] right-0 z-10 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#d2af47] to-[#fefaf0] to-80% backdrop-blur-sm backdrop-filter" />
         </section>
       </section>
+      <Testimonials />
       <Footer />
     </div>
   );
@@ -44,9 +45,12 @@ const Header = () => {
           className="mt-3.5 h-28 w-28"
         />
 
-        <button className="hidden rounded-full bg-gold px-6 py-3 font-semibold text-white lg:block">
+        <Link
+          href="./login"
+          className="hidden rounded-full bg-gold px-6 py-3 font-semibold text-white lg:block"
+        >
           Login
-        </button>
+        </Link>
       </nav>
 
       <section className="absolute top-1/2 w-full -translate-y-1/2 px-5 text-center">
@@ -112,11 +116,14 @@ const PropertyCategories = () => {
 const TrendingProperties = () => {
   return (
     <section className="mb-[6.25rem] px-[6.25rem]">
-      <div>
+      <div className="flex items-center justify-between">
         <h2 className="mb-6 text-4xl font-bold text-black">
           Trending Properties
         </h2>
-        <button>See More</button>
+        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+          See More
+          <IoMdArrowDown className="-rotate-[135deg]" />
+        </button>
       </div>
 
       <div className="grid grid-cols-4 gap-x-5">
