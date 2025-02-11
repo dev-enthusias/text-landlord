@@ -37,7 +37,7 @@ export default function Home() {
 
 const Header = () => {
   return (
-    <header className="relative min-h-[90vh] bg-black/40 bg-[url('/images/home-bg.jpg')] bg-cover bg-center bg-blend-overlay">
+    <header className="relative mb-[6.25rem] min-h-[90vh] bg-black/40 bg-[url('/images/home-bg.jpg')] bg-cover bg-center bg-blend-overlay">
       <nav className="flex h-16 items-center justify-between bg-white/20 px-[6.25rem] backdrop-blur-lg backdrop-filter lg:h-20">
         <img
           src="/logos/logo-transparent.png"
@@ -102,13 +102,18 @@ const Header = () => {
 
 const PropertyCategories = () => {
   return (
-    <section className="px-[6.25rem] py-[4rem]">
-      <div className="">
-        <h2 className="text-4xl font-semibold text-black">
+    <section className="mb-[6.25rem] px-[6.25rem]">
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="max-w-[440px] text-4xl font-semibold leading-[46px] text-black">
           Discover Our Property Categories
         </h2>
-        <p>Featuring luxurious homes and offices </p>
+        <p className="max-w-[440px] text-sm">
+          Find your perfect apartment among our extensive collection of
+          properties. We offer a wide range of options to suit your needs, from
+          cozy studios to spacious multi-bedroom apartments.
+        </p>
       </div>
+      div
     </section>
   );
 };
