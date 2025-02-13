@@ -13,6 +13,7 @@ import {
   loginSchema,
   profileSchema,
   registerFormSchema,
+  waitListSchema,
 } from "./lib/schema";
 
 export type SidebarNavLinks = {
@@ -59,6 +60,7 @@ export type BookAppointmentDataType = z.infer<typeof bookAppointmentSchema>;
 export type AddGalleryPhotoDataType = z.infer<typeof addGalleryPhotoSchema>;
 export type AddTenantDataType = z.infer<typeof addTenantSchema>;
 export type ProfileFormData = z.infer<typeof profileSchema>;
+export type WaitListDataType = z.infer<typeof waitListSchema>;
 export type BasicPropertyInfoDataType = z.infer<typeof basicPropertyInfoSchema>;
 export type CreateAdvertDataType = z.infer<typeof createAdvertSchema>;
 export type AddAccountDataType = z.infer<typeof addAccountSchema>;

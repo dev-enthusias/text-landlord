@@ -142,6 +142,22 @@ export const addTenantSchema = z.object({
     .email({ message: "Invalid email address" }),
 });
 
+export const waitListSchema = z.object({
+  first_name: z
+    .string()
+    .min(1, { message: "First name is required" })
+    .max(50, { message: "First name must be less than 50 characters" }),
+  last_name: z
+    .string()
+    .min(1, { message: "Last name is required" })
+    .max(50, { message: "Last name must be less than 50 characters" }),
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" }),
+  phone: z.string().min(11, { message: "Phone number is required" }),
+});
+
 export const profileSchema = z.object({
   name: z
     .string()

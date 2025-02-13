@@ -113,7 +113,12 @@ const PropertyCategories = () => {
           cozy studios to spacious multi-bedroom apartments.
         </p>
       </div>
-      div
+      <div className="-mx-[6.25rem] grid grid-cols-4">
+        <article className="h-[360px] border"></article>
+        <article className="h-[360px] border"></article>
+        <article className="h-[360px] border"></article>
+        <article className="h-[360px] border"></article>
+      </div>
     </section>
   );
 };
