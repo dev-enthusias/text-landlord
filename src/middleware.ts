@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
       pathname.startsWith("/landlord") ||
       pathname.startsWith("/agent")
     ) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 
@@ -43,7 +43,7 @@ export function middleware(request: NextRequest) {
     }
 
     if (roleId !== 4 && roleId !== 5 && roleId !== 7) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 

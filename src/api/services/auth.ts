@@ -123,7 +123,7 @@ export async function logout() {
   cookies().delete("session");
   cookies().delete("role");
 
-  redirect(routes.LOGIN);
+  redirect("./");
 }
 
 export async function changePassword(data: ChangePasswordDataType) {
