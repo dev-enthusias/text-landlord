@@ -3,7 +3,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ROLE_ROUTES } from "@/constants/data";
-import { routes } from "@/constants/routes";
 import {
   ChangePasswordDataType,
   LoginDataType,
