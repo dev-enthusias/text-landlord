@@ -72,7 +72,7 @@ export default async function Topbar() {
 
   return (
     <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center justify-between bg-white px-5 lg:h-20 lg:px-10">
-      <Link href="./" className="relative h-28 w-28">
+      <Link href="/" className="relative h-28 w-28">
         <Image
           src="/logos/logo-transparent.png"
           alt="Oga landlord logo"

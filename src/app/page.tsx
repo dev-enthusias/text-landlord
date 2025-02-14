@@ -1,5 +1,6 @@
 import DropdownButton from "@/components/ui/dropdown-btn";
 import { howItWorks } from "@/constants/data";
+import { getRole, getToken } from "@/lib/actions";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,7 +38,18 @@ export default function Home() {
   );
 }
 
-const Header = () => {
+const Header = async () => {
+  const token = await getToken();
+  const role = await getRole();
+  const path =
+    role === 4
+      ? "/landlord"
+      : role === 5
+        ? "/tenant"
+        : role === 7
+          ? "/agent"
+          : "/login";
+
   return (
     <header className="relative mb-[6.25rem] min-h-[90vh] bg-black/40 bg-[url('/images/home-bg.jpg')] bg-cover bg-center bg-blend-overlay">
       <nav className="flex h-16 items-center justify-between bg-white/20 px-[3.25rem] backdrop-blur-lg backdrop-filter lg:h-20">
@@ -62,20 +74,29 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex gap-x-2">
+        {token !== undefined ? (
           <Link
-            href="./register"
-            className="hidden rounded-full bg-gradient-to-b from-black/20 to-white/50 px-10 py-2.5 font-semibold text-white lg:block"
+            href={path}
+            className="hidden rounded-full bg-gradient-to-r from-black/70 to-gold/80 px-10 py-2.5 font-semibold text-white lg:block"
           >
-            Register
+            Dashboard
           </Link>
-          <Link
-            href="./login"
-            className="hidden rounded-full bg-gold px-10 py-2.5 font-semibold text-white lg:block"
-          >
-            Login
-          </Link>
-        </div>
+        ) : (
+          <div className="flex gap-x-2">
+            <Link
+              href="./register"
+              className="hidden rounded-full bg-gradient-to-b from-black/20 to-white/50 px-10 py-2.5 font-semibold text-white lg:block"
+            >
+              Register
+            </Link>
+            <Link
+              href="./login"
+              className="hidden rounded-full bg-gold px-10 py-2.5 font-semibold text-white lg:block"
+            >
+              Login
+            </Link>
+          </div>
+        )}
       </nav>
 
       <section className="absolute top-1/2 w-full -translate-y-1/2 px-5 text-center">
