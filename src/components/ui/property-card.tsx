@@ -26,7 +26,7 @@ export function PropertyCard({ type, roleid, data }: any) {
   return (
     <Link
       href={path}
-      className="font-lato block w-full rounded-lg border bg-white p-2 shadow-gold transition duration-300 ease-out hover:shadow-lg"
+      className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg"
     >
       <article className="group flex gap-x-1 sm:flex-col">
         <PropertyPhoto photo={data.image} />

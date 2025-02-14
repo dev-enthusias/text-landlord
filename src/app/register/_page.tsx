@@ -31,6 +31,17 @@ export default function RegisterPage() {
             <Suspense fallback={<div>Loading...</div>}>
               <RegisterationForm />
             </Suspense>
+            <div className="pt-5 text-center text-[14px]">
+              <span className="block lg:mr-2 lg:inline-block">
+                Already have an account?
+              </span>
+              <Link
+                href={routes.REGISTERASLANDLORD}
+                className="mr-2 text-base font-semibold underline transition-all duration-300 ease-out hover:text-gray-700"
+              >
+                Login
+              </Link>
+            </div>
           </div>
         </section>
       </main>

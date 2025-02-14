@@ -1,5 +1,7 @@
-import { PropertyCard } from "@/components/ui/property-card";
+import DropdownButton from "@/components/ui/dropdown-btn";
 import { howItWorks } from "@/constants/data";
+import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { BiSupport } from "react-icons/bi";
 import {
@@ -18,8 +20,8 @@ export default function Home() {
   return (
     <div className="bg-white">
       <Header />
-      <PropertyCategories />
       <TrendingProperties />
+      <PropertyCategories />
       <HowItWorks />
       <section className="mb-[6.25rem] px-[6.25rem]">
         <section className="relative overflow-hidden rounded-3xl border-2 border-gold/50">
@@ -38,28 +40,54 @@ export default function Home() {
 const Header = () => {
   return (
     <header className="relative mb-[6.25rem] min-h-[90vh] bg-black/40 bg-[url('/images/home-bg.jpg')] bg-cover bg-center bg-blend-overlay">
-      <nav className="flex h-16 items-center justify-between bg-white/20 px-[6.25rem] backdrop-blur-lg backdrop-filter lg:h-20">
+      <nav className="flex h-16 items-center justify-between bg-white/20 px-[3.25rem] backdrop-blur-lg backdrop-filter lg:h-20">
         <img
           src="/logos/logo-transparent.png"
           alt=""
           className="mt-3.5 h-28 w-28"
         />
 
-        <Link
-          href="./login"
-          className="hidden rounded-full bg-gold px-6 py-3 font-semibold text-white lg:block"
-        >
-          Login
-        </Link>
+        <div className="flex items-center space-x-4">
+          {dropdowns.map((dropdown, index) => (
+            <DropdownButton
+              key={index}
+              title={dropdown.title}
+              items={dropdown.items}
+            />
+          ))}
+          <div>
+            <Link href="" className="px-4 py-2 text-white/80 hover:text-white">
+              Land
+            </Link>
+          </div>
+        </div>
+
+        <div className="flex gap-x-2">
+          <Link
+            href="./register"
+            className="hidden rounded-full bg-gradient-to-b from-black/20 to-white/50 px-10 py-2.5 font-semibold text-white lg:block"
+          >
+            Register
+          </Link>
+          <Link
+            href="./login"
+            className="hidden rounded-full bg-gold px-10 py-2.5 font-semibold text-white lg:block"
+          >
+            Login
+          </Link>
+        </div>
       </nav>
 
       <section className="absolute top-1/2 w-full -translate-y-1/2 px-5 text-center">
         <h1 className="font-lato text-[60px] font-bold leading-[60px] text-white">
           Find Your Perfect{" "}
-          <span className="font-cormorant italic text-yellow-500">Home</span>{" "}
-          <span className="block">
-            in <span className="text font-cormorant italic">Minutes.</span>
-          </span>
+          <span
+            className="font-cursive text-yellow-500"
+            style={{ fontFamily: "cursive" }}
+          >
+            Home
+          </span>{" "}
+          <span className="block">in Minutes.</span>
         </h1>
 
         <div className="flex items-center justify-center gap-x-4 pt-5 text-white">
@@ -105,7 +133,7 @@ const PropertyCategories = () => {
     <section className="mb-[6.25rem] px-[6.25rem]">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="max-w-[440px] text-4xl font-semibold leading-[46px] text-black">
-          Discover Our Property Categories
+          Explore Our Property Categories
         </h2>
         <p className="max-w-[440px] text-sm">
           Find your perfect apartment among our extensive collection of
@@ -113,11 +141,15 @@ const PropertyCategories = () => {
           cozy studios to spacious multi-bedroom apartments.
         </p>
       </div>
-      <div className="-mx-[6.25rem] grid grid-cols-4">
-        <article className="h-[360px] border"></article>
-        <article className="h-[360px] border"></article>
-        <article className="h-[360px] border"></article>
-        <article className="h-[360px] border"></article>
+      <div className="grid gap-y-[3.25rem]">
+        <Flats />
+        <Shops />
+        <Rooms />
+        <Apartments />
+        <Offices />
+        <Shortlets />
+        <Buildings />
+        <Lands />
       </div>
     </section>
   );
@@ -137,14 +169,298 @@ const TrendingProperties = () => {
       </div>
 
       <div className="grid grid-cols-4 gap-x-5">
-        <PropertyCard data={{ id: 1, slug: "" }} />
-        <PropertyCard data={{ id: 1, slug: "" }} />
-        <PropertyCard data={{ id: 1, slug: "" }} />
-        <PropertyCard data={{ id: 1, slug: "" }} />
+        {trendingProperties.map((property) => (
+          <PropertyCard
+            key={property.id}
+            data={{
+              image: property.image,
+              price: property.price,
+              location: property.location,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
+              size: property.size,
+              name: property.name,
+            }}
+          />
+        ))}
       </div>
     </section>
   );
 };
+
+const Rooms = () => {
+  return (
+    <section>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-2xl font-semibold text-black/75">Rooms</h3>
+        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+          See More
+          <IoMdArrowDown className="-rotate-[135deg]" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-x-5">
+        {rooms.map((property) => (
+          <PropertyCard
+            key={property.id}
+            data={{
+              image: property.image,
+              price: property.price,
+              location: property.location,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
+              size: property.size,
+              name: property.name,
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Offices = () => {
+  return (
+    <section>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-2xl font-semibold text-black/75">Offices</h3>
+        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+          See More
+          <IoMdArrowDown className="-rotate-[135deg]" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-x-5">
+        {offices.map((property) => (
+          <PropertyCard
+            key={property.id}
+            data={{
+              image: property.image,
+              price: property.price,
+              location: property.location,
+              bedrooms: 0,
+              bathrooms: 0,
+              size: property.size,
+              name: property.name,
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Shops = () => {
+  return (
+    <section>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-2xl font-semibold text-black/75">Shops</h3>
+        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+          See More
+          <IoMdArrowDown className="-rotate-[135deg]" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-x-5">
+        {shops.map((property) => (
+          <PropertyCard
+            key={property.id}
+            data={{
+              image: property.image,
+              price: property.price,
+              location: property.location,
+              bedrooms: 0,
+              bathrooms: 0,
+              size: property.size,
+              name: property.name,
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Lands = () => {
+  return (
+    <section>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-2xl font-semibold text-black/75">Lands</h3>
+        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+          See More
+          <IoMdArrowDown className="-rotate-[135deg]" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-x-5">
+        {lands.map((property) => (
+          <PropertyCard
+            key={property.id}
+            data={{
+              image: property.image,
+              price: property.price,
+              location: property.location,
+              bedrooms: 0,
+              bathrooms: 0,
+              size: property.size,
+              name: property.name,
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Buildings = () => {
+  return (
+    <section>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-2xl font-semibold text-black/75">Buildings</h3>
+        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+          See More
+          <IoMdArrowDown className="-rotate-[135deg]" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-x-5">
+        {buildings.map((property) => (
+          <PropertyCard
+            key={property.id}
+            data={{
+              image: property.image,
+              price: property.price,
+              location: property.location,
+              bedrooms: 0,
+              bathrooms: 0,
+              size: property.size,
+              name: property.name,
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Flats = () => {
+  return (
+    <section>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-2xl font-semibold text-black/75">Flats</h3>
+        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+          See More
+          <IoMdArrowDown className="-rotate-[135deg]" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-x-5">
+        {flats.map((property) => (
+          <PropertyCard
+            key={property.id}
+            data={{
+              image: property.image,
+              price: property.price,
+              location: property.location,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
+              size: property.size,
+              name: property.name,
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Shortlets = () => {
+  return (
+    <section>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-2xl font-semibold text-black/75">Shortlets</h3>
+        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+          See More
+          <IoMdArrowDown className="-rotate-[135deg]" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-x-5">
+        {shortlets.map((property) => (
+          <PropertyCard
+            key={property.id}
+            data={{
+              image: property.image,
+              price: property.price,
+              location: property.location,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
+              size: property.size,
+              name: property.name,
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Apartments = () => {
+  return (
+    <section>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-2xl font-semibold text-black/75">Apartments</h3>
+        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+          See More
+          <IoMdArrowDown className="-rotate-[135deg]" />
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-x-5">
+        {apartments.map((property) => (
+          <PropertyCard
+            key={property.id}
+            data={{
+              image: property.image,
+              price: property.price,
+              location: property.location,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
+              size: property.size,
+              name: property.name,
+            }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const dropdowns = [
+  {
+    title: "Residential",
+    items: [
+      { label: "Apartment", href: "" },
+      { label: "Flat", href: "" },
+      { label: "Rooms", href: "" },
+    ],
+  },
+  {
+    title: "Commercial",
+    items: [
+      { label: "Building", href: "" },
+      { label: "Shops", href: "" },
+    ],
+  },
+  {
+    title: "Industrial",
+    items: [
+      { label: "Building", href: "" },
+      { label: "Offices", href: "" },
+      { label: "2 Bedrooms", href: "/flats/2-bedrooms" },
+    ],
+  },
+];
 
 const HowItWorks = () => {
   return (
@@ -266,7 +582,7 @@ const TestimonialCard = () => {
           className="h-24 w-24 rounded-bl-full object-cover"
         />
       </div>
-      <p className="font-open-sans mb-4 text-xl leading-7 text-black/80">
+      <p className="mb-4 font-open-sans text-xl leading-7 text-black/80">
         Finding my new apartment with Ogalandlord was a breeze! Their platform
         is super easy to navigate, and I found exactly what I was looking for in
         no time. I highly recommend it to anyone searching for a new place to
@@ -468,6 +784,438 @@ const Footer = () => {
   );
 };
 
+const trendingProperties = [
+  {
+    id: 1,
+    name: "Luxury Haven Duplex",
+    image: "/images/tp-1.jpg",
+    price: "₦80,000,000",
+    location: "Abuja",
+    bedrooms: 4,
+    bathrooms: 3,
+    size: "3,500 sqft",
+  },
+  {
+    id: 2,
+    name: "Coastal View Apartment",
+    image: "/images/tp-2.jpg",
+    price: "₦35,000,000",
+    location: "Port Harcourt",
+    bedrooms: 3,
+    bathrooms: 2,
+    size: "2,200 sqft",
+  },
+  {
+    id: 3,
+    name: "Ikoyi Prestige Villa",
+    image: "/images/tp-3.jpeg",
+    price: "₦60,000,000",
+    location: "Ikoyi, Lagos",
+    bedrooms: 5,
+    bathrooms: 5,
+    size: "4,500 sqft",
+  },
+  {
+    id: 4,
+    name: "Banana Island Mansion",
+    image: "/images/tp-4.jpeg",
+    price: "₦120,000,000",
+    location: "Banana Island, Lagos",
+    bedrooms: 6,
+    bathrooms: 7,
+    size: "6,000 sqft",
+  },
+];
+
+const apartments = [
+  {
+    id: 1,
+    name: "Elegant City View Apartment",
+    image: "/images/a-1.jpg",
+    price: "₦25,000,000",
+    location: "Victoria Island, Lagos",
+    bedrooms: 3,
+    bathrooms: 2,
+    size: "1,500 sqft",
+  },
+  {
+    id: 2,
+    name: "Modern Urban Retreat",
+    image: "/images/a-2.jpg",
+    price: "₦1,500,000",
+    location: "Awka, Anambra",
+    bedrooms: 2,
+    bathrooms: 2,
+    size: "1,200 sqft",
+  },
+  {
+    id: 3,
+    name: "Sleek Contemporary Apartment",
+    image: "/images/a-3.jpeg",
+    price: "₦20,000,000",
+    location: "Abuja",
+    bedrooms: 6,
+    bathrooms: 3,
+    size: "1,000 sqft",
+  },
+  {
+    id: 4,
+    name: "Luxury Penthouse Suite",
+    image: "/images/a-4.jpg",
+    price: "₦50,000,000",
+    location: "Ikoyi, Lagos",
+    bedrooms: 4,
+    bathrooms: 3,
+    size: "2,200 sqft",
+  },
+];
+
+const rooms = [
+  {
+    id: 1,
+    name: "Opulent Suite Room",
+    image: "/images/r-1.jpg",
+    price: "₦5,000,000",
+    location: "Victoria Island, Lagos",
+    bedrooms: 1,
+    bathrooms: 1,
+    size: "450 sqft",
+  },
+  {
+    id: 2,
+    name: "Grand Deluxe Room",
+    image: "/images/r-2.jpg",
+    price: "₦18,000,000",
+    location: "Lekki, Lagos",
+    bedrooms: 1,
+    bathrooms: 1,
+    size: "400 sqft",
+  },
+  {
+    id: 3,
+    name: "Prestigious Executive Room",
+    image: "/images/r-3.jpg",
+    price: "₦30,000,000",
+    location: "Abuja",
+    bedrooms: 1,
+    bathrooms: 1,
+    size: "500 sqft",
+  },
+  {
+    id: 4,
+    name: "Regal Chamber Suite",
+    image: "/images/r-4.jpeg",
+    price: "₦22,000,000",
+    location: "Ikoyi, Lagos",
+    bedrooms: 1,
+    bathrooms: 1,
+    size: "420 sqft",
+  },
+];
+
+const offices = [
+  {
+    id: 1,
+    name: "Prestige Corporate Office",
+    image: "/images/o-1.jpg",
+    price: "₦42,000,000",
+    location: "Victoria Island, Lagos",
+    meetingRooms: 2,
+    restrooms: 2,
+    size: "2,500 sqft",
+  },
+  {
+    id: 2,
+    name: "Executive Business Center",
+    image: "/images/o-2.webp",
+    price: "₦57,000,000",
+    location: "Central Business District, Abuja",
+    meetingRooms: 3,
+    restrooms: 3,
+    size: "3,000 sqft",
+  },
+  {
+    id: 3,
+    name: "Modern Office Hub",
+    image: "/images/o-3.avif",
+    price: "₦38,000,000",
+    location: "Trans-Amadi, Port Harcourt",
+    meetingRooms: 1,
+    restrooms: 1,
+    size: "1,800 sqft",
+  },
+  {
+    id: 4,
+    name: "Luxury Executive Suites",
+    image: "/images/o-4.webp",
+    price: "₦68,000,000",
+    location: "New Haven, Enugu",
+    meetingRooms: 4,
+    restrooms: 3,
+    size: "3,500 sqft",
+  },
+];
+
+const shops = [
+  {
+    id: 1,
+    name: "Budget Retail Space",
+    image: "/images/s-1.jpg",
+    price: "₦4,000,000",
+    location: "Ikeja, Lagos",
+    size: "800 sqft",
+  },
+  {
+    id: 4,
+    name: "Compact Shop Space",
+    image: "/images/s-4.jpeg",
+    price: "₦800,000",
+    location: "Port Harcourt, Rivers State",
+    size: "700 sqft",
+  },
+  {
+    id: 2,
+    name: "Affordable Storefront",
+    image: "/images/s-2.jpg",
+    price: "₦3,500,000",
+    location: "Wuse, Abuja",
+    size: "600 sqft",
+  },
+  {
+    id: 3,
+    name: "Economy Commercial Outlet",
+    image: "/images/s-3.jpeg",
+    price: "₦1,200,000",
+    location: "Oredo, Benin City",
+    size: "750 sqft",
+  },
+];
+
+const flats = [
+  {
+    id: 1,
+    name: "Modern Urban Flat",
+    image: "/images/f-1.jpeg",
+    price: "₦4,500,000",
+    location: "Warri, Delta State",
+    bedrooms: 2,
+    bathrooms: 2,
+    size: "1,100 sqft",
+  },
+  {
+    id: 2,
+    name: "Contemporary Comfort Flat",
+    image: "/images/f-2.jpeg",
+    price: "₦3,000,000",
+    location: "Kaduna, Kaduna State",
+    bedrooms: 2,
+    bathrooms: 1,
+    size: "1,000 sqft",
+  },
+  {
+    id: 3,
+    name: "Cozy Family Flat",
+    image: "/images/f-3.jpeg",
+    price: "₦5,000,000",
+    location: "Awka, Anambra State",
+    bedrooms: 3,
+    bathrooms: 2,
+    size: "1,300 sqft",
+  },
+  {
+    id: 4,
+    name: "Elegant City Flat",
+    image: "/images/f-4.jpeg",
+    price: "₦6,500,000",
+    location: "Uyo, Akwa Ibom State",
+    bedrooms: 3,
+    bathrooms: 2,
+    size: "1,400 sqft",
+  },
+];
+
+const shortlets = [
+  {
+    id: 1,
+    name: "Downtown Executive Shortlet",
+    image: "/images/sl-1.jpeg",
+    price: "₦7,500,000",
+    location: "Lekki Phase 1, Lagos",
+    bedrooms: 2,
+    bathrooms: 2,
+    size: "1,200 sqft",
+  },
+  {
+    id: 2,
+    name: "Cozy Central Shortlet",
+    image: "/images/sl-2.jpeg",
+    price: "₦5,000,000",
+    location: "Maitama, Abuja",
+    bedrooms: 1,
+    bathrooms: 1,
+    size: "800 sqft",
+  },
+  {
+    id: 3,
+    name: "Modern Shortlet Retreat",
+    image: "/images/sl-3.jpeg",
+    price: "₦6,500,000",
+    location: "Old GRA, Port Harcourt",
+    bedrooms: 1,
+    bathrooms: 1,
+    size: "900 sqft",
+  },
+  {
+    id: 4,
+    name: "Luxury Shortlet Suite",
+    image: "/images/sl-4.jpeg",
+    price: "₦9,000,000",
+    location: "Uyo, Akwa Ibom",
+    bedrooms: 2,
+    bathrooms: 2,
+    size: "1,400 sqft",
+  },
+];
+
+const lands = [
+  {
+    id: 1,
+    name: "Prime Commercial Plot",
+    image: "/images/l-1.jpeg",
+    price: "₦18,000,000",
+    location: "Ikeja, Lagos",
+    size: "5,000 sqft",
+  },
+  {
+    id: 2,
+    name: "Residential Plot in Gated Estate",
+    image: "/images/l-2.jpg",
+    price: "₦16,000,000",
+    location: "Garki, Abuja",
+    size: "4,000 sqft",
+  },
+  {
+    id: 3,
+    name: "Farmland Opportunity",
+    image: "/images/l-3.jpeg",
+    price: "₦10,000,000",
+    location: "Diobu, Port Harcourt",
+    size: "8,000 sqft",
+  },
+  {
+    id: 4,
+    name: "Development Opportunity Plot",
+    image: "/images/l-4.jpeg",
+    price: "₦12,000,000",
+    location: "Ilesa, Osun State",
+    size: "3,500 sqft",
+  },
+];
+
+const buildings = [
+  {
+    id: 1,
+    name: "Iconic Commercial Tower",
+    image: "/images/b-1.jpg",
+    price: "₦120,000,000",
+    location: "Ikeja, Lagos",
+    floors: 10,
+    size: "15,000 sqft",
+  },
+  {
+    id: 2,
+    name: "Modern Mixed-use Complex",
+    image: "/images/b-2.jpg",
+    price: "₦95,000,000",
+    location: "Jabi, Abuja",
+    floors: 8,
+    size: "12,000 sqft",
+  },
+  {
+    id: 3,
+    name: "High-end Residential Building",
+    image: "/images/b-3.jpeg",
+    price: "₦80,000,000",
+    location: "Sango, Ibadan",
+    floors: 5,
+    size: "10,000 sqft",
+  },
+  {
+    id: 4,
+    name: "Prestigious Office Building",
+    image: "/images/b-4.webp",
+    price: "₦150,000,000",
+    location: "GRA, Kano",
+    floors: 12,
+    size: "20,000 sqft",
+  },
+];
+
+const PropertyCard = ({
+  data,
+}: {
+  data: {
+    image: string;
+    price: string;
+    location: string;
+    bedrooms?: number;
+    bathrooms?: number;
+    size: string;
+    name: string;
+  };
+}) => {
+  return (
+    <article className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg">
+      <article className="group flex gap-x-1 sm:flex-col">
+        <div className="relative w-36 overflow-hidden rounded-lg shadow sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
+          <Image
+            src={data.image}
+            alt="property display photo"
+            fill
+            sizes="384px"
+            className="object-cover transition-all duration-700 group-hover:scale-110"
+          />
+        </div>
+
+        <div className="grow pt-2">
+          <div className="px-2">
+            {/* Property value & Status */}
+            <div className="flex justify-between">
+              <p className="flex items-center gap-x-1 text-lg font-bold text-accent">
+                {data.price}
+                <span className="text-xs font-medium text-gray-500 opacity-80">
+                  / year
+                </span>
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-gray-600">{data.name}</h3>
+              <p className="text-xs capitalize tracking-wide">
+                {data.location || "Add the address for this property"}
+              </p>
+            </div>
+
+            <ul className="mt-2 flex items-center justify-between text-xs">
+              <li className="flex w-1/3 items-center justify-start gap-x-1">
+                <BedIcon size={14} />
+                <span>{data.bedrooms || 0} bd</span>
+              </li>
+              <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300">
+                <BathIcon size={14} />
+                <span>{data.bathrooms || 0} bt</span>
+              </li>
+              <li className="flex w-1/3 items-center justify-end gap-x-1">
+                <RulerIcon size={14} />
+                <span>{data.size || 0} ft</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </article>
+  );
+};
 // "I had a few questions during the process, and the Finpro support team was incredibly helpful. They were responsive, friendly, and went above and beyond to assist me. I'm very satisfied with my experience."
 
 // "I was impressed by the wide range of property options available on Finpro. I found exactly the type of apartment I was looking for, in the neighborhood I wanted, and at a price that fit my budget. Thank you, Finpro!"
