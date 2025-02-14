@@ -36,7 +36,7 @@ export default function RegisterPage() {
                 Already have an account?
               </span>
               <Link
-                href={routes.REGISTERASLANDLORD}
+                href={routes.LOGIN}
                 className="mr-2 text-base font-semibold underline transition-all duration-300 ease-out hover:text-gray-700"
               >
                 Login

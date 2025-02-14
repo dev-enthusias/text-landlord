@@ -1,4 +1,5 @@
 import DropdownButton from "@/components/ui/dropdown-btn";
+import ImageSlider from "@/components/ui/image-slider";
 import { howItWorks } from "@/constants/data";
 import { getRole, getToken } from "@/lib/actions";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
@@ -100,25 +101,56 @@ const Header = async () => {
       </nav>
 
       <section className="absolute top-1/2 w-full -translate-y-1/2 px-5 text-center">
-        <h1 className="font-lato text-[60px] font-bold leading-[60px] text-white">
-          Find Your Perfect{" "}
-          <span
-            className="font-cursive text-yellow-500"
-            style={{ fontFamily: "cursive" }}
-          >
-            Home
-          </span>{" "}
-          <span className="block">in Minutes.</span>
-        </h1>
+        <div className="flex flex-col items-center font-lato text-[60px] font-bold leading-[80px] text-white">
+          <div className="flex w-full justify-center gap-x-4">
+            <span>Find Your</span>{" "}
+            <span
+              className="font-cursive inline-block -rotate-3 rounded-xl border-4 border-yellow-500/40 bg-yellow-500/20 px-4 text-yellow-50"
+              style={{ fontFamily: "cursive" }}
+            >
+              Perfect
+            </span>{" "}
+            <div className="flex w-fit items-center">
+              <span>H</span>
+              <div className="mt-2 flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500">
+                <img src="/images/house.png" alt="" />
+              </div>
+              <span>me</span>
+            </div>{" "}
+          </div>
+
+          {/* Second line */}
+          <div className="flex items-end">
+            <div className="relative mr-4 h-16 w-40 rounded-xl">
+              <div className="absolute inset-0 flex justify-center">
+                <ImageSlider />
+              </div>
+            </div>
+            <span className="mr-4">in</span>
+            <span
+              className="font-cursive inline-block rotate-3 rounded-xl border-4 border-yellow-500/40 bg-yellow-500/20 px-4 text-yellow-50"
+              style={{ fontFamily: "cursive" }}
+            >
+              Minutes
+            </span>
+            <span>.</span>
+          </div>
+        </div>
 
         <div className="flex items-center justify-center gap-x-4 pt-5 text-white">
-          <button className="rounded-full bg-yellow-500 px-6 py-3 text-black">
+          <Link
+            href="/register?type=landlord"
+            className="rounded-full bg-yellow-500 px-6 py-3 text-black"
+          >
             List a Property
-          </button>
+          </Link>
           <span>or</span>
-          <button className="rounded-full bg-yellow-500 px-6 py-3 text-black">
+          <Link
+            href="/register?type=tenant"
+            className="inline-block rounded-full bg-yellow-500 px-6 py-3 text-black"
+          >
             Find a Home
-          </button>
+          </Link>
         </div>
       </section>
 
