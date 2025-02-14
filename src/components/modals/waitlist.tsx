@@ -11,7 +11,13 @@ import { joinWaitList } from "@/api/services/waitlist";
 import SubmitButton from "../forms/submit-button";
 import { X } from "lucide-react";
 
-export default function WaitlistModal() {
+export default function WaitlistModal({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [isTimeout, setIsTimeOut] = useState(false);
 
   useEffect(() => {
@@ -26,7 +32,7 @@ export default function WaitlistModal() {
 
     if (lastShown !== today) {
       localStorage.setItem("waitlistLastShown", today); // Update last shown date
-      setTimeout(() => setIsTimeOut(true), 5000);
+      setTimeout(() => setIsTimeOut(true), 3000);
     }
   }, []);
 
@@ -61,57 +67,74 @@ export default function WaitlistModal() {
   };
 
   return (
-    isTimeout && (
-      <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/40 px-5">
-        <article className="w-full max-w-[540px] rounded-lg bg-white px-5 py-8">
-          <div className="flex items-start justify-between">
-            <div>
-              <h2 className="text-xl font-bold text-[#1e1e1e]">
-                Join Our Waitlist
-              </h2>
-              <p>Join our waitlist to be amongst our prioritised landlords</p>
+    <>
+      {(isTimeout || isOpen) && (
+        <div className="no-scrollbar fixed left-0 top-0 z-[1000] flex h-screen w-screen items-center justify-center overflow-y-auto bg-black/40">
+          <article className="w-full max-w-[540px] rounded-lg bg-white px-5 py-6">
+            <div className="flex items-start justify-between border-b pb-1">
+              <div>
+                <h2 className="text-xl font-bold text-[#1e1e1e]">
+                  Join Our Waitlist Today!
+                </h2>
+                <p className="text-sm text-[#1e1e1e]/80">
+                  {" "}
+                  Be the first to know when we launch{" "}
+                </p>
+              </div>
+              <button
+                className="rounded bg-gray-100 p-1 transition-colors duration-200 hover:bg-gray-200"
+                onClick={() => {
+                  setIsTimeOut(false);
+                  setIsOpen(false);
+                }}
+              >
+                <X size={20} />
+              </button>
             </div>
-            <button
-              className="rounded p-1 transition-colors duration-200 hover:bg-gray-200"
-              onClick={() => setIsTimeOut(false)}
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="mt-6 grid gap-y-3"
             >
-              <X size={20} />
-            </button>
-          </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid gap-y-5">
-            <TextInput
-              name="first_name"
-              placeholder="John"
-              label="First Name"
-              register={register}
-              error={errors.first_name?.message}
-            />
-            <TextInput
-              name="last_name"
-              placeholder=""
-              label="Last Name"
-              register={register}
-              error={errors.last_name?.message}
-            />
-            <TextInput
-              name="email"
-              placeholder=""
-              label="Email"
-              register={register}
-              error={errors.email?.message}
-            />
-            <TextInput
-              name="phone"
-              placeholder=""
-              label="Phone Number"
-              register={register}
-              error={errors.phone?.message}
-            />
+              <p className="text-center text-black">Please Enlist Me</p>
+              <TextInput
+                name="first_name"
+                placeholder="John"
+                label="First Name"
+                register={register}
+                error={errors.first_name?.message}
+              />
+              <TextInput
+                name="last_name"
+                placeholder=""
+                label="Last Name"
+                register={register}
+                error={errors.last_name?.message}
+              />
+              <TextInput
+                name="email"
+                placeholder=""
+                label="Email"
+                register={register}
+                error={errors.email?.message}
+              />
+              <TextInput
+                name="phone"
+                placeholder=""
+                label="Phone Number"
+                register={register}
+                error={errors.phone?.message}
+              />
 
-            <SubmitButton isSubmitting={isSubmitting} text="Join Waitlist" />
-          </form>
-        </article>
-      </div>
-    )
+              <div className="mt-2">
+                <SubmitButton
+                  isSubmitting={isSubmitting}
+                  text="Join Waitlist"
+                />
+              </div>
+            </form>
+          </article>
+        </div>
+      )}
+    </>
   );
 }

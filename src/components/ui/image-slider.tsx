@@ -59,7 +59,7 @@ const ImageSlider = ({ images = photos }: { images?: string[] }) => {
         <div className="relative h-full w-full overflow-hidden rounded-xl">
           <Image
             src={images[currentIndex]}
-            alt={`Slide ${currentIndex + 1}`}
+            alt={``}
             fill
             className="w-full object-cover"
             priority
