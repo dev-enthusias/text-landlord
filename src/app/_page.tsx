@@ -81,7 +81,7 @@ const Header = ({
           : "/login";
 
   return (
-    <header className="relative mb-[6.25rem] min-h-[90vh] bg-black/40 bg-[url('/images/home-bg.jpg')] bg-cover bg-center bg-blend-overlay">
+    <header className="relative mb-[3rem] min-h-[90vh] bg-black/40 bg-[url('/images/home-bg.jpg')] bg-cover bg-center bg-blend-overlay lg:mb-[6.25rem]">
       <nav className="flex h-16 items-center justify-between bg-white/20 px-[3.25rem] backdrop-blur-lg backdrop-filter lg:h-20">
         <img
           src="/logos/logo-transparent.png"
@@ -130,27 +130,34 @@ const Header = ({
       </nav>
 
       <section className="absolute top-1/2 w-full -translate-y-1/2 px-5 text-center">
-        <div className="flex flex-col items-center font-lato font-bold text-white lg:text-[60px] lg:leading-[80px]">
-          <div className="flex w-full justify-center gap-x-4">
-            <span>Find Your</span>{" "}
+        <div className="flex flex-col items-center justify-center text-center font-lato text-4xl font-bold text-white lg:text-[60px] lg:leading-[80px]">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 lg:gap-x-4">
+            <span>Find Your</span>
             <span
-              className="font-cursive inline-block -rotate-3 rounded-xl border-4 border-yellow-500/40 bg-yellow-500/20 px-4 text-yellow-50"
+              className="font-cursive inline-block -rotate-3 rounded-xl border-4 border-yellow-500/40 bg-yellow-500/20 px-2 text-yellow-50"
               style={{ fontFamily: "cursive" }}
             >
               Perfect
             </span>{" "}
             <div className="flex w-fit items-center">
               <span>H</span>
-              <div className="mt-2 flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500">
+              <div className="mt-2 flex h-6 w-6 items-center justify-center rounded-full bg-yellow-500 lg:h-10 lg:w-10">
                 <img src="/images/house.png" alt="" />
               </div>
               <span>me</span>
             </div>{" "}
+            <span className="mr-4 lg:hidden">in</span>
+            <span
+              className="font-cursive inline-block rotate-3 rounded-xl border-4 border-yellow-500/40 bg-yellow-500/20 px-4 text-yellow-50 lg:hidden"
+              style={{ fontFamily: "cursive" }}
+            >
+              Minutes
+            </span>
           </div>
 
           {/* Second line */}
-          <div className="flex items-end">
-            <div className="relative mr-4 h-16 w-40 rounded-xl">
+          <div className="hidden flex-wrap items-end lg:flex">
+            <div className="relative mr-4 hidden h-16 w-40 rounded-xl lg:block">
               <div className="absolute inset-0 flex justify-center">
                 <ImageSlider />
               </div>
@@ -165,7 +172,8 @@ const Header = ({
             <span>.</span>
           </div>
         </div>
-        <div className="flex flex-col justify-center gap-4 pt-5 text-white lg:flex-row lg:items-center">
+
+        <div className="flex flex-col justify-center gap-x-4 gap-y-2 pt-5 text-white lg:flex-row lg:items-center">
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -197,7 +205,7 @@ const Header = ({
       </section>
 
       <section
-        className="absolute -bottom-8 left-1/2 grid max-w-[840px] -translate-x-1/2 grid-cols-4 gap-x-2 rounded-full bg-white p-4"
+        className="absolute -bottom-8 left-1/2 hidden w-full max-w-[840px] -translate-x-1/2 grid-cols-4 gap-x-2 rounded-full bg-white p-4 lg:grid"
         style={{ boxShadow: "0px 0.8px 1px rgba(0, 0, 0, 0.13)" }}
       >
         <input
@@ -215,7 +223,7 @@ const Header = ({
           placeholder="Bali, Indonesia"
           className="rounded-full border border-[#d9d9d9] px-5 py-3"
         />
-        <button className="rounded-full bg-black text-white">
+        <button className="w-full rounded-full bg-black text-white">
           Find Property
         </button>
       </section>
@@ -230,7 +238,7 @@ const PropertyCategories = () => {
         <h2 className="max-w-[440px] text-4xl font-semibold leading-[46px] text-black">
           Explore Our Property Categories
         </h2>
-        <p className="max-w-[440px] text-sm">
+        <p className="max-w-[440px]">
           Find your perfect apartment among our extensive collection of
           properties. We offer a wide range of options to suit your needs, from
           cozy studios to spacious multi-bedroom apartments.
@@ -257,7 +265,7 @@ const TrendingProperties = () => {
         <h2 className="mb-6 text-4xl font-bold text-black">
           Trending Properties
         </h2>
-        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+        <button className="hidden shrink-0 items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black lg:flex">
           See More
           <IoMdArrowDown className="-rotate-[135deg]" />
         </button>
@@ -559,24 +567,27 @@ const dropdowns = [
 
 const HowItWorks = () => {
   return (
-    <section className="mb-[6.25rem] bg-[#fcf5e0]/50 px-5 py-[6.25rem] lg:px-[6.25rem]">
-      <div className="mb-6">
-        <h2 className="text-4xl font-bold text-black">
+    <section className="mb-[6.25rem] bg-[#fcf5e0]/50 px-5 py-[3rem] lg:px-[6.25rem] lg:py-[6.25rem]">
+      <div className="mb-6 text-center">
+        <h2 className="mb-2 text-4xl font-bold leading-none text-black">
           How It Works - <span className="text-xl"> Tenant</span>
         </h2>
         <p>Get started with 4 easy steps</p>
       </div>
 
-      <div className="grid gap-x-10 lg:grid-cols-4">
+      <div className="grid gap-10 lg:grid-cols-4">
         {howItWorks.map((step, i) => (
-          <article className="max-w-[320px]" key={i}>
+          <article
+            className="mx-auto max-w-[320px] text-center lg:text-left"
+            key={i}
+          >
             <p className="-black mb-2 text-[60px] font-extrabold text-gold">
               {i + 1}
             </p>
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="text-lg font-bold text-black">{step.title}</h3>
-                <div className="my-4 h-[2px] w-16 bg-gold" />
+                <div className="mx-auto my-2 h-[2px] w-16 bg-gold lg:mx-0 lg:my-4" />
                 <p>{step.description}</p>
               </div>
             </div>
@@ -604,7 +615,7 @@ const Testimonials = () => {
           </button>
         </div>
       </div>
-      <div className="grid gap-x-5 lg:grid-cols-3">
+      <div className="no-scrollbar flex gap-x-5 overflow-x-auto">
         <TestimonialCard />
         <TestimonialCard />
         <TestimonialCard />
@@ -617,17 +628,17 @@ const GetTheApp = () => {
   return (
     <article className="relative z-50 flex items-center justify-between bg-[#fcf5e0]/40 px-2.5 pb-10 pt-10 backdrop-blur-md backdrop-filter lg:px-10">
       <div className="max-w-[640px]">
-        <h2 className="mb-4 text-5xl font-bold leading-[50px] text-black">
+        <h2 className="mb-4 text-center text-2xl font-bold text-black lg:text-left lg:text-5xl lg:leading-[50px]">
           Download the{" "}
           <strong className="underline-squiggly">Ogalandlord App</strong> Now
           for Easy Access!
         </h2>
-        <p className="text-black/80">
+        <p className="text-center text-black/80 lg:text-left">
           Take Ogalandlord with you wherever you go! Download our app for easy
           access to your account, quick bookings, and exclusive mobile-only
           offers.
         </p>
-        <div className="mt-6 flex flex-col gap-5">
+        <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-3 lg:justify-start">
           <Link
             href=""
             className="flex w-fit items-center gap-x-2 rounded-lg border-2 border-black bg-gold p-3"
@@ -662,7 +673,7 @@ const GetTheApp = () => {
 
 const TestimonialCard = () => {
   return (
-    <article className="relative rounded-lg border-2 border-gold/30 bg-[#fcf5e0]/30 p-7 backdrop-blur-3xl backdrop-filter lg:p-14">
+    <article className="relative min-w-[280px] rounded-lg border-2 border-gold/30 bg-[#fcf5e0]/30 p-7 backdrop-blur-3xl backdrop-filter lg:p-14">
       <div className="mb-2 flex justify-between">
         <div
           className="flex flex-col justify-between text-black"
@@ -677,7 +688,7 @@ const TestimonialCard = () => {
           className="h-24 w-24 rounded-bl-full object-cover"
         />
       </div>
-      <p className="mb-4 font-open-sans text-xl leading-7 text-black/80">
+      <p className="mb-4 font-open-sans text-lg leading-7 text-black/80 lg:text-xl">
         Finding my new apartment with Ogalandlord was a breeze! Their platform
         is super easy to navigate, and I found exactly what I was looking for in
         no time. I highly recommend it to anyone searching for a new place to
@@ -696,9 +707,9 @@ const TestimonialCard = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-black/70 bg-[url('/images/brown-chair.jpg')] bg-cover bg-[center_bottom_-4rem] bg-no-repeat px-5 pb-5 pt-[6.26rem] text-white bg-blend-overlay lg:px-[6.25rem]">
+    <footer className="bg-black/70 bg-[url('/images/brown-chair.jpg')] bg-cover bg-[center_bottom_-4rem] bg-no-repeat px-5 pb-5 pt-[3rem] text-white bg-blend-overlay lg:px-[6.25rem] lg:pt-[6.26rem]">
       {/* Useful links */}
-      <section className="mb-20 flex flex-wrap justify-between gap-5 lg:gap-x-20">
+      <section className="mb-10 flex flex-wrap gap-x-20 gap-y-10 lg:mb-20 lg:justify-between">
         <section className="max-w-[420px]">
           <div className="mb-4 h-16 overflow-hidden">
             <img
@@ -780,7 +791,7 @@ const Footer = () => {
             </li>
           </ul>
         </section>
-        <section>
+        <section className="hidden lg:block">
           <h3 className="mb-4 text-lg font-bold">Get the App</h3>
           <ul className="space-y-2">
             <li>
@@ -857,10 +868,48 @@ const Footer = () => {
         </div>
       </section>
 
+      <section className="mb-10 lg:hidden">
+        <h3 className="mb-4 text-lg font-bold">Get the App</h3>
+        <ul className="space-y-2">
+          <li>
+            <Link
+              href=""
+              className="flex w-fit items-center gap-x-1 rounded-lg border-2 border-[#f1ca53] p-2"
+            >
+              <FaApple className="text-xl text-[#f4d57d]" />
+              <div className="space-y-[1px]">
+                <p className="text-[8px] leading-none text-[#f8e5b1]/90">
+                  Download on the
+                </p>
+                <p className="text-sm font-bold leading-none text-[#f1ca53]">
+                  App Store
+                </p>
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href=""
+              className="flex w-fit items-center gap-x-1 rounded-lg border-2 border-[#f1ca53] p-2"
+            >
+              <IoLogoGooglePlaystore className="text-xl text-[#f4d57d]" />
+              <div className="space-y-[1px]">
+                <p className="text-[8px] leading-none text-[#f8e5b1]/90">
+                  GET IT ON
+                </p>
+                <p className="text-sm font-bold leading-none text-[#f1ca53]">
+                  Google Play
+                </p>
+              </div>
+            </Link>
+          </li>
+        </ul>
+      </section>
+
       {/* Copyright, Terms and Conditions */}
-      <section className="flex justify-between border-t border-t-[#e3e3e3] pt-5">
+      <section className="flex flex-col-reverse justify-between gap-y-4 border-t border-t-[#e3e3e3] pt-5 text-sm lg:flex-row">
         <p>© 2024 Oga LandLords. All Rights Reserved.</p>
-        <div className="flex gap-x-4">
+        <div className="flex justify-between gap-x-4">
           <Link
             href=""
             className="inline-block transition-all duration-300 hover:text-[#cecaa3] hover:underline"
@@ -895,12 +944,12 @@ const PropertyCard = ({
   return (
     <article className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg">
       <article className="group flex sm:flex-col">
-        <div className="relative w-24 shrink-0 overflow-hidden rounded-lg shadow sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
+        <div className="relative w-20 shrink-0 overflow-hidden rounded-lg shadow min-[400px]:w-36 sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
           <Image
             src={data.image}
             alt="property display photo"
             fill
-            sizes="96px"
+            sizes="(max-width: 400px) 80px, (max-width: 768px) 144px, 25vw"
             className="w-full object-cover transition-all duration-700 group-hover:scale-110"
           />
         </div>
@@ -924,7 +973,7 @@ const PropertyCard = ({
               </p>
             </div>
 
-            <ul className="mt-2 flex items-center justify-between text-xs">
+            <ul className="mt-2 flex items-center justify-between text-[10px] min-[400px]:text-xs">
               <li className="flex w-1/3 items-center justify-start gap-x-1">
                 <BedIcon size={14} />
                 <span>{data.bedrooms || 0} bd</span>

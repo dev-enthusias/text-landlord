@@ -435,7 +435,7 @@ export const buildings = [
     price: "₦120,000,000",
     location: "Ikeja, Lagos",
     floors: 10,
-    size: "15,000 ft",
+    size: "15K ft",
   },
   {
     id: 2,
@@ -444,7 +444,7 @@ export const buildings = [
     price: "₦95,000,000",
     location: "Jabi, Abuja",
     floors: 8,
-    size: "12,000 ft",
+    size: "12K ft",
   },
   {
     id: 3,
@@ -453,7 +453,7 @@ export const buildings = [
     price: "₦80,000,000",
     location: "Sango, Ibadan",
     floors: 5,
-    size: "10,000 ft",
+    size: "10K ft",
   },
   {
     id: 4,
@@ -462,6 +462,6 @@ export const buildings = [
     price: "₦150,000,000",
     location: "GRA, Kano",
     floors: 12,
-    size: "20,000 ft",
+    size: "20K ft",
   },
 ];
