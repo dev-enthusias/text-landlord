@@ -3,7 +3,18 @@
 import WaitlistModal from "@/components/modals/waitlist";
 import DropdownButton from "@/components/ui/dropdown-btn";
 import ImageSlider from "@/components/ui/image-slider";
-import { howItWorks } from "@/constants/data";
+import {
+  apartments,
+  buildings,
+  flats,
+  howItWorks,
+  lands,
+  offices,
+  rooms,
+  shops,
+  shortlets,
+  trendingProperties,
+} from "@/constants/data";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,7 +47,7 @@ export default function Home({
       <TrendingProperties />
       <PropertyCategories />
       <HowItWorks />
-      <section className="mb-[6.25rem] px-[6.25rem]">
+      <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
         <section className="relative overflow-hidden rounded-3xl border-2 border-gold/50">
           <GetTheApp />
           <div className="absolute left-1/2 top-1/2 z-10 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#796425] from-5% to-[#fefaf0]/20 to-90%" />
@@ -78,7 +89,7 @@ const Header = ({
           className="mt-3.5 h-28 w-28"
         />
 
-        <div className="flex items-center space-x-4">
+        <div className="hidden items-center space-x-4 lg:flex">
           {dropdowns.map((dropdown, index) => (
             <DropdownButton
               key={index}
@@ -101,7 +112,7 @@ const Header = ({
             Dashboard
           </Link>
         ) : (
-          <div className="flex gap-x-2">
+          <div className="hidden gap-x-2 lg:flex">
             <Link
               href="./register"
               className="hidden rounded-full bg-gradient-to-b from-black/20 to-white/50 px-10 py-2.5 font-semibold text-white lg:block"
@@ -119,7 +130,7 @@ const Header = ({
       </nav>
 
       <section className="absolute top-1/2 w-full -translate-y-1/2 px-5 text-center">
-        <div className="flex flex-col items-center font-lato text-[60px] font-bold leading-[80px] text-white">
+        <div className="flex flex-col items-center font-lato font-bold text-white lg:text-[60px] lg:leading-[80px]">
           <div className="flex w-full justify-center gap-x-4">
             <span>Find Your</span>{" "}
             <span
@@ -154,7 +165,7 @@ const Header = ({
             <span>.</span>
           </div>
         </div>
-        <div className="flex items-center justify-center gap-x-4 pt-5 text-white">
+        <div className="flex flex-col justify-center gap-4 pt-5 text-white lg:flex-row lg:items-center">
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -214,8 +225,8 @@ const Header = ({
 
 const PropertyCategories = () => {
   return (
-    <section className="mb-[6.25rem] px-[6.25rem]">
-      <div className="mb-6 flex items-center justify-between">
+    <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
+      <div className="mb-6 flex flex-col items-center justify-between gap-5 lg:flex-row">
         <h2 className="max-w-[440px] text-4xl font-semibold leading-[46px] text-black">
           Explore Our Property Categories
         </h2>
@@ -241,7 +252,7 @@ const PropertyCategories = () => {
 
 const TrendingProperties = () => {
   return (
-    <section className="mb-[6.25rem] px-[6.25rem]">
+    <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
       <div className="flex items-center justify-between">
         <h2 className="mb-6 text-4xl font-bold text-black">
           Trending Properties
@@ -252,7 +263,7 @@ const TrendingProperties = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-5">
+      <div className="grid gap-5 lg:grid-cols-4">
         {trendingProperties.map((property) => (
           <PropertyCard
             key={property.id}
@@ -283,7 +294,7 @@ const Rooms = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-5">
+      <div className="grid gap-5 lg:grid-cols-4">
         {rooms.map((property) => (
           <PropertyCard
             key={property.id}
@@ -314,7 +325,7 @@ const Offices = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-5">
+      <div className="grid gap-5 lg:grid-cols-4">
         {offices.map((property) => (
           <PropertyCard
             key={property.id}
@@ -345,7 +356,7 @@ const Shops = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-5">
+      <div className="grid gap-5 lg:grid-cols-4">
         {shops.map((property) => (
           <PropertyCard
             key={property.id}
@@ -376,7 +387,7 @@ const Lands = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-5">
+      <div className="grid gap-5 lg:grid-cols-4">
         {lands.map((property) => (
           <PropertyCard
             key={property.id}
@@ -407,7 +418,7 @@ const Buildings = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-5">
+      <div className="grid gap-5 lg:grid-cols-4">
         {buildings.map((property) => (
           <PropertyCard
             key={property.id}
@@ -438,7 +449,7 @@ const Flats = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-5">
+      <div className="grid gap-5 lg:grid-cols-4">
         {flats.map((property) => (
           <PropertyCard
             key={property.id}
@@ -469,7 +480,7 @@ const Shortlets = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-5">
+      <div className="grid gap-5 lg:grid-cols-4">
         {shortlets.map((property) => (
           <PropertyCard
             key={property.id}
@@ -500,7 +511,7 @@ const Apartments = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-5">
+      <div className="grid gap-5 lg:grid-cols-4">
         {apartments.map((property) => (
           <PropertyCard
             key={property.id}
@@ -548,7 +559,7 @@ const dropdowns = [
 
 const HowItWorks = () => {
   return (
-    <section className="mb-[6.25rem] bg-[#fcf5e0]/50 px-[6.25rem] py-[6.25rem]">
+    <section className="mb-[6.25rem] bg-[#fcf5e0]/50 px-5 py-[6.25rem] lg:px-[6.25rem]">
       <div className="mb-6">
         <h2 className="text-4xl font-bold text-black">
           How It Works - <span className="text-xl"> Tenant</span>
@@ -578,8 +589,8 @@ const HowItWorks = () => {
 
 const Testimonials = () => {
   return (
-    <section className="mb-[6.25rem] px-[6.25rem]">
-      <div className="mb-6 flex items-end justify-between">
+    <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
+      <div className="mb-6 flex flex-col items-end justify-between lg:flex-row">
         <h2 className="text-4xl font-bold text-black">
           What People are Saying
         </h2>
@@ -604,7 +615,7 @@ const Testimonials = () => {
 
 const GetTheApp = () => {
   return (
-    <article className="relative z-50 flex items-center justify-between bg-[#fcf5e0]/40 px-10 pb-10 pt-10 backdrop-blur-md backdrop-filter">
+    <article className="relative z-50 flex items-center justify-between bg-[#fcf5e0]/40 px-2.5 pb-10 pt-10 backdrop-blur-md backdrop-filter lg:px-10">
       <div className="max-w-[640px]">
         <h2 className="mb-4 text-5xl font-bold leading-[50px] text-black">
           Download the{" "}
@@ -616,10 +627,10 @@ const GetTheApp = () => {
           access to your account, quick bookings, and exclusive mobile-only
           offers.
         </p>
-        <div className="mt-6 flex gap-x-4">
+        <div className="mt-6 flex flex-col gap-5">
           <Link
             href=""
-            className="flex items-center gap-x-2 rounded-lg border-2 border-black bg-gold p-3"
+            className="flex w-fit items-center gap-x-2 rounded-lg border-2 border-black bg-gold p-3"
           >
             <FaApple className="text-2xl text-[#433711]" />
             <div className="space-y-[1px]">
@@ -631,7 +642,7 @@ const GetTheApp = () => {
           </Link>
           <Link
             href=""
-            className="flex items-center gap-x-2 rounded-lg border-2 border-black bg-gold p-3"
+            className="flex w-fit items-center gap-x-2 rounded-lg border-2 border-black bg-gold p-3"
           >
             <IoLogoGooglePlaystore className="text-2xl text-[#433711]" />
             <div className="space-y-[1px]">
@@ -651,7 +662,7 @@ const GetTheApp = () => {
 
 const TestimonialCard = () => {
   return (
-    <article className="relative rounded-lg border-2 border-gold/30 bg-[#fcf5e0]/30 p-14 backdrop-blur-3xl backdrop-filter">
+    <article className="relative rounded-lg border-2 border-gold/30 bg-[#fcf5e0]/30 p-7 backdrop-blur-3xl backdrop-filter lg:p-14">
       <div className="mb-2 flex justify-between">
         <div
           className="flex flex-col justify-between text-black"
@@ -678,14 +689,14 @@ const TestimonialCard = () => {
         <p>Business Man</p>
       </div>
 
-      <div className="absolute bottom-14 right-14 h-0 w-0 border-b-[112px] border-l-[112px] border-b-gold/10 border-l-transparent" />
+      <div className="absolute bottom-7 right-7 h-0 w-0 border-b-[112px] border-l-[112px] border-b-gold/10 border-l-transparent lg:bottom-14 lg:right-14" />
     </article>
   );
 };
 
 const Footer = () => {
   return (
-    <footer className="bg-black/70 bg-[url('/images/brown-chair.jpg')] bg-cover bg-[center_bottom_-4rem] bg-no-repeat px-[6.25rem] pb-5 pt-[6.26rem] text-white bg-blend-overlay">
+    <footer className="bg-black/70 bg-[url('/images/brown-chair.jpg')] bg-cover bg-[center_bottom_-4rem] bg-no-repeat px-5 pb-5 pt-[6.26rem] text-white bg-blend-overlay lg:px-[6.25rem]">
       {/* Useful links */}
       <section className="mb-20 flex flex-wrap justify-between gap-5 lg:gap-x-20">
         <section className="max-w-[420px]">
@@ -809,7 +820,7 @@ const Footer = () => {
       </section>
 
       {/* Support Links and Social Media Handles */}
-      <section className="mb-10 flex items-center justify-center gap-x-10">
+      <section className="mb-10 flex flex-col justify-center gap-x-10 gap-y-5 lg:flex-row lg:items-center">
         <Link href="" className="flex items-center gap-x-2">
           <BiSupport size={26} />
           support@ogalandlord.com
@@ -868,373 +879,6 @@ const Footer = () => {
   );
 };
 
-const trendingProperties = [
-  {
-    id: 1,
-    name: "Luxury Haven Duplex",
-    image: "/images/tp-1.jpg",
-    price: "₦80,000,000",
-    location: "Abuja",
-    bedrooms: 4,
-    bathrooms: 3,
-    size: "3,500 sqft",
-  },
-  {
-    id: 2,
-    name: "Coastal View Apartment",
-    image: "/images/tp-2.jpg",
-    price: "₦35,000,000",
-    location: "Port Harcourt",
-    bedrooms: 3,
-    bathrooms: 2,
-    size: "2,200 sqft",
-  },
-  {
-    id: 3,
-    name: "Ikoyi Prestige Villa",
-    image: "/images/tp-3.jpeg",
-    price: "₦60,000,000",
-    location: "Ikoyi, Lagos",
-    bedrooms: 5,
-    bathrooms: 5,
-    size: "4,500 sqft",
-  },
-  {
-    id: 4,
-    name: "Banana Island Mansion",
-    image: "/images/tp-4.jpeg",
-    price: "₦120,000,000",
-    location: "Banana Island, Lagos",
-    bedrooms: 6,
-    bathrooms: 7,
-    size: "6,000 sqft",
-  },
-];
-
-const apartments = [
-  {
-    id: 1,
-    name: "Elegant City View Apartment",
-    image: "/images/a-1.jpg",
-    price: "₦25,000,000",
-    location: "Victoria Island, Lagos",
-    bedrooms: 3,
-    bathrooms: 2,
-    size: "1,500 sqft",
-  },
-  {
-    id: 2,
-    name: "Modern Urban Retreat",
-    image: "/images/a-2.jpg",
-    price: "₦1,500,000",
-    location: "Awka, Anambra",
-    bedrooms: 2,
-    bathrooms: 2,
-    size: "1,200 sqft",
-  },
-  {
-    id: 3,
-    name: "Sleek Contemporary Apartment",
-    image: "/images/a-3.jpeg",
-    price: "₦20,000,000",
-    location: "Abuja",
-    bedrooms: 6,
-    bathrooms: 3,
-    size: "1,000 sqft",
-  },
-  {
-    id: 4,
-    name: "Luxury Penthouse Suite",
-    image: "/images/a-4.jpg",
-    price: "₦50,000,000",
-    location: "Ikoyi, Lagos",
-    bedrooms: 4,
-    bathrooms: 3,
-    size: "2,200 sqft",
-  },
-];
-
-const rooms = [
-  {
-    id: 1,
-    name: "Opulent Suite Room",
-    image: "/images/r-1.jpg",
-    price: "₦5,000,000",
-    location: "Victoria Island, Lagos",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: "450 sqft",
-  },
-  {
-    id: 2,
-    name: "Grand Deluxe Room",
-    image: "/images/r-2.jpg",
-    price: "₦18,000,000",
-    location: "Lekki, Lagos",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: "400 sqft",
-  },
-  {
-    id: 3,
-    name: "Prestigious Executive Room",
-    image: "/images/r-3.jpg",
-    price: "₦30,000,000",
-    location: "Abuja",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: "500 sqft",
-  },
-  {
-    id: 4,
-    name: "Regal Chamber Suite",
-    image: "/images/r-4.jpeg",
-    price: "₦22,000,000",
-    location: "Ikoyi, Lagos",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: "420 sqft",
-  },
-];
-
-const offices = [
-  {
-    id: 1,
-    name: "Prestige Corporate Office",
-    image: "/images/o-1.jpg",
-    price: "₦42,000,000",
-    location: "Victoria Island, Lagos",
-    meetingRooms: 2,
-    restrooms: 2,
-    size: "2,500 sqft",
-  },
-  {
-    id: 2,
-    name: "Executive Business Center",
-    image: "/images/o-2.webp",
-    price: "₦57,000,000",
-    location: "Central Business District, Abuja",
-    meetingRooms: 3,
-    restrooms: 3,
-    size: "3,000 sqft",
-  },
-  {
-    id: 3,
-    name: "Modern Office Hub",
-    image: "/images/o-3.avif",
-    price: "₦38,000,000",
-    location: "Trans-Amadi, Port Harcourt",
-    meetingRooms: 1,
-    restrooms: 1,
-    size: "1,800 sqft",
-  },
-  {
-    id: 4,
-    name: "Luxury Executive Suites",
-    image: "/images/o-4.webp",
-    price: "₦68,000,000",
-    location: "New Haven, Enugu",
-    meetingRooms: 4,
-    restrooms: 3,
-    size: "3,500 sqft",
-  },
-];
-
-const shops = [
-  {
-    id: 1,
-    name: "Budget Retail Space",
-    image: "/images/s-1.jpg",
-    price: "₦4,000,000",
-    location: "Ikeja, Lagos",
-    size: "800 sqft",
-  },
-  {
-    id: 4,
-    name: "Compact Shop Space",
-    image: "/images/s-4.jpeg",
-    price: "₦800,000",
-    location: "Port Harcourt, Rivers State",
-    size: "700 sqft",
-  },
-  {
-    id: 2,
-    name: "Affordable Storefront",
-    image: "/images/s-2.jpg",
-    price: "₦3,500,000",
-    location: "Wuse, Abuja",
-    size: "600 sqft",
-  },
-  {
-    id: 3,
-    name: "Economy Commercial Outlet",
-    image: "/images/s-3.jpeg",
-    price: "₦1,200,000",
-    location: "Oredo, Benin City",
-    size: "750 sqft",
-  },
-];
-
-const flats = [
-  {
-    id: 1,
-    name: "Modern Urban Flat",
-    image: "/images/f-1.jpeg",
-    price: "₦4,500,000",
-    location: "Warri, Delta State",
-    bedrooms: 2,
-    bathrooms: 2,
-    size: "1,100 sqft",
-  },
-  {
-    id: 2,
-    name: "Contemporary Comfort Flat",
-    image: "/images/f-2.jpeg",
-    price: "₦3,000,000",
-    location: "Kaduna, Kaduna State",
-    bedrooms: 2,
-    bathrooms: 1,
-    size: "1,000 sqft",
-  },
-  {
-    id: 3,
-    name: "Cozy Family Flat",
-    image: "/images/f-3.jpeg",
-    price: "₦5,000,000",
-    location: "Awka, Anambra State",
-    bedrooms: 3,
-    bathrooms: 2,
-    size: "1,300 sqft",
-  },
-  {
-    id: 4,
-    name: "Elegant City Flat",
-    image: "/images/f-4.jpeg",
-    price: "₦6,500,000",
-    location: "Uyo, Akwa Ibom State",
-    bedrooms: 3,
-    bathrooms: 2,
-    size: "1,400 sqft",
-  },
-];
-
-const shortlets = [
-  {
-    id: 1,
-    name: "Downtown Executive Shortlet",
-    image: "/images/sl-1.jpeg",
-    price: "₦7,500,000",
-    location: "Lekki Phase 1, Lagos",
-    bedrooms: 2,
-    bathrooms: 2,
-    size: "1,200 sqft",
-  },
-  {
-    id: 2,
-    name: "Cozy Central Shortlet",
-    image: "/images/sl-2.jpeg",
-    price: "₦5,000,000",
-    location: "Maitama, Abuja",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: "800 sqft",
-  },
-  {
-    id: 3,
-    name: "Modern Shortlet Retreat",
-    image: "/images/sl-3.jpeg",
-    price: "₦6,500,000",
-    location: "Old GRA, Port Harcourt",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: "900 sqft",
-  },
-  {
-    id: 4,
-    name: "Luxury Shortlet Suite",
-    image: "/images/sl-4.jpeg",
-    price: "₦9,000,000",
-    location: "Uyo, Akwa Ibom",
-    bedrooms: 2,
-    bathrooms: 2,
-    size: "1,400 sqft",
-  },
-];
-
-const lands = [
-  {
-    id: 1,
-    name: "Prime Commercial Plot",
-    image: "/images/l-1.jpeg",
-    price: "₦18,000,000",
-    location: "Ikeja, Lagos",
-    size: "5,000 sqft",
-  },
-  {
-    id: 2,
-    name: "Residential Plot in Gated Estate",
-    image: "/images/l-2.jpg",
-    price: "₦16,000,000",
-    location: "Garki, Abuja",
-    size: "4,000 sqft",
-  },
-  {
-    id: 3,
-    name: "Farmland Opportunity",
-    image: "/images/l-3.jpeg",
-    price: "₦10,000,000",
-    location: "Diobu, Port Harcourt",
-    size: "8,000 sqft",
-  },
-  {
-    id: 4,
-    name: "Development Opportunity Plot",
-    image: "/images/l-4.jpeg",
-    price: "₦12,000,000",
-    location: "Ilesa, Osun State",
-    size: "3,500 sqft",
-  },
-];
-
-const buildings = [
-  {
-    id: 1,
-    name: "Iconic Commercial Tower",
-    image: "/images/b-1.jpg",
-    price: "₦120,000,000",
-    location: "Ikeja, Lagos",
-    floors: 10,
-    size: "15,000 sqft",
-  },
-  {
-    id: 2,
-    name: "Modern Mixed-use Complex",
-    image: "/images/b-2.jpg",
-    price: "₦95,000,000",
-    location: "Jabi, Abuja",
-    floors: 8,
-    size: "12,000 sqft",
-  },
-  {
-    id: 3,
-    name: "High-end Residential Building",
-    image: "/images/b-3.jpeg",
-    price: "₦80,000,000",
-    location: "Sango, Ibadan",
-    floors: 5,
-    size: "10,000 sqft",
-  },
-  {
-    id: 4,
-    name: "Prestigious Office Building",
-    image: "/images/b-4.webp",
-    price: "₦150,000,000",
-    location: "GRA, Kano",
-    floors: 12,
-    size: "20,000 sqft",
-  },
-];
-
 const PropertyCard = ({
   data,
 }: {
@@ -1250,14 +894,14 @@ const PropertyCard = ({
 }) => {
   return (
     <article className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg">
-      <article className="group flex gap-x-1 sm:flex-col">
-        <div className="relative w-36 overflow-hidden rounded-lg shadow sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
+      <article className="group flex sm:flex-col">
+        <div className="relative w-24 shrink-0 overflow-hidden rounded-lg shadow sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
           <Image
             src={data.image}
             alt="property display photo"
             fill
-            sizes="384px"
-            className="object-cover transition-all duration-700 group-hover:scale-110"
+            sizes="96px"
+            className="w-full object-cover transition-all duration-700 group-hover:scale-110"
           />
         </div>
 
@@ -1291,7 +935,7 @@ const PropertyCard = ({
               </li>
               <li className="flex w-1/3 items-center justify-end gap-x-1">
                 <RulerIcon size={14} />
-                <span>{data.size || 0} ft</span>
+                <span>{data.size || 0}</span>
               </li>
             </ul>
           </div>
@@ -1300,6 +944,7 @@ const PropertyCard = ({
     </article>
   );
 };
+
 // "I had a few questions during the process, and the Finpro support team was incredibly helpful. They were responsive, friendly, and went above and beyond to assist me. I'm very satisfied with my experience."
 
 // "I was impressed by the wide range of property options available on Finpro. I found exactly the type of apartment I was looking for, in the neighborhood I wanted, and at a price that fit my budget. Thank you, Finpro!"
