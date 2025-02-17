@@ -81,12 +81,12 @@ const Header = ({
           : "/login";
 
   return (
-    <header className="relative mb-[3rem] min-h-[90vh] bg-black/40 bg-[url('/images/home-bg.jpg')] bg-cover bg-center bg-blend-overlay lg:mb-[6.25rem]">
-      <nav className="flex h-16 items-center justify-between bg-white/20 px-[3.25rem] backdrop-blur-lg backdrop-filter lg:h-20">
+    <header className="relative mb-[3rem] min-h-screen bg-black/40 bg-[url('/images/home-bg.jpg')] bg-cover bg-center bg-blend-overlay lg:mb-[6.25rem] lg:min-h-[90vh]">
+      <nav className="flex h-16 items-center justify-between bg-white/20 px-5 backdrop-blur-lg backdrop-filter lg:h-20 lg:px-[3.25rem]">
         <img
           src="/logos/logo-transparent.png"
           alt=""
-          className="mt-3.5 h-28 w-28"
+          className="mt-3.5 h-24 w-24 lg:h-28 lg:w-28"
         />
 
         <div className="hidden items-center space-x-4 lg:flex">
@@ -127,16 +127,31 @@ const Header = ({
             </Link>
           </div>
         )}
+
+        <button className="text-white lg:hidden">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="h-7 w-7"
+          >
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="6" y1="12" x2="18" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </nav>
 
       <section className="absolute top-1/2 w-full -translate-y-1/2 px-5 text-center">
-        <div className="flex flex-col items-center justify-center text-center font-lato text-4xl font-bold text-white lg:text-[60px] lg:leading-[80px]">
+        <div className="mb-8 flex flex-col items-center justify-center text-center font-lato text-5xl font-bold text-white lg:text-[60px] lg:leading-[80px]">
           <div className="flex flex-wrap items-center justify-center gap-x-2 lg:gap-x-4">
             <span>Find Your</span>
-            <span
-              className="font-cursive inline-block -rotate-3 rounded-xl border-4 border-yellow-500/40 bg-yellow-500/20 px-2 text-yellow-50"
-              style={{ fontFamily: "cursive" }}
-            >
+            <span className="font-cursive inline-block -rotate-3 rounded-xl border-4 border-yellow-500/40 bg-yellow-500/20 px-4 text-yellow-50">
               Perfect
             </span>{" "}
             <div className="flex w-fit items-center">
@@ -147,10 +162,7 @@ const Header = ({
               <span>me</span>
             </div>{" "}
             <span className="mr-4 lg:hidden">in</span>
-            <span
-              className="font-cursive inline-block rotate-3 rounded-xl border-4 border-yellow-500/40 bg-yellow-500/20 px-4 text-yellow-50 lg:hidden"
-              style={{ fontFamily: "cursive" }}
-            >
+            <span className="font-cursive inline-block rotate-3 rounded-xl border-4 border-yellow-500/40 bg-yellow-500/20 px-4 text-yellow-50 lg:hidden">
               Minutes
             </span>
           </div>
