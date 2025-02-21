@@ -6,7 +6,7 @@ import ModalLayout from "../ui/modal-layout";
 import { landloardQuickActionData } from "@/constants/data";
 import { X } from "lucide-react";
 import { routes } from "@/constants/routes";
-import PropertyForm from "../forms/property-form";
+import PropertyForm from "../forms/add-property-form";
 import AgentForm from "../forms/agent-form";
 import TenantForm from "../forms/tenant-form";
 import { getToken } from "@/lib/actions";

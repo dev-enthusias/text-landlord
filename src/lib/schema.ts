@@ -70,7 +70,7 @@ export const changePasswordSchema = z
 
 export const addPropertySchema = z.object({
   name: z.string().min(1, { message: "Please input property name" }),
-  type: z.string().min(1, { message: "Please select property type" }),
+  type_id: z.number().min(1, { message: "Please select property type" }),
   default_image: z.custom<FileList>(),
   address: z.string().min(1, { message: "Please input property address" }),
   country_id: z.number().min(1, { message: "Please select country" }),
@@ -79,6 +79,9 @@ export const addPropertySchema = z.object({
   property_category_id: z
     .number()
     .min(1, { message: "Please select property category" }),
+  rent_amount: z.string().min(1, { message: "Please input rent amount" }),
+  grace_period: z.number().min(1, { message: "Please select a grace period" }),
+  caution_fee: z.string().min(1, { message: "Please input % caution fee" }),
 });
 
 export const bookAppointmentSchema = z.object({

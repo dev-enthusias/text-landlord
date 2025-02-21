@@ -17,7 +17,7 @@ export default async function Properties() {
     ]);
 
   const advertisedList = await Promise.all(
-    advertisedProperties.data.map((ad: { property_id: string | number }) =>
+    advertisedProperties.data.map((ad: { property_id: number }) =>
       getPropertyDetails(ad.property_id),
     ),
   ).then((results) => results.filter(Boolean));

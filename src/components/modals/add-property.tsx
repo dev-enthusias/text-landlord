@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ModalLayout from "../ui/modal-layout";
-import PropertyForm from "../forms/property-form";
+import AddPropertyForm from "../forms/add-property-form";
 import { X } from "lucide-react";
 import { IoMdAdd } from "react-icons/io";
 import { Country, PropertyMetadataResponseDataType } from "@/definition";
@@ -41,10 +41,11 @@ export default function AddPropertyBtn({
             </header>
 
             <main className="px-5">
-              <PropertyForm
+              <AddPropertyForm
                 categories={categories}
                 types={types}
                 country={country}
+                isAddPropertyModalOpen={setAddPropertyModal}
               />
             </main>
           </article>

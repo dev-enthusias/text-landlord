@@ -62,10 +62,9 @@ async function DashboardContent({
       {/* Greeting */}
       <div className="font-cormorant">
         <h1 className="text-2xl font-bold text-black">
-          <h1 className="text-2xl font-bold text-black">
-            {greeting}, {name?.split(" ")[0]}!
-          </h1>
+          {greeting}, {name?.split(" ")[0]}!
         </h1>
+
         <p className="font-semibold text-black">
           Let&apos;s help you get a good view of your properties
         </p>

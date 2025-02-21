@@ -8,21 +8,23 @@ import { AddPropertyDataType, Country, LocationList } from "@/definition";
 import { PropertyMetadataResponseDataType } from "@/definition";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addPropertySchema } from "@/lib/schema";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useGlobalStore } from "@/stores/global-store";
 import { addProperty, getCities, getStates } from "@/api/services/property";
 import SubmitButton from "./submit-button";
 import { toast } from "sonner";
 import revalidate from "@/utils/revalidate";
 
-export default function PropertyForm({
+export default function AddPropertyForm({
   categories,
   country,
   types,
+  isAddPropertyModalOpen,
 }: {
   categories: PropertyMetadataResponseDataType["categories"];
   types: PropertyMetadataResponseDataType["type"];
   country: Country[];
+  isAddPropertyModalOpen: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const countryId = useGlobalStore((state) => state.countryId);
@@ -62,10 +64,12 @@ export default function PropertyForm({
   const onSubmit: SubmitHandler<AddPropertyDataType> = async (data) => {
     const res = await addProperty({
       ...data,
+      caution_fee: parseInt(data.caution_fee),
       post_code: "12234",
     });
 
     if (res.result) {
+      isAddPropertyModalOpen(false);
       toast.success("Success", { description: res.message });
       revalidate("/landlord/properties");
     }
@@ -82,6 +86,11 @@ export default function PropertyForm({
     }
   };
 
+  const formattedTypes = types.map((type, index) => ({
+    id: index + 1,
+    name: type,
+  }));
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <fieldset className="space-y-4">
@@ -94,12 +103,12 @@ export default function PropertyForm({
         />
         <SelectInput
           control={control}
-          name="type"
+          name="type_id"
           label="Property Type"
-          options={types}
+          options={formattedTypes}
           placeholder="Choose an option"
           required
-          error={errors.type?.message}
+          error={errors.type_id?.message}
         />
         <SelectInput
           control={control}
@@ -110,6 +119,40 @@ export default function PropertyForm({
           required
           error={errors.property_category_id?.message}
         />
+        <TextInput
+          register={register}
+          name="rent_amount"
+          label="Rent Amount"
+          error={errors.rent_amount?.message}
+          required
+        />
+        <SelectInput
+          control={control}
+          name="grace_period"
+          label="Grace Period"
+          options={[
+            { id: 1, name: "1 week" },
+            { id: 2, name: "2 weeks" },
+            { id: 3, name: "3 weeks" },
+            { id: 4, name: "4 weeks" },
+          ]}
+          placeholder="Select a grace period"
+          required
+          error={errors.grace_period?.message}
+        />
+        <div>
+          <TextInput
+            register={register}
+            name="caution_fee"
+            label="Caution Fee (Refundable)"
+            error={errors.caution_fee?.message}
+            placeholder="eg: 10%"
+            required
+          />
+          <strong className="mt-1 inline-block text-xs font-semibold text-gray-500">
+            Note: The % caution fee will be added to your transaction.
+          </strong>
+        </div>
         <TextInput
           register={register}
           name="address"
@@ -146,7 +189,7 @@ export default function PropertyForm({
           <div className="grid grid-cols-3 gap-x-2">
             <label
               htmlFor="image"
-              className={`relative flex h-28 w-full cursor-pointer items-center justify-center gap-x-1 rounded-md border border-dashed border-gray-300 bg-white py-3 pl-4 pr-10 text-left text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${selectedImage ? "col-span-2" : "col-span-3"}`}
+              className={`relative flex h-28 w-full cursor-pointer items-center justify-center gap-x-1 rounded-md border border-dashed border-gray-300 bg-white py-3 pl-2 pr-2 text-left text-xs shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:pl-4 sm:pr-10 sm:text-sm ${selectedImage ? "col-span-1" : "col-span-3"}`}
             >
               <input
                 type="file"
@@ -157,12 +200,12 @@ export default function PropertyForm({
               />
 
               <>
-                <ImagesIcon size={16} />
+                <ImagesIcon size={16} className="shrink-0" />
                 {selectedImage ? "Change image" : "Select property image"}
               </>
             </label>
             {selectedImage && (
-              <div className="relative col-span-1 h-28 w-full">
+              <div className="relative col-span-2 h-28 w-full">
                 <img
                   src={selectedImage}
                   alt="Selected"

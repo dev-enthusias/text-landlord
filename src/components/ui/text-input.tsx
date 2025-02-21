@@ -8,6 +8,7 @@ export default function TextInput({
   label,
   name,
   register,
+  placeholder,
   required,
   error,
   type = "text",
@@ -31,6 +32,7 @@ export default function TextInput({
           {...register(name)}
           className="relative w-full appearance-none rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
           disabled={disabled}
+          placeholder={placeholder}
           maxLength={maxLength}
         />
 

@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
+import Image from "next/image";
 import AddPropertyBtn from "@/components/modals/add-property";
 import { PropertyCard } from "@/components/ui/property-card";
 import {
