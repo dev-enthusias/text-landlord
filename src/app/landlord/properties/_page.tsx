@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import AddPropertyBtn from "@/components/modals/add-property";
-import { PropertyCard } from "@/components/ui/property-card";
+import { LandlordPropertyCard } from "@/components/ui/property-card";
 import {
   Country,
   LandlordPropertiesResponseDataType,
@@ -17,11 +17,13 @@ export default function PropertiesPage({
   propertyTypeAndCategory,
   country,
   advertisedProperties,
+  myPropertyDetailsList,
 }: {
   properties: LandlordPropertiesResponseDataType;
   propertyTypeAndCategory: PropertyMetadataResponseDataType;
   country: Country[];
   advertisedProperties: LandlordPropertyDetailsResponseDataType[];
+  myPropertyDetailsList: LandlordPropertyDetailsResponseDataType[];
 }) {
   const [allOrAdvertised, setAllOrAdvertised] = useState<"all" | "advertised">(
     "all",
@@ -31,6 +33,8 @@ export default function PropertiesPage({
     allOrAdvertised === "all"
       ? properties.properties.list.length
       : advertisedProperties.length;
+
+  console.log(properties);
 
   return (
     <main className="relative flex h-full px-5 pb-20 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
@@ -46,7 +50,7 @@ export default function PropertiesPage({
                 className={`rounded-full px-4 py-2 ${allOrAdvertised === "all" ? "bg-black/90 text-white" : "bg-gray-100 text-black"}`}
                 onClick={() => setAllOrAdvertised("all")}
               >
-                All Properties
+                My Properties
               </button>
               <button
                 className={`rounded-full px-4 py-2 ${allOrAdvertised === "advertised" ? "bg-black/90 text-white" : "bg-gray-100 text-black"}`}
@@ -78,16 +82,46 @@ export default function PropertiesPage({
                   </p>
                 </div>
               ) : (
-                properties.properties.list.map((property: Property) => (
-                  <PropertyCard key={property.id} roleid={4} data={property} />
+                properties.properties.list.map((property: Property, index) => (
+                  <LandlordPropertyCard
+                    key={property.id}
+                    data={{
+                      id: property.id,
+                      name: property.name,
+                      price: String(
+                        myPropertyDetailsList[index].property.rent_amount,
+                      ),
+                      image: myPropertyDetailsList[index].property.image,
+                      status: property.status,
+                      address: {
+                        address: myPropertyDetailsList[index].property.address,
+                      },
+                      bedrooms: myPropertyDetailsList[index].property.bedroom,
+                      bathrooms: myPropertyDetailsList[index].property.bathroom,
+                      size: String(myPropertyDetailsList[index].property.size),
+                    }}
+                  />
                 ))
               )
             ) : (
-              advertisedProperties.map((property) => (
-                <PropertyCard
+              advertisedProperties.map((property, index) => (
+                <LandlordPropertyCard
                   key={property.property.id}
-                  roleid={4}
-                  data={property.property}
+                  data={{
+                    id: property.property.id,
+                    name: property.property.name,
+                    price: String(
+                      myPropertyDetailsList[index].property.rent_amount,
+                    ),
+                    image: myPropertyDetailsList[index].property.image,
+                    status: property.property.status,
+                    address: {
+                      address: myPropertyDetailsList[index].property.address,
+                    },
+                    bedrooms: myPropertyDetailsList[index].property.bedroom,
+                    bathrooms: myPropertyDetailsList[index].property.bathroom,
+                    size: String(myPropertyDetailsList[index].property.size),
+                  }}
                 />
               ))
             )}

@@ -5,31 +5,32 @@ import PropertyPhoto from "./property-photo";
 
 // TenantPropertyCardTypes<TenantAdvertisedProperties>
 
-export function PropertyCard({ type, roleid, data }: any) {
-  const path = (() => {
-    switch (true) {
-      case roleid === 4:
-        return routes.LANDLORD_PROPERTIES + `/${data.id}`;
-      case roleid === 5:
-        return type === "order"
-          ? routes.TENANT_ORDERS + `/${data.id}`
-          : routes.TENANT_PROPERTIES + `/${data.slug}`;
-      case roleid === 4 && type === "order":
-        return routes.LANDLORD_ORDERS + `/${data.id}`;
-      default:
-        return type === "order"
-          ? routes.AGENT_DASHBOARD_SETTINGS + "?path=orderdetails"
-          : routes.AGENT_PROPERTIES + `/${data.id}`;
-    }
-  })();
-
+export function TenantPropertyCard({
+  type,
+  data,
+}: {
+  type: string;
+  roleid: number;
+  data: {
+    id: number;
+    slug: string;
+    name: string;
+    price: string;
+    image: string;
+    status: "pending" | "approved";
+    address: { address: string };
+    bedrooms: number | null;
+    bathrooms: number | null;
+    size: string;
+  };
+}) {
   return (
     <Link
-      href={path}
+      href={routes.TENANT_PROPERTIES + `/${data.slug}`}
       className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg"
     >
       <article className="group flex gap-x-1 sm:flex-col">
-        <PropertyPhoto photo={data.image} />
+        <PropertyPhoto photo={data.image} status={data.status} />
 
         <div className="grow pt-2">
           <div className="px-2">
@@ -49,8 +50,53 @@ export function PropertyCard({ type, roleid, data }: any) {
             />
 
             <PropertyFeatures
-              bedrooms={data.bedrooms}
-              bathrooms={data.bathrooms}
+              bedrooms={data.bedrooms ?? 0}
+              bathrooms={data.bathrooms ?? 0}
+              size={data.size}
+            />
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
+}
+
+export function LandlordPropertyCard({
+  data,
+}: {
+  data: {
+    id: number;
+    name: string;
+    price: string;
+    image: string;
+    status: "pending" | "approved";
+    address: { address: string };
+    bedrooms: number | null;
+    bathrooms: number | null;
+    size: string;
+  };
+}) {
+  return (
+    <Link
+      href={routes.LANDLORD_PROPERTIES + `/${data.id}`}
+      className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg"
+    >
+      <article className="group flex gap-x-1 sm:flex-col">
+        <PropertyPhoto photo={data.image} status={data.status} />
+
+        <div className="grow pt-2">
+          <div className="px-2">
+            <div className="flex justify-between">
+              <PropertyPrice price={data.price} />
+            </div>
+
+            <PropertyNameAndLocation
+              data={{ name: data.name, location: data?.address?.address }}
+            />
+
+            <PropertyFeatures
+              bedrooms={data.bedrooms ?? 0}
+              bathrooms={data.bathrooms ?? 0}
               size={data.size}
             />
           </div>

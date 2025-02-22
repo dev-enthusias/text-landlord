@@ -22,12 +22,19 @@ export default async function Properties() {
     ),
   ).then((results) => results.filter(Boolean));
 
+  const myPropertyDetailsList = await Promise.all(
+    properties.properties.list.map((p: { id: number }) =>
+      getPropertyDetails(p.id),
+    ),
+  ).then((results) => results.filter(Boolean));
+
   return (
     <PropertiesPage
       properties={properties}
       propertyTypeAndCategory={propertyTypeAndCategory}
       country={country}
       advertisedProperties={advertisedList}
+      myPropertyDetailsList={myPropertyDetailsList}
     />
   );
 }

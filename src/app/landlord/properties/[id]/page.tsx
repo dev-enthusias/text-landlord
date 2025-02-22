@@ -29,8 +29,6 @@ export default async function PropertyDetails({
   )) as LandlordPropertyDetailsResponseDataType;
   const { type, completion } = await getPropertyTypeAndCategory();
 
-  console.log(data);
-
   const gallery = data.gallery.map((item) => item.path);
 
   const floorPlanPhoto = data.gallery.find((item) =>

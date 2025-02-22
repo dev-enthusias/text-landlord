@@ -146,6 +146,7 @@ export interface LandlordPropertyDetailsResponseDataType {
     total_sell: number | null;
     address: string;
     city: string | null;
+    status: "pending" | "approved";
     country: string;
     zip_code: string | null;
     size: number | null;
