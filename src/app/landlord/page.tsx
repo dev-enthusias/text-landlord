@@ -167,6 +167,10 @@ async function DashboardContent({
               <FriendCard />
               <FriendCard />
               <FriendCard />
+              <FriendCard />
+              <FriendCard />
+              <FriendCard />
+              <FriendCard />
               <div className="hidden gap-y-3 md:grid lg:hidden">
                 <FriendCard />
                 <FriendCard />
@@ -174,7 +178,7 @@ async function DashboardContent({
             </div>
           </div>
 
-          <div className="rounded-lg bg-white px-5 pb-5 pt-3">
+          {/* <div className="rounded-lg bg-white px-5 pb-5 pt-3">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-semibold text-black">Reports</h3>
               <Link
@@ -189,7 +193,7 @@ async function DashboardContent({
               <Report />
               <Report />
             </div>
-          </div>
+          </div> */}
         </section>
       </div>
     </section>

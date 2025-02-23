@@ -1,7 +1,6 @@
 import {
   HomeIcon,
   HousePlus,
-  OctagonAlert,
   UserRoundPlus,
   UsersRound,
   WalletCards,
@@ -31,7 +30,6 @@ export const landloardQuickActionData = [
   { icons: <HousePlus />, title: "Add Property", id: 0 },
   // { icons: <UsersRound />, title: "Tenants" },
   { icons: <UserRoundPlus />, title: "Add Tenants", id: 2 },
-  { icons: <OctagonAlert />, title: "Reports", id: 3 },
   { icons: <UsersRound />, title: "Assign Agents", id: 4 },
   { icons: <WalletCards />, title: "Bill Management", id: 5 },
 ];
@@ -64,7 +62,6 @@ export const landlordTopbarLinks = [
   { link: routes.LANDLORD_PROPERTIES, name: "Properties" },
   { link: routes.TENANTS, name: "Tenants" },
   { link: routes.AGENTS, name: "Agents" },
-  { link: routes.REPORTS, name: "Reports" },
   { link: routes.BILL_MANAGEMENT, name: "Bill Management" },
 ];
 
@@ -72,7 +69,6 @@ export const agentTopbarLinks = [
   { link: "/landlord", name: "Home", exact: true },
   { link: routes.LANDLORD_PROPERTIES, name: "Properties" },
   { link: routes.TENANTS, name: "Tenants" },
-  { link: routes.REPORTS, name: "Reports" },
   { link: routes.BILL_MANAGEMENT, name: "Bill Management" },
 ];
 
