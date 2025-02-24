@@ -180,9 +180,11 @@ export default function AddPropertyForm({
               </div>
             )}
           </div>
-          <strong className="mt-1 inline-block text-xs font-semibold text-gray-500">
-            {`Note: A total of ${rentPlusPlatformFee} (+5% platform fee) will be displayed as rent amount`}
-          </strong>
+          {rent && (
+            <strong className="mt-1 inline-block text-xs font-semibold text-gray-500">
+              {`Note: A total of ${rentPlusPlatformFee} (+5% platform fee) will be displayed as rent amount`}
+            </strong>
+          )}
         </div>
         <SelectInput
           control={control}
@@ -207,9 +209,11 @@ export default function AddPropertyForm({
             placeholder="eg: 10%"
             required
           />
-          <strong className="mt-1 inline-block text-xs font-semibold text-gray-500">
-            {`Note: The ${parseInt(String(cautionFee)) || "0"}% (${cautionAmount}) caution fee will be added to your transaction.`}
-          </strong>
+          {cautionFee && (
+            <strong className="mt-1 inline-block text-xs font-semibold text-gray-500">
+              {`Note: The ${parseInt(String(cautionFee)) || "0"}% (${cautionAmount}) caution fee will be added to your transaction.`}
+            </strong>
+          )}
         </div>
         <TextInput
           register={register}
