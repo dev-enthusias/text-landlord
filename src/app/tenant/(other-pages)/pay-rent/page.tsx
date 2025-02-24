@@ -1,5 +1,4 @@
 import PrevPageButton from "@/components/ui/prev-page";
-import { PropertyCard } from "@/components/ui/property-card";
 
 export default function PayRent() {
   return (
@@ -29,7 +28,7 @@ export default function PayRent() {
 
         <section className="my-6">
           <div className="hidden items-stretch gap-5 lg:grid lg:grid-cols-2 xl:grid-cols-3">
-            <PropertyCard
+            {/* <PropertyCard
               type="order"
               data={{
                 price: "$1000",
@@ -64,7 +63,7 @@ export default function PayRent() {
                 total_sell: null,
               }}
               roleid={5}
-            />
+            /> */}
           </div>
         </section>
       </div>

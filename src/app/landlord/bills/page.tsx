@@ -9,8 +9,6 @@ import { getLandlordBills } from "@/api/services/bill";
 export default async function BillsMgt() {
   const bills = await getLandlordBills();
 
-  console.log("bills:", bills);
-
   if (typeof bills === "string")
     return (
       <div className="flex h-full w-full flex-col items-center justify-center py-10">
@@ -37,9 +35,7 @@ export default async function BillsMgt() {
 
         <section className="hidden rounded-2xl bg-white p-5 lg:block">
           <div className="mb-3 flex items-end justify-between">
-            <p className="text-sm font-semibold">
-              Total {totalBills} tenants
-            </p>
+            <p className="text-sm font-semibold">Total {totalBills} tenants</p>
 
             <div className="w-full lg:max-w-[240px] xl:max-w-[440px] xl:gap-x-20">
               <input

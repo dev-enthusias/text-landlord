@@ -1,4 +1,4 @@
-import { PropertyCard } from "../ui/property-card";
+import { TenantPropertyCard } from "../ui/property-card";
 import FilterBtn from "../modals/filter";
 import { TenantAdvertisedProperties } from "@/definition";
 
@@ -21,7 +21,7 @@ export default function PropertyListing({
           <p>There are no advertised properties</p>
         ) : (
           properties.map((property) => (
-            <PropertyCard key={property.id} data={property} roleid={5} />
+            <TenantPropertyCard key={property.id} data={property} roleid={5} />
           ))
         )}
       </div>

@@ -1,5 +1,5 @@
 import PrevPageButton from "@/components/ui/prev-page";
-import { PropertyCard } from "@/components/ui/property-card";
+
 
 export default function Orders() {
   return (
@@ -20,7 +20,7 @@ export default function Orders() {
         </div>
 
         <div className="gap-5 py-3 lg:grid lg:grid-cols-2 xl:grid-cols-3">
-          <PropertyCard
+          {/* <PropertyCard
             type="order"
             data={{
               id: 3,
@@ -37,7 +37,7 @@ export default function Orders() {
               price: "$1000", 
             }}
             roleid={5}
-          />
+          /> */}
         </div>
       </section>
     </section>

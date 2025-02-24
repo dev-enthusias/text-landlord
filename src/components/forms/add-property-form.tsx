@@ -24,7 +24,7 @@ export default function AddPropertyForm({
   categories: PropertyMetadataResponseDataType["categories"];
   types: PropertyMetadataResponseDataType["type"];
   country: Country[];
-  isAddPropertyModalOpen: React.Dispatch<SetStateAction<boolean>>;
+  isAddPropertyModalOpen?: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const countryId = useGlobalStore((state) => state.countryId);
@@ -68,7 +68,7 @@ export default function AddPropertyForm({
       post_code: "12234",
     });
 
-    if (res.result) {
+    if (res.result && isAddPropertyModalOpen) {
       isAddPropertyModalOpen(false);
       toast.success("Success", { description: res.message });
       revalidate("/landlord/properties");

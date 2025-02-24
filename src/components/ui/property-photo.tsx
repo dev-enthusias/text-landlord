@@ -5,7 +5,7 @@ export default function PropertyPhoto({
   status,
 }: {
   photo: string;
-  status: "pending" | "approved";
+  status?: "pending" | "approved";
 }) {
   return (
     <div className="relative w-36 overflow-hidden rounded-lg shadow sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">

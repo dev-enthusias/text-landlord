@@ -6,10 +6,8 @@ import PropertyPhoto from "./property-photo";
 // TenantPropertyCardTypes<TenantAdvertisedProperties>
 
 export function TenantPropertyCard({
-  type,
   data,
 }: {
-  type: string;
   roleid: number;
   data: {
     id: number;
@@ -17,7 +15,6 @@ export function TenantPropertyCard({
     name: string;
     price: string;
     image: string;
-    status: "pending" | "approved";
     address: { address: string };
     bedrooms: number | null;
     bathrooms: number | null;
@@ -30,7 +27,7 @@ export function TenantPropertyCard({
       className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg"
     >
       <article className="group flex gap-x-1 sm:flex-col">
-        <PropertyPhoto photo={data.image} status={data.status} />
+        <PropertyPhoto photo={data.image} />
 
         <div className="grow pt-2">
           <div className="px-2">
@@ -38,11 +35,11 @@ export function TenantPropertyCard({
             <div className="flex justify-between">
               <PropertyPrice price={data.price} />
 
-              {type === "rent" && (
+              {/* {type === "rent" && (
                 <p className="flex items-center justify-center rounded-full bg-green-600/10 px-4 py-0.5 text-xs font-semibold leading-none text-green-500">
                   Paid
                 </p>
-              )}
+              )} */}
             </div>
 
             <PropertyNameAndLocation
