@@ -6,6 +6,7 @@ import {
   getPropertyTypeAndCategory,
 } from "@/api/services/property";
 import PropertiesPage from "./_page";
+import { getDefaultAccont } from "@/api/services/account";
 
 export default async function Properties() {
   const [properties, propertyTypeAndCategory, country, advertisedProperties] =
@@ -15,6 +16,7 @@ export default async function Properties() {
       getCountry(),
       getAdvertisedProperties(),
     ]);
+  const checkDefaultAccount = await getDefaultAccont();
 
   const advertisedList = await Promise.all(
     advertisedProperties.data.map((ad: { property_id: number }) =>
@@ -35,6 +37,7 @@ export default async function Properties() {
       country={country}
       advertisedProperties={advertisedList}
       myPropertyDetailsList={myPropertyDetailsList}
+      checkDefaultAccount={checkDefaultAccount}
     />
   );
 }

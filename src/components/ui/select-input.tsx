@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ChevronDown, Check } from "lucide-react";
 import { useController, Control } from "react-hook-form";
 import { useGlobalStore } from "@/stores/global-store";
@@ -34,6 +34,8 @@ export default function SelectInput({
   const updateCountryId = useGlobalStore((state) => state.updateCountryId);
   const updateStateId = useGlobalStore((state) => state.updateStateId);
   const [isOpen, setIsOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Transform either format to Option array
   const options =
@@ -71,15 +73,39 @@ export default function SelectInput({
     }
   };
 
+  const filteredOptions = options.filter((option) =>
+    option.name.toLowerCase().includes(searchInput.toLowerCase()),
+  );
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative w-full">
+    <div className="relative w-full" ref={dropdownRef}>
       <p className="mb-1 block text-sm font-semibold text-gray-600">
         {label} {required && <span className="font-bold text-red-500">*</span>}
       </p>
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`relative w-full cursor-pointer rounded-md border border-gray-300 bg-white py-3 pl-4 pr-10 text-left shadow-sm ${disabled ? "" : "focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"}`}
+        className={`relative w-full cursor-pointer rounded-md border border-gray-300 bg-white py-3 pl-4 pr-10 text-left shadow-sm ${
+          disabled
+            ? ""
+            : "focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+        }`}
       >
         <span className="block truncate">
           {selectedOption ? (
@@ -99,7 +125,14 @@ export default function SelectInput({
 
       {isOpen && !disabled && (
         <div className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-gray-300 focus:outline-none sm:text-sm">
-          {options.map((option) => (
+          <input
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search..."
+            className="w-full border-b border-gray-300 px-3 py-2 focus:outline-none"
+          />
+          {filteredOptions.map((option) => (
             <button
               key={option.id}
               className={`${

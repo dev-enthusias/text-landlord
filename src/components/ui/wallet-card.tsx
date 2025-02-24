@@ -64,7 +64,7 @@ export default function WalletCard({ data }: { data: AccountType }) {
 
   return (
     <section className="custom-shadow max-w-[540px] rounded-lg bg-white p-3">
-      <article className="mb-2 flex items-center justify-between border-b border-dashed border-gray-200 pb-2">
+      <article className="mb-2 flex items-center gap-x-3 justify-between border-b border-dashed border-gray-200 pb-2">
         <div className="flex items-center space-x-2">
           <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/10">
             <LandmarkIcon className="text-gold" size={15} />
@@ -74,7 +74,7 @@ export default function WalletCard({ data }: { data: AccountType }) {
             <p className="text-xs">Add money via mobile or internet banking</p>
           </div>
         </div>
-        <form className="flex items-center gap-x-1 text-[14px]">
+        <form className="flex shrink-0 items-center gap-x-1 text-[14px]">
           <div className="flex items-center gap-x-1">
             {isSettingDefault ? (
               <LoadingSpinner />
@@ -86,7 +86,7 @@ export default function WalletCard({ data }: { data: AccountType }) {
               />
             )}
             {data.status === 1 ? (
-              <p className="font-bold">Default Account</p>
+              <p className="text-xs font-bold">Default</p>
             ) : (
               <p>Set as default</p>
             )}

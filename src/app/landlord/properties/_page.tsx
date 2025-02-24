@@ -18,12 +18,14 @@ export default function PropertiesPage({
   country,
   advertisedProperties,
   myPropertyDetailsList,
+  checkDefaultAccount,
 }: {
   properties: LandlordPropertiesResponseDataType;
   propertyTypeAndCategory: PropertyMetadataResponseDataType;
   country: Country[];
   advertisedProperties: LandlordPropertyDetailsResponseDataType[];
   myPropertyDetailsList: LandlordPropertyDetailsResponseDataType[];
+  checkDefaultAccount: any;
 }) {
   const [allOrAdvertised, setAllOrAdvertised] = useState<"all" | "advertised">(
     "all",
@@ -33,8 +35,6 @@ export default function PropertiesPage({
     allOrAdvertised === "all"
       ? properties.properties.list.length
       : advertisedProperties.length;
-
-  console.log(properties);
 
   return (
     <main className="relative flex h-full px-5 pb-20 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
@@ -61,6 +61,7 @@ export default function PropertiesPage({
             </div>
 
             <AddPropertyBtn
+            checkDefaultAccount={checkDefaultAccount}
               categories={propertyTypeAndCategory.categories}
               types={propertyTypeAndCategory.type}
               country={country}

@@ -81,7 +81,12 @@ export const addPropertySchema = z.object({
     .min(1, { message: "Please select property category" }),
   rent_amount: z.string().min(1, { message: "Please input rent amount" }),
   grace_period: z.number().min(1, { message: "Please select a grace period" }),
-  caution_fee: z.string().min(1, { message: "Please input % caution fee" }),
+  caution_fee: z
+    .string()
+    .transform((val) => parseInt(val.replace("%", ""), 10))
+    .refine((num) => !isNaN(num) && num >= 0 && num <= 100, {
+      message: "Value must be a number between 0 and 100",
+    }),
 });
 
 export const bookAppointmentSchema = z.object({

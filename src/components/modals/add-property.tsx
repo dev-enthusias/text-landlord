@@ -6,15 +6,18 @@ import AddPropertyForm from "../forms/add-property-form";
 import { X } from "lucide-react";
 import { IoMdAdd } from "react-icons/io";
 import { Country, PropertyMetadataResponseDataType } from "@/definition";
+import Link from "next/link";
 
 export default function AddPropertyBtn({
   categories,
   types,
   country,
+  checkDefaultAccount,
 }: {
   categories: PropertyMetadataResponseDataType["categories"];
   types: PropertyMetadataResponseDataType["type"];
   country: Country[];
+  checkDefaultAccount: any;
 }) {
   const [isAddPropertyModalOpen, setAddPropertyModal] = useState(false);
 
@@ -41,12 +44,34 @@ export default function AddPropertyBtn({
             </header>
 
             <main className="px-5">
-              <AddPropertyForm
-                categories={categories}
-                types={types}
-                country={country}
-                isAddPropertyModalOpen={setAddPropertyModal}
-              />
+              {checkDefaultAccount.status ? (
+                <AddPropertyForm
+                  categories={categories}
+                  types={types}
+                  country={country}
+                  isAddPropertyModalOpen={setAddPropertyModal}
+                />
+              ) : (
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold">
+                    Default Account Required
+                  </h3>
+                  <p className="mt-2 text-sm">
+                    <span>
+                      You need to have a default bank account to add a property.
+                    </span>
+                    <span className="block">
+                      Please set a default account to continue.
+                    </span>
+                  </p>
+                  <Link
+                    href="/landlord/accounts"
+                    className="mt-4 inline-block rounded-lg bg-gold px-5 py-3 text-lg font-bold text-black"
+                  >
+                    Add Account
+                  </Link>
+                </div>
+              )}
             </main>
           </article>
         </ModalLayout>

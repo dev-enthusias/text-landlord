@@ -19,6 +19,7 @@ import {
   getPropertyTypeAndCategory,
 } from "@/api/services/property";
 import { getProfileDetails } from "@/api/services/profile";
+import { getDefaultAccont } from "@/api/services/account";
 
 async function getStatistics() {
   const token = await getToken();
@@ -51,6 +52,7 @@ async function DashboardContent({
   name: string;
 }) {
   const { type, categories } = await getPropertyTypeAndCategory();
+  const checkDefaultAccount = await getDefaultAccont();
 
   const date = new Date();
   const hour = date.getHours();
@@ -87,7 +89,7 @@ async function DashboardContent({
               icon={<RiErrorWarningFill size={14} />}
               total="0"
               description={<p>₦0 Sum of overdue rent</p>}
-              color="#D32F2F"
+              color="#5C3D1E"
               textColor="#ffffff"
             />
             <FinanceSummary
@@ -116,6 +118,7 @@ async function DashboardContent({
                   categories={categories}
                   types={type}
                   country={await getCountry()}
+                  checkDefaultAccount={checkDefaultAccount}
                 />
               }
             />
