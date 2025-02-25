@@ -67,7 +67,7 @@ export default function AddPropertyForm({
     const res = await addProperty({
       ...data,
       caution_fee: parseInt(String(data.caution_fee)),
-      rent_amount: rentPlusPlatformFee,
+      rent_amount: +rent + Number(rent) * 0.05,
       post_code: "12234",
     });
 
