@@ -21,8 +21,6 @@ export default function TenantForm({ properties }: { properties: any }) {
   const onSubmit: SubmitHandler<AddTenantDataType> = async (data) => {
     const result = await addTenant(data);
 
-    console.log(result);
-
     if (!result.success) {
       toast.error(result.error);
     } else {

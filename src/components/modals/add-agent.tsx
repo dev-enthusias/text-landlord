@@ -6,7 +6,7 @@ import ModalLayout from "../ui/modal-layout";
 import { X } from "lucide-react";
 import { IoMdAdd } from "react-icons/io";
 
-export default function AddAgentBtn() {
+export default function AddAgentBtn({ properties }: { properties: any }) {
   const [isAddAgentModalOpen, setAddAgentModal] = useState(false);
 
   return (
@@ -31,7 +31,7 @@ export default function AddAgentBtn() {
               </button>
             </header>
             <main className="px-5">
-              <AgentForm />
+              <AgentForm properties={properties} />
             </main>
           </article>
         </ModalLayout>

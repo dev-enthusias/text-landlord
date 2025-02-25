@@ -153,6 +153,15 @@ export const addTenantSchema = z.object({
     .min(1, { message: "Please select a property" }),
 });
 
+export const addAgentSchema = z.object({
+  agent_id: z.coerce.number().min(1, { message: "Select an agent" }),
+  property_id: z.coerce
+    .number()
+    .min(1, { message: "Please select a property" }),
+  commission: z.string().min(1, { message: "Please input commission" }),
+  end_date: z.string().min(1, { message: "Please input end date" }),
+});
+
 export const waitListSchema = z.object({
   first_name: z
     .string()

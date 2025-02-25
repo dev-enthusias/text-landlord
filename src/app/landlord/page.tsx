@@ -136,7 +136,7 @@ async function DashboardContent({
               icon={<LuUsers2 />}
               total="0"
               description={<p>0 assigned to properties</p>}
-              button={<AddAgentBtn />}
+              button={<AddAgentBtn properties={properties} />}
             />
           </div>
 

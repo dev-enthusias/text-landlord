@@ -63,7 +63,6 @@ export default function AddAccountForm({
       }
     } else {
       const res = await createSubAccount(data);
-
       if (res.status) {
         const res2 = await addAccountToOgaLandlord({
           name: res.data.settlement_bank,
