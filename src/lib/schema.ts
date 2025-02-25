@@ -148,6 +148,9 @@ export const addTenantSchema = z.object({
     .string()
     .min(1, { message: "Email is required" })
     .email({ message: "Invalid email address" }),
+  property_id: z.coerce
+    .number()
+    .min(1, { message: "Please select a property" }),
 });
 
 export const waitListSchema = z.object({

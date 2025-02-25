@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
-import AddEditTenantForm from "./add-edit-tenant";
+import AddEditTenantForm from "./add-tenant";
 
 export default function EditTenantBtn() {
   const [isAddTenantModalOpen, setAddTenantModal] = useState(false);

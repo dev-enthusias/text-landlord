@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import ModalLayout from "./modal-layout";
-import AddEditTenant from "./add-edit-tenant";
+import AddTenant from "./add-tenant";
 import { IoMdAdd } from "react-icons/io";
 
-export default function AddTenantBtn() {
+export default function AddTenantBtn({ properties }: { properties: any }) {
   const [isAddTenantModalOpen, setAddTenantModal] = useState(false);
 
   return (
@@ -19,7 +19,10 @@ export default function AddTenantBtn() {
 
       {isAddTenantModalOpen && (
         <ModalLayout>
-          <AddEditTenant setAddTenantModal={setAddTenantModal} />
+          <AddTenant
+            setAddTenantModal={setAddTenantModal}
+            properties={properties}
+          />
         </ModalLayout>
       )}
     </>

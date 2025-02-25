@@ -15,6 +15,7 @@ import { LandlordDashboardStatisticResponseDataType } from "@/definition";
 import { GrTransaction } from "react-icons/gr";
 import { BASE_URL } from "@/api/config";
 import {
+  getAllProperties,
   getCountry,
   getPropertyTypeAndCategory,
 } from "@/api/services/property";
@@ -53,6 +54,7 @@ async function DashboardContent({
 }) {
   const { type, categories } = await getPropertyTypeAndCategory();
   const checkDefaultAccount = await getDefaultAccont();
+  const properties = await getAllProperties();
 
   const date = new Date();
   const hour = date.getHours();
@@ -127,7 +129,7 @@ async function DashboardContent({
               icon={<FaUsers />}
               total="0"
               description={<p>0 active, 0 inactive</p>}
-              button={<AddTenantBtn />}
+              button={<AddTenantBtn properties={properties} />}
             />
             <PersonalSummary
               title="Total Agents"
