@@ -1,13 +1,14 @@
-"use client";
-
 import Image from "next/image";
 import AddAgentBtn from "@/components/modals/add-agent";
 import { BsChat } from "react-icons/bs";
 import AgentCard from "@/components/ui/agent-card";
 import AssignedPropertyCard from "@/components/ui/assigned-property-card";
 import { CiSearch } from "react-icons/ci";
+import { getAllProperties } from "@/api/services/property";
 
-export default function Agents() {
+export default async function Agents() {
+  const properties = await getAllProperties();
+
   return (
     <main className="mb-20 flex items-start px-5 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
       <div className="no-scrollbar max-h-[calc(100vh-108px)] grow overflow-y-auto">
@@ -15,7 +16,7 @@ export default function Agents() {
           <div className="mb-4 flex flex-col gap-3 lg:flex-row">
             <div className="flex w-full items-center justify-between">
               <h1 className="text-2xl font-semibold text-black">Agents</h1>
-              <AddAgentBtn />
+              <AddAgentBtn properties={properties} />
             </div>
           </div>
           <div className="relative mb-3 w-full lg:max-w-[240px] xl:max-w-[440px] xl:gap-x-20">

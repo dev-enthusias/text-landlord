@@ -10,10 +10,11 @@ import PropertyForm from "../forms/add-property-form";
 import AgentForm from "../forms/agent-form";
 import TenantForm from "../forms/tenant-form";
 import { getToken } from "@/lib/actions";
-import { getCountry } from "@/api/services/property";
+import { getAllProperties, getCountry } from "@/api/services/property";
 
 async function getPropertyTypeAndCategory() {
   const token = await getToken();
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/property/create`,
     {
@@ -36,6 +37,7 @@ export default async function QuickActions() {
   const [isAddAgentModalOpen, setAddAgentModal] = useState(false);
 
   const { type, categories } = await getPropertyTypeAndCategory();
+  const properties = await getAllProperties();
 
   const handleQuickAction = (id: number) => {
     switch (id) {
@@ -110,7 +112,7 @@ export default async function QuickActions() {
               </button>
             </header>
             <main className="px-5">
-              <TenantForm />
+              <TenantForm properties={properties} />
             </main>
           </article>
         </ModalLayout>
@@ -126,7 +128,7 @@ export default async function QuickActions() {
               </button>
             </header>
             <main className="px-5">
-              <AgentForm />
+              <AgentForm properties={properties} />
             </main>
           </article>
         </ModalLayout>

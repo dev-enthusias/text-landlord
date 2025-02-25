@@ -5,9 +5,11 @@ import TenantList, {
 import { CiSearch } from "react-icons/ci";
 import { getTenants } from "@/api/services/tenant";
 import Image from "next/image";
+import { getAllProperties } from "@/api/services/property";
 
 export default async function Tenants() {
   const tenants = await getTenants();
+  const properties = await getAllProperties();
 
   if (typeof tenants === "string")
     return (
@@ -28,7 +30,7 @@ export default async function Tenants() {
           <div className="mb-4 flex flex-col gap-3 lg:flex-row">
             <div className="flex w-full items-center justify-between">
               <h1 className="text-2xl font-semibold text-black">Tenants</h1>
-              <AddTenantBtn />
+              <AddTenantBtn properties={properties} />
             </div>
           </div>
         </section>

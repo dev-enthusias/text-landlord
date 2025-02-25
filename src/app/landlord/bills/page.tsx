@@ -1,4 +1,3 @@
-import AddTenantBtn from "@/components/ui/add-tenant-btn";
 import TenantList, {
   TenantListMobile,
 } from "@/components/data-visualization/tenant-list";
@@ -28,7 +27,7 @@ export default async function BillsMgt() {
           <div className="mb-4 flex flex-col gap-3 lg:flex-row">
             <div className="flex w-full items-center justify-between">
               <h1 className="text-2xl font-semibold text-black">Tenants</h1>
-              <AddTenantBtn />
+              {/* <AddTenantBtn /> */}
             </div>
           </div>
         </section>

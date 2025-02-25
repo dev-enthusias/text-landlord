@@ -10,6 +10,8 @@ import { FormOneDataType } from "@/definition";
 import { registerUser } from "@/api/services/auth";
 import { registerFormSchema } from "@/lib/schema";
 import { toast } from "sonner";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "@/api/services/firebase";
 
 export default function RegistrationForm() {
   const router = useRouter();
@@ -38,6 +40,13 @@ export default function RegistrationForm() {
     });
 
     if (res && res.status) {
+      // set firebase chat users
+      await setDoc(doc(db, "users", res.data.id), res.data);
+
+      // set firebase chat rooms
+      await setDoc(doc(db, "rooms", res.data.id), {
+        messages: [],
+      });
       toast.success("Success", { description: res.message });
       router.push(routes.LOGIN);
     } else if (res && !res.status) {

@@ -106,6 +106,7 @@ export async function registerUser(data: RegisterDataType) {
     } else if (result.role_id)
       return {
         status: true,
+        data: result,
         message: "You have successfully registered on this platform.",
       };
   } catch (error: unknown) {
