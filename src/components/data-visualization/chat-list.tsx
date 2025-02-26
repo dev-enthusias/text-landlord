@@ -10,22 +10,17 @@ import LoadingSpinner from "../ui/loading-spinner";
 
 export default function ChatList({ id }: { id: string }) {
   const [chatLists, setChatLists] = useState<any[]>([]);
-  const [loadingChats, setLoadingChats] = useState(false);
-
-  console.log(chatLists);
+  const [loadingChats, setLoadingChats] = useState(true);
 
   useEffect(() => {
     let unsubscribe: any = null;
 
     const fetchChatLists = async () => {
-      try {
-        setLoadingChats(true);
-        unsubscribe = await getAllChatLists(setChatLists);
-      } catch (error) {
-        console.error("Error fetching chat lists", error);
-      } finally {
+      setLoadingChats(true);
+      unsubscribe = await getAllChatLists((chats) => {
+        setChatLists(chats);
         setLoadingChats(false);
-      }
+      });
     };
 
     fetchChatLists();
@@ -45,15 +40,16 @@ export default function ChatList({ id }: { id: string }) {
     );
   }
 
-  if (!chatLists.length) {
+  // Only show "There is nobody here" if we've attempted to load and chatLists is still empty
+  if (!loadingChats && chatLists.length === 0) {
     return <p className="text-center text-sm">There is nobody here</p>;
   }
 
   return (
     <div className="no-scrollbar grid w-full gap-y-3 overflow-x-scroll px-1">
-      {chatLists.length > 0
-        ? chatLists.map((chat, i) => <FriendCard key={i} data={chat} id={id} />)
-        : ""}
+      {chatLists.map((chat, i) => (
+        <FriendCard key={i} data={chat} id={id} />
+      ))}
     </div>
   );
 }
