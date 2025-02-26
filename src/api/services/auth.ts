@@ -30,6 +30,7 @@ export async function authenticate(
       const roleId = result.role_id;
       const userDetails = {
         name: result.name,
+        
       };
 
       cookies().set("session", authToken, {
