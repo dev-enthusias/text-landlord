@@ -133,6 +133,15 @@ export interface LandlordPropertiesResponseDataType {
   };
 }
 
+export type ChatMessage = {
+  createdAt: number;
+  type: "text";
+  status: "seen" | "sent";
+  author: { id: string };
+  id: string;
+  text: string;
+};
+
 export interface LandlordPropertyDetailsResponseDataType {
   title: string;
   property: {

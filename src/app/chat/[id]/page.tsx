@@ -1,14 +1,40 @@
-import ChatFooter from "@/components/layout/chat-footer";
-import ChatHeader from "@/components/layout/chat-header";
+import { db } from "@/api/services/firebase";
+import { getUserId } from "@/lib/actions";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import ChatClient from "./chat-client";
+import { ChatMessage } from "@/definition";
 
-export default function Chat() {
+export default async function Chat({ params }: { params: { id: string } }) {
+  const roomId = params.id;
+  const userId = (await getUserId()) as string;
+
+  // Fetch initial messages
+  const messagesRef = collection(db, "rooms", roomId, "messages");
+  const snapshot = await getDocs(messagesRef);
+  const initialMessages = snapshot.docs.map((doc) => doc.data());
+
+  // Fetch chat partner details
+  const docRef = doc(db, "rooms", roomId);
+  const docSnap = await getDoc(docRef);
+  let chatPartner = null;
+
+  if (docSnap.exists()) {
+    const [partnerId] = docSnap
+      .data()
+      .userIds.filter((id: string) => id !== userId);
+    const userDocRef = doc(db, "users", partnerId);
+    const userDocSnap = await getDoc(userDocRef);
+    if (userDocSnap.exists()) {
+      chatPartner = userDocSnap.data();
+    }
+  }
+
   return (
-    <section className="flex h-full grow flex-col bg-[#FAFAFA] lg:pb-7">
-      <ChatHeader />
-
-      <main className={`chat-content grow overflow-y-auto px-4 lg:px-7`}></main>
-
-      <ChatFooter />
-    </section>
+    <ChatClient
+      roomId={roomId}
+      userId={userId}
+      initialMessages={initialMessages as ChatMessage[]}
+      chatPartner={chatPartner}
+    />
   );
 }

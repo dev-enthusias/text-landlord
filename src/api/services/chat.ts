@@ -28,6 +28,7 @@ export const getAllChatLists = async (setChatLists: (chats: any[]) => void) => {
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {
         const userData = { ...userDoc.data(), ...snap.data() };
+        userData.roomId = snap.id;
         users.push(userData);
       }
     }

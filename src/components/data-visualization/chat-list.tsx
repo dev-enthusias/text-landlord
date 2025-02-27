@@ -56,7 +56,7 @@ export default function ChatList({ id }: { id: string }) {
 
 function FriendCard({ data, id }: { data: any; id: string }) {
   return (
-    <Link href={routes.CHAT + "/0"} replace>
+    <Link href={routes.CHAT + `/${data.roomId}`} replace>
       <article className="flex items-center gap-x-3 rounded-lg bg-gold/10 px-2 py-1.5 text-[#09132C] hover:bg-gold/15">
         <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
           <Image
