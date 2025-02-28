@@ -30,5 +30,5 @@ export function convertTimestampToTimeFormat(timestamp: number): string {
   const minutesStr = minutes < 10 ? "0" + minutes : minutes.toString();
 
   // Build the formatted time string
-  return `${hoursStr}:${minutesStr}${ampm}`;
+  return `${hoursStr}:${minutesStr} ${ampm}`;
 }
