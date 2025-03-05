@@ -111,7 +111,7 @@ export default function ChatClient({
   }, [messages]);
 
   return (
-    <section className="flex h-full grow flex-col bg-[#FAFAFA] lg:pb-7">
+    <section className="flex h-full grow flex-col bg-[#FAFAFA]">
       <ChatHeader data={chatPartner} />
       <main className="no-scrollbar grow overflow-y-auto px-4 pb-4 lg:px-7">
         <div className="flex flex-col">
@@ -172,7 +172,7 @@ export default function ChatClient({
           <div ref={messagesEndRef} />
         </div>
       </main>
-      <ChatFooter />
+      <ChatFooter roomId={roomId} userId={userId} />
     </section>
   );
 }
