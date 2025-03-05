@@ -21,7 +21,7 @@ export function convertTimestampToTimeFormat(timestamp: number): string {
   const minutes = date.getMinutes();
 
   // Format for 12-hour clock
-  const ampm = hours >= 12 ? "pm" : "am";
+  const ampm = hours >= 12 ? "PM" : "AM";
   hours = hours % 12;
   hours = hours ? hours : 12; // Convert 0 to 12 for 12am
 

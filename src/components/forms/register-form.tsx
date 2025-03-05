@@ -11,7 +11,7 @@ import { registerUser } from "@/api/services/auth";
 import { registerFormSchema } from "@/lib/schema";
 import { toast } from "sonner";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "@/api/services/firebase";
+import { db } from "@/api/firebase.config";
 
 export default function RegistrationForm() {
   const router = useRouter();

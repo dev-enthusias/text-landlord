@@ -6,7 +6,7 @@ import {
   where,
   onSnapshot,
 } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "../firebase.config";
 import { getUserId } from "@/lib/actions";
 
 export const getAllChatLists = async (setChatLists: (chats: any[]) => void) => {

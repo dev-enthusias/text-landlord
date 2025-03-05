@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "../ui/loading-spinner";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/api/services/firebase";
+import { db } from "@/api/firebase.config";
 
 export default function ChatList({ id }: { id: string }) {
   const [chatLists, setChatLists] = useState<any[]>([]);

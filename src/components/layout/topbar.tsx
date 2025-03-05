@@ -88,6 +88,7 @@ export default async function Topbar() {
             key={i}
             href={l.link}
             exact={l.exact}
+            className="transition-all duration-300 hover:text-black"
             activeClassName="font-bold text-black"
           >
             {l.name}

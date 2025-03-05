@@ -1,4 +1,4 @@
-import { db } from "@/api/services/firebase";
+import { db } from "@/api/firebase.config";
 import { getUserId } from "@/lib/actions";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import ChatClient from "./chat-client";

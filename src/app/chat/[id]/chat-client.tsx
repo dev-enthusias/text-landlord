@@ -1,6 +1,6 @@
 "use client";
 
-import { db } from "@/api/services/firebase";
+import { db } from "@/api/firebase.config";
 import ChatFooter from "@/components/layout/chat-footer";
 import ChatHeader from "@/components/layout/chat-header";
 import { ChatMessage } from "@/definition";
@@ -92,7 +92,7 @@ export default function ChatClient({
     // This handles the case when messages are already visible
     const timer = setTimeout(() => {
       markMessagesAsSeen();
-    }, 1000);
+    }, 100);
 
     // Observe the messages container
     if (messagesEndRef.current) {
