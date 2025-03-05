@@ -140,6 +140,12 @@ export type ChatMessage = {
   author: { id: string };
   id: string;
   text: string;
+  height?: number;
+  metadata?: { base64image: string };
+  name: string;
+  size: number;
+  uri: string;
+  width: number;
 };
 
 export interface LandlordPropertyDetailsResponseDataType {

@@ -124,7 +124,19 @@ export default function ChatClient({
                   : "self-start bg-gray-200 text-left"
               } mb-2 max-w-[240px] rounded-lg p-2 text-sm lg:max-w-[480px] lg:text-base`}
             >
-              <p>{message.text}</p>
+              {message.type === "text" ? (
+                <p>{message.text}</p>
+              ) : message.type === "image" ? (
+                <img
+                  // src={message.metadata?.base64image}
+                  src={`data:image/jpeg;base64,${message.metadata?.base64image}`}
+                  alt=""
+                  width={1080}
+                  height={700}
+                  className="rounded-lg object-cover"
+                />
+              ) : null}
+
               <div className="flex items-center justify-end text-[10px] text-gray-500">
                 <div className="flex items-center gap-1.5">
                   <svg
