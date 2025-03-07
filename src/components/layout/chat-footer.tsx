@@ -2,11 +2,19 @@
 
 import { db, storage } from "@/api/firebase.config";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { LucideSendHorizontal } from "lucide-react";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { LucideSendHorizontal, LucideImage, LucideX } from "lucide-react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
+import dynamic from "next/dynamic";
+
+const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
 export default function ChatFooter({
   roomId,
@@ -17,55 +25,83 @@ export default function ChatFooter({
 }) {
   const [messageText, setMessageText] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isSending, setIsSending] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file)); // Preview image before upload
+    }
+  }
+
+  function removeImage() {
+    setImageFile(null);
+    setImagePreview(null);
+  }
 
   async function sendMessage() {
-    // Check for empty message or selected image
     if (!messageText.trim() && !imageFile) {
       toast.error("Please enter a message or select an image.");
       return;
     }
 
-    // Validate the message text to allow only string text
-    if (typeof messageText !== "string") {
-      toast.error("Invalid message type. Please enter a string.");
-      return;
-    }
-
     setIsSending(true);
+
+    console.log(imageFile);
 
     try {
       const messagesRef = collection(db, "rooms", roomId, "messages");
-
       let imageUrl = null;
 
-      // If an image is selected, upload it to Firebase Storage
       if (imageFile) {
+        // Upload image to Firebase Storage
         const imageRef = ref(
           storage,
-          `messages/${roomId}/${Date.now()}-${imageFile.name}`,
+          `messages/${roomId}/${uuidv4()}-${imageFile.name}`,
         );
-        await uploadBytes(imageRef, imageFile);
-        imageUrl = await getDownloadURL(imageRef);
+        const snapshot = await uploadBytes(imageRef, imageFile);
+        imageUrl = await getDownloadURL(snapshot.ref);
+        console.log(imageUrl);
       }
 
-      // Prepare message object
+      // Send message to Firestore
       const newMessage = {
         id: uuidv4(),
         author: { id: userId },
         text: messageText,
-        // imageUrl,
-        createdAt: serverTimestamp(),
+        createdAt: Date.now(),
         status: "sent",
         type: imageFile ? "image" : "text",
       };
 
-      // Add message to Firestore
-      await addDoc(messagesRef, newMessage);
+      const newMessageImage = {
+        id: uuidv4(),
+        author: { id: userId },
+        createdAt: Date.now(),
+        height: 1080,
+        width: 1080,
+        metadata: {
+          base64image: imageUrl,
+        },
+        name: imageFile?.name,
+        size: imageFile?.size,
+        status: "sent",
+        type: imageFile ? "image" : "text",
+      };
 
-      // Reset input fields
+      const uploadedMessageData = imageFile ? newMessageImage : newMessage;
+
+      await addDoc(messagesRef, uploadedMessageData);
+
+      // Reset fields after sending
       setMessageText("");
       setImageFile(null);
+      setImagePreview(null);
+      setShowEmojiPicker(false);
+      toast.success("Message sent!");
     } catch (error) {
       console.error("Error sending message:", error);
       toast.error("Failed to send message.");
@@ -75,43 +111,72 @@ export default function ChatFooter({
   }
 
   return (
-    <footer className="flex gap-x-3 bg-gold/10 px-4 py-4 lg:gap-x-7 lg:px-7">
-      <button type="button" className="text-2xl">
+    <footer className="relative flex gap-x-3 bg-gold/10 px-4 py-4 lg:gap-x-7 lg:px-7">
+      {/* Emoji Picker Button */}
+      <button
+        type="button"
+        className="text-2xl"
+        onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+      >
         🙂
       </button>
-      <button type="button">
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M15.3511 10.5486V19.4365"
-            stroke="#E29A13"
-            strokeWidth="1.81971"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+
+      {/* Emoji Picker */}
+      {showEmojiPicker && (
+        <div className="absolute bottom-14 left-4 z-10">
+          <EmojiPicker
+            onEmojiClick={(emojiObject) => {
+              setMessageText((prev) => prev + emojiObject.emoji);
+              setShowEmojiPicker(false);
+            }}
+            width={290}
           />
-          <path
-            d="M19.8026 14.9925H10.9062"
-            stroke="#E29A13"
-            strokeWidth="1.81971"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        </div>
+      )}
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          sendMessage();
+        }}
+      >
+        {/* Image Upload Button */}
+        <label htmlFor="fileInput" className="cursor-pointer">
+          <LucideImage className="text-gold" size={26} />
+          <input
+            type="file"
+            id="fileInput"
+            accept="image/*"
+            className="hidden"
+            onChange={handleImageChange}
           />
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M21.0346 2.87268H9.66574C5.7028 2.87268 3.21875 5.67757 3.21875 9.64827V20.3599C3.21875 24.3306 5.69125 27.1355 9.66574 27.1355H21.0346C25.0091 27.1355 27.4816 24.3306 27.4816 20.3599V9.64827C27.4816 5.67757 25.0091 2.87268 21.0346 2.87268Z"
-            stroke="#130F26"
-            strokeWidth="1.81971"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
+        </label>
+
+        {/* Image Preview */}
+        {imagePreview && (
+          <div className="relative">
+            <img
+              src={imagePreview}
+              alt="Selected"
+              className="h-12 w-12 rounded-lg object-cover"
+            />
+            <button
+              onClick={removeImage}
+              className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white"
+            >
+              <LucideX size={14} />
+            </button>
+
+            <button
+              type="submit"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold"
+              disabled={isSending}
+            >
+              <LucideSendHorizontal className="text-[#130F26]" />
+            </button>
+          </div>
+        )}
+      </form>
 
       <form
         onSubmit={(e) => {

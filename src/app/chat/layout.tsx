@@ -12,7 +12,7 @@ export default function ChatLayout({
       <div className="h-[calc(100dvh-80px)] max-h-[calc(100dvh-80px)]">
         <section className="flex h-full w-full">
           <div className="no-scrollbar hidden h-dvh overflow-y-auto bg-[#ece6cb] pb-10 lg:block lg:h-[calc(100vh-80px)] lg:shrink-0">
-            <ChatSidebar />
+            <ChatSidebar id />
           </div>
 
           <div className="h-full grow overflow-hidden">{children}</div>
