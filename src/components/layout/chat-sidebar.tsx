@@ -11,6 +11,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/api/firebase.config";
 import { SearchIcon } from "lucide-react";
 import { BackButton } from "../ui/prev-page";
+import { MdInsertPhoto } from "react-icons/md";
 
 export default function ChatList({ id }: { id: string }) {
   const [chatLists, setChatLists] = useState<any[]>([]);
@@ -116,6 +117,7 @@ export const FriendCard = ({
   id: string;
   numberOfUnseenMessages: number | null;
 }) => {
+  console.log(data);
   return (
     <Link
       href={routes.CHAT + `/${data.roomId}`}
@@ -142,8 +144,15 @@ export const FriendCard = ({
           </p>
         </div>
         <div className="flex w-full items-center justify-between gap-x-1">
-          <p className="max-w-[80%] overflow-hidden truncate overflow-ellipsis whitespace-nowrap text-xxs">
-            {data.metadata.text}
+          <p className="max-w-[80%] overflow-hidden truncate overflow-ellipsis whitespace-nowrap text-xs">
+            {data.metadata.type === "image" ? (
+              <span className="flex items-center gap-x-1">
+                <MdInsertPhoto />
+                Photo
+              </span>
+            ) : (
+              data.metadata.text
+            )}
           </p>
 
           {data.metadata.status === "seen" ? (

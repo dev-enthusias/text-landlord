@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "../ui/loading-spinner";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/api/firebase.config";
+import { MdInsertPhoto } from "react-icons/md";
 
 export default function ChatList({ id }: { id: string }) {
   const [chatLists, setChatLists] = useState<any[]>([]);
@@ -124,7 +125,14 @@ function FriendCard({
         </div>
         <div className="flex w-full items-center justify-between gap-x-1">
           <p className="max-w-[80%] overflow-hidden truncate overflow-ellipsis whitespace-nowrap text-xxs">
-            {data.metadata.text}
+            {data.metadata.type === "image" ? (
+              <span className="flex items-center gap-x-1">
+                <MdInsertPhoto />
+                Photo
+              </span>
+            ) : (
+              data.metadata.text
+            )}
           </p>
 
           {data.metadata.status === "seen" ? (

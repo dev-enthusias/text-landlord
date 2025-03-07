@@ -1,7 +1,13 @@
 "use client";
 
 import { db, storage } from "@/api/firebase.config";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import {
   getDownloadURL,
   ref,
@@ -13,6 +19,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
 import dynamic from "next/dynamic";
+import { upload } from "@/api/services/chat";
 
 const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
@@ -43,6 +50,9 @@ export default function ChatFooter({
   }
 
   async function sendMessage() {
+    const time = Date.now();
+    const id = uuidv4();
+
     if (!messageText.trim() && !imageFile) {
       toast.error("Please enter a message or select an image.");
       return;
@@ -50,37 +60,30 @@ export default function ChatFooter({
 
     setIsSending(true);
 
-    console.log(imageFile);
-
     try {
       const messagesRef = collection(db, "rooms", roomId, "messages");
       let imageUrl = null;
 
       if (imageFile) {
-        // Upload image to Firebase Storage
-        const imageRef = ref(
-          storage,
-          `messages/${roomId}/${uuidv4()}-${imageFile.name}`,
-        );
-        const snapshot = await uploadBytes(imageRef, imageFile);
-        imageUrl = await getDownloadURL(snapshot.ref);
-        console.log(imageUrl);
+        imageUrl = await upload(imageFile);
       }
+
+      console.log(imageUrl);
 
       // Send message to Firestore
       const newMessage = {
-        id: uuidv4(),
+        id,
         author: { id: userId },
         text: messageText,
-        createdAt: Date.now(),
+        createdAt: time,
         status: "sent",
         type: imageFile ? "image" : "text",
       };
 
       const newMessageImage = {
-        id: uuidv4(),
+        id,
         author: { id: userId },
-        createdAt: Date.now(),
+        createdAt: time,
         height: 1080,
         width: 1080,
         metadata: {
@@ -95,6 +98,22 @@ export default function ChatFooter({
       const uploadedMessageData = imageFile ? newMessageImage : newMessage;
 
       await addDoc(messagesRef, uploadedMessageData);
+
+      const roomRef = doc(db, "rooms", roomId);
+      await updateDoc(roomRef, {
+        metadata: {
+          author: { id: userId },
+          createdAt: time,
+          id,
+          status: "sent",
+          text: messageText,
+          type: imageFile ? "image" : "text",
+        },
+        createdAt: time,
+        lastMessage: messageText,
+        lastMessageTime: serverTimestamp(),
+        lastMessageAuthor: userId,
+      });
 
       // Reset fields after sending
       setMessageText("");
@@ -154,7 +173,13 @@ export default function ChatFooter({
 
         {/* Image Preview */}
         {imagePreview && (
-          <div className="relative">
+          <form
+            className="relative"
+            onSubmit={(e) => {
+              e.preventDefault();
+              sendMessage();
+            }}
+          >
             <img
               src={imagePreview}
               alt="Selected"
@@ -162,6 +187,7 @@ export default function ChatFooter({
             />
             <button
               onClick={removeImage}
+              type="button"
               className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white"
             >
               <LucideX size={14} />
@@ -174,7 +200,7 @@ export default function ChatFooter({
             >
               <LucideSendHorizontal className="text-[#130F26]" />
             </button>
-          </div>
+          </form>
         )}
       </form>
 
