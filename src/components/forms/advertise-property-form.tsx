@@ -51,11 +51,9 @@ export default function AdvertisePropertyForm({
           label="Advertisement type"
           control={control}
           name="advertisement_type"
-          options={[
-            { id: 1, name: "Rent" },
-            { id: 4, name: "Sale" },
-          ]}
+          options={[{ id: 1, name: "Rent" }]}
           placeholder="choose advertisement type"
+          defaultValue={1}
           error={errors.advertisement_type?.message}
         />
         <SelectInput
@@ -67,6 +65,7 @@ export default function AdvertisePropertyForm({
             { id: 2, name: "Yearly" },
           ]}
           placeholder="choose rent type"
+          defaultValue={2}
           error={errors.rent_type?.message}
         />
 

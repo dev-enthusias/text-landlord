@@ -48,7 +48,7 @@ export default function PropertiesPage({
               My Properties ({totalProperties})
             </h1>
 
-            <div className="custome-shadow fixed bottom-20 left-1/2 flex -translate-x-1/2 gap-x-2 rounded-full border bg-white from-gold/20 to-gold/10 p-1.5">
+            <div className="custome-shadow flex gap-x-2 rounded-full border bg-white from-gold/20 to-gold/10 p-1.5">
               <button
                 className={`rounded-full px-4 py-2 ${allOrAdvertised === "all" ? "bg-black/90 text-white" : "bg-gray-100 text-black"}`}
                 onClick={() => setAllOrAdvertised("all")}
