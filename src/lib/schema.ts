@@ -122,20 +122,20 @@ export const basicPropertyInfoSchema = z.object({
     .string()
     .min(1, { message: "Please input property description" }),
   flat_no: z.string().optional(),
-  rent_amount: z.coerce
-    .number()
-    .positive({ message: "Rent amount must be a positive number" })
-    .min(1, { message: "Please input rent amount" }),
+  rent_amount: z.string().min(1, { message: "Please input rent amount" }),
   bathroom: z.coerce
     .number()
     .int()
     .positive({ message: "Number of bathrooms must be a positive integer" })
-    .min(1, { message: "Please input number of bathrooms" }),
+    .min(1, { message: "Please input number of bathrooms" })
+    .nullable()
+    .or(z.literal("")),
   bedroom: z.coerce
     .number()
     .int()
     .positive({ message: "Number of bedrooms must be a positive integer" })
-    .min(1, { message: "Please input number of bedrooms" }),
+    .min(1, { message: "Please input number of bedrooms" })
+    .or(z.literal("")),
   size: z.coerce
     .number()
     .positive({ message: "Property size must be a positive number" })

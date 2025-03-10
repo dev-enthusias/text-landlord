@@ -14,23 +14,24 @@ import SubmitButton from "./submit-button";
 import TextareaInput from "../ui/text-area";
 import { toast } from "sonner";
 import revalidate from "@/utils/revalidate";
+import { useState } from "react";
 
 export default function ExtraPropertyDetailsForm({
   type,
-  completion,
   name,
   propertyType,
   id,
+  rent,
   setEditPropertyModal,
 }: {
   id: number;
   name: string;
+  rent: number;
   propertyType: PropertyMetadataResponseDataType["type"];
   type: {
     id: number;
     name: string;
   }[];
-  completion: PropertyMetadataResponseDataType["completion"];
   setEditPropertyModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const {
@@ -38,6 +39,7 @@ export default function ExtraPropertyDetailsForm({
     handleSubmit,
     control,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<BasicPropertyInfoDataType>({
     resolver: zodResolver(basicPropertyInfoSchema),
@@ -45,6 +47,10 @@ export default function ExtraPropertyDetailsForm({
       name: name,
     },
   });
+
+  const [rentAmount, setRentAmount] = useState(
+    `₦${rent.toLocaleString("en-NG")}`,
+  );
 
   const onSubmit: SubmitHandler<BasicPropertyInfoDataType> = async (data) => {
     const res = await addPropertyBasicInfo(data, id);
@@ -60,6 +66,34 @@ export default function ExtraPropertyDetailsForm({
   const defaultPropertyType = type.find(
     (type) => type.name === propertyType[0],
   );
+
+  const handleRentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    // Remove currency symbol, commas, and other non-numeric characters
+    value = value.replace(/[^0-9]/g, "");
+
+    if (!value) {
+      setValue("rent_amount", "");
+      setRentAmount("");
+      return;
+    }
+
+    const numericValue = parseFloat(value);
+
+    // Update the actual form value with the numeric string
+    setValue("rent_amount", numericValue.toString(), { shouldValidate: true });
+
+    // Update the display value with the formatted string
+    setRentAmount("₦" + numericValue.toLocaleString("en-NG"));
+  };
+
+  const formatter = new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  });
+
+  const rentPlusPlatformFee = formatter.format(+rent + Number(rent) * 0.05);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -80,27 +114,17 @@ export default function ExtraPropertyDetailsForm({
           error={errors.type?.message}
           defaultValue={defaultPropertyType?.id}
         />
-        <SelectInput
-          label="Property completion"
-          control={control}
-          name="completion"
-          options={completion}
-          placeholder="choose property completion status"
-          error={errors.completion?.message}
-        />
         <TextInput
           register={register}
           name="bedroom"
           label="How may bedrooms are in the property?"
           error={errors.bedroom?.message}
-          required
         />
         <TextInput
           register={register}
           name="bathroom"
           label="How many bathrooms are in the property?"
           error={errors.bathroom?.message}
-          required
         />
         <TextInput
           register={register}
@@ -109,13 +133,36 @@ export default function ExtraPropertyDetailsForm({
           error={errors.size?.message}
           required
         />
-        <TextInput
-          register={register}
-          name="rent_amount"
-          label="How much is the rent for the property?"
-          error={errors.rent_amount?.message}
-          required
-        />
+        <div>
+          <div className="space-y-1">
+            <label
+              htmlFor="rent_amount"
+              className="mb-1 block text-sm font-semibold text-gray-600"
+            >
+              Rent Amount
+              <span className="font-bold text-red-500"> *</span>
+            </label>
+            <div className="relative">
+              <input
+                id="rent_amount"
+                name="rent_amount"
+                value={rentAmount}
+                onChange={handleRentChange}
+                className="relative w-full appearance-none rounded-md border border-gray-300 bg-white px-4 py-3 shadow-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+              />
+            </div>
+            {errors.rent_amount?.message && (
+              <div className="mt-1 text-xs text-red-600">
+                <p>{errors.rent_amount?.message}</p>
+              </div>
+            )}
+          </div>
+          {rent && (
+            <strong className="mt-1 inline-block text-xs font-semibold text-gray-500">
+              {`Note: A total of ${rentPlusPlatformFee} (+5% platform fee) will be displayed as rent amount`}
+            </strong>
+          )}
+        </div>
         <TextInput
           register={register}
           name="flat_no"

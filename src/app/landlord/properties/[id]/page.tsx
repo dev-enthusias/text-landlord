@@ -11,12 +11,12 @@ import {
   PropertyTenants,
 } from "@/components/pages/properties";
 import { routes } from "@/constants/routes";
-import { LandlordPropertyDetailsResponseDataType } from "@/definition";
-import Gallery from "@/components/gallery";
 import {
-  getPropertyDetails,
-  getPropertyTypeAndCategory,
-} from "@/api/services/property";
+  LandlordPropertyDetailsResponseDataType,
+  PropertyFieldsResponseDT,
+} from "@/definition";
+import Gallery from "@/components/gallery";
+import { getPropertyDetails, getPropertyFields } from "@/api/services/property";
 import AdvertisePropertyBtn from "@/components/modals/advertise-property";
 
 export default async function PropertyDetails({
@@ -27,7 +27,6 @@ export default async function PropertyDetails({
   const data = (await getPropertyDetails(
     params.id,
   )) as LandlordPropertyDetailsResponseDataType;
-  const { type, completion } = await getPropertyTypeAndCategory();
 
   const gallery = data.gallery.map((item) => item.path);
 
@@ -35,15 +34,8 @@ export default async function PropertyDetails({
     item.title.toLowerCase().includes("floor plan"),
   );
 
-  const editedCompletion = completion.map((d: string, i: number) => ({
-    id: i,
-    name: d,
-  }));
-
-  const editedType = type.map((d: string, i: number) => ({
-    id: i,
-    name: d,
-  }));
+  const propertyFields =
+    (await getPropertyFields()) as PropertyFieldsResponseDT;
 
   return (
     <main className="px-5 py-7 pb-10 lg:px-20 lg:pb-20">
@@ -75,12 +67,12 @@ export default async function PropertyDetails({
 
         <div className="flex gap-x-2">
           <UpdatePropertyBtn
-            type={editedType}
-            completion={editedCompletion}
+            type={propertyFields.data.types}
             name={data.property.name}
             id={data.property.id}
             propertyType={data.property.type}
             gallery={gallery}
+            rent={data.property.rent_amount}
             floorPlanPhoto={floorPlanPhoto ? [floorPlanPhoto?.path] : []}
           />
 
@@ -125,8 +117,8 @@ export default async function PropertyDetails({
         </div>
 
         <div className="col-span-5 flex flex-col-reverse gap-y-10 lg:col-span-2 lg:flex-col">
-          <PropertyAgent />
-          <PropertyTenants />
+          {/* <PropertyAgent /> */}
+          {/* <PropertyTenants /> */}
           {/* <PurchaseProperty
             rent={data.property.rent_amount}
             totalVacant={

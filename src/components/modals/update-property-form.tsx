@@ -6,12 +6,12 @@ import { X } from "lucide-react";
 import ExtraPropertyDetailsForm from "../forms/extra-property-details";
 import GalleryForm from "../forms/gallery-form";
 import FloorPlanForm from "../forms/floor-plan-form";
-import { PropertyMetadataResponseDataType } from "@/definition";
+import { PropertyFieldsResponseDT } from "@/definition";
 
 export default function UpdatePropertyBtn({
   type,
-  completion,
   name,
+  rent,
   propertyType,
   id,
   gallery,
@@ -20,10 +20,10 @@ export default function UpdatePropertyBtn({
   name: string;
   id: number;
   propertyType: string;
-  type: { id: number; name: string }[];
+  type: PropertyFieldsResponseDT["data"]["types"];
   gallery: string[];
   floorPlanPhoto: string[];
-  completion: PropertyMetadataResponseDataType["completion"];
+  rent: number;
 }) {
   const [isEditPropertyModalOpen, setEditPropertyModal] = useState(false);
   const [activeForm, setActiveForm] = useState<"extra" | "gallery" | "floor">(
@@ -88,8 +88,8 @@ export default function UpdatePropertyBtn({
               {activeForm === "extra" && (
                 <ExtraPropertyDetailsForm
                   type={type}
-                  completion={completion}
                   name={name}
+                  rent={rent}
                   propertyType={[propertyType]}
                   id={id}
                   setEditPropertyModal={setEditPropertyModal}
