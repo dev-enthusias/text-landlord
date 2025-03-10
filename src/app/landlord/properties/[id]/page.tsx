@@ -6,9 +6,7 @@ import {
   DetailedFeatures,
   Facilities,
   Location,
-  PropertyAgent,
   PropertyNameAndTags,
-  PropertyTenants,
 } from "@/components/pages/properties";
 import { routes } from "@/constants/routes";
 import {

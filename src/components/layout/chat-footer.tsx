@@ -1,6 +1,6 @@
 "use client";
 
-import { db, storage } from "@/api/firebase.config";
+import { db } from "@/api/firebase.config";
 import {
   addDoc,
   collection,
@@ -8,12 +8,6 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
 import { LucideSendHorizontal, LucideImage, LucideX } from "lucide-react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";

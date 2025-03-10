@@ -8,12 +8,7 @@ import {
 } from "firebase/firestore";
 import { db, storage } from "../firebase.config";
 import { getUserId } from "@/lib/actions";
-import {
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-  uploadString,
-} from "firebase/storage";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
 export const getAllChatLists = async (setChatLists: (chats: any[]) => void) => {
   const id = (await getUserId()) as string;
