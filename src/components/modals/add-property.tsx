@@ -5,7 +5,11 @@ import ModalLayout from "../ui/modal-layout";
 import AddPropertyForm from "../forms/add-property-form";
 import { X } from "lucide-react";
 import { IoMdAdd } from "react-icons/io";
-import { Country, PropertyMetadataResponseDataType } from "@/definition";
+import {
+  Country,
+  PropertyFieldsResponseDT,
+  PropertyMetadataResponseDataType,
+} from "@/definition";
 import Link from "next/link";
 
 export default function AddPropertyBtn({
@@ -15,7 +19,7 @@ export default function AddPropertyBtn({
   checkDefaultAccount,
 }: {
   categories: PropertyMetadataResponseDataType["categories"];
-  types: PropertyMetadataResponseDataType["type"];
+  types: PropertyFieldsResponseDT["data"]["types"];
   country: Country[];
   checkDefaultAccount: any;
 }) {

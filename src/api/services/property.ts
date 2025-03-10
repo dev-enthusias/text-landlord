@@ -76,6 +76,19 @@ export async function getAllAdvertisedProperties(data: { types: string[] }) {
   return result.data;
 }
 
+export async function getPropertyFields() {
+  const token = await getToken();
+  const res = await fetch(`${BASE_URL}/private/v1/property-search-field`, {
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await res.json();
+  return result;
+}
+
 export const addProperty = async (data: any) => {
   const token = await getToken();
   const formData = new FormData();

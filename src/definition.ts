@@ -810,3 +810,28 @@ export interface TrxResponseDT {
     total_pages: number;
   };
 }
+
+export interface PropertyFieldsResponseDT {
+  status: boolean;
+  message: string;
+  data: {
+    search: string;
+    price: string;
+    baths: string[];
+    beds: string[];
+    categories: {
+      id: number;
+      name: string;
+    }[];
+    types: {
+      id: number;
+      name: string;
+    }[];
+    sqfts: string[];
+    filters: {
+      is_trending: string;
+      is_recommended: string;
+      discounted: string;
+    };
+  };
+}

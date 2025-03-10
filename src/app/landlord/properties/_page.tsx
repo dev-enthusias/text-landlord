@@ -9,6 +9,7 @@ import {
   LandlordPropertiesResponseDataType,
   LandlordPropertyDetailsResponseDataType,
   Property,
+  PropertyFieldsResponseDT,
   PropertyMetadataResponseDataType,
 } from "@/definition";
 
@@ -19,6 +20,7 @@ export default function PropertiesPage({
   advertisedProperties,
   myPropertyDetailsList,
   checkDefaultAccount,
+  type,
 }: {
   properties: LandlordPropertiesResponseDataType;
   propertyTypeAndCategory: PropertyMetadataResponseDataType;
@@ -26,6 +28,7 @@ export default function PropertiesPage({
   advertisedProperties: LandlordPropertyDetailsResponseDataType[];
   myPropertyDetailsList: LandlordPropertyDetailsResponseDataType[];
   checkDefaultAccount: any;
+  type: PropertyFieldsResponseDT["data"]["types"];
 }) {
   const [allOrAdvertised, setAllOrAdvertised] = useState<"all" | "advertised">(
     "all",
@@ -61,9 +64,9 @@ export default function PropertiesPage({
             </div>
 
             <AddPropertyBtn
-            checkDefaultAccount={checkDefaultAccount}
+              checkDefaultAccount={checkDefaultAccount}
               categories={propertyTypeAndCategory.categories}
-              types={propertyTypeAndCategory.type}
+              types={type}
               country={country}
             />
           </div>

@@ -3,10 +3,12 @@ import {
   getAllProperties,
   getCountry,
   getPropertyDetails,
+  getPropertyFields,
   getPropertyTypeAndCategory,
 } from "@/api/services/property";
 import PropertiesPage from "./_page";
 import { getDefaultAccont } from "@/api/services/account";
+import { PropertyFieldsResponseDT } from "@/definition";
 
 export default async function Properties() {
   const [properties, propertyTypeAndCategory, country, advertisedProperties] =
@@ -30,6 +32,10 @@ export default async function Properties() {
     ),
   ).then((results) => results.filter(Boolean));
 
+  const propertyFields =
+    (await getPropertyFields()) as PropertyFieldsResponseDT;
+  const propertyType = propertyFields.data.types;
+
   return (
     <PropertiesPage
       properties={properties}
@@ -38,6 +44,7 @@ export default async function Properties() {
       advertisedProperties={advertisedList}
       myPropertyDetailsList={myPropertyDetailsList}
       checkDefaultAccount={checkDefaultAccount}
+      type={propertyType}
     />
   );
 }

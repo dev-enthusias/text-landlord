@@ -4,7 +4,12 @@ import TextInput from "../ui/text-input";
 import SelectInput from "../ui/select-input";
 import { ImagesIcon } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AddPropertyDataType, Country, LocationList } from "@/definition";
+import {
+  AddPropertyDataType,
+  Country,
+  LocationList,
+  PropertyFieldsResponseDT,
+} from "@/definition";
 import { PropertyMetadataResponseDataType } from "@/definition";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addPropertySchema } from "@/lib/schema";
@@ -22,7 +27,7 @@ export default function AddPropertyForm({
   isAddPropertyModalOpen,
 }: {
   categories: PropertyMetadataResponseDataType["categories"];
-  types: PropertyMetadataResponseDataType["type"];
+  types: PropertyFieldsResponseDT["data"]["types"];
   country: Country[];
   isAddPropertyModalOpen?: React.Dispatch<SetStateAction<boolean>>;
 }) {
@@ -89,11 +94,6 @@ export default function AddPropertyForm({
     }
   };
 
-  const formattedTypes = types.map((type, index) => ({
-    id: index + 1,
-    name: type,
-  }));
-
   const cautionFee = watch("caution_fee");
   const rent = watch("rent_amount");
   const formatter = new Intl.NumberFormat("en-NG", {
@@ -142,7 +142,7 @@ export default function AddPropertyForm({
           control={control}
           name="type_id"
           label="Property Type"
-          options={formattedTypes}
+          options={types}
           placeholder="Choose an option"
           required
           error={errors.type_id?.message}

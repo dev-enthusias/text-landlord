@@ -8,17 +8,20 @@ import { RiErrorWarningFill } from "react-icons/ri";
 import { MoveDownIcon, MoveUpIcon } from "lucide-react";
 import { FaHourglassHalf, FaUsers } from "react-icons/fa";
 import { getToken, getUserId } from "@/lib/actions";
-import { LandlordDashboardStatisticResponseDataType } from "@/definition";
+import {
+  LandlordDashboardStatisticResponseDataType,
+  PropertyFieldsResponseDT,
+} from "@/definition";
 import { GrTransaction } from "react-icons/gr";
 import { BASE_URL } from "@/api/config";
 import {
   getAllProperties,
   getCountry,
+  getPropertyFields,
   getPropertyTypeAndCategory,
 } from "@/api/services/property";
 import { getProfileDetails } from "@/api/services/profile";
 import { getDefaultAccont } from "@/api/services/account";
-import { convertTimestampToTimeFormat } from "@/utils/formatDate";
 import ChatList from "@/components/data-visualization/chat-list";
 
 async function getStatistics() {
@@ -51,10 +54,12 @@ async function DashboardContent({
   statistics: LandlordDashboardStatisticResponseDataType;
   name: string;
 }) {
-  const { type, categories } = await getPropertyTypeAndCategory();
+  const { categories } = await getPropertyTypeAndCategory();
   const checkDefaultAccount = await getDefaultAccont();
   const properties = await getAllProperties();
   const userId = (await getUserId()) as string;
+  const propertyFields =
+    (await getPropertyFields()) as PropertyFieldsResponseDT;
 
   const date = new Date();
   const hour = date.getHours();
@@ -118,7 +123,7 @@ async function DashboardContent({
               button={
                 <AddPropertyBtn
                   categories={categories}
-                  types={type}
+                  types={propertyFields.data.types}
                   country={await getCountry()}
                   checkDefaultAccount={checkDefaultAccount}
                 />
