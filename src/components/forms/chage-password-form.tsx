@@ -23,7 +23,9 @@ export function ChangePasswordForm() {
     const res = await changePassword(data);
 
     reset();
-    toast.success("Success", { description: res.message });
+    toast.success("Success", {
+      description: res.message || "Password changed successfully",
+    });
   };
 
   return (

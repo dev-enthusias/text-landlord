@@ -182,46 +182,52 @@ export const profileSchema = z.object({
   name: z
     .string()
     .min(2, "Name must be at least 2 characters")
-    .max(50, "Name must be less than 50 characters"),
-  email: z.string().email("Invalid email address"),
+    .max(50, "Name must be less than 50 characters")
+    .nullable()
+    .or(z.literal("")),
+  email: z.string().email("Invalid email address").nullable(),
   phone: z
     .string()
     .regex(
       /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
       "Invalid phone number format",
     )
-    .optional()
+    .nullable()
     .or(z.literal("")),
-  gender: z.enum(["male", "female"], {
-    errorMap: () => ({ message: "Please select a valid gender" }),
-  }),
+  gender: z
+    .enum(["male", "female"], {
+      errorMap: () => ({ message: "Please select a valid gender" }),
+    })
+    .optional(),
   date_of_birth: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Use YYYY-MM-DD format")
-    .refine((date) => !isNaN(Date.parse(date)), "Invalid date"),
+    .refine((date) => !isNaN(Date.parse(date)), "Invalid date")
+    .nullable()
+    .or(z.literal("")),
   occupation: z
     .string()
     .min(2, "Occupation must be at least 2 characters")
-    .optional()
+    .nullable()
     .or(z.literal("")),
   passport: z
     .string()
     .min(5, "Passport/ID must be at least 5 characters")
-    .optional()
+    .nullable()
     .or(z.literal("")),
   designation: z
     .string()
     .min(5, "Address must be at least 5 characters")
-    .optional()
+    .nullable()
     .or(z.literal("")),
   institution: z
     .string()
     .min(2, "Company name must be at least 2 characters")
-    .optional()
+    .nullable()
     .or(z.literal("")),
   nid: z
     .string()
     .min(10, "National ID must be at least 10 characters")
-    .optional()
+    .nullable()
     .or(z.literal("")),
 });

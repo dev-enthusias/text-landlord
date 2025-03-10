@@ -36,8 +36,6 @@ export default async function Home() {
   const statistics = await getStatistics();
   const profileDetails = await getProfileDetails();
 
-  convertTimestampToTimeFormat(1740540601798);
-
   return (
     <DashboardContent
       statistics={statistics}

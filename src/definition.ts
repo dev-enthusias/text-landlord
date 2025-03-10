@@ -793,3 +793,20 @@ export interface AppointmentDataType {
     };
   };
 }
+
+export interface TrxResponseDT {
+  list: [];
+  links: {
+    first: string;
+    last: string;
+    prev: null;
+    next: null;
+  };
+  pagination: {
+    total: number;
+    count: number;
+    per_page: number;
+    current_page: number;
+    total_pages: number;
+  };
+}

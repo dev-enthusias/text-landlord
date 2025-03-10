@@ -4,9 +4,16 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import PrevPageButton from "@/components/ui/prev-page";
 import TransactionCard from "@/components/ui/transaction-card";
-import { TrxButtonProps } from "@/definition";
+import { TrxButtonProps, TrxResponseDT } from "@/definition";
+import { Fragment } from "react";
 
-export default function PaymentHistoryPage({ btns }: { btns: TrxButtonProps }) {
+export default function PaymentHistoryPage({
+  btns,
+  trx,
+}: {
+  btns: TrxButtonProps;
+  trx: TrxResponseDT;
+}) {
   const searchParam = useSearchParams();
   const trxType = searchParam.get("trx-type");
 
@@ -38,30 +45,41 @@ export default function PaymentHistoryPage({ btns }: { btns: TrxButtonProps }) {
       </section>
 
       <section className="px-5 py-4 lg:px-10">
-        <section className="mb-4">
-          <div className="mb-2 flex items-center gap-x-1">
-            <h2 className="text-xs font-semibold text-gray-700">NOVEMBER</h2>
-            <hr className="h-[1px] grow border-none bg-gray-100" />
-          </div>
-          <div className="space-y-5">
-            <TransactionCard status="credit" />
-            <TransactionCard status="debit" />
-            <TransactionCard status="credit" />
-          </div>
-        </section>
-
-        <section>
-          <div className="mb-2 flex items-center gap-x-1">
-            <h2 className="text-xs font-semibold text-gray-700">DECEMBER</h2>
-            <hr className="h-[1px] grow border-none bg-gray-100" />
-          </div>
-          <div className="space-y-5">
-            <TransactionCard status="credit" />
-            <TransactionCard status="debit" />
-            <TransactionCard status="credit" />
-            <TransactionCard status="debit" />
-          </div>
-        </section>
+        {trx.list.length <= 0 ? (
+          <p>There are no transaction history</p>
+        ) : (
+          trx.list.map((_, i) => (
+            <Fragment key={i}>
+              <section className="mb-4">
+                <div className="mb-2 flex items-center gap-x-1">
+                  <h2 className="text-xs font-semibold text-gray-700">
+                    NOVEMBER
+                  </h2>
+                  <hr className="h-[1px] grow border-none bg-gray-100" />
+                </div>
+                <div className="space-y-5">
+                  <TransactionCard status="credit" />
+                  <TransactionCard status="debit" />
+                  <TransactionCard status="credit" />
+                </div>
+              </section>
+              <section>
+                <div className="mb-2 flex items-center gap-x-1">
+                  <h2 className="text-xs font-semibold text-gray-700">
+                    DECEMBER
+                  </h2>
+                  <hr className="h-[1px] grow border-none bg-gray-100" />
+                </div>
+                <div className="space-y-5">
+                  <TransactionCard status="credit" />
+                  <TransactionCard status="debit" />
+                  <TransactionCard status="credit" />
+                  <TransactionCard status="debit" />
+                </div>
+              </section>
+            </Fragment>
+          ))
+        )}
       </section>
     </>
   );
