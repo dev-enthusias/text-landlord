@@ -1,4 +1,4 @@
-import { LandlordTenantsResponseType } from "@/definition";
+import { TrxResponseDT } from "@/definition";
 import { getToken } from "@/lib/actions";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -17,5 +17,5 @@ export async function getTrx() {
   );
 
   const data = await res.json();
-  return data.data as LandlordTenantsResponseType;
+  return data.data as TrxResponseDT;
 }

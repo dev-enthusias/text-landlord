@@ -20,8 +20,6 @@ const buttons = [
 export default async function PaymentHistory() {
   const trx = await getTrx();
 
-  console.log(trx);
-
   return (
     <Suspense>
       <PaymentHistoryPage btns={buttons} trx={trx} />
