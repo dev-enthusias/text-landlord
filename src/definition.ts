@@ -6,8 +6,8 @@ import {
   addGalleryPhotoSchema,
   addPropertySchema,
   addTenantSchema,
+  AppointmentSchema,
   basicPropertyInfoSchema,
-  bookAppointmentSchema,
   changePasswordSchema,
   createAdvertSchema,
   forgotPasswordSchema,
@@ -56,8 +56,6 @@ export type LoginDataType = z.infer<typeof loginSchema>;
 export type ForgotPasswordDataType = z.infer<typeof forgotPasswordSchema>;
 export type ChangePasswordDataType = z.infer<typeof changePasswordSchema>;
 export type FormOneDataType = z.infer<typeof registerFormSchema>;
-export type AddPropertyDataType = z.infer<typeof addPropertySchema>;
-export type BookAppointmentDataType = z.infer<typeof bookAppointmentSchema>;
 export type AddGalleryPhotoDataType = z.infer<typeof addGalleryPhotoSchema>;
 export type AddTenantDataType = z.infer<typeof addTenantSchema>;
 export type AddAgentDataType = z.infer<typeof addAgentSchema>;
@@ -777,21 +775,6 @@ export interface AppointmentType {
   message: string;
   date: string;
   time: string;
-}
-
-export interface AppointmentDataType {
-  status: true;
-  message: "successful";
-  data: {
-    list: AppointmentType[];
-    pagination: {
-      total: number;
-      count: number;
-      per_page: number;
-      current_page: number;
-      total_pages: number;
-    };
-  };
 }
 
 export interface TrxResponseDT {

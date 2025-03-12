@@ -16,7 +16,7 @@ export default async function Layout({
   const profileDetails = await getProfileDetails();
 
   return (
-    <section className="flex items-start gap-x-10 py-7 lg:px-20 lg:pb-20">
+    <section className="flex items-start gap-x-10 border-t-2 border-t-gray-200 lg:px-20 lg:py-7 lg:pb-20">
       <div className="custom-shadow mt-10 hidden w-[320px] shrink-0 space-y-5 overflow-hidden rounded-t-xl text-sm lg:block">
         <section className="relative flex flex-col items-center justify-center gap-2 bg-white pb-5 pt-5">
           <div className="relative h-28 w-28 overflow-hidden">
@@ -46,66 +46,73 @@ export default async function Layout({
         </section>
 
         <section className="bg-white">
-          <NavLink
-            href={routes.TENANT_PROFILE}
-            exact
-            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
-            activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
-          >
-            <FaRegUserCircle size={20} />
-            PROFILE
-          </NavLink>
-          <NavLink
-            href={routes.FUND_WALLET}
-            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
-            activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
-          >
-            <GiReceiveMoney size={24} />
-            Fund Wallet
-          </NavLink>
-          <NavLink
-            href={routes.PAY_RENT}
-            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
-            activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
-          >
-            <GiPayMoney size={24} />
-            Pay Rent
-          </NavLink>
-          <NavLink
-            href={routes.TENANT_CHANGE_PASSWORD}
-            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
-            activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
-          >
-            <RiLockPasswordFill size={20} />
-            Change Password
-          </NavLink>
+          {[
+            {
+              id: 1,
+              path: routes.TENANT_PROFILE,
+              icon: <FaRegUserCircle size={20} />,
+              name: "PROFILE",
+            },
+            {
+              id: 2,
+              path: routes.FUND_WALLET,
+              icon: <GiReceiveMoney size={24} />,
+              name: " Fund Wallet",
+            },
+            {
+              id: 3,
+              path: routes.PAY_RENT,
+              icon: <GiPayMoney size={24} />,
+              name: "Pay Rent",
+            },
+            {
+              id: 4,
+              path: routes.TENANT_CHANGE_PASSWORD,
+              icon: <RiLockPasswordFill size={20} />,
+              name: "Change Password",
+            },
+          ].map((obj) => (
+            <NavLink
+              href={obj.path}
+              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+              activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
+            >
+              {obj.icon}
+              {obj.name}
+            </NavLink>
+          ))}
         </section>
 
         <section className="bg-white">
-          <NavLink
-            href={routes.WISHLIST}
-            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
-            activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
-          >
-            <FaHeart size={18} />
-            Wishlist
-          </NavLink>
-          <NavLink
-            href={routes.TENANT_ORDERS}
-            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
-            activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
-          >
-            <LuHistory size={20} />
-            Orders
-          </NavLink>
-          <NavLink
-            href={routes.APPOINTMENTS}
-            className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
-            activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
-          >
-            <LuHistory size={20} />
-            Appointment
-          </NavLink>
+          {[
+            {
+              id: 1,
+              path: routes.WISHLIST,
+              icon: <FaHeart size={18} />,
+              name: "Wishlist",
+            },
+            {
+              id: 2,
+              path: routes.TENANT_ORDERS,
+              icon: <LuHistory size={20} />,
+              name: "Orders",
+            },
+            {
+              id: 3,
+              path: routes.APPOINTMENTS,
+              icon: <LuHistory size={20} />,
+              name: "Appointment",
+            },
+          ].map((obj) => (
+            <NavLink
+              href={obj.path}
+              className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
+              activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
+            >
+              {obj.icon}
+              {obj.name}
+            </NavLink>
+          ))}
         </section>
       </div>
 

@@ -9,7 +9,7 @@ import ModalLayout from "../ui/modal-layout";
 import { X } from "lucide-react";
 import SubmitButton from "./submit-button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { bookAppointmentSchema } from "@/lib/schema";
+import { AppointmentSchema } from "@/lib/schema";
 import { BookAppointmentDataType } from "@/definition";
 import { postAppointment } from "@/api/services/appointment";
 
@@ -32,7 +32,7 @@ export default function BookAppointment({
     register,
     formState: { isSubmitting, errors },
   } = useForm<BookAppointmentDataType>({
-    resolver: zodResolver(bookAppointmentSchema),
+    resolver: zodResolver(AppointmentSchema),
     defaultValues: {
       name: data.name,
       phone: data.phone,

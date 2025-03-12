@@ -1,10 +1,10 @@
-import { getAppointments } from "@/api/services/appointment";
 import AppointmentCard from "@/components/ui/appointment-card";
 import PrevPageButton from "@/components/ui/prev-page";
-import { AppointmentDataType } from "@/definition";
+import { getAppointments } from "@/api/services/appointment";
+import { AppointmentRDT } from "@/definitions/tenant";
 
 export default async function Appointments() {
-  const appointments = (await getAppointments()) as AppointmentDataType;
+  const appointments = (await getAppointments()) as AppointmentRDT;
 
   return (
     <section>
@@ -15,8 +15,8 @@ export default async function Appointments() {
         </div>
       </header>
 
-      <section className="px-5 py-7 lg:px-10">
-        <div className="grid gap-5 py-3 lg:grid-cols-2 xl:grid-cols-3">
+      <section className="px-3 py-5 lg:px-10 lg:py-7">
+        <div className="grid gap-3 lg:grid-cols-2 lg:gap-5 xl:grid-cols-3">
           {appointments.data.list.map((appointment) => (
             <AppointmentCard key={appointment.id} data={appointment} />
           ))}

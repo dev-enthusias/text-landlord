@@ -1,4 +1,4 @@
-import { BookAppointmentDataType } from "@/definition";
+import { AppointmentFDT } from "@/definitions/tenant";
 import { getToken } from "@/lib/actions";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -50,7 +50,7 @@ export const deleteAppointment = async (id: number) => {
   }
 };
 
-export const postAppointment = async (credentials: BookAppointmentDataType) => {
+export const postAppointment = async (credentials: AppointmentFDT) => {
   const token = await getToken();
 
   try {
@@ -74,17 +74,7 @@ export const postAppointment = async (credentials: BookAppointmentDataType) => {
   }
 };
 
-export const updateAppointment = async (credentials: {
-  name: string;
-  phone: string;
-  email: string;
-  property_address: string;
-  message: string;
-  date: string;
-  time: string;
-  property_id: number;
-  property_owner_id: number;
-}) => {
+export const updateAppointment = async (credentials: AppointmentFDT) => {
   const token = await getToken();
 
   try {

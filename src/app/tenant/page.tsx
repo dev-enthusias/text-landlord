@@ -8,22 +8,18 @@ import { RiErrorWarningFill } from "react-icons/ri";
 import { getProfileDetails } from "@/api/services/profile";
 import { getUserId } from "@/lib/actions";
 import ChatList from "@/components/data-visualization/chat-list";
+import greetUser from "@/utils/greet";
 
 export default async function Home() {
   const profileDetails = await getProfileDetails();
   const userId = (await getUserId()) as string;
 
-  const date = new Date();
-  const hour = date.getHours();
-  const greeting =
-    hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
-
   return (
     <section className="mx-auto w-full max-w-[1240px] px-5 py-7 pb-20 lg:px-20">
-      {/* Gretting */}
+      {/* Greeting */}
       <div className="font-cormorant">
         <h1 className="text-2xl font-bold text-black">
-          {greeting}, {profileDetails?.profile_info.name ?? ""}
+          {greetUser()}, {profileDetails?.profile_info.name ?? ""}
         </h1>
         <p className="font-semibold text-black lg:text-lg">
           Let us help you track your rentals

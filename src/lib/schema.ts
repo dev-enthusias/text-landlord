@@ -1,5 +1,71 @@
 import * as z from "zod";
 
+export const AppointmentSchema = z.object({
+  name: z.string(),
+  phone: z.string(),
+  email: z.string().email(),
+  property_address: z.string(),
+  message: z.string(),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: "Invalid date format, expected YYYY-MM-DD",
+  }),
+  time: z.string().regex(/^\d{2}:\d{2}$/, {
+    message: "Invalid time format, expected HH:MM",
+  }),
+  property_id: z.number(),
+  property_owner_id: z.number(),
+});
+
+export const profileSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be less than 50 characters")
+    .nullable()
+    .or(z.literal("")),
+  email: z.string().email("Invalid email address").nullable(),
+  phone: z
+    .string()
+    .regex(
+      /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
+      "Invalid phone number format",
+    )
+    .max(14, "Phone number must be less than 14 digits")
+    .nullable()
+    .or(z.literal("")),
+  gender: z
+    .enum(["male", "female"], {
+      errorMap: () => ({ message: "Please select a valid gender" }),
+    })
+    .optional(),
+  date_of_birth: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Use YYYY-MM-DD format")
+    .refine((date) => !isNaN(Date.parse(date)), "Invalid date")
+    .nullable()
+    .or(z.literal("")),
+  occupation: z
+    .string()
+    .min(2, "Occupation must be at least 2 characters")
+    .nullable()
+    .or(z.literal("")),
+  designation: z
+    .string()
+    .min(5, "Address must be at least 5 characters")
+    .nullable()
+    .or(z.literal("")),
+  institution: z
+    .string()
+    .min(2, "Company name must be at least 2 characters")
+    .nullable()
+    .or(z.literal("")),
+  nid: z
+    .string()
+    .min(10, "National ID must be at least 10 characters")
+    .nullable()
+    .or(z.literal("")),
+});
+
 export const loginSchema = z.object({
   email: z
     .string()
@@ -89,22 +155,6 @@ export const addPropertySchema = z.object({
     }),
 });
 
-export const bookAppointmentSchema = z.object({
-  name: z.string(),
-  phone: z.string(),
-  email: z.string().email(),
-  property_address: z.string(),
-  message: z.string(),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
-    message: "Invalid date format, expected YYYY-MM-DD",
-  }),
-  time: z.string().regex(/^\d{2}:\d{2}$/, {
-    message: "Invalid time format, expected HH:MM",
-  }),
-  property_id: z.number(),
-  property_owner_id: z.number(),
-});
-
 export const addAccountSchema = z.object({
   business_name: z.string().min(1, { message: "Please input business name" }),
   bank_code: z.string().min(1, { message: "Select a bank" }),
@@ -176,54 +226,4 @@ export const waitListSchema = z.object({
     .min(1, { message: "Email is required" })
     .email({ message: "Invalid email address" }),
   phone: z.string().min(11, { message: "Phone number is required" }),
-});
-
-export const profileSchema = z.object({
-  name: z
-    .string()
-    .min(2, "Name must be at least 2 characters")
-    .max(50, "Name must be less than 50 characters")
-    .nullable()
-    .or(z.literal("")),
-  email: z.string().email("Invalid email address").nullable(),
-  phone: z
-    .string()
-    .regex(
-      /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
-      "Invalid phone number format",
-    )
-    .max(14, "Phone number must be less than 14 digits")
-    .nullable()
-    .or(z.literal("")),
-  gender: z
-    .enum(["male", "female"], {
-      errorMap: () => ({ message: "Please select a valid gender" }),
-    })
-    .optional(),
-  date_of_birth: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Use YYYY-MM-DD format")
-    .refine((date) => !isNaN(Date.parse(date)), "Invalid date")
-    .nullable()
-    .or(z.literal("")),
-  occupation: z
-    .string()
-    .min(2, "Occupation must be at least 2 characters")
-    .nullable()
-    .or(z.literal("")),
-  designation: z
-    .string()
-    .min(5, "Address must be at least 5 characters")
-    .nullable()
-    .or(z.literal("")),
-  institution: z
-    .string()
-    .min(2, "Company name must be at least 2 characters")
-    .nullable()
-    .or(z.literal("")),
-  nid: z
-    .string()
-    .min(10, "National ID must be at least 10 characters")
-    .nullable()
-    .or(z.literal("")),
 });

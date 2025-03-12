@@ -8,7 +8,7 @@ export default function PageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen flex-col bg-white lg:bg-transparent">
       <Topbar />
       <div className="grow">{children}</div>
       <Footer />
