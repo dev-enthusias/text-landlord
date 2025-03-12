@@ -6,7 +6,6 @@ import {
   addGalleryPhotoSchema,
   addPropertySchema,
   addTenantSchema,
-  AppointmentSchema,
   basicPropertyInfoSchema,
   changePasswordSchema,
   createAdvertSchema,
@@ -58,6 +57,7 @@ export type ChangePasswordDataType = z.infer<typeof changePasswordSchema>;
 export type FormOneDataType = z.infer<typeof registerFormSchema>;
 export type AddGalleryPhotoDataType = z.infer<typeof addGalleryPhotoSchema>;
 export type AddTenantDataType = z.infer<typeof addTenantSchema>;
+export type AddPropertyDataType = z.infer<typeof addPropertySchema>;
 export type AddAgentDataType = z.infer<typeof addAgentSchema>;
 export type ProfileFormData = z.infer<typeof profileSchema>;
 export type WaitListDataType = z.infer<typeof waitListSchema>;

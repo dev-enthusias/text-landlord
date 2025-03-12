@@ -10,8 +10,8 @@ import { X } from "lucide-react";
 import SubmitButton from "./submit-button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppointmentSchema } from "@/lib/schema";
-import { BookAppointmentDataType } from "@/definition";
 import { postAppointment } from "@/api/services/appointment";
+import { AppointmentFDT } from "@/definitions/tenant";
 
 export default function BookAppointment({
   data,
@@ -31,7 +31,7 @@ export default function BookAppointment({
     handleSubmit,
     register,
     formState: { isSubmitting, errors },
-  } = useForm<BookAppointmentDataType>({
+  } = useForm<AppointmentFDT>({
     resolver: zodResolver(AppointmentSchema),
     defaultValues: {
       name: data.name,
@@ -44,7 +44,7 @@ export default function BookAppointment({
     },
   });
 
-  const onSubmit: SubmitHandler<BookAppointmentDataType> = async (data) => {
+  const onSubmit: SubmitHandler<AppointmentFDT> = async (data) => {
     const response = await postAppointment(data);
 
     if (response.status) {

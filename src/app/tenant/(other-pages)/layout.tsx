@@ -73,6 +73,7 @@ export default async function Layout({
             },
           ].map((obj) => (
             <NavLink
+              key={obj.path}
               href={obj.path}
               className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
               activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"
@@ -105,6 +106,7 @@ export default async function Layout({
             },
           ].map((obj) => (
             <NavLink
+              key={obj.path}
               href={obj.path}
               className="flex w-full items-center gap-x-2 border-b border-gray-300 px-4 py-3 tracking-wide text-black last:border-gray-300 hover:bg-gold/30"
               activeClassName="bg-gold/50 text-black font-semibold hover:bg-gold/50"

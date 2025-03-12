@@ -20,9 +20,8 @@ export default function AppointmentCard({ data }: { data: AppointmentType }) {
     const hrMinSec = date.includes("-") ? date.split("-") : date.split(":");
     const amOrPm = +hrMinSec[0] >= 12 ? "PM" : "AM";
     const hrIn12Format = +hrMinSec[0] - 12;
-    hrIn12Format === 0
-      ? (hrMinSec[0] = "12")
-      : (hrMinSec[0] = String(hrIn12Format));
+    const newHr = hrIn12Format === 0 ? "12" : String(hrIn12Format);
+    hrMinSec[0] = newHr;
 
     return `${hrMinSec[0]}:${hrMinSec[1]} ${amOrPm}`;
   };
@@ -36,6 +35,7 @@ export default function AppointmentCard({ data }: { data: AppointmentType }) {
         revalidate("/tenant/appointments");
       }
     } catch (error) {
+      console.error(error);
       toast.error("Something went wrong");
     } finally {
       setDeleting(false);

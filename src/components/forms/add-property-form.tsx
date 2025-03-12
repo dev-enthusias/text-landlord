@@ -4,12 +4,7 @@ import TextInput from "../ui/text-input";
 import SelectInput from "../ui/select-input";
 import { ImagesIcon } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import {
-  AddPropertyDataType,
-  Country,
-  LocationList,
-  PropertyFieldsResponseDT,
-} from "@/definition";
+import { AddPropertyDataType, Country, LocationList, PropertyFieldsResponseDT } from "@/definition";
 import { PropertyMetadataResponseDataType } from "@/definition";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addPropertySchema } from "@/lib/schema";

@@ -173,7 +173,7 @@ async function DashboardContent({
         <section className="col-span-2 grid gap-5 md:grid-cols-2 lg:grid-cols-1">
           <div className="rounded-lg bg-white px-3 pb-5 pt-3">
             <h3 className="mb-4 text-lg font-semibold text-black">Chats</h3>
-            <ChatList id={userId} />
+            <ChatList id={userId} max={6} />
           </div>
 
           {/* <div className="rounded-lg bg-white px-5 pb-5 pt-3">
