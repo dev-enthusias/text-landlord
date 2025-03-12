@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { WalletOverview } from "@/components/data-visualization/wallet-overview";
 import { LiaCoinsSolid } from "react-icons/lia";
-import { FaHourglassHalf, FaLongArrowAltRight } from "react-icons/fa";
+import { FaHourglassHalf } from "react-icons/fa";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { getProfileDetails } from "@/api/services/profile";
 import { getUserId } from "@/lib/actions";
@@ -13,7 +14,6 @@ import { TenantAdvertisedProperties } from "@/definition";
 import { MdArrowOutward } from "react-icons/md";
 import { getOrderDetails, getOrders } from "@/api/services/order";
 import { MergedOrder, OrderRDT } from "@/definitions/tenant";
-import Image from "next/image";
 
 export default async function Home() {
   const profileDetails = await getProfileDetails();
@@ -30,7 +30,7 @@ export default async function Home() {
   );
 
   return (
-    <section className="mx-auto w-full max-w-[1240px] px-3 py-7 lg:px-20">
+    <section className="mx-auto w-full max-w-[1240px] px-3 py-7 lg:px-20 lg:pb-20">
       {/* Greeting */}
       <section className="font-cormorant">
         <h1 className="text-[24px] font-bold text-black lg:text-2xl">
@@ -88,7 +88,7 @@ export default async function Home() {
 
         {/* Properties */}
         {properties.length > 0 && (
-          <section className="col-span-7">
+          <section className="col-span-7 rounded-lg py-4 lg:bg-white lg:px-5">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-lg font-semibold text-black lg:text-xl">
                 Rent Property
@@ -117,13 +117,20 @@ export default async function Home() {
         {/* Orders */}
         <section className="col-span-7">
           <div className="rounded-lg bg-white px-2 py-4 lg:px-5">
-            <div className="mb-4">
+            <div className="mb-4 flex items-center justify-between">
               <h2 className="hidden text-lg font-semibold text-black lg:block">
                 Rental Payment Overview
               </h2>
               <h2 className="text-lg font-semibold text-black lg:hidden">
                 Order History
               </h2>
+
+              <Link
+                href="/tenant/orders"
+                className="text-sm text-accent underline"
+              >
+                View all
+              </Link>
             </div>
 
             {orders.data.list.length <= 0 ? (
@@ -299,7 +306,7 @@ function PaymentHistoryLineMobile({ data }: { data: MergedOrder }) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between py-2 px-2 text-sm">
+      <div className="flex items-center justify-between px-2 py-2 text-sm">
         <div className="col-span-2 flex items-center gap-x-1">
           <p>Order Status</p>
         </div>
