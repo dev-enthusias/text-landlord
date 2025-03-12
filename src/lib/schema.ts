@@ -192,6 +192,7 @@ export const profileSchema = z.object({
       /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
       "Invalid phone number format",
     )
+    .max(14, "Phone number must be less than 14 digits")
     .nullable()
     .or(z.literal("")),
   gender: z
@@ -208,11 +209,6 @@ export const profileSchema = z.object({
   occupation: z
     .string()
     .min(2, "Occupation must be at least 2 characters")
-    .nullable()
-    .or(z.literal("")),
-  passport: z
-    .string()
-    .min(5, "Passport/ID must be at least 5 characters")
     .nullable()
     .or(z.literal("")),
   designation: z

@@ -17,6 +17,8 @@ export default function ProfileForm({
 }) {
   const [isEditing, setIsEditing] = useState(false);
 
+  console.log(data)
+
   const {
     register,
     control,
@@ -30,7 +32,6 @@ export default function ProfileForm({
       phone: data.profile_info.phone,
       date_of_birth: data.profile_info.date_of_birth,
       occupation: data.profile_info.occupation,
-      passport: data.profile_info.passport,
       designation: data.profile_info.designation,
       institution: data.profile_info.institution,
       nid: data.profile_info.nid,
@@ -38,6 +39,8 @@ export default function ProfileForm({
   });
 
   const onSubmit: SubmitHandler<ProfileFormData> = async (data) => {
+    console.log(data)
+    
     const res = await updateProfile(data);
     console.log(res);
 
@@ -133,13 +136,6 @@ export default function ProfileForm({
             name="occupation"
             disabled={!isEditing}
             error={errors.occupation?.message}
-          />
-          <TextInput
-            label="Passport/ID No"
-            name="passport"
-            register={register}
-            disabled={!isEditing}
-            error={errors.passport?.message}
           />
           <TextInput
             label="National ID"
