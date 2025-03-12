@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import { routes } from "@/constants/routes";
 import PropertyPhoto from "./property-photo";
+import Image from "next/image";
 
 // TenantPropertyCardTypes<TenantAdvertisedProperties>
 
@@ -24,10 +25,71 @@ export function TenantPropertyCard({
   return (
     <Link
       href={routes.TENANT_PROPERTIES + `/${data.slug}`}
-      className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg"
+      className="block w-full max-w-[] rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg"
     >
       <article className="group flex gap-x-1 sm:flex-col">
         <PropertyPhoto photo={data.image} />
+
+        <div className="grow pt-2">
+          <div className="px-2">
+            {/* Property value & Status */}
+            <div className="flex justify-between">
+              <PropertyPrice price={data.price} />
+
+              {/* {type === "rent" && (
+                <p className="flex items-center justify-center rounded-full bg-green-600/10 px-4 py-0.5 text-xs font-semibold leading-none text-green-500">
+                  Paid
+                </p>
+              )} */}
+            </div>
+
+            <PropertyNameAndLocation
+              data={{ name: data.name, location: data?.address?.address }}
+            />
+
+            <PropertyFeatures
+              bedrooms={data.bedrooms ?? 0}
+              bathrooms={data.bathrooms ?? 0}
+              size={data.size}
+            />
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
+}
+
+export function TenantPropertyCardPotrait({
+  data,
+}: {
+  roleid: number;
+  data: {
+    id: number;
+    slug: string;
+    name: string;
+    price: string;
+    image: string;
+    address: { address: string };
+    bedrooms: number | null;
+    bathrooms: number | null;
+    size: string;
+  };
+}) {
+  return (
+    <Link
+      href={routes.TENANT_PROPERTIES + `/${data.slug}`}
+      className="block w-full max-w-[250px] shrink-0 rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg lg:w-auto"
+    >
+      <article className="group flex flex-col gap-x-1">
+        <div className="relative h-36 w-auto overflow-hidden rounded-lg shadow sm:min-w-[240px] lg:min-w-fit">
+          <Image
+            src={data.image}
+            alt="property display photo"
+            fill
+            sizes="384px"
+            className="object-cover transition-all duration-700 group-hover:scale-110"
+          />
+        </div>
 
         <div className="grow pt-2">
           <div className="px-2">

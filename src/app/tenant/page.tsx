@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
-import { routes } from "@/constants/routes";
 import { WalletOverview } from "@/components/data-visualization/wallet-overview";
 import { LiaCoinsSolid } from "react-icons/lia";
 import { FaHourglassHalf, FaLongArrowAltRight } from "react-icons/fa";
@@ -9,31 +7,49 @@ import { getProfileDetails } from "@/api/services/profile";
 import { getUserId } from "@/lib/actions";
 import ChatList from "@/components/data-visualization/chat-list";
 import greetUser from "@/utils/greet";
+import { getAllAdvertisedProperties } from "@/api/services/property";
+import { TenantPropertyCardPotrait } from "@/components/ui/property-card";
+import { TenantAdvertisedProperties } from "@/definition";
+import { MdArrowOutward } from "react-icons/md";
+import { getOrderDetails, getOrders } from "@/api/services/order";
+import { MergedOrder, OrderRDT } from "@/definitions/tenant";
+import Image from "next/image";
 
 export default async function Home() {
   const profileDetails = await getProfileDetails();
   const userId = (await getUserId()) as string;
+  const properties = await getAllAdvertisedProperties({
+    types: ["Commercial", "Residential", "Industrial", "Land"],
+  });
+  const orders = (await getOrders()) as OrderRDT;
+  const orderDetails: MergedOrder[] = await Promise.all(
+    orders.data.list.slice(0, 5).map(async (order) => {
+      const orderDetail = await getOrderDetails(order.id);
+      return { ...order, ...orderDetail.data.list[0] }; // Merge order with its details
+    }),
+  );
 
   return (
-    <section className="mx-auto w-full max-w-[1240px] px-5 py-7 pb-20 lg:px-20">
+    <section className="mx-auto w-full max-w-[1240px] px-3 py-7 lg:px-20">
       {/* Greeting */}
-      <div className="font-cormorant">
-        <h1 className="text-2xl font-bold text-black">
+      <section className="font-cormorant">
+        <h1 className="text-[24px] font-bold text-black lg:text-2xl">
           {greetUser()}, {profileDetails?.profile_info.name ?? ""}
         </h1>
         <p className="font-semibold text-black lg:text-lg">
           Let us help you track your rentals
         </p>
-      </div>
+      </section>
 
-      <div className="mt-6 grid grid-cols-7 items-start gap-5">
-        <section className="col-span-7 space-y-5 lg:col-span-5">
+      <div className="mt-5 grid grid-cols-7 items-start gap-5">
+        {/* Wallet and Rental Summary */}
+        <section className="col-span-7 grid gap-3 lg:col-span-5 lg:gap-5">
           <WalletOverview />
-          <div className="mb-5 grid w-full gap-5 sm:grid-cols-2 md:grid-cols-3 lg:mb-10">
+          <div className="no-scrollbar flex w-full gap-3 overflow-x-auto sm:grid sm:grid-cols-2 md:grid-cols-3 lg:gap-5">
             <FinanceSummary
               title="Rented Properties"
               icon={<LiaCoinsSolid />}
-              total="3"
+              total="0"
               description={<p>Total properties rented</p>}
               color="#4A4A4A"
               textColor="#ffffff"
@@ -41,72 +57,123 @@ export default async function Home() {
             <FinanceSummary
               title="Total Overdue"
               icon={<RiErrorWarningFill size={14} />}
-              total="1"
-              description={<p>₦3M Sum of overdue rent</p>}
+              total="0"
+              description={<p>₦0 Sum of overdue rent</p>}
               color="#D32F2F"
               textColor="#ffffff"
             />
             <FinanceSummary
               title="Total Upcoming"
               icon={<FaHourglassHalf size={14} />}
-              total="1"
-              description={<p>₦600K Sum of upcoming rent</p>}
+              total="0"
+              description={<p>₦0 Sum of upcoming rent</p>}
               color="#D4A017"
               textColor="#000000"
             />
           </div>
         </section>
-        <section className="col-span-7 space-y-5 lg:col-span-2">
-          <div className="rounded-lg bg-white px-5 py-3">
-            <h3 className="mb-4 text-lg font-semibold text-black">Chats</h3>
-            <ChatList id={userId} />
+
+        {/* Chat */}
+        <section className="col-span-7 hidden lg:col-span-2 lg:block">
+          <div className="rounded-lg bg-white px-3 py-3">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-black">Chats</h2>
+              <Link href={"/chat"} className="text-sm text-accent underline">
+                See all
+              </Link>
+            </div>
+            <ChatList id={userId} max={3} />
           </div>
         </section>
-        <section className="col-span-7">
-          <div className="mt-5 rounded-lg bg-white sm:p-5">
-            <div className="mb-4 p-5 sm:p-0">
-              <h3 className="text-lg font-semibold text-black">
-                Rental Payment Overview
-              </h3>
-            </div>
 
-            <div
-              role="grid"
-              aria-label="Rental Payment Overview"
-              className="hidden space-y-3 lg:block"
-            >
-              <div
-                role="row"
-                className="grid grid-cols-8 items-center gap-x-3 text-sm font-semibold"
+        {/* Properties */}
+        {properties.length > 0 && (
+          <section className="col-span-7">
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-black lg:text-xl">
+                Rent Property
+              </h2>
+              <Link
+                href="/tenant/properties"
+                className="flex items-center gap-x-1 border-b border-accent text-sm font-medium text-accent lg:text-base"
               >
-                <h3 role="columnheader" className="col-span-2 text-left">
-                  Property
-                </h3>
-                <h3 role="columnheader">Start Date</h3>
-                <h3 role="columnheader">Due Date</h3>
-                <h3 role="columnheader">Rent Amount</h3>
-                <h3 role="columnheader">Rent Status`</h3>
-                <h3 role="columnheader">Payment Status</h3>
-                <h3 role="columnheader">Action</h3>
-              </div>
-              <p>No transactions has been made</p>
-              {/* <PaymentHistoryLine status="overdue" />
-              <PaymentHistoryLine status="upcoming" />
-              <PaymentHistoryLine
-                status="current"
-                payment_status="successful"
-              /> */}
+                View more <MdArrowOutward className="mt-1" />
+              </Link>
+            </div>
+            <div className="no-scrollbar flex w-full gap-3 overflow-x-auto sm:grid-cols-2 md:grid-cols-3 lg:grid lg:grid-cols-4">
+              {properties
+                .slice(0, 4)
+                .map((property: TenantAdvertisedProperties) => (
+                  <TenantPropertyCardPotrait
+                    key={property.id}
+                    data={property}
+                    roleid={5}
+                  />
+                ))}
+            </div>
+          </section>
+        )}
+
+        {/* Orders */}
+        <section className="col-span-7">
+          <div className="rounded-lg bg-white px-2 py-4 lg:px-5">
+            <div className="mb-4">
+              <h2 className="hidden text-lg font-semibold text-black lg:block">
+                Rental Payment Overview
+              </h2>
+              <h2 className="text-lg font-semibold text-black lg:hidden">
+                Order History
+              </h2>
             </div>
 
-            <div className="space-y-5 bg-gray-100 sm:bg-transparent lg:hidden">
-              <p>No transactions has been made</p>
-              {/* <PaymentHistoryLineMobile status="overdue" />
-              <PaymentHistoryLineMobile status="upcoming" />
-              <PaymentHistoryLineMobile
-                status="current"
-                payment_status="successful"
-              /> */}
+            {orders.data.list.length <= 0 ? (
+              <p>You have not purchased any property yet</p>
+            ) : (
+              <div
+                role="grid"
+                aria-label="Rental Payment Overview"
+                className="hidden lg:block"
+              >
+                <div
+                  role="row"
+                  className="mb-3 grid grid-cols-8 items-center gap-x-3 text-sm font-semibold"
+                >
+                  <h3 role="columnheader" className="col-span-2 text-left">
+                    Property
+                  </h3>
+                  <h3 role="columnheader">Start Date</h3>
+                  <h3 role="columnheader">Grace Period</h3>
+                  <h3 role="columnheader">Rent Amount</h3>
+                  <h3 role="columnheader">Order Status</h3>
+                  <h3 role="columnheader">Payment Status</h3>
+                  <h3 role="columnheader"></h3>
+                </div>
+                <div className="grid gap-y-3">
+                  {orderDetails.map((order) => {
+                    return <PaymentHistoryLine key={order.id} data={order} />;
+                  })}
+                </div>
+              </div>
+            )}
+
+            <div className="grid gap-3 lg:hidden">
+              {orderDetails.map((order) => {
+                return <PaymentHistoryLineMobile key={order.id} data={order} />;
+              })}
             </div>
+          </div>
+        </section>
+
+        {/* Chat */}
+        <section className="col-span-7 lg:col-span-2 lg:hidden">
+          <div className="rounded-lg bg-white px-3 py-3">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-black">Chats</h2>
+              <Link href={"/chat"} className="text-sm text-accent underline">
+                See all
+              </Link>
+            </div>
+            <ChatList id={userId} max={3} />
           </div>
         </section>
       </div>
@@ -131,7 +198,7 @@ function FinanceSummary({
 }) {
   return (
     <article
-      className="w-full rounded-lg px-5 py-3"
+      className="w-full max-w-[250px] shrink-0 rounded-lg px-5 py-3 sm:w-auto"
       style={{ background: color, color: textColor }}
     >
       <div className="flex items-center gap-x-2">
@@ -146,178 +213,114 @@ function FinanceSummary({
   );
 }
 
-function FriendCard() {
-  return (
-    <Link href={routes.CHAT + "/0"} replace>
-      <article className="flex items-center gap-x-3 rounded-lg bg-gold/10 px-2 py-1.5 text-[#09132C]">
-        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
-          <Image
-            src="/images/profile-img.jpeg"
-            alt="name of person photo"
-            fill
-            sizes="72px"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
-
-        <div className="flex grow flex-col">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold">Jane Cooper</h3>
-            <p className="text-xxs">07:38am</p>
-          </div>
-          <div className="flex items-center justify-between">
-            <p className="text-xxs">Haha that&apos;s hillarious</p>
-            {false ? (
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M14.2891 6.68392C14.5687 6.95698 14.574 7.40502 14.301 7.68464L7.39018 14.7613C7.25093 14.9039 7.058 14.9812 6.85882 14.9741C6.65964 14.967 6.47266 14.8763 6.34386 14.7242L3.34734 11.1859C3.09476 10.8876 3.13178 10.4411 3.43003 10.1885C3.72828 9.93593 4.17482 9.97295 4.4274 10.2712L6.92114 13.2159L13.2884 6.69578C13.5615 6.41617 14.0095 6.41085 14.2891 6.68392Z"
-                  fill="#087c7c"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M18.336 6.68392C18.6156 6.95698 18.6209 7.40502 18.3479 7.68464L11.4371 14.7613C11.2978 14.9039 11.1049 14.9812 10.9057 14.9741C10.7065 14.967 10.5195 14.8763 10.3907 14.7242L7.39421 11.1859C7.14163 10.8876 7.17865 10.4411 7.4769 10.1885C7.77516 9.93593 8.22169 9.97295 8.47427 10.2712L10.968 13.2159L17.3353 6.69578C17.6083 6.41617 18.0564 6.41085 18.336 6.68392Z"
-                  fill="#087c7c"
-                />
-              </svg>
-            ) : (
-              <span className="text-primary-500 rounded-full bg-gold p-1 text-3xs font-semibold leading-none text-white">
-                10
-              </span>
-            )}
-          </div>
-        </div>
-      </article>
-    </Link>
-  );
-}
-
-function PaymentHistoryLine({
-  status,
-  payment_status,
-}: {
-  status: "overdue" | "current" | "upcoming";
-  payment_status?: "successful";
-}) {
+function PaymentHistoryLine({ data }: { data: MergedOrder }) {
   return (
     <article
       role="row"
       className="hidden grid-cols-8 items-center gap-x-3 border-b border-b-gray-200 pb-2 lg:grid"
     >
-      <div role="gridcell" className="col-span-2">
-        <h3 className="text-sm font-semibold text-gray-700">
-          Emperica in Dazil, Villa
-        </h3>
-        <p className="text-medium flex items-center gap-x-0.5 text-xs">
-          Palaxisto Emeriando Plaza Road
-        </p>
+      <div role="gridcell" className="col-span-2 flex items-center gap-x-2">
+        <div className="relative h-10 w-10 overflow-hidden rounded-full">
+          <Image
+            src={data.property.image}
+            alt={`${data.property.name} photo`}
+            fill
+          />
+        </div>
+        <h3 className="font-semibold text-gray-700">{data.property.name}</h3>
       </div>
-      <div role="gridcell">12/12/2023</div>
-      <div role="gridcell">12/12/2024</div>
-      <div role="gridcell">₦650,000</div>
+      <div role="gridcell">{data.date}</div>
+      <div role="gridcell">
+        {data.grace_period} {data.grace_period > 1 ? "weeks" : "week"}
+      </div>
+      <div role="gridcell">{data.grand_total}</div>
       <div
         role="gridcell"
-        className={`${status === "overdue" ? "text-[#D32F2F]" : status === "upcoming" ? "text-[#D4A017]" : "text-green-600"}`}
+        className={`w-fit rounded-full px-2 py-0.5 text-sm ${data.status === "pending" ? "bg-[#D4A017]/10 text-[#D4A017]" : "bg-green-600/10 text-green-600"}`}
       >
-        {status === "overdue"
-          ? "overdue"
-          : status === "upcoming"
-            ? "upcoming"
-            : "current"}
+        {data.status === "completed"
+          ? "Completed"
+          : data.status === "pending"
+            ? "Pending"
+            : ""}
       </div>
       <div
         role="gridcell"
-        className={`${payment_status !== "successful" ? "text-[#D32F2F]" : "text-green-600"}`}
+        className={`w-fit rounded-full px-2 py-0.5 text-sm capitalize ${data.payment_status !== "paid" ? "bg-[#D32F2F]/10 text-[#D32F2F]" : "bg-green-600/10 text-green-600"}`}
       >
-        {payment_status === "successful" ? "paid" : "not paid"}
+        {data.payment_status === "paid" ? "paid" : "not paid"}
       </div>
       <div role="gridcell">
-        {payment_status !== "successful" && (
-          <button className="shrink-0 rounded-full bg-black px-3 py-1 text-sm font-bold text-white">
-            Pay Rent
-          </button>
-        )}
+        <Link
+          href={`/tenants/orders/${data.id}`}
+          className="flex shrink-0 items-center gap-x-1 text-sm font-semibold"
+        >
+          View Details <MdArrowOutward />
+        </Link>
       </div>
     </article>
   );
 }
 
-function PaymentHistoryLineMobile({
-  status,
-  payment_status,
-}: {
-  status: "overdue" | "current" | "upcoming";
-  payment_status?: "successful";
-}) {
+function PaymentHistoryLineMobile({ data }: { data: MergedOrder }) {
   return (
-    <article className="space-y-3 bg-white px-5 py-3 sm:rounded-xl sm:border sm:border-gray-300 lg:hidden">
-      <p className="flex items-center gap-x-2 border-b border-b-gray-300 pb-2 text-black">
-        18th Aug, 2020{" "}
-        <span>
-          <FaLongArrowAltRight />
-        </span>{" "}
-        18th Aug, 2021
-      </p>
+    <article className="rounded-xl border border-gray-300 bg-white p-2 lg:hidden">
+      <div className="mb-2 flex items-center gap-x-2 border-b border-b-gray-200 px-2 pb-2">
+        <div className="relative h-10 w-10 overflow-hidden rounded-full">
+          <Image
+            src={data.property.image}
+            alt={`${data.property.name} photo`}
+            fill
+          />
+        </div>
+        <div>
+          <h3 className="font-semibold text-gray-700">{data.property.name}</h3>
+          <Link
+            href={`/tenants/orders/${data.id}`}
+            className="text-xs underline"
+          >
+            View Details
+          </Link>
+        </div>
+      </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between rounded-lg px-2 pb-2 text-sm">
+        <p>Rent Amount</p>
+        <p className="font-semibold text-black">₦650,000</p>
+      </div>
+
+      <div className="flex items-center justify-between rounded-lg bg-gray-100 p-2 text-sm">
+        <p>Payment Status</p>
+        <div
+          role="gridcell"
+          className={`rounded-full px-2 py-0.5 text-sm capitalize ${data.payment_status !== "paid" ? "bg-[#D32F2F]/10 text-[#D32F2F]" : "bg-green-600/10 text-green-600"}`}
+        >
+          {data.payment_status === "paid" ? "paid" : "not paid"}
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between py-2 px-2 text-sm">
         <div className="col-span-2 flex items-center gap-x-1">
-          <p className="text-sm">Rent Status</p>
+          <p>Order Status</p>
         </div>
         <div>
           <span
-            className={`rounded-full px-2 py-1 capitalize ${status === "overdue" ? "bg-[#D32F2F]/10 text-[#D32F2F]" : status === "upcoming" ? "bg-[#D4A017]/10 text-[#D4A017]" : "bg-green-600/10 text-green-600"}`}
+            className={`rounded-full px-2 py-1 capitalize ${data.status === "pending" ? "bg-[#D4A017]/10 text-[#D4A017]" : "bg-green-600/10 text-green-600"}`}
           >
-            {status === "overdue"
-              ? "overdue"
-              : status === "upcoming"
-                ? "upcoming"
-                : "current"}
+            {data.status === "completed"
+              ? "Completed"
+              : data.status === "pending"
+                ? "Pending"
+                : ""}
           </span>
         </div>
       </div>
-      <div className="flex items-center justify-between rounded-lg bg-gray-100 px-3 py-3">
-        <div>
-          <h3 className="text-sm font-semibold text-gray-700">
-            Emperica in Dazil, Villa
-          </h3>
-          <p className="text-medium flex items-center gap-x-0.5 text-xs">
-            Palaxisto Emeriando Plaza Road
-          </p>
+
+      <div className="flex items-center justify-between rounded-lg bg-gray-100 p-2 text-sm">
+        <p>Start Date</p>
+        <div role="gridcell" className="">
+          {data.date}
         </div>
-        <Link
-          href={routes.LANDLORD_PROPERTIES + "/0"}
-          className="inline-block text-xs underline"
-        >
-          View Property
-        </Link>
-      </div>
-      <div className="flex items-center justify-between rounded-lg px-3">
-        <p className="text-sm">Rent Amount</p>
-        <p className="font-semibold text-black">₦650,000</p>
-      </div>
-      <div className="flex items-center justify-between rounded-lg bg-gray-100 px-3 py-3">
-        <p className="text-sm">Payment Status</p>
-        <div
-          role="gridcell"
-          className={`${payment_status !== "successful" ? "text-[#D32F2F]" : "text-green-600"}`}
-        >
-          {payment_status === "successful" ? "paid" : "not paid"}
-        </div>
-      </div>
-      <div role="gridcell">
-        {payment_status !== "successful" && (
-          <button className="shrink-0 rounded-full bg-black px-3 py-1 text-sm font-bold text-white">
-            Pay Rent
-          </button>
-        )}
       </div>
     </article>
   );

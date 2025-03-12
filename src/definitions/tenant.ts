@@ -9,6 +9,13 @@ type PaginationType = {
   total_pages: number;
 };
 
+type LinksType = {
+  first: string;
+  last: string | null;
+  prev: null | string;
+  next: string | null;
+};
+
 export interface AppointmentType {
   id: number;
   name: string;
@@ -30,3 +37,58 @@ export interface AppointmentRDT {
 }
 
 export type AppointmentFDT = z.infer<typeof AppointmentSchema>;
+
+export interface OrderRDT {
+  status: boolean;
+  message: string;
+  data: {
+    list: {
+      id: number;
+      invoice_no: string;
+      tenant_id: number;
+      billing_address_id: null | string;
+      date: string;
+      subtotal: string;
+      discount_amount: string;
+      coupon_amount: string;
+      grand_total: string;
+      paid_amount: string;
+      due_amount: string;
+      grace_period: number;
+      caution_fee: string;
+    }[];
+    links: LinksType;
+    pagination: PaginationType;
+  };
+}
+
+export interface OrderDetailsRDT {
+  status: boolean;
+  message: string;
+  data: {
+    list: {
+      id: number;
+      order_id: number;
+      property_id: number;
+      advertisement_id: number;
+      start_date: null | string;
+      end_date: null | string;
+      price: string;
+      discount_amount: string;
+      total_amount: string;
+      payment_status: "unpaid" | "paid";
+      status: "completed" | "pending";
+      property: {
+        id: number;
+        name: string;
+        slug: string;
+        image: string;
+      };
+    }[];
+    links: LinksType;
+    pagination: PaginationType;
+  };
+}
+
+export type MergedOrder = OrderRDT["data"]["list"][0] &
+  OrderDetailsRDT["data"]["list"][0];

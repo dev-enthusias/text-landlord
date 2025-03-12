@@ -41,8 +41,6 @@ export default async function PropertyDetails({
 
   const galleries = data?.galleries?.map((gallery) => gallery.image);
 
-  console.log(profile);
-
   return (
     <main className="px-5 py-7 pb-10 lg:px-20 lg:pb-20">
       <section className="mb-8 flex items-center justify-between rounded-lg bg-white px-4 py-3">

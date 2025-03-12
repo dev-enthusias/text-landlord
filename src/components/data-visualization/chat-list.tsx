@@ -11,7 +11,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/api/firebase.config";
 import { MdInsertPhoto } from "react-icons/md";
 
-export default function ChatList({ id }: { id: string }) {
+export default function ChatList({ id, max }: { id: string; max: number }) {
   const [chatLists, setChatLists] = useState<any[]>([]);
   const [unseenMessageCounts, setUnseenMessageCounts] = useState<
     Record<string, number>
@@ -77,8 +77,8 @@ export default function ChatList({ id }: { id: string }) {
   }
 
   return (
-    <div className="no-scrollbar grid gap-y-3 px-1">
-      {chatLists.map((chat, i) => (
+    <div className="no-scrollbar grid gap-y-3">
+      {chatLists.slice(0, max).map((chat, i) => (
         <FriendCard
           key={i}
           data={chat}
