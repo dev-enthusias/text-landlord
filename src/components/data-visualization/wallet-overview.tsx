@@ -21,7 +21,7 @@ export function WalletOverview() {
           </button>
         </div>
         <p className="text-xl font-semibold lg:text-2xl xl:text-3xl">
-          {isVisible ? "₦10,000,000" : "****"}
+          {isVisible ? "₦0" : "****"}
         </p>
       </div>
 

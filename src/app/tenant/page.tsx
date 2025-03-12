@@ -6,9 +6,12 @@ import { LiaCoinsSolid } from "react-icons/lia";
 import { FaHourglassHalf, FaLongArrowAltRight } from "react-icons/fa";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { getProfileDetails } from "@/api/services/profile";
+import { getUserId } from "@/lib/actions";
+import ChatList from "@/components/data-visualization/chat-list";
 
 export default async function Home() {
   const profileDetails = await getProfileDetails();
+  const userId = (await getUserId()) as string;
 
   const date = new Date();
   const hour = date.getHours();
@@ -60,11 +63,7 @@ export default async function Home() {
         <section className="col-span-7 space-y-5 lg:col-span-2">
           <div className="rounded-lg bg-white px-5 py-3">
             <h3 className="mb-4 text-lg font-semibold text-black">Chats</h3>
-            <div className="no-scrollbar grid w-full gap-y-3 overflow-x-scroll px-1">
-              <FriendCard />
-              <FriendCard />
-              <FriendCard />
-            </div>
+            <ChatList id={userId} />
           </div>
         </section>
         <section className="col-span-7">
@@ -94,21 +93,23 @@ export default async function Home() {
                 <h3 role="columnheader">Payment Status</h3>
                 <h3 role="columnheader">Action</h3>
               </div>
-              <PaymentHistoryLine status="overdue" />
+              <p>No transactions has been made</p>
+              {/* <PaymentHistoryLine status="overdue" />
               <PaymentHistoryLine status="upcoming" />
               <PaymentHistoryLine
                 status="current"
                 payment_status="successful"
-              />
+              /> */}
             </div>
 
             <div className="space-y-5 bg-gray-100 sm:bg-transparent lg:hidden">
-              <PaymentHistoryLineMobile status="overdue" />
+              <p>No transactions has been made</p>
+              {/* <PaymentHistoryLineMobile status="overdue" />
               <PaymentHistoryLineMobile status="upcoming" />
               <PaymentHistoryLineMobile
                 status="current"
                 payment_status="successful"
-              />
+              /> */}
             </div>
           </div>
         </section>
