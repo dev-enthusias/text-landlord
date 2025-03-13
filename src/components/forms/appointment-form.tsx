@@ -64,7 +64,6 @@ export default function AppointmentForm({
       }
     } else {
       const response = await updateAppointment(data);
-      console.log(response)
 
       if (response.status) {
         toast.success("Success", {
@@ -122,7 +121,7 @@ export default function AppointmentForm({
         />
 
         {/* Date and Time */}
-        <div className="mb-2 flex flex-col lg:flex-row w-full gap-4">
+        <div className="mb-2 flex w-full flex-col gap-4 lg:flex-row">
           <div className="w-full">
             <TextInput
               register={register}

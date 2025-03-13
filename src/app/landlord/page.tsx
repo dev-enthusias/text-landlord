@@ -258,40 +258,6 @@ function PersonalSummary({
   );
 }
 
-// function Report() {
-//   return (
-//     <article>
-//       <div className="mb-2 flex gap-x-2">
-//         <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full">
-//           <Image
-//             src="/images/profile-img.jpeg"
-//             alt=""
-//             fill
-//             className="object-cover"
-//           />
-//         </div>
-//         <div className="flex grow justify-between">
-//           <div>
-//             <h3 className="text-sm font-semibold text-gray-800">
-//               Smith Junior
-//             </h3>
-//             <p className="text-xxs text-accent">Tenant report</p>
-//           </div>
-//           <p className="text-xs">10:15AM</p>
-//         </div>
-//       </div>
-//       <div className="flex gap-x-2">
-//         <div className="flex w-10 shrink-0 justify-center">
-//           <div className="h-full w-0.5 border-r" />
-//         </div>
-//         <p className="text-sm">
-//           I dont know what is wrong with my toilet plumbing it wont flush
-//         </p>
-//       </div>
-//     </article>
-//   );
-// }
-
 function TransactionCard({ status }: { status: "credit" | "debit" }) {
   return (
     <article className="flex flex-wrap items-center justify-between gap-2 gap-x-1 border-b border-b-gray-200 pb-3 last:border-none">

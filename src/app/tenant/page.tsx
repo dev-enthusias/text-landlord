@@ -259,7 +259,7 @@ function PaymentHistoryLine({ data }: { data: MergedOrder }) {
       </div>
       <div role="gridcell">
         <Link
-          href={`/tenants/orders/${data.id}`}
+          href={`/tenant/orders/${data.id}`}
           className="flex shrink-0 items-center gap-x-1 text-sm font-semibold"
         >
           View Details <MdArrowOutward />
@@ -283,7 +283,7 @@ function PaymentHistoryLineMobile({ data }: { data: MergedOrder }) {
         <div>
           <h3 className="font-semibold text-gray-700">{data.property.name}</h3>
           <Link
-            href={`/tenants/orders/${data.id}`}
+            href={`/tenant/orders/${data.id}`}
             className="text-xs underline"
           >
             View Details
