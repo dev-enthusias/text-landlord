@@ -14,7 +14,6 @@ export default function RemovePropertyFromCart({ id }: { id: number }) {
     setRemoving(true);
     try {
       const res = await removeFromCart(id);
-      console.log(res);
       if (res.status) {
         revalidate("/tenant/cart");
         toast.success("Success", { description: "Property removed from cart" });

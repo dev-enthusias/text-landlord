@@ -117,7 +117,6 @@ export const FriendCard = ({
   id: string;
   numberOfUnseenMessages: number | null;
 }) => {
-  console.log(data);
   return (
     <Link
       href={routes.CHAT + `/${data.roomId}`}

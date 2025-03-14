@@ -62,8 +62,6 @@ export default function ChatFooter({
         imageUrl = await upload(imageFile);
       }
 
-      console.log(imageUrl);
-
       // Send message to Firestore
       const newMessage = {
         id,

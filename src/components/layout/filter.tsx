@@ -38,7 +38,6 @@ export default function Filter({
         data.beds = data.beds.map((item: string) => parseInt(item));
       }
       const result = await filterAdvertisedProperties(data);
-      console.log(result);
       setData(result.data);
     } catch (error) {
       console.error("Error fetching filtered data:", error);

@@ -35,7 +35,7 @@ export function WishlistPropertyCard({ data }: WishlistPropertyCardProps) {
   const onSubmit = async (data: any) => {
     try {
       const response = await togglePropertyInWishlist(data);
-      console.log(response);
+
       if (response.status) {
         toast.success("Success", { description: response.message });
       }
@@ -46,7 +46,7 @@ export function WishlistPropertyCard({ data }: WishlistPropertyCardProps) {
   };
 
   return (
-    <article className="font-lato block w-full rounded-lg border bg-white p-2 shadow-gold transition duration-300 ease-out hover:shadow-lg">
+    <article className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg">
       <div className="group flex gap-x-1 sm:flex-col">
         <PropertyPhoto photo={data.image} />
 

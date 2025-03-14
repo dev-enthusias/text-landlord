@@ -41,7 +41,6 @@ export default async function Topbar() {
   const profileDetails =
     (await getProfileDetails()) as UserDetailsResponseDataType;
 
-  console.log(cartItems);
   const topbarLinks =
     roleid === 5
       ? tenantTopbarLinks
