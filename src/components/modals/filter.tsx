@@ -4,8 +4,15 @@ import { useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import ModalLayout from "../ui/modal-layout";
 import Filter from "../layout/filter";
+import { PropertySearchFieldsRDT } from "@/definitions/tenant";
 
-export default function FilterBtn() {
+export default function FilterBtn({
+  properties,
+  searchFields,
+}: {
+  properties: any;
+  searchFields: PropertySearchFieldsRDT;
+}) {
   const [isFilterModalOpen, setFilterModal] = useState(false);
 
   return (
@@ -20,7 +27,11 @@ export default function FilterBtn() {
       {isFilterModalOpen && (
         <ModalLayout>
           <div className="h-full max-h-[80vh] w-[90%] overflow-y-scroll rounded-lg bg-white px-5 py-4">
-            <Filter setFilterModal={setFilterModal} />
+            <Filter
+              searchFieldsData={searchFields}
+              setData={properties}
+              setFilterModal={setFilterModal}
+            />
           </div>
         </ModalLayout>
       )}

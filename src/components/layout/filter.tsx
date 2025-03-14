@@ -1,27 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
 import CustomCheckbox from "../ui/custome-checkbox";
-import { propertyCategories, propertyTypes } from "@/constants/data";
+import {
+  AdvertisedPropertiesRDT,
+  PropertySearchFieldsRDT,
+} from "@/definitions/tenant";
+import { filterAdvertisedProperties } from "@/api/services/property";
 import { X } from "lucide-react";
 
 export default function Filter({
+  searchFieldsData,
+  setData,
   setFilterModal,
 }: {
+  searchFieldsData: PropertySearchFieldsRDT;
+  setData: React.Dispatch<
+    React.SetStateAction<AdvertisedPropertiesRDT["data"]>
+  >;
   setFilterModal?: (bool: boolean) => void;
 }) {
-  const [checked, setChecked] = useState(false);
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: {
+      categories: [] as string[],
+      types: [] as string[],
+      beds: [] as string[],
+      baths: [] as string[],
+      sqfts: [] as string[],
+      price: "" as string,
+    },
+  });
+
+  const onSubmit = async (data: any) => {
+    try {
+      if (data.baths || data.beds) {
+        data.baths = data.baths.map((item: string) => parseInt(item));
+        data.beds = data.beds.map((item: string) => parseInt(item));
+      }
+      const result = await filterAdvertisedProperties(data);
+      console.log(result);
+      setData(result.data);
+    } catch (error) {
+      console.error("Error fetching filtered data:", error);
+    }
+  };
 
   return (
-    <>
+    <div className="rounded-lg bg-white p-3">
       <header className="mb-4 flex items-center justify-between">
         <h2 className="font-semibold text-black">Filters</h2>
-        <div className="flex items-center gap-x-2">
-          <button>
-            <span className="text-xs underline">Reset Filters</span>{" "}
-            <span className="ml-0.5 rounded bg-gold/60 px-1 py-0.5 text-xxs font-semibold text-black">
-              3
-            </span>
+        <div className="items-center flex gap-x-2">
+          <button onClick={() => reset({ price: "" })}>
+            <span className="text-xs underline">Reset Filters</span>
           </button>
           <button
             className="rounded bg-gray-200 p-1"
@@ -32,19 +62,31 @@ export default function Filter({
         </div>
       </header>
 
-      <div className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <section>
           <h3 className="mb-2 text-sm font-medium text-gray-700">
-            Property Type
+            Property Types
           </h3>
-          <ul className="space-y-2 text-gray-600">
-            {propertyCategories.map((category, i) => (
-              <li key={i} className="text-xs tracking-wide">
-                <CustomCheckbox
-                  id="disabled"
-                  checked={checked}
-                  label={category.title}
-                  onChange={() => setChecked(!checked)}
+          <ul className="grid grid-cols-2 gap-y-2 text-gray-600 lg:grid-cols-1">
+            {searchFieldsData.data.types.map((t) => (
+              <li key={t.id} className="text-xs tracking-wide">
+                <Controller
+                  name="types"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomCheckbox
+                      id={`type-${t.id}`}
+                      checked={field.value.includes(t.name)}
+                      label={t.name}
+                      onChange={() =>
+                        field.onChange(
+                          field.value.includes(t.name)
+                            ? field.value.filter((item) => item !== t.name)
+                            : [...field.value, t.name],
+                        )
+                      }
+                    />
+                  )}
                 />
               </li>
             ))}
@@ -53,103 +95,143 @@ export default function Filter({
 
         <section>
           <h3 className="mb-2 text-sm font-medium text-gray-700">
-            Property Category
+            Property Categories
           </h3>
-          <ul className="space-y-2 text-gray-600">
-            {propertyTypes.map((types, i) => (
-              <li key={i} className="text-xs tracking-wide">
-                <CustomCheckbox
-                  id="disabled"
-                  checked={checked}
-                  label={types}
-                  onChange={() => setChecked(!checked)}
+          <ul className="grid grid-cols-2 gap-y-2 text-gray-600 lg:grid-cols-1">
+            {searchFieldsData.data.categories.map((c) => (
+              <li key={c.id} className="text-xs tracking-wide">
+                <Controller
+                  name="categories"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomCheckbox
+                      id={`category-${c.id}`}
+                      checked={field.value.includes(c.name)}
+                      label={c.name}
+                      onChange={() =>
+                        field.onChange(
+                          field.value.includes(c.name)
+                            ? field.value.filter((item) => item !== c.name)
+                            : [...field.value, c.name],
+                        )
+                      }
+                    />
+                  )}
                 />
               </li>
             ))}
           </ul>
         </section>
 
-        <div className="grid grid-cols-2 gap-x-5">
-          <section>
-            <h3 className="mb-2 text-sm font-medium text-gray-700">
-              Min. Price
-            </h3>
-            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
-              <option value="any">150,000</option>
-              <option value="any">250,000</option>
-              <option value="any">350,000</option>
-              <option value="any">450,000</option>
-              <option value="any">550,000</option>
-            </select>
-          </section>
-          <section>
-            <h3 className="mb-2 text-sm font-medium text-gray-700">
-              Max. Price
-            </h3>
-            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
-              <option value="any">150,000</option>
-              <option value="any">250,000</option>
-              <option value="any">350,000</option>
-              <option value="any">450,000</option>
-              <option value="any">550,000</option>
-            </select>
-          </section>
-        </div>
+        <section>
+          <h3 className="mb-2 text-sm font-medium text-gray-700">Bedrooms</h3>
+          <ul className="grid grid-cols-2 gap-y-2 text-gray-600 lg:grid-cols-1">
+            {searchFieldsData.data.beds.map((b) => (
+              <li key={b} className="text-xs tracking-wide">
+                <Controller
+                  name="beds"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomCheckbox
+                      id={`bed-${b}`}
+                      checked={field.value.includes(b)}
+                      label={`${b} Beds`}
+                      onChange={() =>
+                        field.onChange(
+                          field.value.includes(b)
+                            ? field.value.filter((item) => item !== b)
+                            : [...field.value, b],
+                        )
+                      }
+                    />
+                  )}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
 
-        <div className="grid grid-cols-2 gap-x-5">
-          <section>
-            <h3 className="mb-2 text-sm font-medium text-gray-700">Bedroom</h3>
-            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
-              <option value="any">Any</option>
-              <option value="any">1</option>
-              <option value="any">2</option>
-              <option value="any">3</option>
-              <option value="any">4</option>
-              <option value="any">5+</option>
-            </select>
-          </section>
-          <section>
-            <h3 className="mb-2 text-sm font-medium text-gray-700">Bathroom</h3>
-            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
-              <option value="any">Any</option>
-              <option value="any">1</option>
-              <option value="any">2</option>
-              <option value="any">3</option>
-              <option value="any">4</option>
-              <option value="any">5+</option>
-            </select>
-          </section>
-        </div>
+        <section>
+          <h3 className="mb-2 text-sm font-medium text-gray-700">Bathrooms</h3>
+          <ul className="grid grid-cols-2 gap-y-2 text-gray-600 lg:grid-cols-1">
+            {searchFieldsData.data.baths.map((b) => (
+              <li key={b} className="text-xs tracking-wide">
+                <Controller
+                  name="baths"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomCheckbox
+                      id={`bath-${b}`}
+                      checked={field.value.includes(b)}
+                      label={`${b} Baths`}
+                      onChange={() =>
+                        field.onChange(
+                          field.value.includes(b)
+                            ? field.value.filter((item) => item !== b)
+                            : [...field.value, b],
+                        )
+                      }
+                    />
+                  )}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
 
-        <div className="grid grid-cols-2 gap-x-5">
-          <section>
-            <h3 className="mb-2 text-sm font-medium text-gray-700">
-              Size (Min)
-            </h3>
-            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
-              <option value="any">Any</option>
-              <option value="any">1</option>
-              <option value="any">2</option>
-              <option value="any">3</option>
-              <option value="any">4</option>
-              <option value="any">5+</option>
-            </select>
-          </section>
-          <section>
-            <h3 className="mb-2 text-sm font-medium text-gray-700">
-              Size (Max)
-            </h3>
-            <select className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
-              <option value="any">Any</option>
-              <option value="any">1</option>
-              <option value="any">2</option>
-              <option value="any">3</option>
-              <option value="any">4</option>
-              <option value="any">5+</option>
-            </select>
-          </section>
-        </div>
-      </div>
-    </>
+        <section>
+          <h3 className="mb-2 text-sm font-medium text-gray-700">
+            Size (sq ft)
+          </h3>
+          <ul className="grid grid-cols-2 gap-y-2 text-gray-600 lg:grid-cols-1">
+            {searchFieldsData.data.sqfts.map((s) => (
+              <li key={s} className="text-xs tracking-wide">
+                <Controller
+                  name="sqfts"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomCheckbox
+                      id={`sqft-${s}`}
+                      checked={field.value.includes(s)}
+                      label={`${s} sq ft`}
+                      onChange={() =>
+                        field.onChange(
+                          field.value.includes(s)
+                            ? field.value.filter((item) => item !== s)
+                            : [...field.value, s],
+                        )
+                      }
+                    />
+                  )}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h3 className="mb-2 text-sm font-medium text-gray-700">Max. Price</h3>
+          <Controller
+            name="price"
+            control={control}
+            render={({ field }) => (
+              <input
+                type="number"
+                className="w-full rounded-full border border-gray-300 px-3 py-2 text-xs text-gray-600"
+                {...field}
+                onChange={(e) => field.onChange(e.target.value)}
+              />
+            )}
+          />
+        </section>
+
+        <button
+          type="submit"
+          className="mt-6 w-full rounded-full bg-accent px-4 py-3 text-sm font-bold text-white"
+        >
+          Apply Filter
+        </button>
+      </form>
+    </div>
   );
 }

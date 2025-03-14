@@ -1,11 +1,18 @@
+"use client";
+
 import { TenantPropertyCard } from "../ui/property-card";
 import FilterBtn from "../modals/filter";
-import { TenantAdvertisedProperties } from "@/definition";
+import {
+  AdvertisedPropertiesRDT,
+  PropertySearchFieldsRDT,
+} from "@/definitions/tenant";
 
 export default function PropertyListing({
   properties,
+  searchFieldData,
 }: {
-  properties: TenantAdvertisedProperties[];
+  properties: AdvertisedPropertiesRDT["data"];
+  searchFieldData: PropertySearchFieldsRDT;
 }) {
   return (
     <section>
@@ -13,7 +20,7 @@ export default function PropertyListing({
         <p className="font-semibold text-black">
           Showing {properties.length} search results
         </p>
-        <FilterBtn />
+        <FilterBtn properties={properties} searchFields={searchFieldData} />
       </div>
 
       <div className="grid w-full gap-5 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">

@@ -73,7 +73,7 @@ export async function getAllAdvertisedProperties(data: { types: string[] }) {
   });
 
   const result = await res.json();
-  return result.data;
+  return result;
 }
 
 export async function getPropertyFields() {
@@ -136,6 +136,22 @@ export const createAdvert = async (data: any) => {
   const token = await getToken();
 
   const res = await fetch(`${BASE_URL}/private/v1/advertisement/create`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await res.json();
+  return result;
+};
+
+export const filterAdvertisedProperties = async (data: any) => {
+  const token = await getToken();
+
+  const res = await fetch(`${BASE_URL}/private/v1/properties`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
