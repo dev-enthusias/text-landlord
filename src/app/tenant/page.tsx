@@ -87,7 +87,7 @@ export default async function Home() {
         </section>
 
         {/* Properties */}
-        {properties.length > 0 && (
+        {properties.data.length > 0 && (
           <section className="col-span-7 rounded-lg py-4 lg:bg-white lg:px-5">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-lg font-semibold text-black lg:text-xl">
@@ -101,7 +101,7 @@ export default async function Home() {
               </Link>
             </div>
             <div className="no-scrollbar flex w-full gap-3 overflow-x-auto sm:grid-cols-2 md:grid-cols-3 lg:grid lg:grid-cols-4">
-              {properties
+              {properties.data
                 .slice(0, 4)
                 .map((property: TenantAdvertisedProperties) => (
                   <TenantPropertyCardPotrait
