@@ -45,7 +45,7 @@ export async function getAdvertisedPropertyDetails(id: string | number) {
   });
 
   const data = await res.json();
-  return data.data;
+  return data;
 }
 
 export async function getAdvertisedProperties() {

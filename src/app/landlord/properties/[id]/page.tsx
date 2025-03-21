@@ -6,7 +6,6 @@ import {
   DetailedFeatures,
   Facilities,
   Location,
-  PropertyNameAndTags,
 } from "@/components/pages/properties";
 import { routes } from "@/constants/routes";
 import {
@@ -54,14 +53,14 @@ export default async function PropertyDetails({
       </div>
 
       <section className="mb-4 flex items-center justify-between">
-        <PropertyNameAndTags
+        {/* <PropertyNameAndTags
           data={{
             name: data.property.name,
             dealType: data.property.deal_type,
             type: data.property.type,
             category: "",
           }}
-        />
+        /> */}
 
         <div className="flex gap-x-2">
           <UpdatePropertyBtn

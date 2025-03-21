@@ -9,7 +9,7 @@ export default function Gallery({
   gallery,
 }: {
   displayPhoto: string;
-  gallery: any[];
+  gallery: string[];
 }) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
 

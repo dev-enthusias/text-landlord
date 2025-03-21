@@ -134,6 +134,132 @@ export interface AdvertisedPropertiesRDT {
   }[];
 }
 
+export interface AdvertisedPropertyDetailsRDT {
+  status: boolean;
+  message: string;
+  data: {
+    advertisement: {
+      id: number;
+      property_id: number;
+      property_creator_id: number;
+      advertisement_type: number;
+      booking_amount: null;
+      rent_amount: number;
+      rent_type: number;
+      rent_start_date: null;
+      rent_end_date: null;
+      max_member: null;
+      lease_amount: null;
+      lease_duration: null;
+      caretaker_duration: null;
+      terms_condition: "ok";
+    };
+    property: {
+      id: number;
+      name: string;
+      image: string;
+      type: string;
+      completion: string;
+      total_unit: null;
+      total_occupied: null;
+      total_rent: null;
+      total_sell: null;
+      size: string;
+      dining_combined: null;
+      bedroom: number;
+      bathroom: number;
+      rent_type: null;
+      amount: number;
+      grace_period: number;
+      caution_fee: string;
+      discount_amount: number;
+      discount_type: "fixed";
+      booking_amount: null;
+      flat_no: string;
+      description: string;
+      category: string;
+      user_email: string;
+      user_phone: string;
+      wishlist: boolean;
+    };
+    address: {
+      id: 67;
+      country: string;
+      latitude: null;
+      longitude: null;
+      address: string;
+    };
+    galleries: {
+      "1": {
+        id: number;
+        name: string;
+        image: string;
+      };
+    };
+    floorPlans: [
+      {
+        id: number;
+        name: string;
+        image: string;
+      },
+    ];
+    user: {
+      id: number;
+      name: string;
+      photo: string;
+    };
+    facilities: {
+      id: number;
+      name: string;
+      content: string;
+      icon: string;
+    }[];
+    category: { id: number; name: string };
+    property_reviews: [];
+    ratting: {
+      "1": number;
+      "2": number;
+      "3": number;
+      "4": number;
+      "5": number;
+    };
+    agvRating: number;
+  };
+}
+
+// export interface AdvertisedPropertyDetailsRDT {
+//   status: boolean;
+//   message: string;
+//   data: {
+//     id: number;
+//     user_id: number;
+//     property_id: number;
+//     property_creator_id: number;
+//     advertisement_type: number;
+//     booking_amount: null;
+//     rent_amount: number;
+//     rent_type: number;
+//     rent_start_date: null;
+//     rent_end_date: null;
+//     max_member: null;
+//     mortgage_amount: null;
+//     mortgage_duration: null;
+//     lease_amount: null;
+//     lease_duration: null;
+//     caretaker_duration: null;
+//     sell_amount: null;
+//     sell_start_date: null;
+//     negotiable: number;
+//     status: number;
+//     approval_status: number;
+//     approved_by: null;
+//     approved_at: null;
+//     terms_condition: string;
+//     created_at: string;
+//     updated_at: string;
+//   };
+// }
+
 export interface PropertySearchFieldsRDT {
   status: boolean;
   message: string;

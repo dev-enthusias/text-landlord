@@ -30,7 +30,5 @@ export async function togglePropertyInWishlist(data: { property_id: number }) {
     },
   );
 
-  const result = await res.json();
-
-  return result;
+  return await res.json();
 }

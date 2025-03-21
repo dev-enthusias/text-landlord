@@ -3,7 +3,6 @@ import {
   Description,
   DetailedFeatures,
   Facilities,
-  Location,
   PropertyNameAndTags,
   PropertyOwner,
   PurchaseProperty,
@@ -14,32 +13,35 @@ import {
   getAdvertisedPropertyDetails,
   getAllAdvertisedProperties,
 } from "@/api/services/property";
-import {
-  TenantAdvertisedProperties,
-  TenantAdvertisedPropertyDetails,
-} from "@/definition";
 import AddToCartButton from "@/components/forms/add-to-cart-form";
 import BookAppointment from "@/components/forms/book-appointment-btn";
 import { getProfileDetails } from "@/api/services/profile";
+import {
+  AdvertisedPropertiesRDT,
+  AdvertisedPropertyDetailsRDT,
+} from "@/definitions/tenant";
 
 export default async function PropertyDetails({
   params,
 }: {
   params: { slug: string };
 }) {
-  const properties = await getAllAdvertisedProperties({
-    types: ["Commercial", "Residential", "Industrial", "Land"],
-  });
-  const property = properties.find(
-    (property: TenantAdvertisedProperties) => property.slug === params.slug,
-  );
   const profile = await getProfileDetails();
+  const properties = (await getAllAdvertisedProperties({
+    types: ["Commercial", "Residential", "Industrial", "Land"],
+  })) as AdvertisedPropertiesRDT;
+  const property = properties.data.find(
+    (property) => property.slug === params.slug,
+  );
 
-  const data = (await getAdvertisedPropertyDetails(
+  if (!property) return null;
+
+  const { data } = (await getAdvertisedPropertyDetails(
     property.advertise_id,
-  )) as TenantAdvertisedPropertyDetails;
+  )) as AdvertisedPropertyDetailsRDT;
 
-  const galleries = data?.galleries?.map((gallery) => gallery.image);
+  const galleries = Object.values(data.galleries).map((item) => item.image);
+  const floorPlans = Object.values(data.floorPlans).map((item) => item.image);
 
   return (
     <main className="px-5 py-7 pb-10 lg:px-20 lg:pb-20">
@@ -52,12 +54,8 @@ export default async function PropertyDetails({
 
       <section className="mb-4 flex items-center justify-between rounded-lg bg-gold/10 px-4 py-3">
         <PropertyNameAndTags
-          data={{
-            name: data.property.name,
-            dealType: "Rent",
-            type: data.property.type,
-            category: data.property.category,
-          }}
+          address={data.address.address + ", " + data.address.country}
+          name={data.property.name}
         />
 
         <div className="flex items-center gap-x-2">
@@ -87,7 +85,10 @@ export default async function PropertyDetails({
         </div>
       </section>
 
-      <Gallery displayPhoto={data.property.image} gallery={galleries} />
+      <Gallery
+        displayPhoto={data.property.image}
+        gallery={[...galleries, ...floorPlans]}
+      />
 
       <section className="grid grid-cols-5 items-start gap-5">
         <div className="col-span-5 grid gap-y-5 lg:col-span-3">
@@ -132,13 +133,13 @@ export default async function PropertyDetails({
           />
         </div>
 
-        <section className="col-span-5 mt-5 rounded-lg bg-white p-4">
+        {/* <section className="col-span-5 mt-5 rounded-lg bg-white p-4">
           <Location
             address={data.address.address}
             country={data.address.country}
             cord={[40.7128, -74.006]}
           />
-        </section>
+        </section> */}
       </section>
     </main>
   );

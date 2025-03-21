@@ -1,10 +1,10 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { routes } from "@/constants/routes";
 import { BsBuildingsFill, BsChat } from "react-icons/bs";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import { getRole } from "@/lib/actions";
-import React from "react";
 import { MdCategory, MdDining } from "react-icons/md";
 import { formatCurrency } from "@/utils/formatCurrency";
 import dynamic from "next/dynamic";
@@ -13,32 +13,23 @@ import { IoHome } from "react-icons/io5";
 import AddToCartButton from "../forms/add-to-cart-form";
 
 export function PropertyNameAndTags({
-  data,
+  name,
+  address,
 }: {
-  data: {
-    name: string;
-    dealType: string;
-    type: string | null;
-    category?: string;
-  };
+  address: string;
+  name: string;
 }) {
   return (
     <div>
-      <h1 className="font-roboto text-xl font-semibold text-black sm:text-2xl">
-        {data.name}
+      <h1 className="font-roboto text-xl font-semibold text-black sm:text-2xl lg:leading-8">
+        {name}
       </h1>
-      <p className="flex gap-x-2 text-xs font-semibold tracking-wide">
-        <span className="rounded bg-primary-dark px-2 py-0.5 text-black">
-          {data.dealType}
-        </span>
-        <span className="rounded bg-accent px-2 py-0.5 text-white">
-          {data.type}
-        </span>
-        <span>{data.category}</span>
-      </p>
+      <p className="mb-2">{address}</p>
     </div>
   );
 }
+
+
 
 export function WishlistButton({ state, id }: { state: boolean; id: number }) {
   return <WishlistForm id={id} state={state} />;
