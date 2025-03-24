@@ -208,7 +208,7 @@ export function PropertyOwner({
       <h2 className="mb-2 font-roboto font-medium text-black lg:text-xl">
         Property Owner
       </h2>
-      <article className="flex flex-col gap-y-2 lg:flex-row lg:items-center lg:justify-between">
+      <article className="flex flex-col gap-y-2 min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between">
         <div className="flex items-start gap-x-2">
           <div className="relative h-8 w-8 overflow-hidden rounded-full">
             <Image
