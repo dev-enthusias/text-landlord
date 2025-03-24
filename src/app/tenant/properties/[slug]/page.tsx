@@ -47,7 +47,7 @@ export default async function PropertyDetails({
   const floorPlans = Object.values(data.floorPlans).map((item) => item.image);
 
   return (
-    <main className="relative px-5 py-4 pb-20 lg:px-20 lg:pb-20 lg:pt-7">
+    <main className="relative px-3 py-4 pb-20 lg:px-20 lg:pb-20 lg:pt-7">
       <section className="mb-4 flex items-center justify-between rounded-lg bg-white px-4 py-3 lg:mb-8">
         <Link
           href="/tenant/properties"

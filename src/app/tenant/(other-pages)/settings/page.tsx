@@ -1,4 +1,5 @@
 import { logout } from "@/api/services/auth";
+import { getProfileDetails } from "@/api/services/profile";
 import ProfileImageForm from "@/components/forms/profile-image-form";
 import NavLink from "@/components/ui/navlink";
 import { routes } from "@/constants/routes";
@@ -12,6 +13,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 
 export default async function Settings() {
   const roleid = await getRole();
+  const profile = await getProfileDetails();
 
   const path = {
     profile:
@@ -37,9 +39,14 @@ export default async function Settings() {
   return (
     <div className="px-5 py-10">
       <section className="relative mb-10 flex flex-col items-center justify-center gap-2 bg-white">
-        <ProfileImageForm imgUrl={""} name={""} />
+        <ProfileImageForm
+          imgUrl={profile.profile_info.user_image}
+          name={profile.profile_info.name}
+        />
         <div className="flex items-center gap-x-4">
-          <p className="text-xl font-bold text-black">Anotion Markiwa</p>
+          <p className="text-xl font-bold text-black">
+            {profile.profile_info.name}
+          </p>
           <p className="bg-accent/10 px-2 text-xs text-accent">
             {roleid === 5 ? "Tenant" : roleid === 4 ? "Landlord" : "Agent"}
           </p>

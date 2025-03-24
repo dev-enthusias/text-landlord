@@ -25,7 +25,7 @@ export function TenantPropertyCard({
   return (
     <Link
       href={routes.TENANT_PROPERTIES + `/${data.slug}`}
-      className="block w-full max-w-[] rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg"
+      className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out lg:hover:shadow-lg"
     >
       <article className="group flex gap-x-1 sm:flex-col">
         <PropertyPhoto photo={data.image} />

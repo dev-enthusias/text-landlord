@@ -7,7 +7,6 @@ import {
   PropertySearchFieldsRDT,
 } from "@/definitions/tenant";
 import { useState, useEffect } from "react";
-import Menu from "@/components/layout/footer-menu";
 
 export default function ClientPropertiesPage({
   searchFields,
@@ -23,14 +22,13 @@ export default function ClientPropertiesPage({
   }, [data]);
 
   return (
-    <main className="mb-20 flex px-5 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
+    <main className="mb-20 flex px-2 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
       <section className="hidden w-[240px] shrink-0 px-2 lg:block">
         <Filter searchFieldsData={searchFields} setData={setData} />
       </section>
-      <section className="w-full px-2">
+      <section className="w-full">
         <PropertyListing properties={data} searchFieldData={searchFields} />
       </section>
-      <Menu />
     </main>
   );
 }

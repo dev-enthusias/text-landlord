@@ -26,7 +26,7 @@ export default function FilterBtn({
 
       {isFilterModalOpen && (
         <ModalLayout>
-          <div className="h-full max-h-[80vh] w-[90%] overflow-y-scroll rounded-lg bg-white px-5 py-4">
+          <div className="h-full max-h-[80vh] w-[90%] overflow-y-scroll rounded-lg bg-white">
             <Filter
               searchFieldsData={searchFields}
               setData={properties}

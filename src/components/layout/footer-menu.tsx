@@ -12,7 +12,7 @@ export default async function Menu() {
 
   return (
     <footer className="mt-20 shrink-0 bg-white lg:hidden">
-      <ul className="fixed bottom-0 flex w-full justify-between rounded-t-3xl bg-black px-5 py-4 text-background">
+      <ul className="fixed bottom-0 left-0 flex w-full justify-between rounded-t-3xl bg-black px-5 py-4 text-background">
         <li>
           <NavLink
             href="/landlord"

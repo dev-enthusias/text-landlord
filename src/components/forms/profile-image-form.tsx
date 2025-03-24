@@ -6,8 +6,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FaPen } from "react-icons/fa";
+import { updateProfilePhoto } from "@/api/services/profile";
+import { toast } from "sonner";
+import LoadingSpinner from "../ui/loading-spinner";
 
-const MAX_FILE_SIZE = 5000000; // 5MB
+const MAX_FILE_SIZE = 6000000; // 5MB
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
@@ -23,7 +27,7 @@ const imageFormSchema = z.object({
     .refine((file) => file !== null, "Image is required")
     .refine(
       (file) => file && file.size <= MAX_FILE_SIZE,
-      "Max image size is 5MB",
+      "Max image size is 6MB",
     )
     .refine(
       (file) => file && ACCEPTED_IMAGE_TYPES.includes(file.type),
@@ -41,12 +45,12 @@ export default function ProfileImageForm({
   name: string;
 }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [currentImageUrl] = useState(imgUrl);
+  const [currentImageUrl, setCurrentImageUrl] = useState(imgUrl);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<ImageFormValues>({
     resolver: zodResolver(imageFormSchema),
@@ -58,15 +62,16 @@ export default function ProfileImageForm({
       const formData = new FormData();
       formData.append("image", file);
 
-      // TODO: Add your API call here to upload the image
-      // const response = await fetch('/api/upload', {
-      //   method: 'POST',
-      //   body: formData,
-      // });
+      const res = await updateProfilePhoto(formData);
 
-      // If successful, update the image preview
-      // const { imageUrl } = await response.json();
-      // setCurrentImageUrl(imageUrl);
+      if (res.result) {
+        toast.success("Success", { description: res.message });
+
+        // Update the image URL with a cache-busting query parameter
+        setCurrentImageUrl(`${imgUrl}?timestamp=${Date.now()}`);
+      } else {
+        toast.error("Error", { description: res.message });
+      }
 
       setIsEditing(false);
     } catch (error) {
@@ -81,9 +86,9 @@ export default function ProfileImageForm({
 
   return (
     <div className="relative">
-      <div className="relative border-black bg-black">
+      <div className="relative border-black">
         <div className="relative h-24 w-24 overflow-hidden rounded-full">
-          {imgUrl ? (
+          {currentImageUrl ? (
             <Image
               src={currentImageUrl}
               alt="Tenant profile photo"
@@ -102,14 +107,14 @@ export default function ProfileImageForm({
         <button
           type="button"
           onClick={() => setIsEditing(true)}
-          className="absolute bottom-0 right-0 rounded-full bg-white p-1.5 shadow-md hover:bg-gray-100"
+          className="absolute bottom-0 right-1 rounded-full bg-white p-1.5 shadow-md hover:bg-gray-100"
         >
-          <PiPencilCircleDuotone className="h-4 w-4 bg-red-500 text-black" />
+          <FaPen className="h-3 w-3 text-black" />
         </button>
       </div>
 
       {isEditing && (
-        <div className="absolute mt-2 w-64 rounded-lg bg-white p-4 shadow-lg">
+        <div className="absolute left-1/2 mt-2 w-64 -translate-x-1/2 rounded-lg bg-white p-4 shadow-lg">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-1">
               <input
@@ -125,9 +130,12 @@ export default function ProfileImageForm({
             <div className="mt-2 flex gap-2">
               <button
                 type="submit"
-                className="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
+                className="flex items-center justify-center gap-x-2 rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
               >
-                Save
+                Save{" "}
+                {isSubmitting && (
+                  <LoadingSpinner className="border-white border-t-transparent" />
+                )}
               </button>
               <button
                 type="button"

@@ -8,7 +8,7 @@ export default function PropertyPhoto({
   status?: "pending" | "approved";
 }) {
   return (
-    <div className="relative w-36 overflow-hidden rounded-lg shadow sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
+    <div className="relative w-28 overflow-hidden rounded-lg shadow sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
       <Image
         src={photo}
         alt="property display photo"

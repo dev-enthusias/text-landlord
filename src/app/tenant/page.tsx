@@ -14,6 +14,7 @@ import { TenantAdvertisedProperties } from "@/definition";
 import { MdArrowOutward } from "react-icons/md";
 import { getOrderDetails, getOrders } from "@/api/services/order";
 import { MergedOrder, OrderRDT } from "@/definitions/tenant";
+import Menu from "@/components/layout/footer-menu";
 
 export default async function Home() {
   const profileDetails = await getProfileDetails();
@@ -184,6 +185,8 @@ export default async function Home() {
           </div>
         </section>
       </div>
+
+      <Menu />
     </section>
   );
 }
