@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { PiPencilCircleDuotone } from "react-icons/pi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -11,7 +10,7 @@ import { updateProfilePhoto } from "@/api/services/profile";
 import { toast } from "sonner";
 import LoadingSpinner from "../ui/loading-spinner";
 
-const MAX_FILE_SIZE = 6000000; // 5MB
+const MAX_FILE_SIZE = 6000000; // 6MB
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
