@@ -227,39 +227,6 @@ export interface AdvertisedPropertyDetailsRDT {
   };
 }
 
-// export interface AdvertisedPropertyDetailsRDT {
-//   status: boolean;
-//   message: string;
-//   data: {
-//     id: number;
-//     user_id: number;
-//     property_id: number;
-//     property_creator_id: number;
-//     advertisement_type: number;
-//     booking_amount: null;
-//     rent_amount: number;
-//     rent_type: number;
-//     rent_start_date: null;
-//     rent_end_date: null;
-//     max_member: null;
-//     mortgage_amount: null;
-//     mortgage_duration: null;
-//     lease_amount: null;
-//     lease_duration: null;
-//     caretaker_duration: null;
-//     sell_amount: null;
-//     sell_start_date: null;
-//     negotiable: number;
-//     status: number;
-//     approval_status: number;
-//     approved_by: null;
-//     approved_at: null;
-//     terms_condition: string;
-//     created_at: string;
-//     updated_at: string;
-//   };
-// }
-
 export interface PropertySearchFieldsRDT {
   status: boolean;
   message: string;
@@ -277,4 +244,61 @@ export interface PropertySearchFieldsRDT {
       discounted: string;
     };
   };
+}
+
+export interface CartItemsRDT {
+  status: boolean;
+  message: string;
+  data: {
+    id: number;
+    tenant_id: number;
+    property_id: number;
+    advertisement_id: number;
+    discount_amount: string;
+    amount: string;
+    start_date: null;
+    end_date: null;
+    type: null;
+    durations: number;
+    created_at: string;
+    updated_at: string;
+    property: {
+      id: 73;
+      name: string;
+      slug: string;
+      size: string;
+      dining_combined: null;
+      bedroom: number;
+      bathroom: number;
+      rent_amount: number;
+      price_range: null;
+      flat_no: string;
+      description: string;
+      vacant: string;
+      completion: number;
+      deal_type: number;
+      status: "approved" | "pending";
+      type: number;
+      total_unit: null;
+      total_occupied: null;
+      total_rent: null;
+      total_sell: null;
+      discount_type: "fixed";
+      discount_amount: number;
+      user_id: number;
+      default_image: number;
+      property_category_id: number;
+      video_verification: null;
+      video_verification_status: number;
+      created_at: string;
+      updated_at: string;
+      is_trending: number;
+      is_populer: number;
+      is_recommended: number;
+      is_most_populer: number;
+      type_id: number;
+      grace_period: number;
+      caution_fee: string;
+    };
+  }[];
 }

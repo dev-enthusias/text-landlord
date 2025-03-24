@@ -28,7 +28,7 @@ export default function RemovePropertyFromCart({ id }: { id: number }) {
   return (
     <button
       onClick={removePropertyFromCart}
-      className="flex items-center gap-x-1 font-semibold text-gold"
+      className="flex items-center gap-x-1 font-semibold text-gold text-sm"
     >
       {isRemoving ? (
         <LoadingSpinner className="border-gold border-t-transparent" />
