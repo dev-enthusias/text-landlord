@@ -1,5 +1,6 @@
 import { getPropertiesInCart } from "@/api/services/cart";
 import CheckoutButton from "@/components/forms/checkout-btn";
+import Menu from "@/components/layout/footer-menu";
 import RemovePropertyFromCart from "@/components/ui/remove-property-from-cart";
 import { CartProperty } from "@/definition";
 import Image from "next/image";
@@ -80,6 +81,8 @@ export default async function Cart() {
           </section>
         </div>
       )}
+
+      <Menu />
     </main>
   );
 }

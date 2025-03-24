@@ -7,6 +7,7 @@ import { LuHistory } from "react-icons/lu";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { getProfileDetails } from "@/api/services/profile";
 import UpdateProfilePhoto from "@/components/forms/update-profile";
+import Menu from "@/components/layout/footer-menu";
 
 export default async function Layout({
   children,
@@ -120,6 +121,7 @@ export default async function Layout({
 
       <div className="w-full grow overflow-hidden rounded-xl bg-white">
         {children}
+        <Menu />
       </div>
     </section>
   );

@@ -6,8 +6,12 @@ import {
   AdvertisedPropertiesRDT,
   PropertySearchFieldsRDT,
 } from "@/definitions/tenant";
-import { filterAdvertisedProperties } from "@/api/services/property";
+import {
+  filterAdvertisedProperties,
+  getAllAdvertisedProperties,
+} from "@/api/services/property";
 import { X } from "lucide-react";
+import LoadingSpinner from "../ui/loading-spinner";
 
 export default function Filter({
   searchFieldsData,
@@ -20,7 +24,12 @@ export default function Filter({
   >;
   setFilterModal?: (bool: boolean) => void;
 }) {
-  const { control, handleSubmit, reset } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: isSubmitting,
+  } = useForm({
     defaultValues: {
       categories: [] as string[],
       types: [] as string[],
@@ -44,16 +53,28 @@ export default function Filter({
     }
   };
 
+  const handleReset = async () => {
+    reset(); // Clear the form inputs
+    try {
+      const result = await getAllAdvertisedProperties({
+        types: ["Commercial", "Residential", "Industrial", "Land"],
+      });
+      setData(result.data); // Refetch and set the full list of properties
+    } catch (error) {
+      console.error("Error refetching all properties:", error);
+    }
+  };
+
   return (
     <div className="rounded-lg bg-white p-3">
       <header className="mb-4 flex items-center justify-between">
         <h2 className="font-semibold text-black">Filters</h2>
-        <div className="items-center flex gap-x-2">
-          <button onClick={() => reset({ price: "" })}>
+        <div className="flex items-center gap-x-2">
+          <button onClick={handleReset}>
             <span className="text-xs underline">Reset Filters</span>
           </button>
           <button
-            className="rounded bg-gray-200 p-1"
+            className="rounded bg-gray-200 p-1 lg:hidden"
             onClick={() => setFilterModal && setFilterModal(false)}
           >
             <X size={20} />
@@ -208,7 +229,8 @@ export default function Filter({
           </ul>
         </section>
 
-        <section>
+        {/* Might visit it later */}
+        <section className="hidden">
           <h3 className="mb-2 text-sm font-medium text-gray-700">Max. Price</h3>
           <Controller
             name="price"
@@ -226,9 +248,13 @@ export default function Filter({
 
         <button
           type="submit"
-          className="mt-6 w-full rounded-full bg-accent px-4 py-3 text-sm font-bold text-white"
+          className="mt-6 flex w-full items-center justify-center rounded-full bg-accent px-4 py-3 text-sm font-bold text-white"
         >
-          Apply Filter
+          {isSubmitting.isSubmitting ? (
+            <LoadingSpinner className="border-2 border-white border-t-transparent" />
+          ) : (
+            "Apply Filter"
+          )}
         </button>
       </form>
     </div>

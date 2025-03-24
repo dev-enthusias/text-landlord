@@ -95,9 +95,9 @@ export default async function Home() {
               </h2>
               <Link
                 href="/tenant/properties"
-                className="flex items-center gap-x-1 border-b border-accent text-sm font-medium text-accent lg:text-base"
+                className="flex items-center gap-x-1 border-b border-accent text-sm font-medium text-accent"
               >
-                View more <MdArrowOutward className="mt-1" />
+                View more <MdArrowOutward />
               </Link>
             </div>
             <div className="no-scrollbar flex w-full gap-3 overflow-x-auto sm:grid-cols-2 md:grid-cols-3 lg:grid lg:grid-cols-4">
@@ -143,7 +143,7 @@ export default async function Home() {
               >
                 <div
                   role="row"
-                  className="mb-3 grid grid-cols-8 items-center gap-x-3 text-sm font-semibold"
+                  className="mb-3 grid grid-cols-8 items-center gap-x-3 rounded-lg bg-[#F9F9F9] px-2 py-3 text-sm font-semibold"
                 >
                   <h3 role="columnheader" className="col-span-2 text-left">
                     Property
@@ -224,7 +224,7 @@ function PaymentHistoryLine({ data }: { data: MergedOrder }) {
   return (
     <article
       role="row"
-      className="hidden grid-cols-8 items-center gap-x-3 border-b border-b-gray-200 pb-2 lg:grid"
+      className="hidden grid-cols-8 items-center gap-x-3 border-b border-b-gray-200 px-2 pb-2 lg:grid"
     >
       <div role="gridcell" className="col-span-2 flex items-center gap-x-2">
         <div className="relative h-10 w-10 overflow-hidden rounded-full">

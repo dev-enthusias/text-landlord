@@ -1,16 +1,24 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { routes } from "@/constants/routes";
-import { BsBuildingsFill, BsChat } from "react-icons/bs";
+import { BsBuildingsFill } from "react-icons/bs";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
-import { getRole } from "@/lib/actions";
+import { v4 as uuidv4 } from "uuid";
 import { MdCategory, MdDining } from "react-icons/md";
 import { formatCurrency } from "@/utils/formatCurrency";
 import dynamic from "next/dynamic";
 import WishlistForm from "../forms/wishlist-form";
 import { IoHome } from "react-icons/io5";
 import AddToCartButton from "../forms/add-to-cart-form";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaMessage } from "react-icons/fa6";
+import { BiSolidMessageRoundedDots } from "react-icons/bi";
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { db } from "@/api/firebase.config";
+import { useRouter } from "next/navigation";
 
 export function PropertyNameAndTags({
   name,
@@ -24,12 +32,10 @@ export function PropertyNameAndTags({
       <h1 className="font-roboto text-xl font-semibold text-black sm:text-2xl lg:leading-8">
         {name}
       </h1>
-      <p className="mb-2">{address}</p>
+      <p className="mb-2 text-sm">{address}</p>
     </div>
   );
 }
-
-
 
 export function WishlistButton({ state, id }: { state: boolean; id: number }) {
   return <WishlistForm id={id} state={state} />;
@@ -38,7 +44,7 @@ export function WishlistButton({ state, id }: { state: boolean; id: number }) {
 export function Description({ description }: { description: string }) {
   return (
     <section className="rounded-xl bg-white p-4">
-      <h2 className="mb-1 font-roboto text-xl font-medium text-black">
+      <h2 className="mb-1 font-roboto font-medium text-black lg:text-xl">
         Description
       </h2>
       <p>{description}</p>
@@ -59,10 +65,10 @@ export function DetailedFeatures({
 }) {
   return (
     <section className="rounded-xl bg-white p-5">
-      <h2 className="mb-1 font-roboto text-xl font-medium text-black">
+      <h2 className="mb-1 font-roboto font-medium text-black lg:text-xl">
         Features
       </h2>
-      <ul className="flex flex-col gap-y-5">
+      <ul className="flex flex-col gap-y-3 text-sm lg:gap-y-5 lg:text-base">
         <li className="flex gap-x-2">
           <BedIcon size={20} className="text-gray-600" />
           <span>{features.bedroom} bedrooms</span>
@@ -104,7 +110,7 @@ export function Facilities({
 }) {
   return (
     <section className="rounded-xl bg-white p-5">
-      <h2 className="mb-1 font-roboto text-xl font-medium text-black">
+      <h2 className="mb-1 font-roboto font-medium text-black lg:text-xl">
         Facilities
       </h2>
       <ul className="grid grid-cols-3 gap-5">
@@ -112,7 +118,10 @@ export function Facilities({
           <p>This property has no facilities or you may have not added any.</p>
         ) : (
           facilities.map((facility) => (
-            <li key={facility.id} className="flex items-center gap-x-2">
+            <li
+              key={facility.id}
+              className="flex items-center gap-x-2 text-sm lg:text-base"
+            >
               <div className="relative h-5 w-5">
                 <Image
                   src={facility.icon}
@@ -140,14 +149,66 @@ export function PropertyOwner({
     email: string;
     name: string;
     avatar: string;
+    phone: string;
+    id: number;
+    userId: number;
   };
 }) {
+  const router = useRouter();
+
+  const handleChat = async () => {
+    try {
+      const roomsRef = collection(db, "rooms");
+      const roomsQuery = query(
+        roomsRef,
+        where("userIds", "array-contains", landlord.userId),
+      );
+      const roomsSnapshot = await getDocs(roomsQuery);
+
+      let roomId = null;
+
+      // Search for a room that contains both user IDs
+      roomsSnapshot.forEach((doc) => {
+        const roomData = doc.data();
+        if (roomData.userIds.includes(landlord.id)) {
+          roomId = doc.id;
+        }
+      });
+
+      if (roomId) {
+        // Room exists, redirect user
+        router.push(`/chat/${roomId}`);
+      } else {
+        // No room found, create new room
+        const newRoomId = uuidv4(); // Generate unique room ID
+
+        const newRoomData = {
+          userIds: [landlord.userId, landlord.id],
+          created_at: Date.now(),
+          metadata: {},
+          author: {
+            id: landlord.userId,
+          },
+          messages: [],
+          updated_at: Date.now(),
+        };
+
+        await addDoc(roomsRef, { ...newRoomData, id: newRoomId });
+
+        // Redirect to new chat room
+        router.push(`/chat/${newRoomId}`);
+      }
+    } catch (error) {
+      console.error("Error starting chat:", error);
+    }
+  };
+
   return (
     <section className="rounded-xl bg-white p-4">
-      <h2 className="mb-2 font-roboto text-xl font-medium text-black">
+      <h2 className="mb-2 font-roboto font-medium text-black lg:text-xl">
         Property Owner
       </h2>
-      <article className="flex items-center justify-between">
+      <article className="flex flex-col gap-y-2 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-start gap-x-2">
           <div className="relative h-8 w-8 overflow-hidden rounded-full">
             <Image
@@ -163,12 +224,21 @@ export function PropertyOwner({
             <p className="text-xs">{landlord.email}</p>
           </div>
         </div>
-        <Link
-          href={routes.CHAT + "/0"}
-          className="flex items-center gap-x-2 rounded-full bg-black px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
-        >
-          <BsChat /> Chat
-        </Link>
+        <div className="flex justify-end gap-x-2">
+          <Link
+            href={`tel:${landlord.phone}`}
+            className="flex items-center gap-x-2 rounded-full bg-black px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
+          >
+            <FaPhoneAlt /> <span className="hidden lg:inline">Call</span>
+          </Link>
+          <button
+            onClick={handleChat}
+            className="flex items-center gap-x-2 rounded-full bg-black px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
+          >
+            <BiSolidMessageRoundedDots className="h-[18px] w-[18px]" />{" "}
+            <span className="hidden lg:inline">Chat</span>
+          </button>
+        </div>
       </article>
     </section>
   );
@@ -201,28 +271,28 @@ export function PropertyAgent() {
           href={routes.CHAT + "/0"}
           className="flex items-center gap-x-2 rounded-full bg-white px-4 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow"
         >
-          <BsChat /> Chat
+          <FaMessage /> Chat
         </Link>
       </article>
     </section>
   );
 }
 
-export async function PurchaseProperty({
+export function PurchaseProperty({
   rent,
   type,
   category,
   propertyId,
   advertisementId,
+  roleId,
 }: {
   rent: number;
   type: string | null;
   category: string;
   propertyId: number;
   advertisementId: number;
+  roleId: number;
 }) {
-  const roleid = await getRole();
-
   return (
     <section className="space-y-5 rounded-xl bg-white p-5">
       <p className="text-xl font-bold text-accent">
@@ -230,7 +300,7 @@ export async function PurchaseProperty({
         <span className="text-base font-normal text-gray-500">/ year</span>
       </p>
 
-      <div className="grid grid-cols-2 gap-5 rounded-lg bg-background px-5 py-4 text-lg">
+      <div className="grid gap-5 rounded-lg bg-background px-5 py-4 lg:grid-cols-2 lg:text-lg">
         <div className="flex items-start gap-x-3">
           <IoHome size={20} className="mt-1 text-gray-600" />
           <div>
@@ -247,9 +317,9 @@ export async function PurchaseProperty({
         </div>
       </div>
 
-      {roleid === 5 && (
+      {roleId === 5 && (
         <AddToCartButton
-          className="flex w-full items-center justify-center gap-x-2 rounded-full bg-gold py-3 text-lg font-bold text-white"
+          className="hidden w-full items-center justify-center gap-x-2 rounded-full bg-gold py-3 text-lg font-bold text-white lg:flex"
           values={{
             propertyId: propertyId,
             advertisementId: advertisementId,
@@ -345,7 +415,7 @@ function PropertyTenant({
         href={routes.CHAT + "/0"}
         className="flex items-center gap-x-2 rounded-full bg-white px-1.5 py-1.5 font-roboto text-sm font-semibold text-gold shadow-lg transition-all duration-300 ease-out hover:shadow sm:px-4"
       >
-        <BsChat /> <span className="hidden sm:inline-block">Chat</span>
+        <FaMessage /> <span className="hidden sm:inline-block">Chat</span>
       </Link>
     </div>
   );

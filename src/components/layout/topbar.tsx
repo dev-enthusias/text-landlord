@@ -95,7 +95,7 @@ export default async function Topbar() {
         ))}
       </div>
 
-      <div className="relative flex items-center gap-x-4 lg:gap-x-5">
+      <div className="relative flex items-center gap-x-2 lg:gap-x-5">
         {roleid === 5 && (
           <Link
             href={routes.WISHLIST}
@@ -117,7 +117,7 @@ export default async function Topbar() {
         {roleid === 5 && (
           <Link
             href={routes.CART}
-            className="relative hidden items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
+            className="relative items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 lg:flex"
           >
             <LucideShoppingCart className="h-5 w-5" />
             {cartItems?.data?.length > 0 && (

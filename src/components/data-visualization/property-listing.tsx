@@ -25,7 +25,9 @@ export default function PropertyListing({
 
       <div className="grid w-full gap-5 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
         {properties.length <= 0 ? (
-          <p>There are no advertised properties</p>
+          <p className="col-span-3 lg:col-span-2 xl:col-span-3 2xl:col-span-4">
+            There are no advertised properties found.
+          </p>
         ) : (
           properties.map((property) => (
             <TenantPropertyCard key={property.id} data={property} roleid={5} />
