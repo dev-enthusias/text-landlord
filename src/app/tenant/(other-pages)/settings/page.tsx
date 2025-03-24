@@ -43,6 +43,7 @@ export default async function Settings() {
           imgUrl={profile.profile_info.user_image}
           name={profile.profile_info.name}
         />
+
         <div className="flex items-center gap-x-4">
           <p className="text-xl font-bold text-black">
             {profile.profile_info.name}

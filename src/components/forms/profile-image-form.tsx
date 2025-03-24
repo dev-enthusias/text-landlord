@@ -9,6 +9,7 @@ import { FaPen } from "react-icons/fa";
 import { updateProfilePhoto } from "@/api/services/profile";
 import { toast } from "sonner";
 import LoadingSpinner from "../ui/loading-spinner";
+import revalidate from "@/utils/revalidate";
 
 const MAX_FILE_SIZE = 6000000; // 6MB
 const ACCEPTED_IMAGE_TYPES = [
@@ -46,6 +47,8 @@ export default function ProfileImageForm({
   const [isEditing, setIsEditing] = useState(false);
   const [currentImageUrl, setCurrentImageUrl] = useState(imgUrl);
 
+  console.log(currentImageUrl);
+
   const {
     register,
     handleSubmit,
@@ -64,10 +67,10 @@ export default function ProfileImageForm({
       const res = await updateProfilePhoto(formData);
 
       if (res.result) {
+        console.log(res.result);
         toast.success("Success", { description: res.message });
-
-        // Update the image URL with a cache-busting query parameter
-        setCurrentImageUrl(`${imgUrl}?timestamp=${Date.now()}`);
+        setCurrentImageUrl(res.data.user_image);
+        revalidate("/tenant/settings", "layout");
       } else {
         toast.error("Error", { description: res.message });
       }
