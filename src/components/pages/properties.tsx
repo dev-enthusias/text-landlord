@@ -29,10 +29,10 @@ export function PropertyNameAndTags({
 }) {
   return (
     <div>
-      <h1 className="font-roboto text-xl font-semibold text-black sm:text-2xl lg:leading-8">
+      <h1 className="font-roboto text-lg font-semibold text-black sm:text-2xl lg:leading-8">
         {name}
       </h1>
-      <p className="mb-2 text-sm">{address}</p>
+      <p className="mb-2 text-xs lg:text-sm">{address}</p>
     </div>
   );
 }

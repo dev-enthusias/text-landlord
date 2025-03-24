@@ -61,36 +61,40 @@ export default async function PropertyDetails({
         </p>
       </section>
 
-      <section className="z-50 mb-4 flex flex-col rounded-lg bg-[#eeebde] px-4 py-3 lg:sticky lg:top-20 lg:flex-row lg:items-center lg:justify-between">
+      <section className="z-50 mb-4 flex items-center justify-between rounded-lg bg-[#eeebde] px-4 py-3 lg:sticky lg:top-20">
         <PropertyNameAndTags
           address={data.address.address + ", " + data.address.country}
           name={data.property.name}
         />
 
-        <div className="hidden flex-col gap-2 lg:flex lg:flex-row lg:items-center">
+        <div className="flex gap-2 lg:items-center">
           <WishlistButton
             id={data.property.id}
             state={data.property.wishlist}
           />
 
-          <BookAppointment
-            data={{
-              name: profile.profile_info.name,
-              phone: profile.profile_info.phone,
-              email: profile.profile_info.email,
-              property_address: data.address.address,
-              property_id: data.property.id,
-              property_owner_id: data.user.id,
-            }}
-          />
+          <div className="hidden lg:block">
+            <BookAppointment
+              data={{
+                name: profile.profile_info.name,
+                phone: profile.profile_info.phone,
+                email: profile.profile_info.email,
+                property_address: data.address.address,
+                property_id: data.property.id,
+                property_owner_id: data.user.id,
+              }}
+            />
+          </div>
 
-          <AddToCartButton
-            values={{
-              propertyId: data.property.id,
-              advertisementId: data.advertisement.id,
-              amount: data.advertisement.rent_amount,
-            }}
-          />
+          <div className="hidden lg:block">
+            <AddToCartButton
+              values={{
+                propertyId: data.property.id,
+                advertisementId: data.advertisement.id,
+                amount: data.advertisement.rent_amount,
+              }}
+            />
+          </div>
         </div>
       </section>
 
@@ -147,7 +151,10 @@ export default async function PropertyDetails({
         </div>
       </section>
 
-      <section className="fixed bottom-0 left-0 flex w-full justify-between gap-x-2 bg-gray-100 px-3 py-3 lg:hidden" style={{boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.07)"}}>
+      <section
+        className="fixed bottom-0 left-0 flex w-full justify-between gap-x-2 bg-gray-100 px-3 py-3 lg:hidden"
+        style={{ boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.07)" }}
+      >
         <BookAppointment
           data={{
             name: profile.profile_info.name,
