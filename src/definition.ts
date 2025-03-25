@@ -704,6 +704,8 @@ export interface Order {
   grand_total: string;
   paid_amount: string;
   due_amount: string;
+  grace_period: number;
+  caution_fee: string;
 }
 
 export interface OrdersDataType {

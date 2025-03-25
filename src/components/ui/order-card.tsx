@@ -17,7 +17,7 @@ export function OrderCard({
   return (
     <Link
       href={`${routes.TENANT_ORDERS}/${orderData.id}`}
-      className="font-lato block w-full rounded-lg border bg-white p-2 shadow-gold transition duration-300 ease-out hover:shadow-lg"
+      className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg"
     >
       <article className="group flex gap-x-1 sm:flex-col">
         <PropertyPhoto photo={order.property?.image} />{" "}
@@ -33,13 +33,18 @@ export function OrderCard({
               </p>
             </div>
 
-            <div>
+            <div className="mt-1 flex items-center gap-x-3">
               <h3 className="font-bold text-gray-600">{order.property.name}</h3>
+              <span className="rounded bg-accent px-2 py-[1px] text-xs font-semibold text-white">
+                Rent
+              </span>
             </div>
 
             <p className="mt-1 text-sm">
               Order date:{" "}
-              <span className="font-semibold text-gray-600">{orderData.date}</span>
+              <span className="font-semibold text-gray-600">
+                {orderData.date}
+              </span>
             </p>
           </div>
         </div>

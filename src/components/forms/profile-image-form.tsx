@@ -47,8 +47,6 @@ export default function ProfileImageForm({
   const [isEditing, setIsEditing] = useState(false);
   const [currentImageUrl, setCurrentImageUrl] = useState(imgUrl);
 
-  console.log(currentImageUrl);
-
   const {
     register,
     handleSubmit,
@@ -67,7 +65,6 @@ export default function ProfileImageForm({
       const res = await updateProfilePhoto(formData);
 
       if (res.result) {
-        console.log(res.result);
         toast.success("Success", { description: res.message });
         setCurrentImageUrl(res.data.user_image);
         revalidate("/tenant/settings", "layout");

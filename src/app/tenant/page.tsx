@@ -26,7 +26,7 @@ export default async function Home() {
   const orderDetails: MergedOrder[] = await Promise.all(
     orders.data.list.slice(0, 5).map(async (order) => {
       const orderDetail = await getOrderDetails(order.id);
-      return { ...order, ...orderDetail.data.list[0] }; // Merge order with its details
+      return { ...orderDetail.data.list[0], ...order }; // Merge order with its details
     }),
   );
 
