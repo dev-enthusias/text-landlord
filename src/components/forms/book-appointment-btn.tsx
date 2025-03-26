@@ -22,7 +22,7 @@ export default function BookAppointment({
     <>
       <button
         type="button"
-        className="flex items-center justify-center gap-x-2 rounded-full bg-black px-6 py-3 text-sm font-bold text-[#f3f3f3]"
+        className="flex items-center justify-center gap-x-2 rounded-full bg-black px-3 py-3 text-sm font-bold text-[#f3f3f3] lg:px-6"
         onClick={() => setIsBooking(true)}
       >
         Book Appointment

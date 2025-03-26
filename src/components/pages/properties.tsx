@@ -16,7 +16,15 @@ import AddToCartButton from "../forms/add-to-cart-form";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
 import { BiSolidMessageRoundedDots } from "react-icons/bi";
-import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "@/api/firebase.config";
 import { useRouter } from "next/navigation";
 
@@ -158,42 +166,42 @@ export function PropertyOwner({
 
   const handleChat = async () => {
     try {
-      const roomsRef = collection(db, "rooms");
-      const roomsQuery = query(
-        roomsRef,
+      // Find room with userIds containing userId
+      const q = query(
+        collection(db, "rooms"),
         where("userIds", "array-contains", landlord.userId),
       );
-      const roomsSnapshot = await getDocs(roomsQuery);
+      const roomsSnapshot = await getDocs(q);
 
+      // check if landlord.id is in the userIds array then update the roomId number if found
       let roomId = null;
-
-      // Search for a room that contains both user IDs
       roomsSnapshot.forEach((doc) => {
-        const roomData = doc.data();
-        if (roomData.userIds.includes(landlord.id)) {
-          roomId = doc.id;
-        }
+        console.log(doc.id, " => ", doc.data());
+        if (doc.data().userIds.includes(landlord.id)) roomId = doc.id;
       });
 
+      // redirect the user to room else create a room
       if (roomId) {
-        // Room exists, redirect user
         router.push(`/chat/${roomId}`);
       } else {
-        // No room found, create new room
         const newRoomId = uuidv4(); // Generate unique room ID
+        console.log(newRoomId);
 
         const newRoomData = {
-          userIds: [landlord.userId, landlord.id],
           created_at: Date.now(),
-          metadata: {},
-          author: {
-            id: landlord.userId,
+          metadata: {
+            author: {
+              id: landlord.userId,
+            },
+            created_at: Date.now(),
+            id: newRoomId,
           },
-          messages: [],
           updated_at: Date.now(),
+          userIds: [landlord.userId, landlord.id],
         };
 
-        await addDoc(roomsRef, { ...newRoomData, id: newRoomId });
+        // Create doc in rooms collection
+        await setDoc(doc(db, "rooms", newRoomId), newRoomData);
 
         // Redirect to new chat room
         router.push(`/chat/${newRoomId}`);

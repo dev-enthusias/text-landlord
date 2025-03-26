@@ -152,7 +152,7 @@ export default async function PropertyDetails({
       </section>
 
       <section
-        className="fixed bottom-0 grid grid-cols-2 left-0 w-full justify-between gap-x-2 bg-gray-100 px-3 py-3 lg:hidden"
+        className="fixed bottom-0 grid grid-cols-2 left-0 w-full justify-between gap-x-2 bg-gray-100 px-1 py-3 lg:hidden"
         style={{ boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.07)" }}
       >
         <BookAppointment
