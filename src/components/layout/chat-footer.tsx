@@ -214,10 +214,10 @@ export default function ChatFooter({
 
         <button
           type="submit"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold lg:h-10 lg:w-10"
           disabled={isSending}
         >
-          <LucideSendHorizontal className="text-[#130F26]" />
+          <LucideSendHorizontal className="text-[#130F26] h-5 w-5" />
         </button>
       </form>
     </footer>

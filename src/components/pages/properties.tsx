@@ -21,7 +21,6 @@ import {
   query,
   where,
   getDocs,
-  addDoc,
   setDoc,
   doc,
 } from "firebase/firestore";
@@ -185,7 +184,6 @@ export function PropertyOwner({
         router.push(`/chat/${roomId}`);
       } else {
         const newRoomId = uuidv4(); // Generate unique room ID
-        console.log(newRoomId);
 
         const newRoomData = {
           created_at: Date.now(),
@@ -197,7 +195,7 @@ export function PropertyOwner({
             id: newRoomId,
           },
           updated_at: Date.now(),
-          userIds: [landlord.userId, landlord.id],
+          userIds: [String(landlord.userId), String(landlord.id)],
         };
 
         // Create doc in rooms collection

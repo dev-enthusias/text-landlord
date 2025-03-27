@@ -21,9 +21,13 @@ export const getAllChatLists = async (setChatLists: (chats: any[]) => void) => {
     const users: any[] = []; // Array to store user data
 
     for (const snap of querySnapshot.docs) {
-      const [user] = snap
+      const users = snap
         .data()
         .userIds.filter((userId: string) => userId !== id);
+
+      const [user] = users.map((d: string | number) => String(d));
+
+      console.log(typeof user, user);
 
       const userDocRef = doc(db, "users", user);
       const userDoc = await getDoc(userDocRef);

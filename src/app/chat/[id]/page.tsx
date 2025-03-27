@@ -6,6 +6,8 @@ import { ChatMessage } from "@/definition";
 
 export default async function Chat({ params }: { params: { id: string } }) {
   const roomId = params.id;
+  if (!roomId) throw new Error("Room ID is undefined!");
+
   const userId = (await getUserId()) as string;
 
   // Fetch initial messages
@@ -13,28 +15,28 @@ export default async function Chat({ params }: { params: { id: string } }) {
   const snapshot = await getDocs(messagesRef);
   const initialMessages = snapshot.docs.map((doc) => doc.data());
 
-  // Fetch chat partner details
+  // Fetch chat partner ID
   const docRef = doc(db, "rooms", roomId);
   const docSnap = await getDoc(docRef);
-  let chatPartner = null;
 
+  let partnerId: string | undefined;
   if (docSnap.exists()) {
-    const [partnerId] = docSnap
-      .data()
-      .userIds.filter((id: string) => id !== userId);
-    const userDocRef = doc(db, "users", partnerId);
-    const userDocSnap = await getDoc(userDocRef);
-    if (userDocSnap.exists()) {
-      chatPartner = userDocSnap.data();
+    const userIds = docSnap.data().userIds;
+    // Validate userIds is an array
+    if (!Array.isArray(userIds)) {
+      throw new Error("userIds is not an array!");
     }
+    partnerId = userIds.find((id) => id !== userId);
   }
+
+  if (partnerId === undefined) throw new Error("Partner ID is undefined!");
 
   return (
     <ChatClient
       roomId={roomId}
       userId={userId}
       initialMessages={initialMessages as ChatMessage[]}
-      chatPartner={chatPartner}
+      partnerId={partnerId}
     />
   );
 }

@@ -19,12 +19,12 @@ export default function ChatClient({
   roomId,
   userId,
   initialMessages,
-  chatPartner,
+  partnerId,
 }: {
   roomId: string;
   userId: string;
   initialMessages: ChatMessage[];
-  chatPartner: any;
+  partnerId: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>(
     initialMessages.sort((a, b) => a.createdAt - b.createdAt), // Ensure correct order on first load
@@ -112,7 +112,7 @@ export default function ChatClient({
 
   return (
     <section className="flex h-full grow flex-col bg-[#FAFAFA]">
-      <ChatHeader data={chatPartner} />
+      <ChatHeader partnerId={partnerId} />
       <main className="no-scrollbar grow overflow-y-auto px-4 pb-4 lg:px-7">
         <div className="flex flex-col">
           {messages.map((message, index) => (
