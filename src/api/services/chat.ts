@@ -27,8 +27,6 @@ export const getAllChatLists = async (setChatLists: (chats: any[]) => void) => {
 
       const [user] = users.map((d: string | number) => String(d));
 
-      console.log(typeof user, user);
-
       const userDocRef = doc(db, "users", user);
       const userDoc = await getDoc(userDocRef);
       if (userDoc.exists()) {

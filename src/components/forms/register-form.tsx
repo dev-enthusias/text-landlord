@@ -39,14 +39,10 @@ export default function RegistrationForm() {
       type,
     });
 
-    if (res && res.status) {
-      // set firebase chat users
-      await setDoc(doc(db, "users", res.data.id), res.data);
+    console.log(res);
 
-      // set firebase chat rooms
-      await setDoc(doc(db, "rooms", res.data.id), {
-        messages: [],
-      });
+    if (res && res.status) {
+      await setDoc(doc(db, "users", String(res.data.id)), res.data);
       toast.success("Success", { description: res.message });
       router.push(routes.LOGIN);
     } else if (res && !res.status) {
