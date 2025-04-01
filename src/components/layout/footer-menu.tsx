@@ -1,5 +1,4 @@
 import NavLink from "../ui/navlink";
-import { LuUsers2 } from "react-icons/lu";
 import { MdDashboard, MdHomeWork } from "react-icons/md";
 import { FaFileInvoice, FaUsers } from "react-icons/fa";
 import { getRole } from "@/lib/actions";
@@ -54,7 +53,7 @@ export default async function Menu() {
                 Tenants
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
                 href="/landlord/agents"
                 className="flex flex-col items-center justify-center gap-y-1 text-sm"
@@ -63,7 +62,7 @@ export default async function Menu() {
                 <LuUsers2 className="h-5 w-5" />
                 Agents
               </NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink
                 href="/landlord/bills"

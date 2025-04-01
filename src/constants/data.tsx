@@ -61,7 +61,7 @@ export const landlordTopbarLinks = [
   { link: "/landlord", name: "Home", exact: true },
   { link: routes.LANDLORD_PROPERTIES, name: "Properties" },
   { link: routes.TENANTS, name: "Tenants" },
-  { link: routes.AGENTS, name: "Agents" },
+  // { link: routes.AGENTS, name: "Agents" },
   { link: routes.BILL_MANAGEMENT, name: "Bill Management" },
 ];
 
