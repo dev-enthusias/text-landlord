@@ -171,7 +171,7 @@ export default async function Topbar() {
                 </Link>
               )}
               <form action={logout}>
-                <button className="flex w-full items-center gap-x-2 rounded px-4 py-2 font-semibold hover:text-gold">
+                <button className="flex w-full items-center gap-x-2 rounded px-4 py-2 font-semibold text-red-500 hover:bg-red-50">
                   <FaPowerOff className="mt-1" size={14} /> Logout
                 </button>
               </form>
