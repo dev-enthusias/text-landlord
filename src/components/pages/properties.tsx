@@ -112,7 +112,8 @@ export function Facilities({
     id: number;
     name: string;
     content: string;
-    icon: string;
+    image?: string;
+    icon?: string;
   }[];
 }) {
   return (
@@ -122,7 +123,9 @@ export function Facilities({
       </h2>
       <ul className="grid grid-cols-3 gap-5">
         {facilities.length <= 0 ? (
-          <p>This property has no facilities or you may have not added any.</p>
+          <p className="col-span-3">
+            This property has no facilities or you may have not added any.
+          </p>
         ) : (
           facilities.map((facility) => (
             <li
@@ -131,7 +134,7 @@ export function Facilities({
             >
               <div className="relative h-5 w-5">
                 <Image
-                  src={facility.icon}
+                  src={facility.image || facility.icon || "/images/house.png"}
                   alt={facility.name}
                   fill
                   className="object-cover"
@@ -295,8 +298,8 @@ export function PurchaseProperty({
   rent: number;
   type: string | null;
   category: string;
-  propertyId: number;
-  advertisementId: number;
+  propertyId?: number;
+  advertisementId?: number;
   roleId: number;
 }) {
   return (
@@ -323,7 +326,7 @@ export function PurchaseProperty({
         </div>
       </div>
 
-      {roleId === 5 && (
+      {roleId === 5 && propertyId && advertisementId && (
         <AddToCartButton
           className="hidden w-full items-center justify-center gap-x-2 rounded-full bg-gold py-3 text-lg font-bold text-white lg:flex"
           values={{

@@ -70,7 +70,7 @@ export default function AddPropertyBtn({
                   </p>
                   <Link
                     href="/landlord/accounts"
-                    className="mt-4 inline-block rounded-lg bg-gold px-5 py-3 text-lg font-bold text-black"
+                    className="mt-4 inline-block rounded-lg bg-gold px-5 py-2.5 font-bold text-black"
                   >
                     Add Account
                   </Link>

@@ -153,16 +153,13 @@ export interface LandlordPropertyDetailsResponseDataType {
     name: string;
     image: string;
     deal_type: "Rent";
-    type: "Commercial" | "Residential";
+    type: "Commercial" | "Residential" | "Land" | "Industrial";
     completion: "Under Construction" | "Completed";
-    total_unit: number | null;
-    total_occupied: number | null;
-    total_rent: number | null;
-    total_sell: number | null;
     address: string;
     city: string | null;
     status: "pending" | "approved";
     country: string;
+    category: string;
     zip_code: string | null;
     size: number | null;
     dining_combined: string;
@@ -174,7 +171,13 @@ export interface LandlordPropertyDetailsResponseDataType {
   };
   current_tenant: any[];
   previous_tenants: any[];
-  facilities: any[];
+  facilities: {
+    id: number;
+    name: string;
+    content: string;
+    image?: string;
+    icon?: string;
+  }[];
   gallery: {
     id: number;
     title: string;

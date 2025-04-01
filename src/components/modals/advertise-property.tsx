@@ -11,7 +11,7 @@ export default function AdvertisePropertyBtn({ id }: { id: number }) {
   return (
     <>
       <button
-        className="flex items-center gap-x-1 rounded bg-accent px-4 py-3 text-sm font-bold tracking-wide text-white hover:bg-accent/80"
+        className="flex items-center gap-x-1 rounded-full bg-accent px-4 py-3 text-sm font-bold tracking-wide text-white hover:bg-accent/80 lg:px-6"
         onClick={() => setEditPropertyModal(true)}
       >
         Advertise Property

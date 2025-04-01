@@ -43,12 +43,12 @@ export default function PropertiesPage({
     <main className="relative flex h-full px-5 pb-20 pt-7 lg:gap-x-8 lg:px-10 xl:gap-x-10">
       <section className="flex w-full lg:gap-x-8 xl:gap-x-10">
         <section className="grow">
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-6 flex items-center justify-between lg:flex-row">
             <h1 className="text-lg font-semibold text-black">
               My Properties ({totalProperties})
             </h1>
 
-            <div className="custome-shadow flex gap-x-2 rounded-full border bg-white from-gold/20 to-gold/10 p-1.5">
+            <div className="custome-shadow hidden gap-x-2 rounded-full border bg-white from-gold/20 to-gold/10 p-1.5 text-sm lg:flex lg:text-base">
               <button
                 className={`rounded-full px-4 py-2 ${allOrAdvertised === "all" ? "bg-black/90 text-white" : "bg-gray-100 text-black"}`}
                 onClick={() => setAllOrAdvertised("all")}
@@ -71,10 +71,25 @@ export default function PropertiesPage({
             />
           </div>
 
-          <div className="grid w-full gap-5 sm:grid-cols-2 min-[875px]:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-4">
+          <div className="custome-shadow flex gap-x-2 rounded-full border bg-white from-gold/20 to-gold/10 p-1.5 lg:hidden">
+            <button
+              className={`rounded-full px-4 py-2 ${allOrAdvertised === "all" ? "bg-black/90 text-white" : "bg-gray-100 text-black"}`}
+              onClick={() => setAllOrAdvertised("all")}
+            >
+              My Properties
+            </button>
+            <button
+              className={`rounded-full px-4 py-2 ${allOrAdvertised === "advertised" ? "bg-black/90 text-white" : "bg-gray-100 text-black"}`}
+              onClick={() => setAllOrAdvertised("advertised")}
+            >
+              Advertised Properties
+            </button>
+          </div>
+
+          <div className="grid w-full gap-5 sm:grid-cols-2 min-[875px]:grid-cols-3 lg:grid-cols-4">
             {allOrAdvertised === "all" ? (
               properties.properties.list.length <= 0 ? (
-                <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-y-2 px-5">
+                <div className="mx-auto flex h-full w-full flex-col items-center justify-center gap-y-2 border px-5 sm:col-span-2 min-[875px]:col-span-3 lg:col-span-4">
                   <Image
                     src="/illustrations/undraw_quiet-street.svg"
                     alt="no properties illustration"

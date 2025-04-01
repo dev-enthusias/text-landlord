@@ -33,7 +33,7 @@ export default function UpdatePropertyBtn({
   return (
     <>
       <button
-        className="flex items-center gap-x-1 rounded bg-gold px-4 py-2 text-sm font-bold tracking-wide text-black hover:bg-gold/80"
+        className="flex items-center gap-x-1 rounded-full bg-gold px-4 lg:px-6 py-2 text-sm font-bold tracking-wide text-black hover:bg-gold/80"
         onClick={() => setEditPropertyModal(true)}
       >
         Update Property Details

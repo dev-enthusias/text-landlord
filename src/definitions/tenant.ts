@@ -212,7 +212,8 @@ export interface AdvertisedPropertyDetailsRDT {
       id: number;
       name: string;
       content: string;
-      icon: string;
+      icon?: string;
+      image?: string;
     }[];
     category: { id: number; name: string };
     property_reviews: [];
