@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { BackButton } from "@/components/ui/prev-page";
 import UpdatePropertyBtn from "@/components/modals/update-property-form";
 import {
   Description,

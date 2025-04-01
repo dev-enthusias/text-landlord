@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { db } from "@/api/firebase.config";
 import { doc, getDoc } from "firebase/firestore";
 import Image from "next/image";
-import LoadingSpinner from "../ui/loading-spinner";
 
 interface PartnerData {
   name?: string;
