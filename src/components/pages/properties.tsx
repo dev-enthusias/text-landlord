@@ -7,7 +7,7 @@ import { routes } from "@/constants/routes";
 import { BsBuildingsFill } from "react-icons/bs";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
-import { MdCategory, MdDining, MdTimer } from "react-icons/md";
+import { MdCategory, MdTimer } from "react-icons/md";
 import { formatCurrency } from "@/utils/formatCurrency";
 import dynamic from "next/dynamic";
 import WishlistForm from "../forms/wishlist-form";
