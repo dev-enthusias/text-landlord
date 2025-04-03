@@ -3,18 +3,7 @@
 import WaitlistModal from "@/components/modals/waitlist";
 import DropdownButton from "@/components/ui/dropdown-btn";
 import ImageSlider from "@/components/ui/image-slider";
-import {
-  apartments,
-  buildings,
-  flats,
-  howItWorks,
-  lands,
-  offices,
-  rooms,
-  shops,
-  shortlets,
-  trendingProperties,
-} from "@/constants/data";
+import { howItWorks } from "@/constants/data";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,17 +24,44 @@ import { IoLogoGooglePlaystore } from "react-icons/io5";
 export default function Home({
   token,
   role,
+  flat,
+  apartment,
+  shop,
+  building,
+  office,
+  room,
+  land,
+  shortlet,
 }: {
   token: string | undefined;
   role: number | undefined;
+  flat: any[];
+  apartment: any[];
+  shop: any[];
+  building: any[];
+  office: any[];
+  room: any[];
+  land: any[];
+  shortlet: any[];
 }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log(flat);
 
   return (
     <div className="relative bg-white">
       <Header setIsOpen={setIsOpen} role={role} token={token} />
-      <TrendingProperties />
-      <PropertyCategories />
+      {/* <TrendingProperties /> */}
+      <PropertyCategories
+        flats={flat}
+        apartment={apartment}
+        shop={shop}
+        building={building}
+        office={office}
+        room={room}
+        land={land}
+        shortlet={shortlet}
+      />
       <HowItWorks />
       <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
         <section className="relative overflow-hidden rounded-3xl border-2 border-gold/50">
@@ -243,7 +259,16 @@ const Header = ({
   );
 };
 
-const PropertyCategories = () => {
+const PropertyCategories = ({
+  flats,
+  apartment,
+  shop,
+  building,
+  office,
+  room,
+  land,
+  shortlet,
+}: any) => {
   return (
     <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
       <div className="mb-6 flex flex-col items-center justify-between gap-5 lg:flex-row">
@@ -257,53 +282,54 @@ const PropertyCategories = () => {
         </p>
       </div>
       <div className="grid gap-y-[3.25rem]">
-        <Flats />
-        <Shops />
-        <Rooms />
-        <Apartments />
-        <Offices />
-        <Shortlets />
-        <Buildings />
-        <Lands />
+        {flats.length > 0 && <Flats flats={flats} />}
+
+        {shop.length > 0 && <Shops shops={shop} />}
+        {room.length > 0 && <Rooms rooms={room} />}
+        {apartment.length > 0 && <Apartments apartments={apartment} />}
+        {office.length > 0 && <Offices offices={office} />}
+        {shortlet.length > 0 && <Shortlets shortlets={shortlet} />}
+        {building.length > 0 && <Buildings buildings={building} />}
+        {land.length > 0 && <Lands lands={land} />}
       </div>
     </section>
   );
 };
 
-const TrendingProperties = () => {
-  return (
-    <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
-      <div className="flex items-center justify-between">
-        <h2 className="mb-6 text-4xl font-bold text-black">
-          Trending Properties
-        </h2>
-        <button className="hidden shrink-0 items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black lg:flex">
-          See More
-          <IoMdArrowDown className="-rotate-[135deg]" />
-        </button>
-      </div>
+// const TrendingProperties = () => {
+//   return (
+//     <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
+//       <div className="flex items-center justify-between">
+//         <h2 className="mb-6 text-4xl font-bold text-black">
+//           Trending Properties
+//         </h2>
+//         <button className="hidden shrink-0 items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black lg:flex">
+//           See More
+//           <IoMdArrowDown className="-rotate-[135deg]" />
+//         </button>
+//       </div>
 
-      <div className="grid gap-5 lg:grid-cols-4">
-        {trendingProperties.map((property) => (
-          <PropertyCard
-            key={property.id}
-            data={{
-              image: property.image,
-              price: property.price,
-              location: property.location,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              size: property.size,
-              name: property.name,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+//       <div className="grid gap-5 lg:grid-cols-4">
+//         {trendingProperties.map((property) => (
+//           <PropertyCard
+//             key={property.id}
+//             data={{
+//               image: property.image,
+//               price: property.price,
+//               location: property.location,
+//               bedrooms: property.bedrooms,
+//               bathrooms: property.bathrooms,
+//               size: property.size,
+//               name: property.name,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
-const Rooms = () => {
+const Rooms = ({ rooms }: { rooms: any }) => {
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
@@ -315,7 +341,7 @@ const Rooms = () => {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-4">
-        {rooms.map((property) => (
+        {rooms.map((property: any) => (
           <PropertyCard
             key={property.id}
             data={{
@@ -334,7 +360,7 @@ const Rooms = () => {
   );
 };
 
-const Offices = () => {
+const Offices = ({ offices }: { offices: any }) => {
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
@@ -365,7 +391,7 @@ const Offices = () => {
   );
 };
 
-const Shops = () => {
+const Shops = ({ shops }: { shops: any }) => {
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
@@ -396,7 +422,7 @@ const Shops = () => {
   );
 };
 
-const Lands = () => {
+const Lands = ({ lands }: { lands: any }) => {
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
@@ -427,7 +453,7 @@ const Lands = () => {
   );
 };
 
-const Buildings = () => {
+const Buildings = ({ buildings }: { buildings: any }) => {
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
@@ -458,7 +484,7 @@ const Buildings = () => {
   );
 };
 
-const Flats = () => {
+const Flats = ({ flats }: { flats: any }) => {
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
@@ -489,7 +515,7 @@ const Flats = () => {
   );
 };
 
-const Shortlets = () => {
+const Shortlets = ({ shortlets }: { shortlets: any }) => {
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
@@ -520,7 +546,7 @@ const Shortlets = () => {
   );
 };
 
-const Apartments = () => {
+const Apartments = ({ apartments }: { apartments: any }) => {
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">
@@ -1005,7 +1031,3 @@ const PropertyCard = ({
     </article>
   );
 };
-
-// "I had a few questions during the process, and the Finpro support team was incredibly helpful. They were responsive, friendly, and went above and beyond to assist me. I'm very satisfied with my experience."
-
-// "I was impressed by the wide range of property options available on Finpro. I found exactly the type of apartment I was looking for, in the neighborhood I wanted, and at a price that fit my budget. Thank you, Finpro!"
