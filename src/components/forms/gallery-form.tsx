@@ -11,7 +11,7 @@ import SubmitButton from "./submit-button";
 import { toast } from "sonner";
 import revalidate from "@/utils/revalidate";
 
-const MAX_IMAGES = 3;
+const MAX_IMAGES = 5;
 
 export default function GalleryForm({
   gallery,
@@ -22,7 +22,7 @@ export default function GalleryForm({
   id: number | string;
   setEditPropertyModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
 
   const {
     handleSubmit,
@@ -45,23 +45,29 @@ export default function GalleryForm({
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const files = event.target.files;
 
-    if (file) {
-      if (gallery.length + 1 > MAX_IMAGES) {
+    if (files) {
+      const fileArray = Array.from(files);
+      const newImageUrls = fileArray.map((file) => URL.createObjectURL(file));
+
+      if (
+        gallery.length + selectedImages.length + fileArray.length >
+        MAX_IMAGES
+      ) {
         toast.error(`You can only upload up to ${MAX_IMAGES} images.`);
         return;
       }
+
+      setSelectedImages((prev) => [...prev, ...newImageUrls]);
+
       // Set the FileList value in the form
-      setValue("image", event.target.files as FileList, {
-        shouldValidate: true,
-      });
-      setSelectedImage(URL.createObjectURL(file));
+      setValue("image", files as FileList, { shouldValidate: true });
     }
   };
 
   const handleRemoveImage = (index: number) => {
-    console.log(index)
+    setSelectedImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -74,13 +80,14 @@ export default function GalleryForm({
           <div className="grid grid-cols-3 gap-2">
             <label
               htmlFor="image"
-              className={`relative col-span-3 flex h-28 w-full cursor-pointer items-center justify-center gap-1 rounded-md border border-dashed border-gray-300 bg-white py-3 pl-4 pr-10 text-left text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary`}
+              className="relative col-span-3 flex h-28 w-full cursor-pointer items-center justify-center gap-1 rounded-md border border-dashed border-gray-300 bg-white py-3 pl-4 pr-10 text-left text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
             >
               <input
                 type="file"
                 id="image"
                 accept="image/jpeg,image/jpg,image/png,image/webp"
                 className="hidden"
+                multiple // Allows multiple file selection
                 onChange={handleFileChange}
               />
 
@@ -90,33 +97,25 @@ export default function GalleryForm({
                   Select property images
                 </div>
                 <p className="text-sm">
-                  You can add at most, three of your best property photos
+                  You can add at most, five of your best property photos
                 </p>
               </div>
             </label>
-            {selectedImage && (
-              <div className="relative col-span-1 h-28 w-full">
+
+            {/* Display selected images */}
+            {selectedImages.map((image, index) => (
+              <div
+                key={`selected-${index}`}
+                className="relative col-span-1 h-28 w-full border-2 border-blue-500"
+              >
                 <img
-                  src={selectedImage}
+                  src={image}
                   alt="Selected"
                   className="h-full w-full object-cover"
                 />
-                <button
-                  type="button"
-                  className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-white"
-                  onClick={() => setSelectedImage(null)}
-                >
-                  &times;
-                </button>
-              </div>
-            )}
-            {gallery.map((image, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={image}
-                  alt={`Selected ${index}`}
-                  className="h-28 w-full object-cover"
-                />
+                <span className="absolute left-1 top-1 rounded bg-blue-600 px-2 py-1 text-xs text-white">
+                  New
+                </span>
                 <button
                   type="button"
                   className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-white"
@@ -126,7 +125,25 @@ export default function GalleryForm({
                 </button>
               </div>
             ))}
+
+            {/* Display existing gallery images */}
+            {gallery.map((image, index) => (
+              <div
+                key={`gallery-${index}`}
+                className="relative col-span-1 h-28 w-full border-2 border-gray-500"
+              >
+                <img
+                  src={image}
+                  alt={`Gallery ${index}`}
+                  className="h-28 w-full object-cover"
+                />
+                <span className="absolute left-1 top-1 rounded bg-gray-700 px-2 py-1 text-xs text-white">
+                  Gallery
+                </span>
+              </div>
+            ))}
           </div>
+
           {errors.image?.message && (
             <div className="mt-1 text-xs text-red-600">
               <p>{errors.image?.message}</p>

@@ -4,7 +4,9 @@ import {
   Description,
   DetailedFeatures,
   Facilities,
+  PropertyAgent,
   PropertyNameAndTags,
+  PropertyTenants,
   PurchaseProperty,
 } from "@/components/pages/properties";
 import { routes } from "@/constants/routes";
@@ -74,8 +76,8 @@ export default async function PropertyDetails({
 
       <Gallery displayPhoto={data.property.image} gallery={gallery} />
 
-      <section className="grid grid-cols-5 gap-5">
-        <div className="col-span-5 grid gap-y-10 lg:col-span-3">
+      <section className="grid grid-cols-5 items-start gap-5">
+        <div className="col-span-5 grid gap-y-5 lg:col-span-3">
           <Description
             description={
               data.property.description ??
@@ -84,27 +86,26 @@ export default async function PropertyDetails({
           />
           <DetailedFeatures
             features={{
-              size: data.property.size,
+              size: data.property.size ?? "0",
               bedroom: data.property.bedroom ?? 0,
               bathroom: data.property.bathroom ?? 0,
-              dining_combined:
-                data.property.dining_combined ??
-                "You have not added dining information.",
-              flat_no: data.property.flat_no ?? "(You have not added flat no.)",
+              flat_no: data.property.flat_no,
             }}
           />
           <Facilities facilities={data.facilities} />
         </div>
 
-        <div className="col-span-5 flex flex-col-reverse gap-y-10 lg:col-span-2 lg:flex-col">
-          {/* <PropertyAgent /> */}
-          {/* <PropertyTenants /> */}
+        <div className="col-span-5 flex flex-col-reverse gap-y-5 lg:col-span-2 lg:flex-col">
           <PurchaseProperty
             rent={data.property.rent_amount}
             type={data.property.type}
             category={data.property.category}
+            grace_period={data.property.grace_period}
+            caution_fee={data.property.caution_fee}
             roleId={(await getRole()) as number}
           />
+          <PropertyAgent />
+          <PropertyTenants />
         </div>
       </section>
     </main>

@@ -116,10 +116,9 @@ export default async function PropertyDetails({
 
           <DetailedFeatures
             features={{
-              size: data.property.size || 0,
+              size: data.property.size || "0",
               bedroom: data.property.bedroom || 0,
               bathroom: data.property.bathroom || 0,
-              dining_combined: data.property.dining_combined,
               flat_no: data.property.flat_no,
             }}
           />

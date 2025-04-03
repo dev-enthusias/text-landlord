@@ -172,7 +172,10 @@ export const addGalleryPhoto = async (
 
   for (const key in data) {
     if (key === "image" && data.image) {
-      formData.append("image", data?.image[0]);
+      // Append each selected image
+      Array.from(data.image).forEach((file) => {
+        formData.append("image", file);
+      });
     } else {
       formData.append(key, data[key]);
     }

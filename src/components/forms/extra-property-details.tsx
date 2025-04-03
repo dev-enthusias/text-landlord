@@ -159,7 +159,7 @@ export default function ExtraPropertyDetailsForm({
           </div>
           {rent && (
             <strong className="mt-1 inline-block text-xs font-semibold text-gray-500">
-              {`Note: A total of ${rentPlusPlatformFee} (+5% platform fee) will be displayed as rent amount`}
+              {`Note: A total of ${rentPlusPlatformFee} (₦${rent} + 5% platform fee) will be displayed as rent amount`}
             </strong>
           )}
         </div>

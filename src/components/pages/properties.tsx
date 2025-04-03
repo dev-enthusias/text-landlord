@@ -7,14 +7,14 @@ import { routes } from "@/constants/routes";
 import { BsBuildingsFill } from "react-icons/bs";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
-import { MdCategory, MdDining } from "react-icons/md";
+import { MdCategory, MdDining, MdTimer } from "react-icons/md";
 import { formatCurrency } from "@/utils/formatCurrency";
 import dynamic from "next/dynamic";
 import WishlistForm from "../forms/wishlist-form";
 import { IoHome } from "react-icons/io5";
 import AddToCartButton from "../forms/add-to-cart-form";
 import { FaPhoneAlt } from "react-icons/fa";
-import { FaMessage } from "react-icons/fa6";
+import { FaMessage, FaTriangleExclamation } from "react-icons/fa6";
 import { BiSolidMessageRoundedDots } from "react-icons/bi";
 import {
   collection,
@@ -63,10 +63,9 @@ export function DetailedFeatures({
   features,
 }: {
   features: {
-    size: null | string | number;
+    size: null | string;
     bedroom: null | number;
     bathroom: null | number;
-    dining_combined: string | null;
     flat_no: null | string;
   };
 }) {
@@ -88,12 +87,6 @@ export function DetailedFeatures({
           <RulerIcon size={20} className="text-gray-600" />
           <span>{features.size} square feet</span>
         </li>
-        {features.dining_combined !== null && (
-          <li className="flex gap-x-2">
-            <MdDining size={20} className="text-gray-600" />
-            <span>{features.dining_combined}</span>
-          </li>
-        )}
         {features.flat_no !== null && (
           <li className="flex gap-x-2">
             <BsBuildingsFill size={20} className="text-gray-600" />
@@ -256,7 +249,7 @@ export function PropertyOwner({
 // You should later remove this function
 export function PropertyAgent() {
   return (
-    <section>
+    <section className="rounded-lg bg-white p-5">
       <h2 className="mb-2 font-roboto text-xl font-medium text-black">
         Assigned Agent
       </h2>
@@ -294,6 +287,8 @@ export function PurchaseProperty({
   propertyId,
   advertisementId,
   roleId,
+  caution_fee,
+  grace_period,
 }: {
   rent: number;
   type: string | null;
@@ -301,6 +296,8 @@ export function PurchaseProperty({
   propertyId?: number;
   advertisementId?: number;
   roleId: number;
+  caution_fee?: string;
+  grace_period?: number;
 }) {
   return (
     <section className="space-y-5 rounded-xl bg-white p-5">
@@ -310,6 +307,27 @@ export function PurchaseProperty({
       </p>
 
       <div className="grid gap-5 rounded-lg bg-background px-5 py-4 lg:grid-cols-2 lg:text-lg">
+        {caution_fee && grace_period && (
+          <>
+            <div className="flex items-start gap-x-3">
+              <FaTriangleExclamation size={20} className="mt-1 text-gray-600" />
+              <div>
+                <p>Caution Fee</p>
+                <p className="font-semibold text-gray-600">{caution_fee}%</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-x-3">
+              <MdTimer size={20} className="mt-1 text-gray-600" />
+              <div>
+                <p>Grace Period</p>
+                <p className="font-semibold text-gray-600">
+                  {grace_period} week(s)
+                </p>
+              </div>
+            </div>
+          </>
+        )}
+
         <div className="flex items-start gap-x-3">
           <IoHome size={20} className="mt-1 text-gray-600" />
           <div>
@@ -373,9 +391,9 @@ export function Location({
 
 export function PropertyTenants() {
   return (
-    <section>
+    <section className="rounded-lg bg-white p-5">
       <h2 className="mb-2 font-roboto text-xl font-medium text-black">
-        Tenants (3)
+        Tenant
       </h2>
 
       <div className="space-y-4">

@@ -161,13 +161,15 @@ export interface LandlordPropertyDetailsResponseDataType {
     country: string;
     category: string;
     zip_code: string | null;
-    size: number | null;
+    size: string | null;
     dining_combined: string;
     bedroom: number | null;
     bathroom: number | null;
     rent_amount: number;
     flat_no: string | null;
     description: string | null;
+    caution_fee: string;
+    grace_period: number;
   };
   current_tenant: any[];
   previous_tenants: any[];
