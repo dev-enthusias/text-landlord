@@ -1,13 +1,9 @@
-"use client";
-
-import WaitlistModal from "@/components/modals/waitlist";
 import DropdownButton from "@/components/ui/dropdown-btn";
 import ImageSlider from "@/components/ui/image-slider";
 import { howItWorks } from "@/constants/data";
 import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { BiSupport } from "react-icons/bi";
 import {
   FaApple,
@@ -44,13 +40,9 @@ export default function Home({
   land: any[];
   shortlet: any[];
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  console.log(flat);
-
   return (
     <div className="relative bg-white">
-      <Header setIsOpen={setIsOpen} role={role} token={token} />
+      <Header role={role} token={token} />
       {/* <TrendingProperties /> */}
       <PropertyCategories
         flats={flat}
@@ -73,7 +65,6 @@ export default function Home({
       </section>
       <Testimonials />
       <Footer />
-      <WaitlistModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }
@@ -81,11 +72,9 @@ export default function Home({
 const Header = ({
   role,
   token,
-  setIsOpen,
 }: {
   role: number | undefined;
   token: string | undefined;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const path =
     role === 4
@@ -202,31 +191,13 @@ const Header = ({
         </div>
 
         <div className="flex flex-col justify-center gap-x-4 gap-y-2 pt-5 text-white lg:flex-row lg:items-center">
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setIsOpen(true);
-            }}
-            className="rounded-full bg-black px-6 py-3 text-white"
-          >
+          <button className="rounded-full bg-black px-6 py-3 text-white">
             Become a Landlord
           </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setIsOpen(true);
-            }}
-            className="inline-block rounded-full bg-yellow-500 px-6 py-3 text-white"
-          >
+          <button className="inline-block rounded-full bg-yellow-500 px-6 py-3 text-white">
             Find a Home
           </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setIsOpen(true);
-            }}
-            className="inline-block rounded-full bg-accent px-6 py-3 text-white"
-          >
+          <button className="inline-block rounded-full bg-accent px-6 py-3 text-white">
             Become an Agent
           </button>
         </div>
@@ -347,7 +318,7 @@ const Rooms = ({ rooms }: { rooms: any }) => {
             data={{
               image: property.image,
               price: property.price,
-              location: property.location,
+              location: `${property.address.address} ${property.address.city}`,
               bedrooms: property.bedrooms,
               bathrooms: property.bathrooms,
               size: property.size,
@@ -372,15 +343,15 @@ const Offices = ({ offices }: { offices: any }) => {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-4">
-        {offices.map((property) => (
+        {offices.map((property: any) => (
           <PropertyCard
             key={property.id}
             data={{
               image: property.image,
               price: property.price,
-              location: property.location,
-              bedrooms: 0,
-              bathrooms: 0,
+              location: `${property.address.address} ${property.address.city}`,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
               size: property.size,
               name: property.name,
             }}
@@ -403,15 +374,15 @@ const Shops = ({ shops }: { shops: any }) => {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-4">
-        {shops.map((property) => (
+        {shops.map((property: any) => (
           <PropertyCard
             key={property.id}
             data={{
               image: property.image,
               price: property.price,
-              location: property.location,
-              bedrooms: 0,
-              bathrooms: 0,
+              location: `${property.address.address} ${property.address.city}`,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
               size: property.size,
               name: property.name,
             }}
@@ -434,15 +405,15 @@ const Lands = ({ lands }: { lands: any }) => {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-4">
-        {lands.map((property) => (
+        {lands.map((property: any) => (
           <PropertyCard
             key={property.id}
             data={{
               image: property.image,
               price: property.price,
-              location: property.location,
-              bedrooms: 0,
-              bathrooms: 0,
+              location: `${property.address.address} ${property.address.city}`,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
               size: property.size,
               name: property.name,
             }}
@@ -465,15 +436,15 @@ const Buildings = ({ buildings }: { buildings: any }) => {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-4">
-        {buildings.map((property) => (
+        {buildings.map((property: any) => (
           <PropertyCard
             key={property.id}
             data={{
               image: property.image,
               price: property.price,
-              location: property.location,
-              bedrooms: 0,
-              bathrooms: 0,
+              location: `${property.address.address} ${property.address.city}`,
+              bedrooms: property.bedrooms,
+              bathrooms: property.bathrooms,
               size: property.size,
               name: property.name,
             }}
@@ -496,13 +467,13 @@ const Flats = ({ flats }: { flats: any }) => {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-4">
-        {flats.map((property) => (
+        {flats.map((property: any) => (
           <PropertyCard
             key={property.id}
             data={{
               image: property.image,
               price: property.price,
-              location: property.location,
+              location: `${property.address.address} ${property.address.city}`,
               bedrooms: property.bedrooms,
               bathrooms: property.bathrooms,
               size: property.size,
@@ -527,13 +498,13 @@ const Shortlets = ({ shortlets }: { shortlets: any }) => {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-4">
-        {shortlets.map((property) => (
+        {shortlets.map((property: any) => (
           <PropertyCard
             key={property.id}
             data={{
               image: property.image,
               price: property.price,
-              location: property.location,
+              location: `${property.address.address} ${property.address.city}`,
               bedrooms: property.bedrooms,
               bathrooms: property.bathrooms,
               size: property.size,
@@ -558,13 +529,13 @@ const Apartments = ({ apartments }: { apartments: any }) => {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-4">
-        {apartments.map((property) => (
+        {apartments.map((property: any) => (
           <PropertyCard
             key={property.id}
             data={{
               image: property.image,
               price: property.price,
-              location: property.location,
+              location: `${property.address.address} ${property.address.city}`,
               bedrooms: property.bedrooms,
               bathrooms: property.bathrooms,
               size: property.size,
