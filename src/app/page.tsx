@@ -3,7 +3,6 @@ import {
   getPropertyByCategory,
   getPropertyFields,
 } from "@/api/services/property";
-import { Property } from "@/definition";
 import { PropertySearchFieldsRDT } from "@/definitions/tenant";
 import { getRole, getToken } from "@/lib/actions";
 
