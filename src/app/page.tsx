@@ -1,24 +1,22 @@
 import Home from "./_page";
-import { getPropertyByCategory } from "@/api/services/property";
+import {
+  getPropertyByCategory,
+  getPropertyFields,
+} from "@/api/services/property";
+import { Property } from "@/definition";
+import { PropertySearchFieldsRDT } from "@/definitions/tenant";
 import { getRole, getToken } from "@/lib/actions";
-
-const categories = [
-  "flat",
-  "apartment",
-  "shop",
-  "building",
-  "office",
-  "room",
-  "land",
-  "shortlet",
-] as const;
-
-const getPropertiesByCategory = async () =>
-  Promise.all(categories.map((category) => getPropertyByCategory(category)));
 
 export default async function LandingPage() {
   const token = await getToken();
   const role = await getRole();
+  const {
+    data: { categories },
+  } = (await getPropertyFields()) as PropertySearchFieldsRDT;
+
+  const getPropertiesByCategory = async () =>
+    Promise.all(categories.map(({ name }) => getPropertyByCategory(name)));
+
   const [
     flats,
     apartments,

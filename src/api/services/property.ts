@@ -78,6 +78,7 @@ export async function getAllAdvertisedProperties(data: { types: string[] }) {
 
 export async function getPropertyFields() {
   const token = await getToken();
+  console.log(token);
   const res = await fetch(`${BASE_URL}/private/v1/property-search-field`, {
     headers: {
       "Content-type": "application/json",
@@ -86,6 +87,9 @@ export async function getPropertyFields() {
   });
 
   const result = await res.json();
+
+  console.log(result);
+
   return result;
 }
 
