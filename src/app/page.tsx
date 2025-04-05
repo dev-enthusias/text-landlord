@@ -1,26 +1,26 @@
 import Home from "./_page";
 import { getRole, getToken } from "@/lib/actions";
 
-const getPropertyByCategory = async (category: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/public/v1/property/category/${category}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ category }),
-    },
-  );
+// const getPropertyByCategory = async (category: string) => {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_BASE_URL}/public/v1/property/category/${category}`,
+//     {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ category }),
+//     },
+//   );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch data");
+//   }
 
-  const data = await res.json();
+//   const data = await res.json();
 
-  return data.data;
-};
+//   return data.data;
+// };
 
 export default async function LandingPage() {
   const token = await getToken();

@@ -1,8 +1,8 @@
 import DropdownButton from "@/components/ui/dropdown-btn";
 import ImageSlider from "@/components/ui/image-slider";
 import { howItWorks } from "@/constants/data";
-import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
-import Image from "next/image";
+// import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
+// import Image from "next/image";
 import Link from "next/link";
 import { BiSupport } from "react-icons/bi";
 import {
@@ -14,7 +14,7 @@ import {
   FaTiktok,
 } from "react-icons/fa";
 import { FaArrowRightLong, FaXTwitter } from "react-icons/fa6";
-import { IoMdArrowDown } from "react-icons/io";
+// import { IoMdArrowDown } from "react-icons/io";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 
 export default function Home({
@@ -230,42 +230,42 @@ const Header = ({
   );
 };
 
-const PropertyCategories = ({
-  flats,
-  apartment,
-  shop,
-  building,
-  office,
-  room,
-  land,
-  shortlet,
-}: any) => {
-  return (
-    <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
-      <div className="mb-6 flex flex-col items-center justify-between gap-5 lg:flex-row">
-        <h2 className="max-w-[440px] text-4xl font-semibold leading-[46px] text-black">
-          Explore Our Property Categories
-        </h2>
-        <p className="max-w-[440px]">
-          Find your perfect apartment among our extensive collection of
-          properties. We offer a wide range of options to suit your needs, from
-          cozy studios to spacious multi-bedroom apartments.
-        </p>
-      </div>
-      <div className="grid gap-y-[3.25rem]">
-        {flats.length > 0 && <Flats flats={flats} />}
+// const PropertyCategories = ({
+//   flats,
+//   apartment,
+//   shop,
+//   building,
+//   office,
+//   room,
+//   land,
+//   shortlet,
+// }: any) => {
+//   return (
+//     <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
+//       <div className="mb-6 flex flex-col items-center justify-between gap-5 lg:flex-row">
+//         <h2 className="max-w-[440px] text-4xl font-semibold leading-[46px] text-black">
+//           Explore Our Property Categories
+//         </h2>
+//         <p className="max-w-[440px]">
+//           Find your perfect apartment among our extensive collection of
+//           properties. We offer a wide range of options to suit your needs, from
+//           cozy studios to spacious multi-bedroom apartments.
+//         </p>
+//       </div>
+//       <div className="grid gap-y-[3.25rem]">
+//         {flats.length > 0 && <Flats flats={flats} />}
 
-        {shop.length > 0 && <Shops shops={shop} />}
-        {room.length > 0 && <Rooms rooms={room} />}
-        {apartment.length > 0 && <Apartments apartments={apartment} />}
-        {office.length > 0 && <Offices offices={office} />}
-        {shortlet.length > 0 && <Shortlets shortlets={shortlet} />}
-        {building.length > 0 && <Buildings buildings={building} />}
-        {land.length > 0 && <Lands lands={land} />}
-      </div>
-    </section>
-  );
-};
+//         {shop.length > 0 && <Shops shops={shop} />}
+//         {room.length > 0 && <Rooms rooms={room} />}
+//         {apartment.length > 0 && <Apartments apartments={apartment} />}
+//         {office.length > 0 && <Offices offices={office} />}
+//         {shortlet.length > 0 && <Shortlets shortlets={shortlet} />}
+//         {building.length > 0 && <Buildings buildings={building} />}
+//         {land.length > 0 && <Lands lands={land} />}
+//       </div>
+//     </section>
+//   );
+// };
 
 // const TrendingProperties = () => {
 //   return (
@@ -300,253 +300,253 @@ const PropertyCategories = ({
 //   );
 // };
 
-const Rooms = ({ rooms }: { rooms: any }) => {
-  return (
-    <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-2xl font-semibold text-black/75">Rooms</h3>
-        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
-          See More
-          <IoMdArrowDown className="-rotate-[135deg]" />
-        </button>
-      </div>
+// const Rooms = ({ rooms }: { rooms: any }) => {
+//   return (
+//     <section>
+//       <div className="mb-4 flex items-center justify-between">
+//         <h3 className="text-2xl font-semibold text-black/75">Rooms</h3>
+//         <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+//           See More
+//           <IoMdArrowDown className="-rotate-[135deg]" />
+//         </button>
+//       </div>
 
-      <div className="grid gap-5 lg:grid-cols-4">
-        {rooms.map((property: any) => (
-          <PropertyCard
-            key={property.id}
-            data={{
-              image: property.image,
-              price: property.price,
-              location: `${property.address.address} ${property.address.city}`,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              size: property.size,
-              name: property.name,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+//       <div className="grid gap-5 lg:grid-cols-4">
+//         {rooms.map((property: any) => (
+//           <PropertyCard
+//             key={property.id}
+//             data={{
+//               image: property.image,
+//               price: property.price,
+//               location: `${property.address.address} ${property.address.city}`,
+//               bedrooms: property.bedrooms,
+//               bathrooms: property.bathrooms,
+//               size: property.size,
+//               name: property.name,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
-const Offices = ({ offices }: { offices: any }) => {
-  return (
-    <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-2xl font-semibold text-black/75">Offices</h3>
-        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
-          See More
-          <IoMdArrowDown className="-rotate-[135deg]" />
-        </button>
-      </div>
+// const Offices = ({ offices }: { offices: any }) => {
+//   return (
+//     <section>
+//       <div className="mb-4 flex items-center justify-between">
+//         <h3 className="text-2xl font-semibold text-black/75">Offices</h3>
+//         <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+//           See More
+//           <IoMdArrowDown className="-rotate-[135deg]" />
+//         </button>
+//       </div>
 
-      <div className="grid gap-5 lg:grid-cols-4">
-        {offices.map((property: any) => (
-          <PropertyCard
-            key={property.id}
-            data={{
-              image: property.image,
-              price: property.price,
-              location: `${property.address.address} ${property.address.city}`,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              size: property.size,
-              name: property.name,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+//       <div className="grid gap-5 lg:grid-cols-4">
+//         {offices.map((property: any) => (
+//           <PropertyCard
+//             key={property.id}
+//             data={{
+//               image: property.image,
+//               price: property.price,
+//               location: `${property.address.address} ${property.address.city}`,
+//               bedrooms: property.bedrooms,
+//               bathrooms: property.bathrooms,
+//               size: property.size,
+//               name: property.name,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
-const Shops = ({ shops }: { shops: any }) => {
-  return (
-    <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-2xl font-semibold text-black/75">Shops</h3>
-        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
-          See More
-          <IoMdArrowDown className="-rotate-[135deg]" />
-        </button>
-      </div>
+// const Shops = ({ shops }: { shops: any }) => {
+//   return (
+//     <section>
+//       <div className="mb-4 flex items-center justify-between">
+//         <h3 className="text-2xl font-semibold text-black/75">Shops</h3>
+//         <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+//           See More
+//           <IoMdArrowDown className="-rotate-[135deg]" />
+//         </button>
+//       </div>
 
-      <div className="grid gap-5 lg:grid-cols-4">
-        {shops.map((property: any) => (
-          <PropertyCard
-            key={property.id}
-            data={{
-              image: property.image,
-              price: property.price,
-              location: `${property.address.address} ${property.address.city}`,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              size: property.size,
-              name: property.name,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+//       <div className="grid gap-5 lg:grid-cols-4">
+//         {shops.map((property: any) => (
+//           <PropertyCard
+//             key={property.id}
+//             data={{
+//               image: property.image,
+//               price: property.price,
+//               location: `${property.address.address} ${property.address.city}`,
+//               bedrooms: property.bedrooms,
+//               bathrooms: property.bathrooms,
+//               size: property.size,
+//               name: property.name,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
-const Lands = ({ lands }: { lands: any }) => {
-  return (
-    <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-2xl font-semibold text-black/75">Lands</h3>
-        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
-          See More
-          <IoMdArrowDown className="-rotate-[135deg]" />
-        </button>
-      </div>
+// const Lands = ({ lands }: { lands: any }) => {
+//   return (
+//     <section>
+//       <div className="mb-4 flex items-center justify-between">
+//         <h3 className="text-2xl font-semibold text-black/75">Lands</h3>
+//         <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+//           See More
+//           <IoMdArrowDown className="-rotate-[135deg]" />
+//         </button>
+//       </div>
 
-      <div className="grid gap-5 lg:grid-cols-4">
-        {lands.map((property: any) => (
-          <PropertyCard
-            key={property.id}
-            data={{
-              image: property.image,
-              price: property.price,
-              location: `${property.address.address} ${property.address.city}`,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              size: property.size,
-              name: property.name,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+//       <div className="grid gap-5 lg:grid-cols-4">
+//         {lands.map((property: any) => (
+//           <PropertyCard
+//             key={property.id}
+//             data={{
+//               image: property.image,
+//               price: property.price,
+//               location: `${property.address.address} ${property.address.city}`,
+//               bedrooms: property.bedrooms,
+//               bathrooms: property.bathrooms,
+//               size: property.size,
+//               name: property.name,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
-const Buildings = ({ buildings }: { buildings: any }) => {
-  return (
-    <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-2xl font-semibold text-black/75">Buildings</h3>
-        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
-          See More
-          <IoMdArrowDown className="-rotate-[135deg]" />
-        </button>
-      </div>
+// const Buildings = ({ buildings }: { buildings: any }) => {
+//   return (
+//     <section>
+//       <div className="mb-4 flex items-center justify-between">
+//         <h3 className="text-2xl font-semibold text-black/75">Buildings</h3>
+//         <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+//           See More
+//           <IoMdArrowDown className="-rotate-[135deg]" />
+//         </button>
+//       </div>
 
-      <div className="grid gap-5 lg:grid-cols-4">
-        {buildings.map((property: any) => (
-          <PropertyCard
-            key={property.id}
-            data={{
-              image: property.image,
-              price: property.price,
-              location: `${property.address.address} ${property.address.city}`,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              size: property.size,
-              name: property.name,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+//       <div className="grid gap-5 lg:grid-cols-4">
+//         {buildings.map((property: any) => (
+//           <PropertyCard
+//             key={property.id}
+//             data={{
+//               image: property.image,
+//               price: property.price,
+//               location: `${property.address.address} ${property.address.city}`,
+//               bedrooms: property.bedrooms,
+//               bathrooms: property.bathrooms,
+//               size: property.size,
+//               name: property.name,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
-const Flats = ({ flats }: { flats: any }) => {
-  return (
-    <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-2xl font-semibold text-black/75">Flats</h3>
-        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
-          See More
-          <IoMdArrowDown className="-rotate-[135deg]" />
-        </button>
-      </div>
+// const Flats = ({ flats }: { flats: any }) => {
+//   return (
+//     <section>
+//       <div className="mb-4 flex items-center justify-between">
+//         <h3 className="text-2xl font-semibold text-black/75">Flats</h3>
+//         <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+//           See More
+//           <IoMdArrowDown className="-rotate-[135deg]" />
+//         </button>
+//       </div>
 
-      <div className="grid gap-5 lg:grid-cols-4">
-        {flats.map((property: any) => (
-          <PropertyCard
-            key={property.id}
-            data={{
-              image: property.image,
-              price: property.price,
-              location: `${property.address.address} ${property.address.city}`,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              size: property.size,
-              name: property.name,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+//       <div className="grid gap-5 lg:grid-cols-4">
+//         {flats.map((property: any) => (
+//           <PropertyCard
+//             key={property.id}
+//             data={{
+//               image: property.image,
+//               price: property.price,
+//               location: `${property.address.address} ${property.address.city}`,
+//               bedrooms: property.bedrooms,
+//               bathrooms: property.bathrooms,
+//               size: property.size,
+//               name: property.name,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
-const Shortlets = ({ shortlets }: { shortlets: any }) => {
-  return (
-    <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-2xl font-semibold text-black/75">Shortlets</h3>
-        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
-          See More
-          <IoMdArrowDown className="-rotate-[135deg]" />
-        </button>
-      </div>
+// const Shortlets = ({ shortlets }: { shortlets: any }) => {
+//   return (
+//     <section>
+//       <div className="mb-4 flex items-center justify-between">
+//         <h3 className="text-2xl font-semibold text-black/75">Shortlets</h3>
+//         <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+//           See More
+//           <IoMdArrowDown className="-rotate-[135deg]" />
+//         </button>
+//       </div>
 
-      <div className="grid gap-5 lg:grid-cols-4">
-        {shortlets.map((property: any) => (
-          <PropertyCard
-            key={property.id}
-            data={{
-              image: property.image,
-              price: property.price,
-              location: `${property.address.address} ${property.address.city}`,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              size: property.size,
-              name: property.name,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+//       <div className="grid gap-5 lg:grid-cols-4">
+//         {shortlets.map((property: any) => (
+//           <PropertyCard
+//             key={property.id}
+//             data={{
+//               image: property.image,
+//               price: property.price,
+//               location: `${property.address.address} ${property.address.city}`,
+//               bedrooms: property.bedrooms,
+//               bathrooms: property.bathrooms,
+//               size: property.size,
+//               name: property.name,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
-const Apartments = ({ apartments }: { apartments: any }) => {
-  return (
-    <section>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-2xl font-semibold text-black/75">Apartments</h3>
-        <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
-          See More
-          <IoMdArrowDown className="-rotate-[135deg]" />
-        </button>
-      </div>
+// const Apartments = ({ apartments }: { apartments: any }) => {
+//   return (
+//     <section>
+//       <div className="mb-4 flex items-center justify-between">
+//         <h3 className="text-2xl font-semibold text-black/75">Apartments</h3>
+//         <button className="flex items-center gap-x-2 rounded-full border border-black px-4 py-2 text-sm text-black">
+//           See More
+//           <IoMdArrowDown className="-rotate-[135deg]" />
+//         </button>
+//       </div>
 
-      <div className="grid gap-5 lg:grid-cols-4">
-        {apartments.map((property: any) => (
-          <PropertyCard
-            key={property.id}
-            data={{
-              image: property.image,
-              price: property.price,
-              location: `${property.address.address} ${property.address.city}`,
-              bedrooms: property.bedrooms,
-              bathrooms: property.bathrooms,
-              size: property.size,
-              name: property.name,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+//       <div className="grid gap-5 lg:grid-cols-4">
+//         {apartments.map((property: any) => (
+//           <PropertyCard
+//             key={property.id}
+//             data={{
+//               image: property.image,
+//               price: property.price,
+//               location: `${property.address.address} ${property.address.city}`,
+//               bedrooms: property.bedrooms,
+//               bathrooms: property.bathrooms,
+//               size: property.size,
+//               name: property.name,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
 
 const dropdowns = [
   {
@@ -937,68 +937,68 @@ const Footer = () => {
   );
 };
 
-const PropertyCard = ({
-  data,
-}: {
-  data: {
-    image: string;
-    price: string;
-    location: string;
-    bedrooms?: number;
-    bathrooms?: number;
-    size: string;
-    name: string;
-  };
-}) => {
-  return (
-    <article className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg">
-      <article className="group flex sm:flex-col">
-        <div className="relative w-20 shrink-0 overflow-hidden rounded-lg shadow min-[400px]:w-36 sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
-          <Image
-            src={data.image}
-            alt="property display photo"
-            fill
-            sizes="(max-width: 400px) 80px, (max-width: 768px) 144px, 25vw"
-            className="w-full object-cover transition-all duration-700 group-hover:scale-110"
-          />
-        </div>
+// const PropertyCard = ({
+//   data,
+// }: {
+//   data: {
+//     image: string;
+//     price: string;
+//     location: string;
+//     bedrooms?: number;
+//     bathrooms?: number;
+//     size: string;
+//     name: string;
+//   };
+// }) => {
+//   return (
+//     <article className="block w-full rounded-lg border bg-white p-2 font-lato shadow-gold transition duration-300 ease-out hover:shadow-lg">
+//       <article className="group flex sm:flex-col">
+//         <div className="relative w-20 shrink-0 overflow-hidden rounded-lg shadow min-[400px]:w-36 sm:h-36 sm:w-auto sm:min-w-[240px] lg:min-w-fit">
+//           <Image
+//             src={data.image}
+//             alt="property display photo"
+//             fill
+//             sizes="(max-width: 400px) 80px, (max-width: 768px) 144px, 25vw"
+//             className="w-full object-cover transition-all duration-700 group-hover:scale-110"
+//           />
+//         </div>
 
-        <div className="grow pt-2">
-          <div className="px-2">
-            {/* Property value & Status */}
-            <div className="flex justify-between">
-              <p className="flex items-center gap-x-1 text-lg font-bold text-accent">
-                {data.price}
-                <span className="text-xs font-medium text-gray-500 opacity-80">
-                  / year
-                </span>
-              </p>
-            </div>
+//         <div className="grow pt-2">
+//           <div className="px-2">
+//             {/* Property value & Status */}
+//             <div className="flex justify-between">
+//               <p className="flex items-center gap-x-1 text-lg font-bold text-accent">
+//                 {data.price}
+//                 <span className="text-xs font-medium text-gray-500 opacity-80">
+//                   / year
+//                 </span>
+//               </p>
+//             </div>
 
-            <div>
-              <h3 className="font-bold text-gray-600">{data.name}</h3>
-              <p className="text-xs capitalize tracking-wide">
-                {data.location || "Add the address for this property"}
-              </p>
-            </div>
+//             <div>
+//               <h3 className="font-bold text-gray-600">{data.name}</h3>
+//               <p className="text-xs capitalize tracking-wide">
+//                 {data.location || "Add the address for this property"}
+//               </p>
+//             </div>
 
-            <ul className="mt-2 flex items-center justify-between text-[10px] min-[400px]:text-xs">
-              <li className="flex w-1/3 items-center justify-start gap-x-1">
-                <BedIcon size={14} />
-                <span>{data.bedrooms || 0} bd</span>
-              </li>
-              <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300">
-                <BathIcon size={14} />
-                <span>{data.bathrooms || 0} bt</span>
-              </li>
-              <li className="flex w-1/3 items-center justify-end gap-x-1">
-                <RulerIcon size={14} />
-                <span>{data.size || 0}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </article>
-    </article>
-  );
-};
+//             <ul className="mt-2 flex items-center justify-between text-[10px] min-[400px]:text-xs">
+//               <li className="flex w-1/3 items-center justify-start gap-x-1">
+//                 <BedIcon size={14} />
+//                 <span>{data.bedrooms || 0} bd</span>
+//               </li>
+//               <li className="flex w-1/3 items-center justify-center gap-x-1 border-x border-x-gray-300">
+//                 <BathIcon size={14} />
+//                 <span>{data.bathrooms || 0} bt</span>
+//               </li>
+//               <li className="flex w-1/3 items-center justify-end gap-x-1">
+//                 <RulerIcon size={14} />
+//                 <span>{data.size || 0}</span>
+//               </li>
+//             </ul>
+//           </div>
+//         </div>
+//       </article>
+//     </article>
+//   );
+// };
