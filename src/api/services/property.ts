@@ -282,17 +282,14 @@ export const getCities = async (id: string | number) => {
 };
 
 export const getPropertyByCategory = async (category: string) => {
-  const token = await getToken();
-
   const res = await fetch(`${BASE_URL}/private/v1/properties`, {
     method: "POST",
+    mode: "cors",
     body: JSON.stringify({ categories: [category] }),
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
   });
 
-  const data = await res.json();
-  return data.data;
+  return await res.json();
 };

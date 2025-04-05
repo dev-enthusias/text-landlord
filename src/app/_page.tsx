@@ -20,31 +20,31 @@ import { IoLogoGooglePlaystore } from "react-icons/io5";
 export default function Home({
   token,
   role,
-  flat,
-  apartment,
-  shop,
-  building,
-  office,
-  room,
-  land,
-  shortlet,
+  // flat,
+  // apartment,
+  // shop,
+  // building,
+  // office,
+  // room,
+  // land,
+  // shortlet,
 }: {
   token: string | undefined;
   role: number | undefined;
-  flat: any[];
-  apartment: any[];
-  shop: any[];
-  building: any[];
-  office: any[];
-  room: any[];
-  land: any[];
-  shortlet: any[];
+  // flat: any[];
+  // apartment: any[];
+  // shop: any[];
+  // building: any[];
+  // office: any[];
+  // room: any[];
+  // land: any[];
+  // shortlet: any[];
 }) {
   return (
     <div className="relative bg-white">
       <Header role={role} token={token} />
       {/* <TrendingProperties /> */}
-      <PropertyCategories
+      {/* <PropertyCategories
         flats={flat}
         apartment={apartment}
         shop={shop}
@@ -53,7 +53,7 @@ export default function Home({
         room={room}
         land={land}
         shortlet={shortlet}
-      />
+      /> */}
       <HowItWorks />
       <section className="mb-[6.25rem] px-5 lg:px-[6.25rem]">
         <section className="relative overflow-hidden rounded-3xl border-2 border-gold/50">
