@@ -33,6 +33,7 @@ export default async function PropertyDetails({
     item.title.toLowerCase().includes("floor plan"),
   );
 
+  console.log(data.property.type);
   const propertyFields =
     (await getPropertyFields()) as PropertyFieldsResponseDT;
 
@@ -66,6 +67,7 @@ export default async function PropertyDetails({
             cautionFee={data.property.caution_fee}
             id={data.property.id}
             propertyType={data.property.type}
+            category={data.property.category}
             gallery={gallery}
             rent={data.property.rent_amount}
             flatNo={data.property.flat_no}

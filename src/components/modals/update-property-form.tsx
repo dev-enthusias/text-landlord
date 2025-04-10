@@ -24,6 +24,7 @@ export default function UpdatePropertyBtn({
   description,
   bathroom,
   bedroom,
+  category,
 }: {
   name: string;
   id: number;
@@ -40,6 +41,7 @@ export default function UpdatePropertyBtn({
   description: string | null;
   bathroom: number | null;
   bedroom: number | null;
+  category: string;
 }) {
   const [isEditPropertyModalOpen, setEditPropertyModal] = useState(false);
   const [activeForm, setActiveForm] = useState<"extra" | "gallery" | "floor">(
@@ -114,8 +116,9 @@ export default function UpdatePropertyBtn({
                   bathroom={bathroom}
                   flatNo={flatNo}
                   description={description}
-                  propertyType={[propertyType]}
+                  propertyType={propertyType}
                   id={id}
+                  category={category}
                   setEditPropertyModal={setEditPropertyModal}
                 />
               )}

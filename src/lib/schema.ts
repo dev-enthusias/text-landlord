@@ -170,7 +170,8 @@ export const addGalleryPhotoSchema = z.object({
 
 export const basicPropertyInfoSchema = z.object({
   name: z.string().min(1, { message: "Please input property name" }),
-  type: z.coerce.number(),
+  type_id: z.coerce.number(),
+  category_id: z.coerce.number(),
   description: z
     .string()
     .min(1, { message: "Please input property description" }),

@@ -23,6 +23,7 @@ export default function ExtraPropertyDetailsForm({
   categories,
   propertyType,
   id,
+  category,
   rent,
   cautionFee,
   gracePeriod,
@@ -36,8 +37,9 @@ export default function ExtraPropertyDetailsForm({
   id: number;
   name: string;
   rent: number;
-  propertyType: PropertyMetadataResponseDataType["type"];
+  propertyType: string;
   categories: PropertyFieldsResponseDT["data"]["categories"];
+  category: string;
   cautionFee: string;
   gracePeriod: number;
   description: string | null;
@@ -84,6 +86,8 @@ export default function ExtraPropertyDetailsForm({
 
   const onSubmit: SubmitHandler<BasicPropertyInfoDataType> = async (data) => {
     const newData = { ...data, completion: 0 };
+    console.log(newData);
+
     const res = await addPropertyBasicInfo(newData, id);
 
     if (res.status) {
@@ -94,9 +98,11 @@ export default function ExtraPropertyDetailsForm({
     }
   };
 
-  const defaultPropertyType = type.find(
-    (type) => type.name === propertyType[0],
-  );
+  const defaultPropertyType = type.find((type) => type.name === propertyType);
+
+  const defaultCategory = categories.find((c) => c.name === category);
+
+  console.log(propertyType);
 
   const handleRentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
@@ -133,6 +139,7 @@ export default function ExtraPropertyDetailsForm({
 
   const rentPlusPlatformFee = formatter.format(+rent + Number(rent) * 0.05);
 
+  console.log(errors);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <fieldset className="space-y-4">
@@ -146,20 +153,20 @@ export default function ExtraPropertyDetailsForm({
         <SelectInput
           label="Property type"
           control={control}
-          name="type"
+          name="type_id"
           options={type}
           placeholder="choose a property type"
-          error={errors.type?.message}
+          error={errors.type_id?.message}
           defaultValue={defaultPropertyType?.id}
         />
         <SelectInput
-          label="Property type"
+          label="Property Category"
           control={control}
-          name="type"
+          name="category_id"
           options={categories}
           placeholder="select a category"
-          error={errors.type?.message}
-          defaultValue={defaultPropertyType?.id}
+          error={errors.category_id?.message}
+          defaultValue={defaultCategory?.id}
         />
         <TextInput
           register={register}
