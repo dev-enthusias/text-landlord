@@ -147,12 +147,15 @@ export const addPropertySchema = z.object({
     .min(1, { message: "Please select property category" }),
   rent_amount: z.string().min(1, { message: "Please input rent amount" }),
   grace_period: z.number().min(1, { message: "Please select a grace period" }),
-  caution_fee: z
-    .string()
-    .transform((val) => parseInt(val.replace("%", ""), 10))
-    .refine((num) => !isNaN(num) && num >= 0 && num <= 100, {
+  caution_fee: z.string().refine(
+    (val) => {
+      const num = parseInt(val.replace("%", ""), 10);
+      return !isNaN(num) && num >= 0 && num <= 100;
+    },
+    {
       message: "Value must be a number between 0 and 100",
-    }),
+    },
+  ),
 });
 
 export const addAccountSchema = z.object({
@@ -171,7 +174,7 @@ export const basicPropertyInfoSchema = z.object({
   description: z
     .string()
     .min(1, { message: "Please input property description" }),
-  flat_no: z.string().optional(),
+  flat_no: z.string().optional().nullable(),
   rent_amount: z.string().min(1, { message: "Please input rent amount" }),
   bathroom: z.coerce
     .number()
@@ -185,11 +188,23 @@ export const basicPropertyInfoSchema = z.object({
     .int()
     .positive({ message: "Number of bedrooms must be a positive integer" })
     .min(1, { message: "Please input number of bedrooms" })
+    .nullable()
     .or(z.literal("")),
   size: z.coerce
     .number()
     .positive({ message: "Property size must be a positive number" })
-    .min(1, { message: "Please input property size" }),
+    .min(1, { message: "Please input property size" })
+    .nullable(),
+  grace_period: z.number().min(1, { message: "Please select a grace period" }),
+  caution_fee: z.string().refine(
+    (val) => {
+      const num = parseInt(val.replace("%", ""), 10);
+      return !isNaN(num) && num >= 0 && num <= 100;
+    },
+    {
+      message: "Value must be a number between 0 and 100",
+    },
+  ),
 });
 
 export const addTenantSchema = z.object({

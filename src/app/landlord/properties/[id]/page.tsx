@@ -4,9 +4,7 @@ import {
   Description,
   DetailedFeatures,
   Facilities,
-  PropertyAgent,
   PropertyNameAndTags,
-  PropertyTenants,
   PurchaseProperty,
 } from "@/components/pages/properties";
 import { routes } from "@/constants/routes";
@@ -56,17 +54,25 @@ export default async function PropertyDetails({
       <section className="mb-4 flex items-center justify-between rounded-lg bg-[#eeebde] px-4 py-3">
         <PropertyNameAndTags
           name={data.property.name}
-          address={`${data.property.address}, ${data.property.city}, ${data.property.country}, ${data.property.zip_code}`}
+          address={`${data.property.address}, ${data.property.city}, ${data.property.country}.`}
         />
 
         <div className="flex gap-x-2">
           <UpdatePropertyBtn
+            categories={propertyFields.data.categories}
             type={propertyFields.data.types}
             name={data.property.name}
+            gracePeriod={data.property.grace_period}
+            cautionFee={data.property.caution_fee}
             id={data.property.id}
             propertyType={data.property.type}
             gallery={gallery}
             rent={data.property.rent_amount}
+            flatNo={data.property.flat_no}
+            size={data.property.size}
+            bathroom={data.property.bathroom}
+            bedroom={data.property.bedroom}
+            description={data.property.description}
             floorPlanPhoto={floorPlanPhoto ? [floorPlanPhoto?.path] : []}
           />
 
@@ -104,8 +110,8 @@ export default async function PropertyDetails({
             caution_fee={data.property.caution_fee}
             roleId={(await getRole()) as number}
           />
-          <PropertyAgent />
-          <PropertyTenants />
+          {/* <PropertyAgent />
+          <PropertyTenants /> */}
         </div>
       </section>
     </main>

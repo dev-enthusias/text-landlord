@@ -54,7 +54,7 @@ export function Description({ description }: { description: string }) {
       <h2 className="mb-1 font-roboto font-medium text-black lg:text-xl">
         Description
       </h2>
-      <p>{description}</p>
+      <p className="break-all">{description}</p>
     </section>
   );
 }

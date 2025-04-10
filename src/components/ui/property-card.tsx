@@ -166,9 +166,14 @@ export function LandlordPropertyCard({
 }
 
 function PropertyPrice({ price }: { price: string }) {
+  const formattedAmount = new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  }).format(+price);
+
   return (
     <p className="flex items-center gap-x-1 text-lg font-bold text-accent">
-      {price}
+      {formattedAmount}
       <span className="text-xs font-medium text-gray-500 opacity-80">
         / year
       </span>

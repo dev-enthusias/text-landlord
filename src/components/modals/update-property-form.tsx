@@ -12,18 +12,34 @@ export default function UpdatePropertyBtn({
   type,
   name,
   rent,
+  cautionFee,
+  gracePeriod,
   propertyType,
   id,
   gallery,
   floorPlanPhoto,
+  categories,
+  size,
+  flatNo,
+  description,
+  bathroom,
+  bedroom,
 }: {
   name: string;
   id: number;
   propertyType: string;
   type: PropertyFieldsResponseDT["data"]["types"];
+  categories: PropertyFieldsResponseDT["data"]["categories"];
+  cautionFee: string;
+  gracePeriod: number;
   gallery: string[];
   floorPlanPhoto: string[];
   rent: number;
+  flatNo: string | null;
+  size: string | null;
+  description: string | null;
+  bathroom: number | null;
+  bedroom: number | null;
 }) {
   const [isEditPropertyModalOpen, setEditPropertyModal] = useState(false);
   const [activeForm, setActiveForm] = useState<"extra" | "gallery" | "floor">(
@@ -33,7 +49,7 @@ export default function UpdatePropertyBtn({
   return (
     <>
       <button
-        className="flex items-center gap-x-1 rounded-full bg-gold px-4 lg:px-6 py-2 text-sm font-bold tracking-wide text-black hover:bg-gold/80"
+        className="flex items-center gap-x-1 rounded-full bg-gold px-4 py-2 text-sm font-bold tracking-wide text-black hover:bg-gold/80 lg:px-6"
         onClick={() => setEditPropertyModal(true)}
       >
         Update Property Details
@@ -88,8 +104,16 @@ export default function UpdatePropertyBtn({
               {activeForm === "extra" && (
                 <ExtraPropertyDetailsForm
                   type={type}
+                  categories={categories}
                   name={name}
                   rent={rent}
+                  cautionFee={cautionFee}
+                  gracePeriod={gracePeriod}
+                  size={size}
+                  bedroom={bedroom}
+                  bathroom={bathroom}
+                  flatNo={flatNo}
+                  description={description}
                   propertyType={[propertyType]}
                   id={id}
                   setEditPropertyModal={setEditPropertyModal}

@@ -5,6 +5,7 @@ import SelectInput from "../ui/select-input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
   BasicPropertyInfoDataType,
+  PropertyFieldsResponseDT,
   PropertyMetadataResponseDataType,
 } from "@/definition";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,15 +20,31 @@ import { useState, useEffect } from "react";
 export default function ExtraPropertyDetailsForm({
   type,
   name,
+  categories,
   propertyType,
   id,
   rent,
+  cautionFee,
+  gracePeriod,
+  bedroom,
+  bathroom,
+  description,
+  flatNo,
+  size,
   setEditPropertyModal,
 }: {
   id: number;
   name: string;
   rent: number;
   propertyType: PropertyMetadataResponseDataType["type"];
+  categories: PropertyFieldsResponseDT["data"]["categories"];
+  cautionFee: string;
+  gracePeriod: number;
+  description: string | null;
+  bathroom: number | null;
+  bedroom: number | null;
+  flatNo: string | null;
+  size: string | null;
   type: {
     id: number;
     name: string;
@@ -39,6 +56,7 @@ export default function ExtraPropertyDetailsForm({
     handleSubmit,
     control,
     reset,
+    watch,
     setValue,
     formState: { errors, isSubmitting },
   } = useForm<BasicPropertyInfoDataType>({
@@ -46,6 +64,13 @@ export default function ExtraPropertyDetailsForm({
     defaultValues: {
       name: name,
       rent_amount: rent.toString(),
+      caution_fee: cautionFee.toString(),
+      grace_period: gracePeriod,
+      bedroom: bedroom !== null ? bedroom : null,
+      bathroom: bathroom || null,
+      flat_no: flatNo || null,
+      description: description || "",
+      size: size !== null ? +size : null,
     },
   });
 
@@ -99,7 +124,13 @@ export default function ExtraPropertyDetailsForm({
     currency: "NGN",
   });
 
-  console.log(errors);
+  const cautionFeeVal = watch("caution_fee");
+
+  const cautionAmount = formatter.format(
+    (parseFloat(String(rent)) || 0) *
+      ((parseInt(String(cautionFeeVal)) || 0) / 100),
+  );
+
   const rentPlusPlatformFee = formatter.format(+rent + Number(rent) * 0.05);
 
   return (
@@ -118,6 +149,15 @@ export default function ExtraPropertyDetailsForm({
           name="type"
           options={type}
           placeholder="choose a property type"
+          error={errors.type?.message}
+          defaultValue={defaultPropertyType?.id}
+        />
+        <SelectInput
+          label="Property type"
+          control={control}
+          name="type"
+          options={categories}
+          placeholder="select a category"
           error={errors.type?.message}
           defaultValue={defaultPropertyType?.id}
         />
@@ -176,6 +216,35 @@ export default function ExtraPropertyDetailsForm({
           label="Flat number (if it is a flat)"
           error={errors.flat_no?.message}
         />
+        <SelectInput
+          control={control}
+          name="grace_period"
+          label="Grace Period"
+          options={[
+            { id: 1, name: "1 week" },
+            { id: 2, name: "2 weeks" },
+            { id: 3, name: "3 weeks" },
+            { id: 4, name: "4 weeks" },
+          ]}
+          placeholder="Select a grace period"
+          required
+          error={errors.grace_period?.message}
+        />
+        <div>
+          <TextInput
+            register={register}
+            name="caution_fee"
+            label="Refundable Caution Fee (%)"
+            error={errors.caution_fee?.message}
+            placeholder="eg: 10%"
+            required
+          />
+          {cautionFee && (
+            <strong className="mt-1 inline-block text-xs font-semibold text-gray-500">
+              {`Note: The ${parseInt(String(cautionFee)) || "0"}% (${cautionAmount}) caution fee will be added to your transaction.`}
+            </strong>
+          )}
+        </div>
         <TextareaInput
           register={register}
           name="description"
