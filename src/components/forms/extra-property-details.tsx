@@ -14,7 +14,7 @@ import SubmitButton from "./submit-button";
 import TextareaInput from "../ui/text-area";
 import { toast } from "sonner";
 import revalidate from "@/utils/revalidate";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ExtraPropertyDetailsForm({
   type,
@@ -45,6 +45,7 @@ export default function ExtraPropertyDetailsForm({
     resolver: zodResolver(basicPropertyInfoSchema),
     defaultValues: {
       name: name,
+      rent_amount: rent.toString(),
     },
   });
 
@@ -52,8 +53,13 @@ export default function ExtraPropertyDetailsForm({
     `₦${rent.toLocaleString("en-NG")}`,
   );
 
+  useEffect(() => {
+    setValue("rent_amount", rent.toString());
+  }, [rent, setValue]);
+
   const onSubmit: SubmitHandler<BasicPropertyInfoDataType> = async (data) => {
-    const res = await addPropertyBasicInfo(data, id);
+    const newData = { ...data, completion: 0 };
+    const res = await addPropertyBasicInfo(newData, id);
 
     if (res.status) {
       reset();
@@ -93,6 +99,7 @@ export default function ExtraPropertyDetailsForm({
     currency: "NGN",
   });
 
+  console.log(errors);
   const rentPlusPlatformFee = formatter.format(+rent + Number(rent) * 0.05);
 
   return (

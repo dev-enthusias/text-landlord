@@ -190,7 +190,6 @@ export const basicPropertyInfoSchema = z.object({
     .number()
     .positive({ message: "Property size must be a positive number" })
     .min(1, { message: "Please input property size" }),
-  completion: z.coerce.number(),
 });
 
 export const addTenantSchema = z.object({
