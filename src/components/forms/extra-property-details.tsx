@@ -6,7 +6,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import {
   BasicPropertyInfoDataType,
   PropertyFieldsResponseDT,
-  PropertyMetadataResponseDataType,
 } from "@/definition";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { basicPropertyInfoSchema } from "@/lib/schema";
