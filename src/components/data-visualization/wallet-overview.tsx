@@ -5,6 +5,7 @@ import Link from "next/link";
 import { EyeIcon, EyeOffIcon, ShieldCheckIcon } from "lucide-react";
 import { routes } from "@/constants/routes";
 import LoadingSpinner from "../ui/loading-spinner";
+import { LuShieldCheck } from "react-icons/lu";
 
 export function WalletOverview() {
   const [isVisible, setVisibility] = useState<boolean | undefined>(undefined);
@@ -31,6 +32,7 @@ export function WalletOverview() {
         <div className="mb-4 flex items-center gap-x-2">
           <p className="flex items-center gap-x-1 text-sm">
             <ShieldCheckIcon size={14} />
+            <LuShieldCheck />
             Available balance
           </p>
           <button

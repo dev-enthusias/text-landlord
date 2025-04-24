@@ -18,13 +18,13 @@ export default function PropertyListing({
     <section>
       <div className="mb-4 flex items-center justify-between">
         <div className="text-black">
-          <h1 className="text-lg lg:text-xl font-semibold">Properties</h1>
+          <h1 className="text-lg font-semibold lg:text-xl">Properties</h1>
           <p className="text-sm">Showing {properties.length} search results</p>
         </div>
         <FilterBtn properties={properties} searchFields={searchFieldData} />
       </div>
 
-      <div className="grid w-full gap-2 lg:gap-5 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid w-full gap-2 lg:grid-cols-3 lg:gap-5 xl:grid-cols-3 2xl:grid-cols-4">
         {properties.length <= 0 ? (
           <p className="col-span-3 lg:col-span-2 xl:col-span-3 2xl:col-span-4">
             There are no advertised properties found.

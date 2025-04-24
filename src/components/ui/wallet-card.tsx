@@ -64,7 +64,7 @@ export default function WalletCard({ data }: { data: AccountType }) {
 
   return (
     <section className="custom-shadow max-w-[540px] rounded-lg bg-white p-3">
-      <article className="mb-2 flex items-center gap-x-3 justify-between border-b border-dashed border-gray-200 pb-2">
+      <article className="mb-2 flex items-center justify-between gap-x-3 border-b border-dashed border-gray-200 pb-2">
         <div className="flex items-center space-x-2">
           <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/10">
             <LandmarkIcon className="text-gold" size={15} />

@@ -16,6 +16,7 @@ export default function ChatList({ id, max }: { id: string; max: number }) {
   const [unseenMessageCounts, setUnseenMessageCounts] = useState<
     Record<string, number>
   >({});
+
   const [loadingChats, setLoadingChats] = useState(true);
 
   useEffect(() => {

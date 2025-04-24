@@ -175,23 +175,6 @@ async function DashboardContent({
             <h3 className="mb-4 text-lg font-semibold text-black">Chats</h3>
             <ChatList id={userId} max={6} />
           </div>
-
-          {/* <div className="rounded-lg bg-white px-5 pb-5 pt-3">
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-black">Reports</h3>
-              <Link
-                href={routes.REPORTS}
-                className="text-sm underline transition-colors duration-300 hover:text-black"
-              >
-                View all
-              </Link>
-            </div>
-            <div className="space-y-4">
-              <Report />
-              <Report />
-              <Report />
-            </div>
-          </div> */}
         </section>
       </div>
     </section>

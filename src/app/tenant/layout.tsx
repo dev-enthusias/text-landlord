@@ -1,5 +1,7 @@
-import Footer from "@/components/layout/footer";
 import Topbar from "@/components/layout/topbar";
+import Footer from "@/components/layout/footer";
+
+export const dynamic = "force-dynamic";
 
 export default function PageLayout({
   children,

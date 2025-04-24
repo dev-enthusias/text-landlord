@@ -3,7 +3,6 @@
 import { useState } from "react";
 import ModalLayout from "../ui/modal-layout";
 import AddPropertyForm from "../forms/add-property-form";
-import { X } from "lucide-react";
 import { IoMdAdd } from "react-icons/io";
 import {
   Country,
@@ -11,6 +10,7 @@ import {
   PropertyMetadataResponseDataType,
 } from "@/definition";
 import Link from "next/link";
+import { MdClose } from "react-icons/md";
 
 export default function AddPropertyBtn({
   categories,
@@ -43,7 +43,7 @@ export default function AddPropertyBtn({
                 className="rounded p-1 transition-colors duration-200 hover:bg-gray-200"
                 onClick={() => setAddPropertyModal(false)}
               >
-                <X size={20} />
+                <MdClose size={20} />
               </button>
             </header>
 

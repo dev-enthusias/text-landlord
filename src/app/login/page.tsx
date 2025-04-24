@@ -1,14 +1,14 @@
+import { Suspense } from "react";
 import Link from "next/link";
-import LoginForm from "../../components/forms/login-form";
 import AuthLogo from "@/components/ui/auth-logo";
 import AuthLeftHandSide from "@/components/layout/auth-sidebar";
+import LoginForm from "../../components/forms/login-form";
 import { routes } from "@/constants/routes";
-import { Suspense } from 'react'
 
 export default function LoginPage() {
   return (
     <Suspense>
-      <main className="flex overflow-hidden bg-white p-4 lg:h-dvh lg:max-h-dvh">
+      <main className="flex overflow-hidden bg-white p-4 lg:h-dvh">
         <AuthLeftHandSide />
 
         <section className="no-scrollbar relative flex h-full min-h-dvh grow flex-col items-center justify-center overflow-y-auto py-10">

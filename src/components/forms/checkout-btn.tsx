@@ -6,7 +6,7 @@ import LoadingSpinner from "../ui/loading-spinner";
 import { getLandlordSplitDetails, initializeTrx } from "@/api/services/payment";
 import { toast } from "sonner";
 
-export default function CheckoutButton({
+export default function  CheckoutButton({
   cartItems,
 }: {
   cartItems: CartProperty["data"];

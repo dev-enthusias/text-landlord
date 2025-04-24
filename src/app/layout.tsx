@@ -4,8 +4,8 @@ import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Oga landlord",
-  description: "",
+  title: "Oga Landlord",
+  description: "Find your perfect home in minutes",
 };
 
 export default function RootLayout({

@@ -9,3 +9,5 @@ export default function Success() {
     </div>
   );
 }
+// Day of the jackal
+// A shop for killers

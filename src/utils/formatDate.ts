@@ -13,6 +13,7 @@ export function formatDateToLong(dateString: string) {
  * @param {number} timestamp - Unix timestamp in milliseconds
  * @returns {string} Time in format "hh:mmam" or "hh:mmpm"
  */
+
 export function convertTimestampToTimeFormat(timestamp: number): string {
   const date = new Date(timestamp);
 
