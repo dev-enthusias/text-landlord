@@ -5,8 +5,9 @@ import { createOrder } from "@/api/services/order";
 import LoadingSpinner from "../ui/loading-spinner";
 import { getLandlordSplitDetails, initializeTrx } from "@/api/services/payment";
 import { toast } from "sonner";
+import { getAdvertisedPropertyDetails } from "@/api/services/property";
 
-export default function  CheckoutButton({
+export default function CheckoutButton({
   cartItems,
 }: {
   cartItems: CartProperty["data"];
@@ -24,13 +25,17 @@ export default function  CheckoutButton({
 
       // Perform sequential processing for each cart item
       for (const item of cartItems) {
-        // 1. Get Split Details
-        const splitDetailsResult = await getLandlordSplitDetails(73);
+        // Get property detail
+        const propertyDetail = await getAdvertisedPropertyDetails(
+          item.advertisement_id,
+        );
 
-        if (
-          splitDetailsResult.data?.split_code === null ||
-          !splitDetailsResult.result
-        ) {
+        // 1. Get Split Details
+        const splitDetailsResult = await getLandlordSplitDetails(
+          propertyDetail.data.advertisement.property_creator_id,
+        );
+
+        if (splitDetailsResult.data?.split_code === null) {
           toast.error(
             `Failed to get account details for ${item.property.name}`,
           );
@@ -44,7 +49,9 @@ export default function  CheckoutButton({
         });
 
         if (!orderResult.data?.id) {
-          toast.error("Failed to create order");
+          toast.error("Failed to create order", {
+            description: orderResult.error,
+          });
           return;
         }
 

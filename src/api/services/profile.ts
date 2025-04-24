@@ -1,7 +1,8 @@
 import { ProfileFormData } from "@/definition";
 import { getToken } from "@/lib/actions";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://api.ogalandlords.com/api";
 
 export const updateProfile = async (data: ProfileFormData) => {
   const token = await getToken();
@@ -27,6 +28,7 @@ export const updateProfilePhoto = async (data: any) => {
     method: "POST",
     body: data,
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
@@ -41,6 +43,7 @@ export const getProfileDetails = async () => {
     `${process.env.NEXT_PUBLIC_BASE_URL}/private/v1/user/profile`,
     {
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${await getToken()}`,
       },
     },

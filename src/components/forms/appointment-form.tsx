@@ -53,6 +53,12 @@ export default function AppointmentForm({
   });
 
   const onSubmit: SubmitHandler<AppointmentFDT> = async (data) => {
+    if (!data.phone) {
+      return toast.error(
+        "Please complete your profile setup. Your phone number is required",
+      );
+    }
+
     if (method === "post") {
       const response = await postAppointment(data);
 

@@ -8,7 +8,7 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { LucideSendHorizontal, LucideImage, LucideX } from "lucide-react";
+import { LucideSendHorizontal, LucideX } from "lucide-react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
@@ -30,13 +30,13 @@ export default function ChatFooter({
   const [isSending, setIsSending] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
-  function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (file) {
-      setImageFile(file);
-      setImagePreview(URL.createObjectURL(file)); // Preview image before upload
-    }
-  }
+  // function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     setImageFile(file);
+  //     setImagePreview(URL.createObjectURL(file)); // Preview image before upload
+  //   }
+  // }
 
   function removeImage() {
     setImageFile(null);
@@ -152,7 +152,7 @@ export default function ChatFooter({
         }}
       >
         {/* Image Upload Button */}
-        <label htmlFor="fileInput" className="cursor-pointer">
+        {/* <label htmlFor="fileInput" className="cursor-pointer">
           <LucideImage className="text-gold" size={26} />
           <input
             type="file"
@@ -161,7 +161,7 @@ export default function ChatFooter({
             className="hidden"
             onChange={handleImageChange}
           />
-        </label>
+        </label> */}
 
         {/* Image Preview */}
         {imagePreview && (
@@ -217,7 +217,7 @@ export default function ChatFooter({
           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold lg:h-10 lg:w-10"
           disabled={isSending}
         >
-          <LucideSendHorizontal className="text-[#130F26] h-5 w-5" />
+          <LucideSendHorizontal className="h-5 w-5 text-[#130F26]" />
         </button>
       </form>
     </footer>

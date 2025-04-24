@@ -34,7 +34,12 @@ export function TenantPropertyCard({
           <div className="px-2">
             {/* Property value & Status */}
             <div className="flex justify-between">
-              <PropertyPrice price={data.price} />
+              <p className="flex items-center gap-x-1 text-lg font-bold text-accent">
+                {data.price}
+                <span className="text-xs font-medium text-gray-500 opacity-80">
+                  / year
+                </span>
+              </p>
 
               {/* {type === "rent" && (
                 <p className="flex items-center justify-center rounded-full bg-green-600/10 px-4 py-0.5 text-xs font-semibold leading-none text-green-500">
@@ -95,7 +100,12 @@ export function TenantPropertyCardPotrait({
           <div className="px-2">
             {/* Property value & Status */}
             <div className="flex justify-between">
-              <PropertyPrice price={data.price} />
+              <p className="flex items-center gap-x-1 text-lg font-bold text-accent">
+                {data.price}
+                <span className="text-xs font-medium text-gray-500 opacity-80">
+                  / year
+                </span>
+              </p>
 
               {/* {type === "rent" && (
                 <p className="flex items-center justify-center rounded-full bg-green-600/10 px-4 py-0.5 text-xs font-semibold leading-none text-green-500">
