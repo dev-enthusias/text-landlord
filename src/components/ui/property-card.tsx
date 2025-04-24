@@ -3,6 +3,7 @@ import { BathIcon, BedIcon, RulerIcon } from "lucide-react";
 import { routes } from "@/constants/routes";
 import PropertyPhoto from "./property-photo";
 import Image from "next/image";
+import { AdvertisedPropertiesRDT } from "@/definitions/tenant";
 
 // TenantPropertyCardTypes<TenantAdvertisedProperties>
 
@@ -10,17 +11,7 @@ export function TenantPropertyCard({
   data,
 }: {
   roleid: number;
-  data: {
-    id: number;
-    slug: string;
-    name: string;
-    price: string;
-    image: string;
-    address: { address: string };
-    bedrooms: number | null;
-    bathrooms: number | null;
-    size: string;
-  };
+  data: AdvertisedPropertiesRDT["data"][0];
 }) {
   return (
     <Link
@@ -55,7 +46,7 @@ export function TenantPropertyCard({
             <PropertyFeatures
               bedrooms={data.bedrooms ?? 0}
               bathrooms={data.bathrooms ?? 0}
-              size={data.size}
+              size={data.size ?? "0"}
             />
           </div>
         </div>
